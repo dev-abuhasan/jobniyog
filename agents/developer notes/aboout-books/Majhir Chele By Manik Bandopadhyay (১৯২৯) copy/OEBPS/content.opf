@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?><package unique-identifier="uid" version="3.0" xml:lang="bn" xmlns="http://www.idpf.org/2007/opf">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+<dc:identifier id="uid">4ee9ddbc435c442f9cb5f4e492008793</dc:identifier>
+<meta property="dcterms:modified">2022-06-11T20:41:48Z</meta><dc:language>bn</dc:language>
+<dc:title id="meta-title">মাঝির ছেলে</dc:title>
+<meta property="title-type" refines="#meta-title"/>main
+				    <dc:source>https://t.me/bongboi</dc:source>
+
+
+
+
+<dc:contributor id="meta-bkp">Wikisource &amp; @bongboi</dc:contributor><dc:rights>© All copyrights to respective authors. Please buy the hardcopy to support your favourite authors</dc:rights><dc:description>A project to scrape websites into epub by https://t.me/bongboi</dc:description>
+<meta property="role" refines="#meta-bkp" scheme="marc:relators"/>bkp<meta content="title" name="cover"/></metadata>
+<manifest>
+<item href="nav.xhtml" id="nav" media-type="application/xhtml+xml" properties="nav"></item>
+<item href="title.xhtml" id="title" media-type="application/xhtml+xml"></item>
+<item href="main.css" id="mainCss" media-type="text/css"></item><item href="images/Accueil_scribe.png" id="Accueil_scribe.png" media-type="image/png"></item><item href="c0___________.xhtml" id="c0___________" media-type="application/xhtml+xml"></item>
+<item href="c1______________.xhtml" id="c1______________" media-type="application/xhtml+xml"></item>
+<item href="c2_______________.xhtml" id="c2_______________" media-type="application/xhtml+xml"></item>
+<item href="c3_______________.xhtml" id="c3_______________" media-type="application/xhtml+xml"></item>
+<item href="c4_______________.xhtml" id="c4_______________" media-type="application/xhtml+xml"></item>
+<item href="c5________________.xhtml" id="c5________________" media-type="application/xhtml+xml"></item>
+<item href="c6_______________.xhtml" id="c6_______________" media-type="application/xhtml+xml"></item>
+<item href="c7_______________.xhtml" id="c7_______________" media-type="application/xhtml+xml"></item>
+<item href="c8______________.xhtml" id="c8______________" media-type="application/xhtml+xml"></item>
+<item href="c9_______________.xhtml" id="c9_______________" media-type="application/xhtml+xml"></item>
+<item href="c10______________.xhtml" id="c10______________" media-type="application/xhtml+xml"></item>
+<item href="c11_________________.xhtml" id="c11_________________" media-type="application/xhtml+xml"></item>
+<item href="c12________________.xhtml" id="c12________________" media-type="application/xhtml+xml"></item>
+<item href="images/c13_Nuvola_camera.svg_40px_Nuvola_camera.svg.png" id="c13_Nuvola_camera.svg_40px_Nuvola_camera.svg.png" media-type="image/png"></item>
+<item href="images/c14____________________________.tif_lossless_page1_400px________________________________________.tif.png" id="c14____________________________.tif_lossless_page1_400px________________________________________.tif.png" media-type="image/png"></item>
+<item href="about.xhtml" id="about" media-type="application/xhtml+xml"></item>
+</manifest>
+<spine><itemref idref="title" linear="yes"></itemref><itemref idref="nav"></itemref><itemref idref="c0___________" linear="yes"></itemref><itemref idref="c1______________" linear="yes"></itemref><itemref idref="c2_______________" linear="yes"></itemref><itemref idref="c3_______________" linear="yes"></itemref><itemref idref="c4_______________" linear="yes"></itemref><itemref idref="c5________________" linear="yes"></itemref><itemref idref="c6_______________" linear="yes"></itemref><itemref idref="c7_______________" linear="yes"></itemref><itemref idref="c8______________" linear="yes"></itemref><itemref idref="c9_______________" linear="yes"></itemref><itemref idref="c10______________" linear="yes"></itemref><itemref idref="c11_________________" linear="yes"></itemref><itemref idref="c12________________" linear="yes"></itemref><itemref idref="about" linear="yes"></itemref>
+</spine>
+</package>

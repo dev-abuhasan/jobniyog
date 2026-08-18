@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>New Order #{{ORDER_ID}} &mdash; {{SITE_NAME}}</title>
+</head>
+<body style="margin:0;padding:0;background:#f0f4f8;font-family:Arial,Helvetica,sans-serif">
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all">New order #{{ORDER_ID}} from {{CUSTOMER_NAME}} &mdash; total {{TOTAL}}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4f8">
+    <tr><td align="center" style="padding:40px 16px">
+
+      <table role="presentation" width="620" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:620px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="background:linear-gradient(135deg,#1e3a5f 0%,#2d5a8e 100%);padding:24px 32px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="background:#ffffff;border-radius:10px;padding:4px;width:44px;height:44px" width="44" height="44" align="center" valign="middle">
+                        <img src="{{SITE_URL}}/assets/img/logo-nobg.png" alt="{{SITE_NAME}}" width="36" height="36" style="display:block;border:0" />
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td valign="middle" style="padding-left:14px">
+                  <p style="margin:0;font-size:18px;font-weight:700;color:#ffffff">{{SITE_NAME}} Admin</p>
+                  <p style="margin:3px 0 0;font-size:12px;color:rgba(255,255,255,0.75)">New Order Notification</p>
+                </td>
+                <td width="48" align="right" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td width="44" height="44" align="center" valign="middle" style="width:44px;height:44px;background:rgba(255,255,255,0.18);border-radius:22px;font-size:20px;color:#ffffff;line-height:44px;text-align:center">&#128722;</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ORDER BANNER -->
+        <tr>
+          <td style="background:#e8f0fb;padding:14px 32px;border-bottom:1px solid #d0dff0">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="middle">
+                  <p style="margin:0;font-size:14px;color:#1e3a5f;font-weight:600">
+                    Order <span style="color:#2d5a8e">#{{ORDER_ID}}</span> &nbsp;&#183;&nbsp; {{ORDER_DATE}}
+                  </p>
+                </td>
+                <td align="right" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right">
+                    <tr>
+                      <td style="background:#e67e22;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#ffffff;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap">New Order</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- CUSTOMER INFO -->
+        <tr>
+          <td style="padding:24px 32px 8px">
+            <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:1px">Customer Details</p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7faff;border-radius:10px;border:1px solid #d0dff0">
+              <tr>
+                <td style="padding:14px 18px" valign="top" width="50%">
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6b8ab0;text-transform:uppercase;letter-spacing:0.8px">Name</p>
+                  <p style="margin:0;font-size:14px;font-weight:600;color:#1e3a5f">{{CUSTOMER_NAME}}</p>
+                </td>
+                <td style="padding:14px 18px;border-left:1px solid #d0dff0" valign="top" width="50%">
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6b8ab0;text-transform:uppercase;letter-spacing:0.8px">Phone</p>
+                  <p style="margin:0;font-size:14px;font-weight:600;color:#1e3a5f">{{CUSTOMER_PHONE}}</p>
+                </td>
+              </tr>
+              {{CUSTOMER_EMAIL_ROW}}
+            </table>
+          </td>
+        </tr>
+
+        <!-- DELIVERY ADDRESS -->
+        <tr>
+          <td style="padding:16px 32px 8px">
+            <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:1px">Delivery Address</p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7faff;border-radius:10px;border:1px solid #d0dff0">
+              <tr>
+                <td style="padding:14px 18px">
+                  <p style="margin:0;font-size:13px;color:#1e3a5f;line-height:1.6">
+                    {{DELIVERY_ADDRESS_LINE}}<br/>
+                    <span style="color:#4a6a8a">{{DELIVERY_AREA_DISTRICT}}</span>{{DIVISION_SUFFIX}}
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- NOTES (conditional — only present when non-empty) -->
+        {{ORDER_NOTES_BLOCK}}
+
+        <!-- ITEMS TABLE -->
+        <tr>
+          <td style="padding:16px 32px 0">
+            <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#1e3a5f;text-transform:uppercase;letter-spacing:1px">Order Items</p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #d0dff0;border-radius:10px;overflow:hidden">
+              <tr style="background:#e8f0fb">
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:0.7px;border-bottom:1px solid #d0dff0">Product</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:0.7px;border-bottom:1px solid #d0dff0;text-align:center" width="50">Qty</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:0.7px;border-bottom:1px solid #d0dff0;text-align:right" width="80">Price</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#4a6a8a;text-transform:uppercase;letter-spacing:0.7px;border-bottom:1px solid #d0dff0;text-align:right" width="90">Total</td>
+              </tr>
+              {{ORDER_ITEMS_ROWS}}
+            </table>
+          </td>
+        </tr>
+
+        <!-- SUMMARY -->
+        <tr>
+          <td style="padding:18px 32px 0">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="right">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="min-width:220px">
+                    <tr>
+                      <td style="padding:5px 0;font-size:13px;color:#4a6a8a">Subtotal</td>
+                      <td style="padding:5px 0;font-size:13px;color:#1e3a5f;text-align:right;font-weight:500">{{SUBTOTAL}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:5px 0;font-size:13px;color:#4a6a8a">Delivery fee</td>
+                      <td style="padding:5px 0;font-size:13px;color:#1e3a5f;text-align:right;font-weight:500">{{DELIVERY_FEE}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="padding:4px 0"><div style="height:1px;background:#d0dff0;font-size:0;line-height:0">&nbsp;</div></td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 0 4px;font-size:15px;font-weight:700;color:#1e3a5f">Total</td>
+                      <td style="padding:8px 0 4px;font-size:18px;font-weight:800;color:#2d5a8e;text-align:right">{{TOTAL}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- PAYMENT -->
+        <tr>
+          <td style="padding:16px 32px 8px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7faff;border-radius:10px;border:1px solid #d0dff0">
+              <tr>
+                <td style="padding:14px 18px">
+                  <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:#6b8ab0;text-transform:uppercase;letter-spacing:0.8px">Payment Method</p>
+                  <p style="margin:0;font-size:14px;font-weight:600;color:#1e3a5f">{{PAYMENT_METHOD}}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ADMIN CTA -->
+        <tr>
+          <td align="center" style="padding:16px 32px 32px">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td align="center" style="background:linear-gradient(135deg,#1e3a5f,#2d5a8e);border-radius:50px">
+                  <a href="{{SITE_URL}}/admin" target="_blank"
+                    style="display:inline-block;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:13px 32px;border-radius:50px;letter-spacing:0.3px">
+                    View in Admin Panel
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="background:#e8f0fb;padding:16px 32px;border-top:1px solid #d0dff0">
+            <p style="margin:0;font-size:11px;color:#6b8ab0;text-align:center;line-height:1.6">
+              This is an automated admin notification from {{SITE_NAME}}.<br/>
+              &copy; {{YEAR}} {{SITE_NAME}} &mdash; <a href="{{SITE_URL}}" style="color:#2d5a8e;text-decoration:none">{{SITE_URL}}</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

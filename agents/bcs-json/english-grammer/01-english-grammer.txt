@@ -1,0 +1,124 @@
+Uttron Book: Page 35 Pronoun MCQ 7-25 Explain
+
+07. "______ do you spell your surname?"
+সঠিক উত্তর: (b) How
+
+ব্যাখ্যা: এখানে জানতে চাওয়া হচ্ছে—"আপনি আপনার পদবি (surname) কীভাবে বানান করেন?" কোনো কাজ কীভাবে করা হয় তা জানতে প্রশ্নবোধক শব্দ হিসেবে How ব্যবহৃত হয়।
+
+কেন অন্যগুলো নয়: When (কখন), Where (কোথায়), Who (কে)—এগুলো এখানে অর্থহীন।
+
+08. That young man to ______ we owe many thanks saved our mother's life after the car accident.
+সঠিক উত্তর: (c) whom
+
+ব্যাখ্যা: শূন্যস্থানের আগে একটি preposition (to) আছে। মনে রাখবেন, Preposition-এর পর সবসময় Objective case বসে। Relative pronoun-এর মধ্যে 'who' হলো Subjective আর 'whom' হলো Objective। তাই 'to whom' হবে সঠিক।
+
+সহজ ট্রিক: to who বা to which এখানে ব্যাকরণগতভাবে ভুল।
+
+09. Since you are a graduate now, it is time to get ______ a job.
+সঠিক উত্তর: (a) you
+
+ব্যাখ্যা: বাক্যটির অর্থ: "যেহেতু তুমি এখন একজন গ্র্যাজুয়েট, তাই এখন তোমার নিজের একটি চাকরি পাওয়ার সময়।" এখানে 'get you a job' মানে 'নিজের জন্য একটি চাকরি জোগাড় করা'।
+
+কেন অন্যগুলো নয়: 'get yourself a job'-ও হতে পারত, তবে 'get you a job' এখানে স্ট্যান্ডার্ড ইডিয়ম্যাটিক এক্সপ্রেশন হিসেবে ব্যবহৃত হয়েছে।
+
+10. Fill in the blank: between ______ . this is the greatest book I've ever read.
+সঠিক উত্তর: (b) you and me
+
+ব্যাখ্যা: এটি বিসিএস পরীক্ষার অন্যতম হট-টপিক! Between হলো একটি preposition। আর preposition-এর পর সবসময় pronoun-এর Objective Form বসে (যেমন: me, him, her, us, them)।
+
+হ্যাক: 'you' এর সাবজেক্ট ও অবজেক্ট ফর্ম একই (you), কিন্তু 'I' এর অবজেক্ট ফর্ম হলো 'me'। তাই সঠিক উত্তর between you and me। (পরীক্ষায় 'between you and I' দিয়ে কনফিউজড করবে, ভুলেও ওটা দাগাবেন না)।
+
+11. The child cried for ______ mother.
+সঠিক উত্তর: (c) its
+
+ব্যাখ্যা: সাধারণত ইংরেজি ব্যাকরণে ছোট শিশু (child/baby) বা অবুঝ প্রাণীদের লিঙ্গ বা জেন্ডার নিশ্চিত না থাকলে তাদেরকে Neuter Gender (ক্লীবলিঙ্গ) ধরা হয়। Neuter gender-এর possessive pronoun হলো its।
+
+হ্যাক: শিশুটি ছেলে না মেয়ে তা নিশ্চিত না থাকায় his/her না হয়ে its হবে।
+
+12. Which one of the following words is an example of a Reciprocal Pronoun?
+সঠিক উত্তর: (c) Each other
+
+ব্যাখ্যা: Reciprocal Pronoun মানে হলো "পারস্পরিক সম্পর্কযুক্ত সর্বনাম"। ইংরেজিতে Reciprocal Pronoun মাত্র ২টি: each other (দুইজনের মধ্যে) এবং one another (বহুজনের মধ্যে)।
+
+13. She was working on her computer with her baby next to ______ .
+সঠিক উত্তর: (b) herself
+
+ব্যাখ্যা: বাক্যটিতে সাবজেক্ট (She) এবং যার পাশে বাচ্চাটি বসেছে (her/herself) একই ব্যক্তি। যখন বাক্যের সাবজেক্ট ও অবজেক্ট একই ব্যক্তি বা বস্তুকে নির্দেশ করে, তখন Reflexive Pronoun ব্যবহার করতে হয়। 'She'-এর reflexive হলো herself।
+
+14. One has to follow ______ conscience.
+সঠিক উত্তর: (b) one's
+
+ব্যাখ্যা: নিয়ম হলো: বাক্যের সাবজেক্ট যদি অনির্দিষ্ট Pronoun 'One' হয়, তবে তার Possessive adjective হিসেবে সবসময় 'one's' বসে (his বা her বসে না)।
+
+15. The specialist ______ you want to meet is available only on Thursdays.
+সঠিক উত্তর: (c) whom
+
+ব্যাখ্যা: "যে বিশেষজ্ঞের সাথে তুমি দেখা করতে চাও..."। এখানে 'meet' (দেখা করা) ভার্বটির অবজেক্ট দরকার। যেহেতু 'the specialist' একজন ব্যক্তি এবং বাক্যে অবজেক্ট হিসেবে বসছে, তাই whom হবে।
+
+শর্টকাট ট্রিক: শূন্যস্থানের পর যদি একটি নতুন Subject + Verb থাকে (যেমন এখানে আছে 'you want'), তবে সাধারণত শূন্যস্থানে whom বসে।
+
+16. Each of the boys gets a prize. Here 'each' is a —
+সঠিক উত্তর: (d) Distributive Pronoun
+
+ব্যাখ্যা: Each, Every, Either, Neither—এগুলো যখন কোনো দলের সবাইকে আলাদা আলাদা বা পৃথক করে বোঝায়, তখন তাদেরকে Distributive Pronoun (বিভাগবাচক সর্বনাম) বলে।
+
+17. Use appropriate relative pronoun to join the following sentences: The man is a famous doctor. I met him in the job.
+সঠিক উত্তর: (b) whom
+
+ব্যাখ্যা: এখানে দুটি বাক্য জোড়া দিতে হবে। 'The man' (ব্যক্তি) এবং দ্বিতীয় বাক্যে তাকে 'him' (object) বলা হয়েছে। যেহেতু অবজেক্টকে নির্দেশ করছে, তাই relative pronoun হবে whom।
+
+যুক্ত বাক্যটি: The man whom I met in the job is a famous doctor.
+
+18. The underlined word in the sentence 'Sheela works for a company that makes furniture's'—
+সঠিক উত্তর: (a) a relative pronoun
+
+ব্যাখ্যা: এখানে 'that' শব্দটি তার ঠিক আগের নাউন 'company' (antecedent)-কে নির্দেশ করছে এবং দুটি ক্লজকে যুক্ত করছে। তাই এটি একটি Relative Pronoun।
+
+19. Everybody should obey ______ respective duties in ______ own position for the development of our company.
+সঠিক উত্তর: (b) his, his
+
+ব্যাখ্যা: Everybody, Everyone, Anybody, Someone—এই অনির্দিষ্ট প্রোনাউনগুলো ব্যাকরণগতভাবে Singular (একবচন) হিসেবে গণ্য হয়। তাই এদের possessive pronoun হিসেবে Singular 'his' (বা her) বসে, plural 'their' বসে না।
+
+নোট: যদিও আধুনিক ইনফরমাল ইংলিশে 'their' লেখা হয়, কিন্তু বিসিএস-এর মতো ফরমাল পরীক্ষায় his-ই সঠিক উত্তর।
+
+20. Which one is correct?
+সঠিক উত্তর: (c) You, he and I am present.
+
+ব্যাখ্যা: সাধারণ বা ভালো কোনো কাজের ক্ষেত্রে বিভিন্ন পারসনের প্রোনাউন বসার নিয়ম হলো ২৩১ (231) নিয়ম। অর্থাৎ:
+
+২য় পারসন (You) + ৩য় পারসন (He) + ১ম পারসন (I)।
+
+আর সবশেষে যেহেতু 'I' আছে, তাই অক্সিলিয়ারি ভার্ব হবে am।
+
+ভুল স্বীকারোক্তি/সংশোধন: উত্তরণের উত্তরপত্রে ২০ নাম্বারের উত্তর দেওয়া আছে 'b' (You, he and I are present)। কিন্তু ব্যাকরণগতভাবে প্রথাগত নিয়মে 'I' এর সাথে am বসে। তবে আধুনিক ইংরেজিতে ৩ জন বোঝালে প্লুরাল হিসেবে 'are'-ও গ্রহণ করা হয়। পরীক্ষার জন্য প্রথাগত 'am' নিয়মটিই বেশি নিরাপদ।
+
+21. 'None but Allah can help us.' What kind of pronoun 'None' is?
+সঠিক উত্তর: (c) Indefinite
+
+ব্যাখ্যা: None, Any, Some, Many, One—এগুলো দিয়ে কোনো নির্দিষ্ট ব্যক্তি বা বস্তুকে বোঝায় না, বরং অনির্দিষ্টভাবে বোঝায়। তাই 'None' হলো Indefinite Pronoun (অনির্দিষ্টজ্ঞাপক সর্বনাম)।
+
+22. Which one of the following sentences is correct?
+সঠিক উত্তর: (d) You, Selim and I shall be punished.
+
+ব্যাখ্যা: দোষ স্বীকার করা, শাস্তি পাওয়া বা কোনো খারাপ কাজের ক্ষেত্রে প্রোনাউন বসার নিয়মটি উল্টে যায়। তখন নিয়ম হয় ১২৩ (123) নিয়ম। অর্থাৎ:
+
+১ম পারসন (I) + ২য় পারসন (You) + ৩য় পারসন (Selim)।
+
+কিন্তু এখানে অপশনে সরাসরি 'I, you and Selim' নেই। অপশন (d)-তে আছে "You, Selim and I shall be punished"—যা আসলে একবচনে সাধারণ ভুল বা শাস্তির ক্ষেত্রে ২য়, ৩য় ও ১ম পারসন ব্যবহারের আরেকটি গ্রাহ্য রূপ (২৩১)। অন্য কোনো অপশন ব্যাকরণগতভাবে মেলে না বিধায় (d)-ই এখানে সবচেয়ে উপযুক্ত।
+
+23. Honesty is a noble virtue. The man ______ possesses this uncommon quality is the happiest man in the world.
+সঠিক উত্তর: (a) who
+
+ব্যাখ্যা: শূন্যস্থানের ঠিক পরেই একটি ভার্ব আছে (possesses)। মনে রাখবেন, শূন্যস্থানের পর সরাসরি ভার্ব থাকলে শূন্যস্থানে Subjective relative pronoun "who" বসে (ব্যক্তির ক্ষেত্রে)।
+
+24. We could not buy anything because ______ of the shops was open.
+সঠিক উত্তর: (d) none
+
+ব্যাখ্যা: বাক্যটির অর্থ: "আমরা কিছুই কিনতে পারিনি কারণ দোকানগুলোর একটিও খোলা ছিল না।" 'দোকানগুলোর একটিও না' বোঝাতে none of the shops ব্যবহৃত হয়।
+
+কেন অন্যগুলো নয়: 'nothing of the shops' বা 'no one of the shops' ব্যাকরণগতভাবে ভুল প্রয়োগ।
+
+25. They fought with one another. Here 'one another' is —
+সঠিক উত্তর: (d) Reciprocal pronoun
+
+ব্যাখ্যা: ১২ নম্বর প্রশ্নের নিয়মানুযায়ী—'each other' এবং 'one another' হলো Reciprocal Pronoun (পারস্পরিক সর্বনাম)। যেহেতু এখানে বহুজনের মধ্যে লড়াইয়ের কথা বলা হচ্ছে, তাই 'one another' বসেছে।

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশ মানচিত্র (BCS Infographic)</title>
+    <style>
+        :root {
+            /* Map Colors & Borders */
+            --bg-color: #f4f9f9;
+            --water-color: #67b3dc;
+            --water-dark: #4a95b8;
+            --border-color: #333333;
+            --coastline-color: #1a5f7a;
+            --grid-line: rgba(0, 0, 0, 0.1);
+            
+            /* Division Fills */
+            --dhaka-fill: #fed7d7;
+            --dhaka-border: #e53e3e;
+            --chattogram-fill: #feebc8;
+            --chattogram-border: #dd6b20;
+            --rajshahi-fill: #c6f6d5;
+            --rajshahi-border: #38a169;
+            --khulna-fill: #bee3f8;
+            --khulna-border: #3182ce;
+            --barisal-fill: #fefcbf;
+            --barisal-border: #d69e2e;
+            --sylhet-fill: #e9d8fd;
+            --sylhet-border: #805ad5;
+            --rangpur-fill: #fed7d7; /* Approximated based on visual */
+            --rangpur-border: #e53e3e;
+            --mymensingh-fill: #fbd38d;
+            --mymensingh-border: #ed8936;
+
+            /* Zone Colors */
+            --zone-high-risk: #ff0000;    /* M > 7 */
+            --zone-med-risk: #ffa500;     /* 6 < M < 7 */
+            --zone-low-risk: #ffff00;     /* 5 < M < 6 */
+            --zone-min-risk: #90ee90;     /* M < 5 */
+
+            /* Text Colors */
+            --text-main: #1a202c;
+            --text-sub: #4a5568;
+            --text-white: #ffffff;
+        }
+
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            background-color: #e2e8f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .container {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 1000px;
+            background-color: var(--bg-color);
+            shape-rendering: geometricPrecision;
+        }
+
+        /* Sidebar Info Card */
+        #info-card {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 20px;
+        }
+
+        #info-card h2 { margin-top: 0; color: var(--text-main); }
+        #info-card p { color: var(--text-sub); line-height: 1.6; }
+        #info-card .placeholder { color: #a0aec0; text-align: center; padding: 40px 0; }
+
+        /* SVG Text Styling */
+        .district-label { font-size: 11px; fill: var(--text-main); font-weight: bold; text-anchor: middle; pointer-events: none; }
+        .division-label { font-size: 14px; fill: var(--text-white); font-weight: bold; text-anchor: middle; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); pointer-events: none; }
+        .river-text { font-size: 16px; fill: #1a365d; font-weight: bold; font-style: italic; }
+        .small-text { font-size: 9px; fill: var(--text-main); }
+        .legend-text { font-size: 8px; fill: var(--text-sub); }
+        .header-text { font-size: 12px; fill: var(--text-main); text-anchor: middle; }
+        .header-title { font-size: 18px; fill: var(--text-main); font-weight: bold; text-anchor: middle; }
+        
+        /* Interactivity */
+        .district {
+            stroke-width: 1.5;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .district:hover {
+            stroke: #000 !important;
+            stroke-width: 3 !important;
+            fill-opacity: 0.8 !important;
+        }
+        .port-marker { cursor: pointer; }
+        .port-marker:hover circle { fill: #f56565; }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; align-items: center; }
+            #info-card { width: 100%; max-width: 800px; position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <svg viewBox="0 0 1200 1600" xmlns="http://www.w3.org/2000/svg">
+            <!-- Definitions -->
+            <defs>
+                <!-- Clip Paths for Rivers (Simplified) -->
+                <clipPath id="map-clip">
+                    <rect x="100" y="100" width="1000" height="1400" />
+                </clipPath>
+                
+                <!-- Patterns -->
+                <pattern id="hill-shade" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                    <line x1="0" y1="0" x2="0" y2="10" stroke="#ccc" stroke-width="1" />
+                </pattern>
+            </defs>
+
+            <!-- Background & Grid -->
+            <rect width="100%" height="100%" fill="white" />
+            <g stroke="var(--grid-line)" stroke-width="1" fill="none">
+                <!-- Latitude/Longitude lines -->
+                <line x1="100" y1="200" x2="1100" y2="200" />
+                <line x1="100" y1="400" x2="1100" y2="400" />
+                <line x1="100" y1="600" x2="1100" y2="600" />
+                <line x1="100" y1="800" x2="1100" y2="800" />
+                <line x1="100" y1="1000" x2="1100" y2="1000" />
+                <line x1="100" y1="1200" x2="1100" y2="1200" />
+                <line x1="200" y1="100" x2="200" y2="1500" />
+                <line x1="400" y1="100" x2="400" y2="1500" />
+                <line x1="600" y1="100" x2="600" y2="1500" />
+                <line x1="800" y1="100" x2="800" y2="1500" />
+                <line x1="1000" y1="100" x2="1000" y2="1500" />
+            </g>
+
+            <!-- Ocean (Bay of Bengal) -->
+            <path d="M 100 1200 L 1100 1200 L 1100 1500 L 100 1500 Z" fill="var(--water-color)" />
+            <text x="600" y="1350" class="river-text" style="font-size: 28px;">বঙ্গোপসাগর</text>
+
+            <!-- Adjacent Countries (Landmasses outside BD) -->
+            <g fill="#e2e8f0" stroke="#a0aec0" stroke-width="2">
+                <path d="M 100 250 L 300 250 L 300 400 L 100 400 Z" /> <!-- West Bengal -->
+                <path d="M 900 200 L 1100 200 L 1100 400 L 900 400 Z" /> <!-- Assam -->
+                <path d="M 1000 500 L 1100 500 L 1100 800 L 1000 800 Z" /> <!-- Tripura -->
+                <path d="M 1000 900 L 1100 900 L 1100 1200 L 1000 1200 Z" /> <!-- Mizoram/Myanmar -->
+            </g>
+            <text x="200" y="300" class="small-text" style="text-anchor:middle;">পশ্চিমবঙ্গ</text>
+            <text x="1000" y="300" class="small-text" style="text-anchor:middle;">আসাম</text>
+            <text x="1050" y="650" class="small-text" style="text-anchor:middle;">ত্রিপুরা</text>
+            <text x="1050" y="1050" class="small-text" style="text-anchor:middle;">মিজোরাম</text>
+
+            <!-- RIVERS -->
+            <g fill="none" stroke="var(--water-dark)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" clip-path="url(#map-clip)">
+                <!-- Padma -->
+                <path d="M 400 700 Q 500 750 600 800 L 750 900" />
+                <!-- Meghna -->
+                <path d="M 800 500 L 750 800 L 800 1000" />
+                <!-- Jamuna -->
+                <path d="M 450 300 L 450 600" />
+                <!-- Teesta -->
+                <path d="M 350 250 L 450 350" />
+                <!-- Surma -->
+                <path d="M 750 350 L 850 450" />
+                <!-- Other tributaries -->
+                <path d="M 300 600 L 450 700" stroke-width="4" />
+                <path d="M 600 600 L 750 800" stroke-width="4" />
+                <path d="M 700 300 L 750 500" stroke-width="4" />
+            </g>
+            
+            <text x="480" y="720" class="river-text" transform="rotate(-30 480 720)">পদ্মা</text>
+            <text x="720" y="800" class="river-text" transform="rotate(45 720 800)">মেঘনা</text>
+            <text x="420" y="480" class="river-text" transform="rotate(-90 420 480)">যমুনা</text>
+            <text x="380" y="280" class="river-text" transform="rotate(45 380 280)">তিস্তা</text>
+            <text x="780" y="380" class="river-text" transform="rotate(-15 780 380)">সুরমা</text>
+
+            <!-- ==================== DISTRICTS & DIVISIONS (SIMPLIFIED SHAPES) ==================== -->
+            <g id="map-container">
+                
+                <!-- RANGPUR DIVISION -->
+                <g id="rangpur-div">
+                    <path class="district" data-district="ঠাকুরগাঁও" data-div="রংপুর" data-sector="7" d="M 250 200 L 320 180 L 350 220 L 300 280 L 240 250 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="290" y="230" class="district-label">ঠাকুরগাঁও</text>
+
+                    <path class="district" data-district="পঞ্চগড়" data-div="রংপুর" data-sector="7" d="M 350 160 L 400 180 L 380 230 L 330 220 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="365" y="200" class="district-label">পঞ্চগড়</text>
+
+                    <path class="district" data-district="দিনাজপুর" data-div="রংপুর" data-sector="7" d="M 230 280 L 310 300 L 300 370 L 210 350 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="260" y="325" class="district-label">দিনাজপুর</text>
+
+                    <path class="district" data-district="নীলফামারী" data-div="রংপুর" data-sector="7" d="M 330 250 L 400 260 L 390 330 L 320 310 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="360" y="290" class="district-label">নীলফামারী</text>
+                    
+                    <path class="district" data-district="কুড়িগ্রাম" data-div="রংপুর" data-sector="7" d="M 420 250 L 480 280 L 460 340 L 410 310 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="445" y="300" class="district-label">কুড়িগ্রাম</text>
+
+                    <path class="district" data-district="রংপুর" data-div="রংপুর" data-sector="7" d="M 320 350 L 400 360 L 380 430 L 310 410 Z" fill="var(--rangpur-fill)" stroke="var(--rangpur-border)"/>
+                    <text x="350" y="390" class="district-label">রংপুর</text>
+                </g>
+                
+                <!-- RAJSHAHI DIVISION -->
+                <g id="rajshahi-div">
+                    <path class="district" data-district="চাঁপাইনবাবগঞ্জ" data-div="রাজশাহী" data-sector="7" d="M 180 400 L 250 410 L 240 460 L 170 450 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="210" y="430" class="district-label">চাঁপাইনবাবগঞ্জ</text>
+
+                    <path class="district" data-district="নওগাঁ" data-div="রাজশাহী" data-sector="7" d="M 180 480 L 280 490 L 270 580 L 170 560 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="220" y="530" class="district-label">নওগাঁ</text>
+                    
+                    <path class="district" data-district="রাজশাহী" data-div="রাজশাহী" data-sector="7" d="M 260 410 L 340 420 L 330 480 L 250 460 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="295" y="450" class="district-label">রাজশাহী</text>
+
+                    <path class="district" data-district="নাটোর" data-div="রাজশাহী" data-sector="7" d="M 350 440 L 420 430 L 430 510 L 340 500 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="380" y="470" class="district-label">নাটোর</text>
+
+                    <path class="district" data-district="সিরাজগঞ্জ" data-div="রাজশাহী" data-sector="7" d="M 400 520 L 480 510 L 500 600 L 390 590 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="440" y="555" class="district-label">সিরাজগঞ্জ</text>
+
+                    <path class="district" data-district="পাবনা" data-div="রাজশাহী" data-sector="7" d="M 340 530 L 420 540 L 410 620 L 330 610 Z" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                    <text x="375" y="575" class="district-label">পাবনা</text>
+                </g>
+
+                <!-- KHULNA DIVISION -->
+                <g id="khulna-div">
+                    <path class="district" data-district="যশোর" data-div="খুলনা" data-sector="9" d="M 180 700 L 260 710 L 250 780 L 170 770 Z" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                    <text x="215" y="740" class="district-label">যশোর</text>
+
+                    <path class="district" data-district="চুয়াডাঙ্গা" data-div="খুলনা" data-sector="9" d="M 280 680 L 350 690 L 340 750 L 270 740 Z" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                    <text x="310" y="710" class="district-label">চুয়াডাঙ্গা</text>
+
+                    <path class="district" data-district="কুষ্টিয়া" data-div="খুলনা" data-sector="9" d="M 350 650 L 430 660 L 420 730 L 340 720 Z" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                    <text x="380" y="690" class="district-label">কুষ্টিয়া</text>
+                    
+                    <path class="district" data-district="খুলনা" data-div="খুলনা" data-sector="9" d="M 150 820 L 250 830 L 240 930 L 140 920 Z" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                    <text x="190" y="875" class="district-label">খুলনা</text>
+
+                    <path class="district" data-district="সাতক্ষীরা" data-div="খুলনা" data-sector="9" d="M 120 940 L 220 950 L 210 1050 L 110 1040 Z" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                    <text x="160" y="990" class="district-label">সাতক্ষীরা</text>
+                </g>
+
+                <!-- BARISAL DIVISION -->
+                <g id="barisal-div">
+                    <path class="district" data-district="বরিশাল" data-div="বরিশাল" data-sector="9" d="M 400 950 L 500 960 L 480 1060 L 380 1050 Z" fill="var(--barisal-fill)" stroke="var(--barisal-border)"/>
+                    <text x="435" y="1000" class="district-label">বরিশাল</text>
+                    
+                    <path class="district" data-district="পটুয়াখালী" data-div="বরিশাল" data-sector="9" d="M 450 1080 L 550 1090 L 530 1180 L 430 1170 Z" fill="var(--barisal-fill)" stroke="var(--barisal-border)"/>
+                    <text x="490" y="1130" class="district-label">পটুয়াখালী</text>
+
+                    <path class="district" data-district="ভোলা" data-div="বরিশাল" data-sector="9" d="M 600 1050 L 700 1060 L 680 1160 L 580 1150 Z" fill="var(--barisal-fill)" stroke="var(--barisal-border)"/>
+                    <text x="640" y="1105" class="district-label">ভোলা</text>
+                </g>
+
+                <!-- DHAKA DIVISION -->
+                <g id="dhaka-div">
+                    <path class="district" data-district="টাঙ্গাইল" data-div="ঢাকা" data-sector="4" d="M 450 600 L 550 610 L 540 700 L 440 690 Z" fill="var(--dhaka-fill)" stroke="var(--dhaka-border)"/>
+                    <text x="495" y="650" class="district-label">টাঙ্গাইল</text>
+
+                    <path class="district" data-district="ঢাকা" data-div="ঢাকা" data-sector="4" d="M 500 750 L 600 760 L 590 850 L 490 840 Z" fill="var(--dhaka-fill)" stroke="var(--dhaka-border)"/>
+                    <text x="545" y="800" class="district-label">ঢাকা</text>
+
+                    <path class="district" data-district="ফরিদপুর" data-div="ঢাকা" data-sector="4" d="M 400 800 L 500 810 L 490 900 L 390 890 Z" fill="var(--dhaka-fill)" stroke="var(--dhaka-border)"/>
+                    <text x="445" y="850" class="district-label">ফরিদপুর</text>
+
+                    <path class="district" data-district="মাদারীপুর" data-div="ঢাকা" data-sector="4" d="M 450 910 L 550 920 L 540 1000 L 440 990 Z" fill="var(--dhaka-fill)" stroke="var(--dhaka-border)"/>
+                    <text x="495" y="955" class="district-label">মাদারীপুর</text>
+                </g>
+
+                <!-- MYMENSINGH DIVISION -->
+                <g id="mymensingh-div">
+                    <path class="district" data-district="ময়মনসিংহ" data-div="ময়মনসিংহ" data-sector="4" d="M 500 450 L 600 460 L 590 550 L 490 540 Z" fill="var(--mymensingh-fill)" stroke="var(--mymensingh-border)"/>
+                    <text x="545" y="500" class="district-label">ময়মনসিংহ</text>
+                    
+                    <path class="district" data-district="নেত্রকোণা" data-div="ময়মনসিংহ" data-sector="4" d="M 620 430 L 720 440 L 710 530 L 610 520 Z" fill="var(--mymensingh-fill)" stroke="var(--mymensingh-border)"/>
+                    <text x="660" y="480" class="district-label">নেত্রকোণা</text>
+                </g>
+
+                <!-- SYLHET DIVISION -->
+                <g id="sylhet-div">
+                    <path class="district" data-district="সিলেট" data-div="সিলেট" data-sector="3" d="M 800 400 L 950 410 L 940 500 L 790 490 Z" fill="var(--sylhet-fill)" stroke="var(--sylhet-border)"/>
+                    <text x="870" y="455" class="district-label">সিলেট</text>
+
+                    <path class="district" data-district="হবিগঞ্জ" data-div="সিলেট" data-sector="3" d="M 750 550 L 880 560 L 870 650 L 740 640 Z" fill="var(--sylhet-fill)" stroke="var(--sylhet-border)"/>
+                    <text x="810" y="600" class="district-label">হবিগঞ্জ</text>
+                </g>
+
+                <!-- CHATTOGRAM DIVISION -->
+                <g id="chattogram-div">
+                    <path class="district" data-district="চট্টগ্রাম" data-div="চট্টগ্রাম" data-sector="2" d="M 750 900 L 880 910 L 900 1050 L 730 1040 Z" fill="var(--chattogram-fill)" stroke="var(--chattogram-border)"/>
+                    <text x="790" y="960" class="district-label">চট্টগ্রাম</text>
+
+                    <path class="district" data-district="কক্সবাজার" data-div="চট্টগ্রাম" data-sector="2" d="M 800 1100 L 950 1110 L 970 1250 L 780 1240 Z" fill="var(--chattogram-fill)" stroke="var(--chattogram-border)"/>
+                    <text x="870" y="1180" class="district-label">কক্সবাজার</text>
+
+                    <path class="district" data-district="রাঙ্গামাটি" data-div="চট্টগ্রাম" data-sector="2" d="M 850 750 L 980 760 L 960 850 L 830 840 Z" fill="var(--chattogram-fill)" stroke="var(--chattogram-border)"/>
+                    <text x="900" y="800" class="district-label">রাঙ্গামাটি</text>
+                </g>
+
+                <!-- Earthquake Zones (Overlays) -->
+                <!-- Zone M>7 (RED) - Sylhet, Mymensingh -->
+                <path d="M 600 400 L 950 400 L 950 600 L 600 600 Z" fill="var(--zone-high-risk)" fill-opacity="0.3" stroke="var(--zone-high-risk)" stroke-dasharray="5,5"/>
+                <text x="750" y="480" fill="var(--zone-high-risk)" font-weight="bold" font-size="24">M > 7</text>
+
+                <!-- Zone 6<M<7 (ORANGE) - Dhaka, Rajshahi -->
+                <path d="M 300 550 L 600 550 L 600 800 L 300 800 Z" fill="var(--zone-med-risk)" fill-opacity="0.3" stroke="var(--zone-med-risk)" stroke-dasharray="5,5"/>
+                <text x="450" y="680" fill="var(--zone-med-risk)" font-weight="bold" font-size="24">6 < M < 7</text>
+
+                <!-- Zone 5<M<6 (YELLOW) - Khulna, Barisal -->
+                <path d="M 150 850 L 500 850 L 500 1100 L 150 1100 Z" fill="var(--zone-low-risk)" fill-opacity="0.3" stroke="var(--zone-low-risk)" stroke-dasharray="5,5"/>
+                <text x="300" y="980" fill="#b7791f" font-weight="bold" font-size="24">5 < M < 6</text>
+                
+                <!-- Zone M<5 (GREEN) - Chattogram -->
+                <path d="M 600 900 L 950 900 L 950 1200 L 600 1200 Z" fill="var(--zone-min-risk)" fill-opacity="0.3" stroke="var(--zone-min-risk)" stroke-dasharray="5,5"/>
+                <text x="750" y="1050" fill="var(--zone-min-risk)" font-weight="bold" font-size="24">M < 5</text>
+
+            </g>
+
+            <!-- Ports & Markers -->
+            <g class="port-marker" onclick="updateInfo('মোংলা বন্দর', 'খুলনা', 'সেক্টর ৯', 'মোংলা নদী', 'একটি প্রধান সমুদ্র বন্দর')">
+                <circle cx="250" cy="900" r="6" fill="red" stroke="white" stroke-width="2" />
+                <text x="250" y="915" class="small-text" text-anchor="middle" fill="red">মোংলা</text>
+            </g>
+            
+            <g class="port-marker" onclick="updateInfo('চট্টগ্রাম বন্দর', 'চট্টগ্রাম', 'সেক্টর ২', 'কর্ণফুলী নদী', 'দেশের প্রধান সমুদ্র বন্দর')">
+                <circle cx="850" cy="1030" r="6" fill="red" stroke="white" stroke-width="2" />
+                <text x="850" y="1045" class="small-text" text-anchor="middle" fill="red">চট্টগ্রাম</text>
+            </g>
+
+            <!-- Header / Title -->
+            <text x="600" y="80" class="header-title" style="font-size: 40px;">বাংলাদেশ মানচিত্র</text>
+            
+            <!-- Compass Rose -->
+            <g transform="translate(1000, 80)">
+                <circle cx="0" cy="0" r="30" fill="none" stroke="#ccc" />
+                <polygon points="0,-25 5,-5 25,0 5,5 0,25 -5,5 -25,0 -5,-5" fill="#333" />
+                <text x="0" y="-35" class="small-text">উ</text>
+                <text x="0" y="45" class="small-text">দ</text>
+                <text x="-40" y="5" class="small-text">প</text>
+                <text x="35" y="5" class="small-text">পূ</text>
+            </g>
+
+            <!-- Legend Box -->
+            <g transform="translate(200, 1400)">
+                <rect x="0" y="0" width="800" height="150" fill="white" stroke="var(--border-color)" rx="5" />
+                <text x="400" y="25" class="legend-text" text-anchor="middle" font-weight="bold" font-size="16">লেজেন্ড</text>
+                
+                <line x1="20" y1="50" x2="80" y2="50" stroke="black" stroke-width="2" />
+                <text x="90" y="53" class="legend-text">আন্তর্জাতিক সীমানা</text>
+                
+                <line x1="20" y1="70" x2="80" y2="70" stroke="#3182ce" stroke-width="4" />
+                <text x="90" y="73" class="legend-text">প্রধান নদী</text>
+                
+                <rect x="20" y="85" width="20" height="20" fill="var(--zone-high-risk)" />
+                <text x="45" y="100" class="legend-text">M > 7 (উচ্চ ঝুঁকি)</text>
+                
+                <rect x="200" y="85" width="20" height="20" fill="var(--zone-med-risk)" />
+                <text x="225" y="100" class="legend-text">6 < M < 7</text>
+                
+                <rect x="380" y="85" width="20" height="20" fill="var(--zone-low-risk)" />
+                <text x="405" y="100" class="legend-text">5 < M < 6</text>
+
+                <rect x="560" y="85" width="20" height="20" fill="var(--zone-min-risk)" />
+                <text x="585" y="100" class="legend-text">M < 5</text>
+
+                <circle cx="30" cy="125" r="5" fill="red" />
+                <text x="45" y="128" class="legend-text">সমুদ্র বন্দর</text>
+            </g>
+
+            <!-- Division Info Boxes (Top Visuals) -->
+            <g transform="translate(100, 120)">
+                <rect x="0" y="0" width="200" height="50" fill="var(--dhaka-fill)" stroke="var(--dhaka-border)"/>
+                <text x="100" y="25" class="small-text" text-anchor="middle" font-weight="bold">ঢাকা বিভাগ</text>
+                <text x="100" y="40" class="small-text" text-anchor="middle">১৩টি জেলা</text>
+            </g>
+            <g transform="translate(310, 120)">
+                <rect x="0" y="0" width="200" height="50" fill="var(--chattogram-fill)" stroke="var(--chattogram-border)"/>
+                <text x="100" y="25" class="small-text" text-anchor="middle" font-weight="bold">চট্টগ্রাম বিভাগ</text>
+                <text x="100" y="40" class="small-text" text-anchor="middle">১১টি জেলা</text>
+            </g>
+            <g transform="translate(520, 120)">
+                <rect x="0" y="0" width="200" height="50" fill="var(--rajshahi-fill)" stroke="var(--rajshahi-border)"/>
+                <text x="100" y="25" class="small-text" text-anchor="middle" font-weight="bold">রাজশাহী বিভাগ</text>
+                <text x="100" y="40" class="small-text" text-anchor="middle">৮টি জেলা</text>
+            </g>
+            <g transform="translate(730, 120)">
+                <rect x="0" y="0" width="200" height="50" fill="var(--khulna-fill)" stroke="var(--khulna-border)"/>
+                <text x="100" y="25" class="small-text" text-anchor="middle" font-weight="bold">খুলনা বিভাগ</text>
+                <text x="100" y="40" class="small-text" text-anchor="middle">১০টি জেলা</text>
+            </g>
+            
+        </svg>
+    </div>
+
+    <!-- Sidebar Info Card -->
+    <div id="info-card">
+        <h2>BCS জেলা তথ্য</h2>
+        <div id="card-content">
+            <div class="placeholder">
+                <p>মানচিত্রে যেকোনো জেলা, বন্দর, বা নদীতে ক্লিক করুন</p>
+                <p style="font-size: 12px;">(এটি একটি ইন্টারেক্টিভ মকআপ)</p>
+            </div>
+        </div>
+        <div style="margin-top: 20px; border-top: 1px solid #e2e8f0; padding-top: 10px;">
+            <h3>মুক্তিযুদ্ধের সেক্টর</h3>
+            <div id="sector-info" style="font-size: 14px; color: #4a5568;">
+                <p><strong>সেক্টর ১:</strong> চট্টগ্রাম</p>
+                <p><strong>সেক্টর ২:</strong> ঢাকা</p>
+                <p><strong>সেক্টর ৩:</strong> সিলেট</p>
+                <p><strong>সেক্টর ৪:</strong> ময়মনসিংহ</p>
+                <p><strong>সেক্টর ৫:</strong> রাজশাহী</p>
+                <p><strong>সেক্টর ৬:</strong> রংপুর</p>
+                <p><strong>সেক্টর ৭:</strong> খুলনা</p>
+                <p><strong>সেক্টর ৮:</strong> ফরিদপুর</p>
+                <p><strong>সেক্টর ৯:</strong> বরিশাল</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 2. Structured JS Data Array (Mock Data)
+        const bcsData = [
+            { id: '1', district: 'ঠাকুরগাঁও', division: 'রংপুর', sector: '7', rivers: ['তিস্তা'], border: 'পশ্চিমবঙ্গ', note: 'উত্তরবঙ্গের জেলা' },
+            { id: '2', district: 'পঞ্চগড়', division: 'রংপুর', sector: '7', rivers: ['তিস্তা'], border: 'পশ্চিমবঙ্গ', note: 'বাংলাদেশের সর্বউত্তর জেলা' },
+            { id: '3', district: 'দিনাজপুর', division: 'রংপুর', sector: '7', rivers: ['আত্রাই'], border: 'পশ্চিমবঙ্গ', note: 'প্রাচীন ঐতিহাসিক জেলা' },
+            { id: '4', district: 'কুড়িগ্রাম', division: 'রংপুর', sector: '7', rivers: ['যমুনা'], border: 'ভারত', note: '' },
+            { id: '5', district: 'চাঁপাইনবাবগঞ্জ', division: 'রাজশাহী', sector: '7', rivers: ['মহানন্দা'], border: 'পশ্চিমবঙ্গ', note: '' },
+            { id: '6', district: 'নওগাঁ', division: 'রাজশাহী', sector: '7', rivers: ['আত্রাই'], border: 'পশ্চিমবঙ্গ', note: '' },
+            { id: '7', district: 'রাজশাহী', division: 'রাজশাহী', sector: '7', rivers: ['পদ্মা'], border: 'পশ্চিমবঙ্গ', note: 'সিল্ক সিটি' },
+            { id: '8', district: 'ঢাকা', division: 'ঢাকা', sector: '2', rivers: ['বুড়িগঙ্গা'], border: 'মধ্যাঞ্চল', note: 'জাতীয় রাজধানী' },
+            { id: '9', district: 'চট্টগ্রাম', division: 'চট্টগ্রাম', sector: '1', rivers: ['কর্ণফুলী'], border: 'ত্রিপুরা, মিজোরাম', note: 'প্রধান বন্দর নগরী' },
+            { id: '10', district: 'সিলেট', division: 'সিলেট', sector: '3', rivers: ['সুরমা'], border: 'আসাম', note: 'আমার বাংলাদেশ, চা বাগান' },
+            { id: '11', district: 'খুলনা', division: 'খুলনা', sector: '9', rivers: ['রূপসা'], border: 'পশ্চিমবঙ্গ', note: 'সুন্দরবনের প্রবেশদ্বার' },
+            { id: '12', district: 'বরিশাল', division: 'বরিশাল', sector: '9', rivers: ['কীর্তনখোলা'], border: 'দক্ষিণাঞ্চল', note: 'দক্ষিণ বঙ্গের প্রবেশদ্বার' },
+            { id: '13', district: 'ময়মনসিংহ', division: 'ময়মনসিংহ', sector: '4', rivers: ['ব্রহ্মপুত্র'], border: 'ভারত', note: 'ময়মনসিংহ বিভাগ' },
+            { id: '14', district: 'কক্সবাজার', division: 'চট্টগ্রাম', sector: '1', rivers: ['মাতামুহুরী'], border: 'মিয়ানমার', note: 'বিশ্বের দীর্ঘতম সমুদ্র সৈকত' },
+            // Add more districts as needed for the demo
+        ];
+
+        // Helper to find data
+        function getDistrictData(name) {
+            return bcsData.find(d => d.district === name);
+        }
+
+        // 3. Interactivity: Click & Hover
+        document.addEventListener('DOMContentLoaded', () => {
+            const districts = document.querySelectorAll('.district');
+            const cardContent = document.getElementById('card-content');
+            const sectorInfo = document.getElementById('sector-info');
+
+            districts.forEach(el => {
+                el.addEventListener('click', function(e) {
+                    const name = this.getAttribute('data-district');
+                    const div = this.getAttribute('data-div');
+                    const sector = this.getAttribute('data-sector');
+                    
+                    // Check data array for more details (Mocking for SVG elements not in array)
+                    const details = getDistrictData(name);
+                    
+                    let html = `
+                        <div style="background: #f7fafc; padding: 15px; border-radius: 6px;">
+                            <h2 style="color: #2b6cb0; margin-top:0;">${name}</h2>
+                            <p><strong>বিভাগ:</strong> ${div}</p>
+                            <p><strong>মুক্তিযুদ্ধ সেক্টর:</strong> ${sector}</p>
+                    `;
+                    
+                    if(details) {
+                        html += `<p><strong>প্রধান নদী:</strong> ${details.rivers.join(', ')}</p>`;
+                        html += `<p><strong>সীমান্ত:</strong> ${details.border}</p>`;
+                        if(details.note) html += `<p><em>${details.note}</em></p>`;
+                    } else {
+                        html += `<p><em>মকআপ ডেটা উপলব্ধ নেই।</em></p>`;
+                    }
+                    html += `</div>`;
+                    
+                    cardContent.innerHTML = html;
+                });
+
+                // Hover effect handled via CSS, but we ensure data attributes are accessible
+                el.style.cursor = 'pointer';
+            });
+
+            // Handle click on Map background to reset
+            document.getElementById('map-container').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    cardContent.innerHTML = `
+                        <div class="placeholder">
+                            <p>মানচিত্রে যেকোনো জেলা, বন্দর, বা নদীতে ক্লিক করুন</p>
+                            <p style="font-size: 12px;">(এটি একটি ইন্টারেক্টিভ মকআপ)</p>
+                        </div>
+                    `;
+                }
+            });
+        });
+
+        // External function for Port clicks
+        function updateInfo(title, div, sector, river, note) {
+            const cardContent = document.getElementById('card-content');
+            cardContent.innerHTML = `
+                <div style="background: #fff5f5; padding: 15px; border-radius: 6px;">
+                    <h2 style="color: #c53030; margin-top:0;">${title}</h2>
+                    <p><strong>বিভাগ:</strong> ${div}</p>
+                    <p><strong>মুক্তিযুদ্ধ সেক্টর:</strong> ${sector}</p>
+                    <p><strong>নদী:</strong> ${river}</p>
+                    <p><em>${note}</em></p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

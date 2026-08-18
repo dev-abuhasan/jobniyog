@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Order Confirmed &mdash; {{SITE_NAME}}</title>
+</head>
+<body style="margin:0;padding:0;background:#f7f2e8;font-family:Arial,Helvetica,sans-serif">
+  <div style="display:none;max-height:0;overflow:hidden;mso-hide:all">Order #{{ORDER_ID}} confirmed &mdash; total {{TOTAL}}. Thank you for shopping with {{SITE_NAME}}!&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7f2e8">
+    <tr><td align="center" style="padding:40px 16px">
+
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="background:linear-gradient(135deg,#aa96da 0%,#8d77c2 100%);padding:28px 36px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="56" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+                      <tr>
+                        <td style="background:#ffffff;border-radius:10px;padding:4px;width:48px;height:48px" width="48" height="48" align="center" valign="middle">
+                          <img src="{{SITE_URL}}/assets/img/logo-nobg.png" alt="{{SITE_NAME}}" width="40" height="40" style="display:block;border:0" />
+                        </td>
+                      </tr>
+                    </table>
+                </td>
+                <td valign="middle" style="padding-left:14px">
+                  <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;mso-line-height-rule:exactly">{{SITE_NAME}}</p>
+                  <p style="margin:4px 0 0;font-size:12px;color:rgba(255,255,255,0.82);mso-line-height-rule:exactly">Order Confirmation</p>
+                </td>
+                <td width="44" align="right" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td width="44" height="44" align="center" valign="middle" style="width:44px;height:44px;background:rgba(255,255,255,0.22);border-radius:22px;font-size:18px;font-weight:700;color:#ffffff;font-family:Arial,sans-serif;line-height:44px;mso-line-height-rule:exactly;text-align:center">&#10003;</td>
+                      </tr>
+                    </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ORDER BANNER -->
+        <tr>
+          <td style="background:#f1dcc8;padding:14px 36px;border-bottom:1px solid #e8d4b8">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td valign="middle">
+                  <p style="margin:0;font-size:14px;color:#6f5b48;font-weight:600">Order <span style="color:#8d77c2">#{{ORDER_ID}}</span> &nbsp;&#183;&nbsp; {{ORDER_DATE}}</p>
+                </td>
+                <td align="right" valign="middle">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right">
+                    <tr>
+                      <td style="background:#8d77c2;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;color:#ffffff;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap">Confirmed</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- GREETING -->
+        <tr>
+          <td style="padding:28px 36px 8px">
+            <p style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1f1a17">Thank you, {{CUSTOMER_NAME}}!</p>
+            <p style="margin:0;font-size:14px;color:#6f5b48;line-height:1.65">Your order has been placed and is being prepared. We&apos;ll keep you updated.</p>
+          </td>
+        </tr>
+
+        <!-- ITEMS TABLE -->
+        <tr>
+          <td style="padding:20px 36px 0">
+            <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#1f1a17;text-transform:uppercase;letter-spacing:1px">Order Items</p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #f1dcc8;border-radius:10px;overflow:hidden">
+              <tr style="background:#f7f2e8">
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:0.8px;border-bottom:1px solid #f1dcc8">Product</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:0.8px;border-bottom:1px solid #f1dcc8;text-align:center" width="50">Qty</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:0.8px;border-bottom:1px solid #f1dcc8;text-align:right" width="80">Price</td>
+                <td style="padding:9px 14px;font-size:11px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:0.8px;border-bottom:1px solid #f1dcc8;text-align:right" width="90">Total</td>
+              </tr>
+              {{ORDER_ITEMS_ROWS}}
+            </table>
+          </td>
+        </tr>
+
+        <!-- SUMMARY -->
+        <tr>
+          <td style="padding:18px 36px 0">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="right">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="min-width:220px">
+                    <tr>
+                      <td style="padding:5px 0;font-size:13px;color:#6f5b48">Subtotal</td>
+                      <td style="padding:5px 0;font-size:13px;color:#1f1a17;text-align:right;font-weight:500">{{SUBTOTAL}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:5px 0;font-size:13px;color:#6f5b48">Delivery fee</td>
+                      <td style="padding:5px 0;font-size:13px;color:#1f1a17;text-align:right;font-weight:500">{{DELIVERY_FEE}}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="padding:4px 0"><div style="height:1px;background:#f1dcc8;font-size:0;line-height:0">&nbsp;</div></td>
+                    </tr>
+                    <tr>
+                      <td style="padding:8px 0 4px;font-size:15px;font-weight:700;color:#1f1a17">Total</td>
+                      <td style="padding:8px 0 4px;font-size:18px;font-weight:800;color:#8d77c2;text-align:right">{{TOTAL}}</td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- DELIVERY & PAYMENT -->
+        <tr>
+          <td style="padding:18px 36px 8px">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7f2e8;border-radius:10px">
+              <tr>
+                <td style="padding:16px 18px;border-right:1px solid #e8d4b8" valign="top" width="50%">
+                  <p style="margin:0 0 6px;font-size:10px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:1px">Delivery Address</p>
+                  <p style="margin:0;font-size:13px;color:#1f1a17;line-height:1.5">{{DELIVERY_ADDRESS}}<br/><span style="color:#6f5b48">{{DELIVERY_DISTRICT}}</span></p>
+                </td>
+                <td style="padding:16px 18px" valign="top" width="50%">
+                  <p style="margin:0 0 6px;font-size:10px;font-weight:700;color:#9b8270;text-transform:uppercase;letter-spacing:1px">Payment</p>
+                  <p style="margin:0;font-size:13px;color:#1f1a17;font-weight:600">{{PAYMENT_METHOD}}</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- CTA -->
+        <tr>
+          <td align="center" style="padding:16px 36px 32px">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td align="center" style="background:linear-gradient(135deg,#aa96da,#8d77c2);border-radius:50px">
+                  <a href="{{SITE_URL}}/order" target="_blank"
+                    style="display:inline-block;color:#ffffff;font-size:14px;font-weight:700;text-decoration:none;padding:13px 32px;border-radius:50px;letter-spacing:0.3px">
+                    View My Orders
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="background:#f7f2e8;padding:18px 36px;border-top:1px solid #f1dcc8">
+            <p style="margin:0 0 4px;font-size:12px;color:#9b8270"><a href="{{SITE_URL}}" style="color:#8d77c2;text-decoration:none;font-weight:600">{{SITE_NAME}}</a> &nbsp;&#183;&nbsp; &copy; {{YEAR}} All rights reserved.</p>
+            <p style="margin:0;font-size:11px;color:#b8a898">This is an automated message &mdash; please do not reply.</p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

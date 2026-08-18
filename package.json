@@ -1,0 +1,50 @@
+{
+  "name": "jobniyog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "env-cmd -f .env.dev next dev",
+    "dev:port": "env-cmd -f .env.dev next dev -p $PORT",
+    "build": "next build",
+    "build:dev": "env-cmd -f .env.dev next build",
+    "start": "next start",
+    "start:port": "env-cmd -f .env.local next start -p $PORT",
+    "start:node": "cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/ && node .next/standalone/server.js",
+    "lint": "eslint",
+    "update": "npx -p npm-check-updates ncu -u",
+    "check:all": "npm run check:types && npm run lint"
+  },
+  "dependencies": {
+    "@next/third-parties": "^16.2.9",
+    "@tinymce/tinymce-react": "^6.3.0",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.10.0",
+    "jose": "^6.2.3",
+    "katex": "^0.17.0",
+    "next": "16.2.9",
+    "nodemailer": "^9.0.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.35.2",
+    "tinymce": "^8.6.0",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^26",
+    "@types/nodemailer": "^8.0.1",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/tinymce": "^4.6.9",
+    "env-cmd": "^11.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
+    "typescript": "^6"
+  }
+}

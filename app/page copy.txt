@@ -1,0 +1,30 @@
+import mathData from "@/services/fake-data/math.json";
+import MathRenderer, { MathItem } from "../components/atoms/math-renderer";
+import UniversalMathCreator from "@/components/organisms/universal-math-creator";
+import MathEditorTemplate from "@/components/templates/math-editor-template";
+export default function Home() {
+  return (
+    <div className="flex flex-col flex-1 items-center justify-center font-sans bg-white">
+
+      <div className="space-y-6">
+        {mathData.map((item: MathItem) => (
+          <div key={item.id} className="p-5 border border-gray-200 rounded-xl bg-white">
+            <span className="text-xs font-bold uppercase tracking-wider text-red-600 bg-red-50 px-2.5 py-1 rounded-md">
+              {item.topic}
+            </span>
+            <p className="mt-3 text-gray-700 font-medium">{item.question}</p>
+
+            {/* Render KaTeX math directly as HTML DOM elements */}
+            <div className="mt-4 p-4 bg-slate-50 border border-slate-100 rounded-lg text-lg overflow-x-auto text-indigo-500">
+              <MathRenderer text={item.formula} />
+            </div>
+          </div>
+        ))}
+      </div>
+      <UniversalMathCreator />
+
+
+      <MathEditorTemplate />
+    </div>
+  );
+}

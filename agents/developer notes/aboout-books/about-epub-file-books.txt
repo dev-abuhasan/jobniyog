@@ -1,0 +1,272 @@
+EPUB Developer Notes
+====================
+
+What is EPUB?
+-------------
+EPUB (Electronic Publication) is an open, royalty-free ebook format maintained by the World Wide Web Consortium (W3C). It is the most widely used ebook format outside of Amazon Kindle.
+
+Key Facts
+---------
+- Open standard (no license fee required)
+- Based on ZIP archive format
+- Uses HTML/XHTML for content
+- Uses CSS for styling
+- Uses XML for metadata
+- Supports images, SVG, fonts, audio, and video
+- Supports hyperlinks and navigation
+- EPUB 3 supports modern HTML5 features
+
+Important
+---------
+The EPUB format is open.
+The book content is NOT automatically open source.
+Most commercial EPUB books are protected by copyright.
+Some EPUB files are also protected with DRM (encryption).
+
+Basic Structure
+---------------
+
+book.epub
+│
+├── mimetype
+├── META-INF/
+│   └── container.xml
+└── OEBPS/ (or EPUB/)
+    ├── content.opf
+    ├── nav.xhtml (or toc.ncx)
+    ├── chapter1.xhtml
+    ├── chapter2.xhtml
+    ├── styles.css
+    ├── images/
+    └── fonts/
+
+File Purpose
+------------
+mimetype
+    Contains:
+    application/epub+zip
+
+container.xml
+    Points to the main package (content.opf).
+
+content.opf
+    Metadata, manifest, spine (reading order).
+
+nav.xhtml
+    Table of contents.
+
+chapter*.xhtml
+    Actual book chapters.
+
+styles.css
+    Book styling.
+
+images/
+    Images and cover.
+
+fonts/
+    Embedded fonts.
+
+How EPUB Works
+--------------
+EPUB
+    ↓
+ZIP Archive
+    ↓
+HTML/XHTML
+CSS
+XML
+Images
+Fonts
+
+Extracting EPUB
+---------------
+Method 1:
+Rename
+
+book.epub
+↓
+
+book.zip
+
+Extract using any ZIP tool.
+
+Method 2:
+Use libraries.
+
+Node.js:
+- adm-zip
+- unzipper
+- yauzl
+
+Python:
+- zipfile
+
+Java:
+- java.util.zip
+
+Go:
+- archive/zip
+
+Rebuilding EPUB
+---------------
+After editing:
+
+Files
+↓
+
+ZIP correctly
+↓
+
+Rename .zip → .epub
+
+Important:
+- mimetype must be the FIRST file.
+- mimetype must NOT be compressed.
+
+Otherwise some readers may reject the EPUB.
+
+Typical Processing Pipeline
+---------------------------
+
+EPUB
+↓
+
+Extract ZIP
+↓
+
+Read XHTML
+↓
+
+Remove HTML tags
+↓
+
+Plain text
+↓
+
+Split by chapter
+↓
+
+AI Processing
+    - Summary
+    - Translation
+    - Flashcards
+    - Quiz
+    - Character extraction
+    - Keywords
+    - Embeddings
+    - Semantic search
+
+Why EPUB Is Great for AI
+------------------------
+- Already structured.
+- Chapters are separated.
+- Clean HTML.
+- Easy metadata.
+- Less parsing than PDF.
+- Easier OCR is usually unnecessary.
+- Excellent for Retrieval-Augmented Generation (RAG).
+
+Useful Node.js Libraries
+------------------------
+EPUB Parsing
+- epub
+- epub-parser
+- epubjs
+- adm-zip
+- unzipper
+
+HTML Parsing
+- cheerio
+- jsdom
+
+XML Parsing
+- fast-xml-parser
+- xml2js
+
+AI
+- OpenAI SDK
+- LangChain
+- LlamaIndex
+
+Database
+---------
+Store:
+- Book
+- Author
+- Chapter
+- Paragraph
+- Embeddings
+- Summaries
+- Keywords
+
+Advantages
+----------
+✓ Open standard
+✓ Easy to parse
+✓ HTML based
+✓ Small file size
+✓ Cross-platform
+✓ Great for AI
+✓ Easy to edit
+✓ Easy to generate
+✓ Can be built entirely with open-source tools
+
+Limitations
+-----------
+- DRM may encrypt content.
+- Commercial books are usually copyrighted.
+- EPUB layout is reflowable, not fixed like PDF.
+- Some readers support different subsets of EPUB features.
+
+Common Developer Workflow
+-------------------------
+
+Read EPUB
+↓
+
+Extract ZIP
+↓
+
+Parse XHTML
+
+↓
+
+Clean HTML
+
+↓
+
+Store chapters in database
+
+↓
+
+Generate embeddings
+
+↓
+
+AI summaries
+
+↓
+
+Search API
+
+↓
+
+Frontend reader
+
+Future Project Ideas
+--------------------
+- EPUB Reader
+- EPUB to Markdown
+- EPUB to PDF
+- AI Book Summarizer
+- AI Tutor
+- Vocabulary Builder
+- Flashcard Generator
+- Quiz Generator
+- Semantic Book Search
+- Personal Digital Library
+
+Golden Rule
+-----------
+EPUB is simply a ZIP archive containing structured HTML, CSS, XML, and assets. Once you understand web technologies, you already understand most of the EPUB format.

@@ -1,0 +1,255 @@
+{
+    "letter": "A",
+    "set": 1,
+    "createdAt": "2026-08-18",
+    "source": "BCS Preliminary Book - Set A",
+    "words": [
+        {
+            "id": "absurd",
+            "word": "Absurd",
+            "meaning": "অযৌক্তিক / হাস্যকর",
+            "synonyms": [
+                {
+                    "word": "Unreasonable",
+                    "meaning": "অযৌক্তিক"
+                },
+                {
+                    "word": "Illogical",
+                    "meaning": "যুক্তিহীন"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Reasonable",
+                    "meaning": "যুক্তিসঙ্গত"
+                },
+                {
+                    "word": "Sensible",
+                    "meaning": "বিচক্ষণ / যুক্তিসঙ্গত"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Abstruse",
+                    "meaning": "দুর্বোধ্য / গভীর"
+                },
+                {
+                    "word": "Absolve",
+                    "meaning": "মুক্তি দেওয়া / ক্ষমা করা"
+                },
+                {
+                    "word": "Absorb",
+                    "meaning": "শোষণ করা"
+                }
+            ]
+        },
+        {
+            "id": "abandon",
+            "word": "Abandon",
+            "meaning": "পরিত্যাগ করা / ছেড়ে দেওয়া",
+            "synonyms": [
+                {
+                    "word": "Discard",
+                    "meaning": "বর্জন করা / ফেলে দেওয়া"
+                },
+                {
+                    "word": "Drop",
+                    "meaning": "ছেড়ে দেওয়া"
+                },
+                {
+                    "word": "Forsake",
+                    "meaning": "পরিত্যাগ করা"
+                },
+                {
+                    "word": "Quit",
+                    "meaning": "ছেড়ে দেওয়া"
+                },
+                {
+                    "word": "Leave",
+                    "meaning": "ছেড়ে যাওয়া / পরিত্যাগ করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Support",
+                    "meaning": "সমর্থন করা"
+                },
+                {
+                    "word": "Retain",
+                    "meaning": "ধরে রাখা / বজায় রাখা"
+                },
+                {
+                    "word": "Keep",
+                    "meaning": "রেখে দেওয়া / ধরে রাখা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Abate",
+                    "meaning": "কমে যাওয়া / কমানো"
+                },
+                {
+                    "word": "Abdicate",
+                    "meaning": "পদত্যাগ করা"
+                },
+                {
+                    "word": "Abhor",
+                    "meaning": "ঘৃণা করা"
+                }
+            ]
+        },
+        {
+            "id": "abate",
+            "word": "Abate",
+            "meaning": "কমে যাওয়া / কমানো",
+            "synonyms": [
+                {
+                    "word": "Subside",
+                    "meaning": "প্রশমিত হওয়া / কমে যাওয়া"
+                },
+                {
+                    "word": "Decrease",
+                    "meaning": "হ্রাস পাওয়া / কমানো"
+                },
+                {
+                    "word": "Lessen",
+                    "meaning": "কমানো / হ্রাস করা"
+                },
+                {
+                    "word": "Diminish",
+                    "meaning": "হ্রাস পাওয়া / কমানো"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Magnify",
+                    "meaning": "বড় করা / বৃদ্ধি করা"
+                },
+                {
+                    "word": "Increase",
+                    "meaning": "বৃদ্ধি করা"
+                },
+                {
+                    "word": "Enlarge",
+                    "meaning": "বড় করা / সম্প্রসারিত করা"
+                },
+                {
+                    "word": "Ameliorate",
+                    "meaning": "উন্নত করা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Abandon",
+                    "meaning": "পরিত্যাগ করা / ছেড়ে দেওয়া"
+                },
+                {
+                    "word": "Abdicate",
+                    "meaning": "পদত্যাগ করা"
+                },
+                {
+                    "word": "Abhor",
+                    "meaning": "ঘৃণা করা"
+                }
+            ]
+        },
+        {
+            "id": "abbreviate",
+            "word": "Abbreviate",
+            "meaning": "সংক্ষিপ্ত করা",
+            "synonyms": [
+                {
+                    "word": "Shorten",
+                    "meaning": "ছোট / সংক্ষিপ্ত করা"
+                },
+                {
+                    "word": "Abridge",
+                    "meaning": "সংক্ষিপ্ত করা"
+                },
+                {
+                    "word": "Trim",
+                    "meaning": "ছাঁটাই করা / কমানো"
+                },
+                {
+                    "word": "Condense",
+                    "meaning": "সংক্ষেপ করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Enlarge",
+                    "meaning": "বড় করা"
+                },
+                {
+                    "word": "Expand",
+                    "meaning": "সম্প্রসারিত / বিস্তৃত করা"
+                },
+                {
+                    "word": "Amplify",
+                    "meaning": "বৃদ্ধি করা / জোরালো করা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Abridge",
+                    "meaning": "সংক্ষিপ্ত করা"
+                },
+                {
+                    "word": "Abstract",
+                    "meaning": "সংক্ষিপ্তসার / বিমূর্ত"
+                },
+                {
+                    "word": "Condense",
+                    "meaning": "সংক্ষেপ করা"
+                }
+            ]
+        },
+        {
+            "id": "adulterate",
+            "word": "Adulterate",
+            "meaning": "ভেজাল মেশানো / বিশুদ্ধতা নষ্ট করা",
+            "synonyms": [
+                {
+                    "word": "Contaminate",
+                    "meaning": "দূষিত করা"
+                },
+                {
+                    "word": "Pollute",
+                    "meaning": "দূষিত করা"
+                },
+                {
+                    "word": "Amalgamate",
+                    "meaning": "মিশ্রিত করা / একত্রিত করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Purify",
+                    "meaning": "বিশুদ্ধ করা"
+                },
+                {
+                    "word": "Clean",
+                    "meaning": "পরিষ্কার করা"
+                },
+                {
+                    "word": "Smoothen",
+                    "meaning": "মসৃণ করা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Adultery",
+                    "meaning": "ব্যভিচার"
+                },
+                {
+                    "word": "Adulate",
+                    "meaning": "অতিরিক্ত প্রশংসা করা"
+                },
+                {
+                    "word": "Adulterine",
+                    "meaning": "অবৈধ / মিশ্রিত"
+                }
+            ]
+        }
+    ]
+}

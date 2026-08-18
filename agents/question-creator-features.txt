@@ -1,0 +1,721 @@
+================================================================================
+            MATH QUESTION BUILDER - BULK IMPORT & AI IMAGE CONVERTER
+                           Implementation Plan v1.0
+================================================================================
+
+This document describes two major features for the Math Question Builder
+application, including full implementation details, code snippets, and
+integration steps. You can copy this entire text and save as a reference file.
+
+
+-------------------------------------------------------------------------------
+FEATURE 1: BULK MCQ IMPORT PARSER
+-------------------------------------------------------------------------------
+
+DESCRIPTION
+-----------
+Allows admins to paste a formatted text block containing multiple MCQs (or
+written questions) and parse them into the editor's MCQ structure. The format
+is simple, human-readable, and LaTeX-aware.
+
+FORMAT SPECIFICATION
+---------------------
+Each question block starts with "Q:" for the question content, followed by
+"QA:" for the options (comma-separated). Each option is prefixed by "A.", "B.",
+"C.", "D." (case-insensitive, trailing dot optional).
+
+Example:
+
+MCQ:
+Q: The value of $\frac{1}{2} + \frac{1}{3}$ is?
+QA: A. $\frac{5}{6}$, B. $\frac{1}{5}$, C. $\frac{2}{5}$, D. $\frac{3}{4}$
+
+Q: Solve: $x^2 - 4 = 0$
+QA: A. $x = \pm 2$, B. $x = \pm 4$, C. $x = \pm 1$, D. $x = \pm 3$
+
+WRITTEN:
+Q: Explain the concept of derivatives.
+QA: (No options - or omit QA line)
+
+IMPLEMENTATION STEPS
+--------------------
+
+Step 1: Create parser module: lib/mcq-parser.ts
+
+Copy the code below into lib/mcq-parser.ts:
+
+-------------------------------------------------------------------------------
+// lib/mcq-parser.ts
+import { generateId } from "@/components/organisms/math-editor/math-editor-utils";
+
+export interface ParsedMCQ {
+    question: string;
+    options: { id: string; text: string; isCorrect: boolean }[];
+    type: 'mcq' | 'written';
+}
+
+export function parseMCQText(text: string): ParsedMCQ[] {
+    const questions: ParsedMCQ[] = [];
+    // Split by "Q:" to find each question block
+    const blocks = text.split(/Q:/).filter(block => block.trim());
+    
+    for (const block of blocks) {
+        // Try to find QA: section
+        const qaMatch = block.match(/(.*?)QA:\s*(.*)/s);
+        if (!qaMatch) {
+            // No QA section -> treat as written question
+            const questionText = block.trim();
+            if (questionText) {
+                questions.push({
+                    question: questionText,
+                    options: [],
+                    type: 'written'
+                });
+            }
+            continue;
+        }
+        
+        const questionText = qaMatch[1].trim();
+        const optionsText = qaMatch[2].trim();
+        
+        // Parse options (e.g., "A. text", "B. text", etc.)
+        const optionMatches = optionsText.match(/[A-D]\.\s*[^,]+(?:,[^,]+)*/g);
+        const options = optionMatches?.map((opt, index) => {
+            const clean = opt.replace(/^[A-D]\.\s*/, '').trim();
+            return {
+                id: generateId(),
+                text: clean,
+                isCorrect: false
+            };
+        }) || [];
+        
+        if (options.length >= 2) {
+            questions.push({
+                question: questionText,
+                options,
+                type: 'mcq'
+            });
+        } else {
+            // If fewer than 2 options, treat as written
+            questions.push({
+                question: questionText,
+                options,
+                type: 'written'
+            });
+        }
+    }
+    return questions;
+}
+-------------------------------------------------------------------------------
+
+Step 2: Create BulkImport component: components/organisms/math-editor/bulk-import.tsx
+
+Copy the code below:
+
+-------------------------------------------------------------------------------
+"use client";
+
+import React, { useState } from "react";
+import { parseMCQText, ParsedMCQ } from "@/lib/mcq-parser";
+import type { MCQOption } from "@/services/types";
+
+interface BulkImportProps {
+    onImport: (options: MCQOption[]) => void;
+    onClose: () => void;
+}
+
+export default function BulkImport({ onImport, onClose }: BulkImportProps) {
+    const [text, setText] = useState("");
+    const [preview, setPreview] = useState<ParsedMCQ[]>([]);
+    const [error, setError] = useState<string>("");
+
+    const handleParse = () => {
+        if (!text.trim()) {
+            setError("Please paste some MCQ text.");
+            return;
+        }
+        try {
+            const parsed = parseMCQText(text);
+            if (parsed.length === 0) {
+                setError("No valid MCQ questions found. Check the format.");
+                return;
+            }
+            setPreview(parsed);
+            setError("");
+        } catch (e) {
+            setError("Failed to parse: " + (e as Error).message);
+        }
+    };
+
+    const handleImport = () => {
+        // Flatten all options from all questions
+        const allOptions: MCQOption[] = [];
+        preview.forEach((q) => {
+            allOptions.push(...q.options);
+        });
+        onImport(allOptions);
+        onClose();
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="bg-white rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col p-6">
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold text-gray-800">Bulk Import MCQ</h3>
+                    <button onClick={onClose} className="text-gray-600 hover:text-gray-900 text-2xl">✕</button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto">
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Paste your MCQ questions in this format:
+                        </label>
+                        <pre className="bg-gray-100 p-3 rounded text-xs text-gray-600 overflow-x-auto">{`MCQ:
+Q: The value of $\\frac{1}{2} + \\frac{1}{3}$ is?
+QA: A. $\\frac{5}{6}$, B. $\\frac{1}{5}$, C. $\\frac{2}{5}$, D. $\\frac{3}{4}$
+
+Q: Solve: $x^2 - 4 = 0$
+QA: A. $x = \\pm 2$, B. $x = \\pm 4$, C. $x = \\pm 1$, D. $x = \\pm 3$`}</pre>
+                    </div>
+
+                    <textarea
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        placeholder="Paste your MCQ questions here..."
+                        className="w-full h-40 rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        spellCheck={false}
+                    />
+
+                    {error && (
+                        <div className="mt-2 p-2 bg-red-50 border border-red-200 text-red-700 rounded text-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    {preview.length > 0 && (
+                        <div className="mt-4">
+                            <p className="text-sm font-medium text-gray-700 mb-2">
+                                Preview ({preview.length} questions found):
+                            </p>
+                            <div className="bg-gray-50 p-3 rounded border border-gray-200 max-h-60 overflow-y-auto">
+                                {preview.map((q, idx) => (
+                                    <div key={idx} className="mb-3 pb-3 border-b border-gray-200 last:border-0">
+                                        <p className="text-sm font-medium text-gray-800">
+                                            {idx + 1}. {q.question}
+                                        </p>
+                                        {q.options.length > 0 && (
+                                            <div className="ml-4 mt-1 space-y-0.5">
+                                                {q.options.map((opt, optIdx) => (
+                                                    <p key={optIdx} className="text-xs text-gray-600">
+                                                        {String.fromCharCode(65 + optIdx)}. {opt.text}
+                                                    </p>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-gray-200">
+                    <button onClick={handleParse} className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
+                        Preview
+                    </button>
+                    <button
+                        onClick={handleImport}
+                        disabled={preview.length === 0}
+                        className={`px-4 py-2 rounded-md transition ${
+                            preview.length > 0
+                                ? "bg-blue-600 text-white hover:bg-blue-700"
+                                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                        }`}
+                    >
+                        Import {preview.length} Question{preview.length > 1 ? "s" : ""}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+-------------------------------------------------------------------------------
+
+Step 3: Integrate with MathEditor (components/organisms/math-editor/index.tsx)
+
+Add the following state and button in the options section:
+
+// State
+const [showBulkImport, setShowBulkImport] = useState(false);
+
+// Handler
+const handleBulkImport = (importedOptions: MCQOption[]) => {
+    setOptions(importedOptions);
+    setQuestionType("mcq");
+    setError("");
+};
+
+// Add button next to "Add Option"
+<button
+    onClick={() => setShowBulkImport(true)}
+    className="px-4 py-2 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+>
+    📥 Bulk Import
+</button>
+
+// Modal
+{showBulkImport && (
+    <BulkImport
+        onImport={handleBulkImport}
+        onClose={() => setShowBulkImport(false)}
+    />
+)}
+
+
+-------------------------------------------------------------------------------
+FEATURE 2: AI IMAGE TO MCQ/CONVERTER
+-------------------------------------------------------------------------------
+
+DESCRIPTION
+-----------
+Process images of question papers to extract and convert questions into the
+editor's format using AI. The system uses the image2mcq library with OpenRouter
+(for free/paid models) or Ollama (for local, completely free processing).
+
+ARCHITECTURE
+------------
+[Image Upload] → [API Route] → [image2mcq Library] → [JSON Response] → [Editor Preview]
+
+IMPLEMENTATION STEPS
+--------------------
+
+Step 1: Install the image2mcq library (Python side)
+
+Because image2mcq is a Python library, you need to set up a Python backend or
+use it via a microservice. Recommended approach:
+
+- Create a separate Python microservice (Flask/FastAPI) that exposes an endpoint
+  for processing images.
+- Or, use a serverless function (AWS Lambda, Vercel Python runtime) to run the
+  Python code.
+
+Option: If you prefer to run it in Next.js, you can use child_process to execute
+a Python script, but that's not recommended for production.
+
+We'll assume a Python microservice at /api/process-image (or a separate endpoint).
+
+Step 2: Python microservice code (FastAPI example)
+
+Create a file `image_service.py`:
+
+-------------------------------------------------------------------------------
+from fastapi import FastAPI, File, UploadFile, Form
+from fastapi.responses import JSONResponse
+from image2mcq import ImageMCQGenerator
+import os
+import tempfile
+
+app = FastAPI()
+
+@app.post("/process-image")
+async def process_image(
+    image: UploadFile = File(...),
+    question_type: str = Form("mcq")
+):
+    try:
+        # Save uploaded image temporarily
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp:
+            content = await image.read()
+            tmp.write(content)
+            tmp_path = tmp.name
+
+        # Configure the generator
+        gen = ImageMCQGenerator(
+            api_key=os.environ.get("OPENROUTER_API_KEY"),
+            method="images2mcq",
+            mcq_model="auto",
+            mcq_model_list=[
+                "google/gemini-2.5-flash-lite",
+                "google/gemma-3-27b-it:free",
+                "nvidia/llama-nemotron-embed-vl-1b-v2:free"
+            ]
+        )
+
+        # Process image
+        result = gen.from_image_paths(tmp_path, n=10)  # n = number of questions expected
+
+        # Clean up
+        os.unlink(tmp_path)
+
+        return JSONResponse(content=result)
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
+-------------------------------------------------------------------------------
+
+Step 3: Next.js API Route (proxy to Python microservice)
+
+If you choose to keep everything in Next.js, you can create an API route that
+calls the Python microservice, or you can directly use the image2mcq library
+if you set up a Python runtime in Vercel (Vercel now supports Python).
+
+Simpler: Create a Next.js API route that calls the Python service.
+
+app/api/process-image/route.ts:
+
+-------------------------------------------------------------------------------
+import { NextRequest, NextResponse } from 'next/server';
+
+export async function POST(req: NextRequest) {
+    try {
+        const formData = await req.formData();
+        const image = formData.get('image');
+        const type = formData.get('type') || 'mcq';
+
+        // Forward to Python microservice
+        const response = await fetch(`${process.env.PYTHON_SERVICE_URL}/process-image`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        const data = await response.json();
+        return NextResponse.json(data);
+    } catch (error) {
+        return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+}
+-------------------------------------------------------------------------------
+
+Step 4: UI Component for Image Import
+
+Create components/organisms/math-editor/image-import.tsx:
+
+-------------------------------------------------------------------------------
+"use client";
+
+import React, { useState, useRef } from "react";
+import type { MCQOption } from "@/services/types";
+
+interface ImageImportProps {
+    onImport: (options: MCQOption[], content: string, explanation: string) => void;
+    onClose: () => void;
+}
+
+export default function ImageImport({ onImport, onClose }: ImageImportProps) {
+    const [image, setImage] = useState<File | null>(null);
+    const [questionType, setQuestionType] = useState<"mcq" | "written">("mcq");
+    const [loading, setLoading] = useState(false);
+    const [preview, setPreview] = useState<any>(null);
+    const [error, setError] = useState<string>("");
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setImage(e.target.files[0]);
+            setError("");
+        }
+    };
+
+    const handleProcess = async () => {
+        if (!image) {
+            setError("Please select an image first.");
+            return;
+        }
+
+        setLoading(true);
+        setError("");
+
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("type", questionType);
+
+        try {
+            const response = await fetch("/api/process-image", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || "Failed to process image.");
+            }
+
+            const data = await response.json();
+            setPreview(data);
+        } catch (err) {
+            setError(err.message || "Something went wrong.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleImport = () => {
+        if (preview) {
+            // Map preview data to MCQOption format
+            const options: MCQOption[] = [];
+            // Assume preview contains questions array
+            preview.questions?.forEach((q: any) => {
+                q.options?.forEach((opt: any) => {
+                    options.push({
+                        id: generateId(),
+                        text: opt.text || opt.content || "",
+                        isCorrect: opt.isCorrect || false,
+                    });
+                });
+            });
+            onImport(options, preview.content || "", preview.explanation || "");
+            onClose();
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col p-6">
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold text-gray-800">Import from Image</h3>
+                    <button onClick={onClose} className="text-gray-600 hover:text-gray-900 text-2xl">✕</button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Select Question Type
+                        </label>
+                        <select
+                            value={questionType}
+                            onChange={(e) => setQuestionType(e.target.value as "mcq" | "written")}
+                            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800 focus:border-blue-500"
+                        >
+                            <option value="mcq">Multiple Choice</option>
+                            <option value="written">Written</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Upload Image
+                        </label>
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                            accept="image/*"
+                            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-800"
+                        />
+                        {image && (
+                            <p className="text-xs text-gray-500 mt-1">Selected: {image.name}</p>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={handleProcess}
+                        disabled={loading || !image}
+                        className={`w-full py-2 rounded-md transition ${
+                            loading || !image
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-blue-600 text-white hover:bg-blue-700"
+                        }`}
+                    >
+                        {loading ? "Processing..." : "Process Image"}
+                    </button>
+
+                    {error && (
+                        <div className="p-2 bg-red-50 border border-red-200 text-red-700 rounded text-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    {preview && (
+                        <div>
+                            <h4 className="text-sm font-medium text-gray-700 mb-2">Preview</h4>
+                            <div className="bg-gray-50 p-3 rounded border border-gray-200 max-h-40 overflow-y-auto">
+                                <pre className="text-xs text-gray-800 whitespace-pre-wrap">
+                                    {JSON.stringify(preview, null, 2)}
+                                </pre>
+                            </div>
+                            <button
+                                onClick={handleImport}
+                                className="mt-2 w-full py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                            >
+                                Import to Editor
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+-------------------------------------------------------------------------------
+
+Step 5: Integrate with MathEditor
+
+Add a new button in the toolbar/header area:
+
+// State
+const [showImageImport, setShowImageImport] = useState(false);
+
+// Handler
+const handleImageImport = (importedOptions: MCQOption[], content: string, explanation: string) => {
+    if (importedOptions.length > 0) {
+        setOptions(importedOptions);
+        setQuestionType("mcq");
+    }
+    if (content) {
+        setContent(content);
+    }
+    if (explanation) {
+        setExplanation(explanation);
+    }
+    setError("");
+};
+
+// Button
+<button
+    onClick={() => setShowImageImport(true)}
+    className="px-3 py-1 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700"
+>
+    📷 Import from Image
+</button>
+
+// Modal
+{showImageImport && (
+    <ImageImport
+        onImport={handleImageImport}
+        onClose={() => setShowImageImport(false)}
+    />
+)}
+
+
+MODEL CONFIGURATION & COST MANAGEMENT
+-------------------------------------
+
+Option A: OpenRouter (Recommended)
+- Sign up at openrouter.ai (no card required for free tier)
+- Free tier: 50 requests/day, rate-limited
+- To increase to 1000/day: add $10 credit (one-time, no card needed if you use crypto or prepaid)
+- Use "auto" failover to switch between free models if one hits limit
+
+Configuration in Python:
+gen = ImageMCQGenerator(
+    api_key=os.environ.get("OPENROUTER_API_KEY"),
+    method="images2mcq",
+    mcq_model="auto",
+    mcq_model_list=[
+        "google/gemini-2.5-flash-lite",
+        "google/gemma-3-27b-it:free",
+        "nvidia/llama-nemotron-embed-vl-1b-v2:free"
+    ]
+)
+
+Option B: Ollama (Local, 100% Free)
+- Install Ollama on your server: ollama.ai
+- Pull a vision model: ollama pull llama3.2-vision:latest
+- Requires GPU (at least 8GB VRAM for small models)
+- No API costs, but processing may be slower
+
+Configuration:
+gen = ImageMCQGenerator(
+    method="images2mcq",
+    mcq_model="llama3.2-vision:latest",
+    ollama_server="http://localhost:11434",
+    ollama_model="llama3.2-vision:latest"
+)
+
+
+INTEGRATION ROADMAP
+===================
+
+Phase 1: Bulk Import (Week 1)
+---------------------------
+[ ] Create mcq-parser.ts
+[ ] Build BulkImport component
+[ ] Integrate with MathEditor
+[ ] Write unit tests
+[ ] Document usage
+
+Phase 2: AI Image Converter (Week 2-3)
+-----------------------------------
+[ ] Set up Python microservice or Vercel Python runtime
+[ ] Install image2mcq
+[ ] Configure OpenRouter API
+[ ] Create API route in Next.js
+[ ] Build ImageImport component
+[ ] Integrate with MathEditor
+[ ] Test with sample images
+
+Phase 3: Optimization & Production (Week 4)
+----------------------------------------
+[ ] Add caching for processed images
+[ ] Implement rate limiting
+[ ] Add error handling for API failures
+[ ] Write comprehensive tests
+[ ] Deploy and monitor
+[ ] Create user documentation
+
+
+ENVIRONMENT VARIABLES
+=====================
+
+For Bulk Import:
+  No specific environment variables.
+
+For AI Image Converter:
+  OPENROUTER_API_KEY=sk-or-v1-...
+  PYTHON_SERVICE_URL=http://localhost:8000   (if using microservice)
+  OLLAMA_SERVER=http://localhost:11434      (if using Ollama)
+
+
+DEPENDENCIES
+============
+
+Next.js (already present)
+No additional dependencies for Bulk Import.
+
+For AI:
+  Python side: image2mcq (pip install image2mcq)
+  FastAPI / Flask (for microservice)
+  Optionally: ollama (for local)
+
+If using Vercel Python runtime, include image2mcq in requirements.txt.
+
+
+TESTING STRATEGY
+================
+
+Unit Tests:
+  - Parser with various formats (valid, invalid, LaTeX)
+  - Error handling for malformed input
+
+Integration Tests:
+  - API endpoint with mock image
+  - Component rendering with parsed data
+  - End-to-end import flow
+
+Performance Tests:
+  - Image processing time (< 10 seconds)
+  - Memory usage for large images
+  - Concurrent processing limits
+
+User Acceptance:
+  - Test with real question papers
+  - Verify LaTeX preservation
+  - Check option ordering and correctness
+
+
+CONCLUSION
+==========
+
+These two features will significantly enhance the Math Question Builder's
+capabilities:
+  1. Bulk Import - fast, free, text-based import of multiple MCQs.
+  2. AI Image Converter - digitize physical question papers using AI.
+
+Both features integrate seamlessly with the existing MathPalette and LaTeX
+rendering, providing a complete end-to-end solution for creating math questions
+at scale.
+
+For any questions, refer to the full codebase or contact the development team.
+
+================================================================================
+END OF DOCUMENT
+================================================================================

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BCS Vocabulary Pro</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+
+<body
+    class="min-h-screen bg-slate-50 dark:bg-slate-900 font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 border-b border-slate-200/80 dark:border-slate-700/80 bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-sm transition-colors duration-300">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:py-4">
+
+            <div class="flex items-center gap-3">
+                <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white shadow-lg">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <h1
+                        class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        BCS Vocabulary Pro
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Synonym & Antonym Mastery</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle -->
+                <button id="themeToggle"
+                    class="rounded-xl p-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors duration-200">
+                    <svg id="themeIcon" class="h-5 w-5 text-slate-600 dark:text-slate-300" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <div
+                    class="rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 px-5 py-2 text-center shadow-sm transition-colors duration-300">
+                    <p id="totalWords" class="text-lg font-bold text-indigo-700 dark:text-indigo-400">
+                        0
+                    </p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Words</p>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- Main -->
+    <main class="mx-auto max-w-7xl px-4 py-6">
+
+        <!-- Navigation -->
+        <div
+            class="mb-6 flex gap-2 rounded-2xl bg-white dark:bg-slate-800 p-1 shadow-sm transition-colors duration-300">
+            <button id="vocabularyTab"
+                class="flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg">
+                📚 Vocabulary
+            </button>
+            <button id="practiceTab"
+                class="flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700">
+                🎯 Practice
+            </button>
+            <button id="examTab"
+                class="flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700">
+                📝 Exam Mode
+            </button>
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- Vocabulary -->
+        <!-- ================================================= -->
+
+        <section id="vocabularyView">
+
+            <!-- Search / Filter -->
+            <div
+                class="mb-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-5 shadow-sm backdrop-blur-sm transition-colors duration-300">
+
+                <div class="flex flex-col gap-3 sm:flex-row">
+
+                    <div class="relative flex-1">
+                        <svg class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input id="searchInput" type="text" placeholder="Search word or meaning..."
+                            class="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 pl-10 pr-4 py-3 text-sm text-slate-900 dark:text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900" />
+                    </div>
+
+                    <select id="setSelect"
+                        class="rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-3 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                        <option value="all">All Sets</option>
+                    </select>
+
+                </div>
+
+                <div id="letterFilters" class="mt-4 flex flex-wrap gap-2"></div>
+
+            </div>
+
+            <!-- Vocabulary Cards -->
+            <div id="vocabularyList" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+
+            <!-- Pagination -->
+            <div id="paginationContainer" class="mt-6 flex items-center justify-between flex-wrap gap-3"></div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- Practice -->
+        <!-- ================================================= -->
+
+        <section id="practiceView" class="hidden">
+
+            <!-- Practice Settings -->
+            <div
+                class="mb-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-6 shadow-sm backdrop-blur-sm transition-colors duration-300">
+                <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200">Practice Settings</h2>
+                <div class="mt-4 flex flex-wrap gap-4">
+                    <div>
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-400">Question Type</label>
+                        <select id="practiceType"
+                            class="mt-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                            <option value="mixed">Mixed (Synonym & Antonym)</option>
+                            <option value="synonym">Only Synonyms</option>
+                            <option value="antonym">Only Antonyms</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-400">Questions per Page</label>
+                        <select id="practiceCount"
+                            class="mt-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="all">All Words</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="startPractice"
+                            class="rounded-xl bg-indigo-600 dark:bg-indigo-500 px-6 py-2 text-sm font-semibold text-white transition hover:bg-indigo-700 dark:hover:bg-indigo-600 hover:shadow-md">
+                            Start Practice →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Practice Quiz -->
+            <div id="practiceQuizContainer" class="hidden">
+                <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+                    <button id="exitPractice"
+                        class="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Exit
+                    </button>
+                    <div class="flex items-center gap-4">
+                        <span id="practiceCounter"
+                            class="text-sm font-semibold text-slate-500 dark:text-slate-400"></span>
+                        <span id="practiceScore"
+                            class="rounded-full bg-indigo-100 dark:bg-indigo-900/50 px-3 py-1 text-sm font-bold text-indigo-700 dark:text-indigo-300">Score:
+                            0</span>
+                    </div>
+                </div>
+                <div id="practiceQuestions" class="space-y-4"></div>
+                <div id="practicePagination" class="mt-6 flex justify-center gap-2"></div>
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- Exam Mode -->
+        <!-- ================================================= -->
+
+        <section id="examView" class="hidden">
+
+            <!-- Exam Settings -->
+            <div
+                class="mb-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-6 shadow-sm backdrop-blur-sm transition-colors duration-300">
+                <h2 class="text-lg font-bold text-slate-800 dark:text-slate-200">📝 Exam Settings</h2>
+                <div class="mt-4 flex flex-wrap gap-4">
+                    <div>
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-400">Number of
+                            Questions</label>
+                        <select id="examCount"
+                            class="mt-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                            <option value="10">10</option>
+                            <option value="20" selected>20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="all">All Words</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-400">Question Type</label>
+                        <select id="examType"
+                            class="mt-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                            <option value="mixed">Mixed</option>
+                            <option value="synonym">Only Synonyms</option>
+                            <option value="antonym">Only Antonyms</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-sm font-medium text-slate-600 dark:text-slate-400">Time Limit
+                            (minutes)</label>
+                        <select id="examTime"
+                            class="mt-1 rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-4 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900">
+                            <option value="0">No Limit</option>
+                            <option value="5">5</option>
+                            <option value="10" selected>10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                            <option value="60">60</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="startExam"
+                            class="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-2 text-sm font-semibold text-white transition hover:shadow-lg">
+                            Start Exam →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exam Container -->
+            <div id="examContainer" class="hidden">
+                <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+                    <button id="exitExam"
+                        class="flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-400 transition hover:bg-slate-100 dark:hover:bg-slate-700">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Exit
+                    </button>
+                    <div class="flex items-center gap-4">
+                        <span id="examTimer"
+                            class="rounded-full bg-red-100 dark:bg-red-900/50 px-3 py-1 text-sm font-bold text-red-700 dark:text-red-300">⏱️
+                            10:00</span>
+                        <span id="examCounter" class="text-sm font-semibold text-slate-500 dark:text-slate-400"></span>
+                        <span id="examScore"
+                            class="rounded-full bg-indigo-100 dark:bg-indigo-900/50 px-3 py-1 text-sm font-bold text-indigo-700 dark:text-indigo-300">Score:
+                            0</span>
+                    </div>
+                </div>
+                <div id="examQuestions" class="space-y-4"></div>
+                <div id="examPagination" class="mt-6 flex justify-center gap-2"></div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="./assets/js/app.js"></script>
+
+</body>
+
+</html>
