@@ -6,6 +6,7 @@
     "words": [
         {
             "id": "absurd",
+            "serialIndex": "01",
             "word": "Absurd",
             "meaning": "অযৌক্তিক / হাস্যকর",
             "synonyms": [
@@ -45,6 +46,7 @@
         },
         {
             "id": "abandon",
+            "serialIndex": "02",
             "word": "Abandon",
             "meaning": "পরিত্যাগ করা / ছেড়ে দেওয়া",
             "synonyms": [
@@ -100,6 +102,7 @@
         },
         {
             "id": "abate",
+            "serialIndex": "03",
             "word": "Abate",
             "meaning": "কমে যাওয়া / কমানো",
             "synonyms": [
@@ -155,6 +158,7 @@
         },
         {
             "id": "abbreviate",
+            "serialIndex": "04",
             "word": "Abbreviate",
             "meaning": "সংক্ষিপ্ত করা",
             "synonyms": [
@@ -206,6 +210,7 @@
         },
         {
             "id": "adulterate",
+            "serialIndex": "05",
             "word": "Adulterate",
             "meaning": "ভেজাল মেশানো / বিশুদ্ধতা নষ্ট করা",
             "synonyms": [
@@ -253,6 +258,7 @@
         },
         {
             "id": "accord",
+            "serialIndex": "06",
             "word": "Accord",
             "meaning": "মিল হওয়া / একমত হওয়া",
             "synonyms": [
@@ -304,6 +310,7 @@
         },
         {
             "id": "accumulate",
+            "serialIndex": "07",
             "word": "Accumulate",
             "meaning": "জড়ো হওয়া / একত্র করা",
             "synonyms": [
@@ -351,6 +358,7 @@
         },
         {
             "id": "acknowledge",
+            "serialIndex": "08",
             "word": "Acknowledge",
             "meaning": "স্বীকার করা",
             "synonyms": [
@@ -398,6 +406,7 @@
         },
         {
             "id": "assist",
+            "serialIndex": "09",
             "word": "Assist",
             "meaning": "সহযোগিতা করা",
             "synonyms": [
@@ -441,6 +450,7 @@
         },
         {
             "id": "acme",
+            "serialIndex": "10",
             "word": "Acme",
             "meaning": "সর্বোচ্চ সীমা / চূড়া",
             "synonyms": [
