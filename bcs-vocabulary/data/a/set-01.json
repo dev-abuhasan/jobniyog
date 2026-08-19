@@ -250,6 +250,241 @@
                     "meaning": "অবৈধ / মিশ্রিত"
                 }
             ]
+        },
+        {
+            "id": "accord",
+            "word": "Accord",
+            "meaning": "মিল হওয়া / একমত হওয়া",
+            "synonyms": [
+                {
+                    "word": "Admit",
+                    "meaning": "স্বীকার করা"
+                },
+                {
+                    "word": "Allow",
+                    "meaning": "অনুমতি দেওয়া"
+                },
+                {
+                    "word": "Grant",
+                    "meaning": "মঞ্জুর করা"
+                },
+                {
+                    "word": "Agree",
+                    "meaning": "একমত হওয়া"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Oppose",
+                    "meaning": "বিরোধিতা করা"
+                },
+                {
+                    "word": "Challenge",
+                    "meaning": "চ্যালেঞ্জ করা"
+                },
+                {
+                    "word": "Disallow",
+                    "meaning": "অনুমতি না দেওয়া"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "According",
+                    "meaning": "অনুযায়ী"
+                },
+                {
+                    "word": "Accordance",
+                    "meaning": "সামঞ্জস্য / অনুযায়ী"
+                },
+                {
+                    "word": "Record",
+                    "meaning": "নথি / রেকর্ড করা"
+                }
+            ]
+        },
+        {
+            "id": "accumulate",
+            "word": "Accumulate",
+            "meaning": "জড়ো হওয়া / একত্র করা",
+            "synonyms": [
+                {
+                    "word": "Gather",
+                    "meaning": "জড়ো করা"
+                },
+                {
+                    "word": "Amass",
+                    "meaning": "বিপুল পরিমাণে জড়ো করা"
+                },
+                {
+                    "word": "Assemble",
+                    "meaning": "একত্র করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Scatter",
+                    "meaning": "ছড়িয়ে দেওয়া"
+                },
+                {
+                    "word": "Disperse",
+                    "meaning": "বিক্ষিপ্ত করা"
+                },
+                {
+                    "word": "Disseminate",
+                    "meaning": "ছড়িয়ে দেওয়া / প্রচার করা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Acclimate",
+                    "meaning": "পরিবেশের সাথে মানিয়ে নেওয়া"
+                },
+                {
+                    "word": "Calculate",
+                    "meaning": "হিসাব করা"
+                },
+                {
+                    "word": "Accentuate",
+                    "meaning": "বিশেষভাবে গুরুত্ব দেওয়া"
+                }
+            ]
+        },
+        {
+            "id": "acknowledge",
+            "word": "Acknowledge",
+            "meaning": "স্বীকার করা",
+            "synonyms": [
+                {
+                    "word": "Admit",
+                    "meaning": "স্বীকার করা"
+                },
+                {
+                    "word": "Certify",
+                    "meaning": "প্রত্যয়ন করা"
+                },
+                {
+                    "word": "Accept",
+                    "meaning": "গ্রহণ করা / স্বীকার করা"
+                },
+                {
+                    "word": "Endorse",
+                    "meaning": "সমর্থন করা / অনুমোদন করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Deny",
+                    "meaning": "অস্বীকার করা"
+                },
+                {
+                    "word": "Refuse",
+                    "meaning": "প্রত্যাখ্যান করা"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Knowledge",
+                    "meaning": "জ্ঞান"
+                },
+                {
+                    "word": "Acquaint",
+                    "meaning": "পরিচিত করানো"
+                },
+                {
+                    "word": "Recognize",
+                    "meaning": "চেনা / স্বীকৃতি দেওয়া"
+                }
+            ]
+        },
+        {
+            "id": "assist",
+            "word": "Assist",
+            "meaning": "সহযোগিতা করা",
+            "synonyms": [
+                {
+                    "word": "Help",
+                    "meaning": "সাহায্য করা"
+                },
+                {
+                    "word": "Aid",
+                    "meaning": "সহায়তা করা"
+                },
+                {
+                    "word": "Support",
+                    "meaning": "সমর্থন / সহায়তা করা"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Oppose",
+                    "meaning": "বিরোধিতা করা"
+                },
+                {
+                    "word": "Obstruct",
+                    "meaning": "বাধা দেওয়া"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Attend",
+                    "meaning": "উপস্থিত থাকা / যত্ন নেওয়া"
+                },
+                {
+                    "word": "Persist",
+                    "meaning": "অবিচল থাকা"
+                },
+                {
+                    "word": "Assert",
+                    "meaning": "দৃঢ়ভাবে বলা"
+                }
+            ]
+        },
+        {
+            "id": "acme",
+            "word": "Acme",
+            "meaning": "সর্বোচ্চ সীমা / চূড়া",
+            "synonyms": [
+                {
+                    "word": "Summit",
+                    "meaning": "চূড়া / সর্বোচ্চ বিন্দু"
+                },
+                {
+                    "word": "Pinnacle",
+                    "meaning": "সর্বোচ্চ শিখর"
+                },
+                {
+                    "word": "Zenith",
+                    "meaning": "সর্বোচ্চ বিন্দু"
+                }
+            ],
+            "antonyms": [
+                {
+                    "word": "Lower Point",
+                    "meaning": "নিম্নতম বিন্দু"
+                },
+                {
+                    "word": "Base",
+                    "meaning": "ভিত্তি / নিম্ন অংশ"
+                },
+                {
+                    "word": "Nadir",
+                    "meaning": "সর্বনিম্ন বিন্দু"
+                }
+            ],
+            "confusing_words": [
+                {
+                    "word": "Acre",
+                    "meaning": "জমির পরিমাপের একক"
+                },
+                {
+                    "word": "Acme",
+                    "meaning": "সর্বোচ্চ সীমা / চূড়া"
+                },
+                {
+                    "word": "Apex",
+                    "meaning": "শীর্ষবিন্দু"
+                }
+            ]
         }
     ]
 }
