@@ -26,6 +26,8 @@ const state = {
         type: 'mixed',
         completed: false,
         questionData: {},
+        sessionId: null,
+        usedQuestions: [],
     },
 
     exam: {
@@ -42,6 +44,8 @@ const state = {
         started: false,
         completed: false,
         questionData: {},
+        sessionId: null,
+        usedQuestions: [],
     }
 };
 
@@ -80,6 +84,7 @@ const practicePagination = document.getElementById("practicePagination");
 const practiceCounter = document.getElementById("practiceCounter");
 const practiceScore = document.getElementById("practiceScore");
 const exitPractice = document.getElementById("exitPractice");
+const resetPractice = document.getElementById("resetPractice");
 
 // Exam
 const examCount = document.getElementById("examCount");
@@ -93,6 +98,7 @@ const examCounter = document.getElementById("examCounter");
 const examScore = document.getElementById("examScore");
 const examTimer = document.getElementById("examTimer");
 const exitExam = document.getElementById("exitExam");
+const resetExam = document.getElementById("resetExam");
 
 
 // =====================================================
@@ -100,9 +106,8 @@ const exitExam = document.getElementById("exitExam");
 // =====================================================
 
 function initTheme() {
-    // Check if theme is stored in localStorage
     const savedTheme = localStorage.getItem('bcs-theme');
-    const isDark = savedTheme === 'dark' || (savedTheme === null && true); // Default dark
+    const isDark = savedTheme === 'dark' || (savedTheme === null && true);
 
     if (isDark) {
         document.documentElement.classList.add('dark');
@@ -148,6 +153,7 @@ async function init() {
     setupSearch();
     setupPractice();
     setupExam();
+    setupItemsPerPage();
     renderLetters();
     renderSets();
     applyFilters();
@@ -217,19 +223,36 @@ function showTab(tab) {
     practiceView.classList.add("hidden");
     examView.classList.add("hidden");
 
-    vocabularyTab.className = "flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
-    practiceTab.className = "flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
-    examTab.className = "flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
+    vocabularyTab.className = "flex-1 rounded-xl px-2 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
+    practiceTab.className = "flex-1 rounded-xl px-2 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
+    examTab.className = "flex-1 rounded-xl px-2 py-2.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700";
 
     if (tab === 'vocabulary') {
         vocabularyView.classList.remove("hidden");
-        vocabularyTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
+        vocabularyTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-2 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
     } else if (tab === 'practice') {
         practiceView.classList.remove("hidden");
-        practiceTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
+        practiceTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-2 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
     } else if (tab === 'exam') {
         examView.classList.remove("hidden");
-        examTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-4 py-2.5 text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
+        examTab.className = "flex-1 rounded-xl bg-indigo-600 dark:bg-indigo-500 px-2 py-2.5 text-xs sm:text-sm font-semibold text-white transition-all shadow-md hover:shadow-lg";
+    }
+}
+
+
+// =====================================================
+// ITEMS PER PAGE
+// =====================================================
+
+function setupItemsPerPage() {
+    const topSelect = document.getElementById('itemsPerPageSelect');
+    if (topSelect) {
+        topSelect.value = state.itemsPerPage;
+        topSelect.addEventListener('change', (e) => {
+            state.itemsPerPage = e.target.value;
+            state.currentPage = 1;
+            applyFilters();
+        });
     }
 }
 
@@ -263,6 +286,14 @@ function applyFilters() {
 
         return letterMatch && setMatch && searchMatch;
     });
+
+    const itemsPerPage = state.itemsPerPage === 'all' ? state.filteredWords.length : parseInt(state.itemsPerPage);
+    const totalPages = Math.ceil(state.filteredWords.length / itemsPerPage);
+    if (state.currentPage > totalPages && totalPages > 0) {
+        state.currentPage = totalPages;
+    } else if (state.currentPage < 1) {
+        state.currentPage = 1;
+    }
 
     renderVocabulary();
     renderPagination();
@@ -327,102 +358,163 @@ function renderSets() {
 
 
 // =====================================================
-// PAGINATION
+// PAGINATION - VOCABULARY
 // =====================================================
 
 function renderPagination() {
     const totalItems = state.filteredWords.length;
-    const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+    const itemsPerPage = state.itemsPerPage;
+    const perPage = itemsPerPage === 'all' ? totalItems : parseInt(itemsPerPage);
+    const totalPages = Math.ceil(totalItems / perPage);
+    const currentPage = state.currentPage;
 
-    if (totalPages <= 1) {
+    if (totalItems === 0) {
         paginationContainer.innerHTML = `
-            <div class="text-sm text-slate-500 dark:text-slate-400">${totalItems} words found</div>
+            <div class="text-center text-sm text-slate-500 dark:text-slate-400 py-4">
+                No words found
+            </div>
         `;
         return;
     }
 
-    const startItem = (state.currentPage - 1) * state.itemsPerPage + 1;
-    const endItem = Math.min(state.currentPage * state.itemsPerPage, totalItems);
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = `
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+                <span class="text-slate-500 dark:text-slate-400">Showing all ${totalItems} words</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-400 text-xs">Per page:</span>
+                    <select id="itemsPerPageSelectBottom" 
+                        class="rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-2 py-1 text-sm outline-none focus:border-indigo-400">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+            </div>
+        `;
 
-    let paginationHTML = `
-        <div class="flex items-center gap-2 text-sm flex-wrap">
-            <span class="text-slate-500 dark:text-slate-400">${startItem}-${endItem} of ${totalItems}</span>
-            <div class="flex gap-1">
-                <button data-page="prev" class="rounded-lg px-3 py-1 transition hover:bg-slate-100 dark:hover:bg-slate-700 ${state.currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-        }">←</button>
+        const select = document.getElementById('itemsPerPageSelectBottom');
+        if (select) {
+            select.value = itemsPerPage;
+            select.addEventListener('change', (e) => {
+                state.itemsPerPage = e.target.value;
+                state.currentPage = 1;
+                const topSelect = document.getElementById('itemsPerPageSelect');
+                if (topSelect) topSelect.value = e.target.value;
+                applyFilters();
+            });
+        }
+        return;
+    }
+
+    const startItem = (currentPage - 1) * perPage + 1;
+    const endItem = Math.min(currentPage * perPage, totalItems);
+
+    let html = `
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-500 dark:text-slate-400">
+                Showing <span class="font-medium">${startItem}-${endItem}</span> of <span class="font-medium">${totalItems}</span> words
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="flex gap-1">
+                    <button data-page="prev" 
+                        class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}"
+                        ${currentPage === 1 ? 'disabled' : ''}>
+                        ←
+                    </button>
     `;
 
-    const maxVisible = 5;
-    let startPage = Math.max(1, state.currentPage - Math.floor(maxVisible / 2));
+    const maxVisible = window.innerWidth < 640 ? 3 : 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
     let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
     if (endPage - startPage + 1 < maxVisible) {
         startPage = Math.max(1, endPage - maxVisible + 1);
     }
 
     if (startPage > 1) {
-        paginationHTML += `<button data-page="1" class="rounded-lg px-3 py-1 transition hover:bg-slate-100 dark:hover:bg-slate-700">1</button>`;
-        if (startPage > 2) paginationHTML += `<span class="px-1">…</span>`;
+        html += `<button data-page="1" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">1</button>`;
+        if (startPage > 2) html += `<span class="px-1 text-slate-400">…</span>`;
     }
 
     for (let i = startPage; i <= endPage; i++) {
-        paginationHTML += `
-            <button data-page="${i}" class="rounded-lg px-3 py-1 transition ${i === state.currentPage
-                ? "bg-indigo-600 dark:bg-indigo-500 text-white shadow-md"
-                : "hover:bg-slate-100 dark:hover:bg-slate-700"
-            }">${i}</button>
+        html += `
+            <button data-page="${i}" 
+                class="rounded-lg px-3 py-1.5 text-sm transition ${i === currentPage
+                ? 'bg-indigo-600 dark:bg-indigo-500 text-white shadow-md'
+                : 'hover:bg-slate-100 dark:hover:bg-slate-700'
+            }">
+                ${i}
+            </button>
         `;
     }
 
     if (endPage < totalPages) {
-        if (endPage < totalPages - 1) paginationHTML += `<span class="px-1">…</span>`;
-        paginationHTML += `<button data-page="${totalPages}" class="rounded-lg px-3 py-1 transition hover:bg-slate-100 dark:hover:bg-slate-700">${totalPages}</button>`;
+        if (endPage < totalPages - 1) html += `<span class="px-1 text-slate-400">…</span>`;
+        html += `<button data-page="${totalPages}" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">${totalPages}</button>`;
     }
 
-    paginationHTML += `
-                <button data-page="next" class="rounded-lg px-3 py-1 transition hover:bg-slate-100 dark:hover:bg-slate-700 ${state.currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-        }">→</button>
+    html += `
+                    <button data-page="next" 
+                        class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}"
+                        ${currentPage === totalPages ? 'disabled' : ''}>
+                        →
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Per page:</span>
+                    <select id="itemsPerPageSelectBottom" 
+                        class="rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-2 py-1 text-sm outline-none focus:border-indigo-400">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
             </div>
-            <select id="itemsPerPageSelect" class="rounded-lg border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 px-2 py-1 text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-indigo-400">
-                <option value="5">5</option>
-                <option value="10" ${state.itemsPerPage === 10 ? "selected" : ""}>10</option>
-                <option value="20" ${state.itemsPerPage === 20 ? "selected" : ""}>20</option>
-                <option value="50" ${state.itemsPerPage === 50 ? "selected" : ""}>50</option>
-                <option value="100" ${state.itemsPerPage === 100 ? "selected" : ""}>100</option>
-            </select>
         </div>
     `;
 
-    paginationContainer.innerHTML = paginationHTML;
+    paginationContainer.innerHTML = html;
 
-    paginationContainer.querySelectorAll("[data-page]").forEach((btn) => {
-        btn.addEventListener("click", () => {
+    paginationContainer.querySelectorAll('[data-page]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            if (btn.disabled) return;
             const page = btn.dataset.page;
-            if (page === "prev" && state.currentPage > 1) {
+            if (page === 'prev' && currentPage > 1) {
                 state.currentPage--;
-            } else if (page === "next" && state.currentPage < totalPages) {
+            } else if (page === 'next' && currentPage < totalPages) {
                 state.currentPage++;
-            } else if (page !== "prev" && page !== "next") {
+            } else if (page !== 'prev' && page !== 'next') {
                 state.currentPage = parseInt(page);
             }
             renderVocabulary();
             renderPagination();
+            document.getElementById('vocabularyList').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
 
-    const itemsPerPageSelect = document.getElementById("itemsPerPageSelect");
-    if (itemsPerPageSelect) {
-        itemsPerPageSelect.addEventListener("change", (e) => {
-            state.itemsPerPage = parseInt(e.target.value);
+    const select = document.getElementById('itemsPerPageSelectBottom');
+    if (select) {
+        select.value = itemsPerPage;
+        select.addEventListener('change', (e) => {
+            state.itemsPerPage = e.target.value;
             state.currentPage = 1;
-            renderVocabulary();
-            renderPagination();
+            const topSelect = document.getElementById('itemsPerPageSelect');
+            if (topSelect) topSelect.value = e.target.value;
+            applyFilters();
         });
     }
 }
 
 
 // =====================================================
-// VOCABULARY - No truncation, full content visible
+// VOCABULARY
 // =====================================================
 
 function renderVocabulary() {
@@ -436,15 +528,15 @@ function renderVocabulary() {
         return;
     }
 
-    const start = (state.currentPage - 1) * state.itemsPerPage;
-    const end = Math.min(start + state.itemsPerPage, state.filteredWords.length);
+    const itemsPerPage = state.itemsPerPage === 'all' ? state.filteredWords.length : parseInt(state.itemsPerPage);
+    const start = (state.currentPage - 1) * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, state.filteredWords.length);
     const pageItems = state.filteredWords.slice(start, end);
 
     vocabularyList.innerHTML = pageItems
         .map(
             (word) => `
                 <article class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-4 shadow-sm transition-all hover:shadow-lg backdrop-blur-sm">
-                    <!-- Word Header with Serial Index -->
                     <div class="flex items-start justify-between">
                         <div class="flex-1">
                             <div class="flex items-center gap-2 flex-wrap">
@@ -465,14 +557,11 @@ function renderVocabulary() {
                         </div>
                     </div>
 
-                    <!-- Meaning -->
                     <div class="mt-2 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/30 dark:to-purple-900/30 p-2.5 border border-indigo-100/50 dark:border-indigo-800/50">
                         <p class="text-sm font-semibold text-slate-700 dark:text-slate-300 break-words">${word.meaning}</p>
                     </div>
 
-                    <!-- Synonyms & Antonyms in Table Layout -->
                     <div class="mt-3 border border-slate-200/50 dark:border-slate-700/50 rounded-xl overflow-hidden">
-                        <!-- Synonyms Row -->
                         <div class="grid grid-cols-12 gap-0 border-b border-slate-200/50 dark:border-slate-700/50">
                             <div class="col-span-3 bg-indigo-50/50 dark:bg-indigo-900/20 px-3 py-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center">
                                 Synonyms
@@ -488,7 +577,6 @@ function renderVocabulary() {
                             </div>
                         </div>
                         
-                        <!-- Antonyms Row -->
                         <div class="grid grid-cols-12 gap-0">
                             <div class="col-span-3 bg-purple-50/50 dark:bg-purple-900/20 px-3 py-2 text-xs font-bold text-purple-600 dark:text-purple-400 flex items-center">
                                 Antonyms
@@ -510,12 +598,81 @@ function renderVocabulary() {
         .join("");
 }
 
-// =====================================================
-// GENERATE QUESTION DATA
-// =====================================================
 
 // =====================================================
-// GENERATE QUESTION DATA - Enhanced with confusing words
+// QUESTION TRACKING SYSTEM
+// =====================================================
+
+function getUsedQuestions(mode) {
+    const key = `bcs_used_${mode}`;
+    return JSON.parse(localStorage.getItem(key) || "[]");
+}
+
+function saveUsedQuestions(mode, usedIds) {
+    const key = `bcs_used_${mode}`;
+    localStorage.setItem(key, JSON.stringify(usedIds));
+}
+
+function getAvailableQuestions(mode, allQuestions) {
+    const usedIds = getUsedQuestions(mode);
+    const available = allQuestions.filter(word => !usedIds.includes(word.id));
+
+    // If no available questions, reset the used list and start fresh
+    if (available.length === 0) {
+        localStorage.removeItem(`bcs_used_${mode}`);
+        return allQuestions;
+    }
+
+    return available;
+}
+
+function markQuestionAsUsed(mode, wordId) {
+    const usedIds = getUsedQuestions(mode);
+    if (!usedIds.includes(wordId)) {
+        usedIds.push(wordId);
+        saveUsedQuestions(mode, usedIds);
+    }
+}
+
+function resetQuestionTracking(mode) {
+    const key = `bcs_used_${mode}`;
+    localStorage.removeItem(key);
+    // Show confirmation message
+    const message = mode === 'practice' ? 'Practice' : 'Exam';
+    alert(`✅ ${message} history has been reset! All questions will be shown again.`);
+}
+
+
+// =====================================================
+// GENERATE UNIQUE QUESTIONS
+// =====================================================
+
+function generateUniqueQuestions(mode, allWords, count, type) {
+    // Get available questions
+    const available = getAvailableQuestions(mode, allWords);
+
+    // Shuffle available questions
+    const shuffled = shuffle([...available]);
+
+    // Take requested count or all
+    let selected = shuffled.slice(0, count);
+
+    // If we don't have enough, allow reuse from the beginning
+    if (selected.length < count) {
+        const usedIds = getUsedQuestions(mode);
+        const allIds = allWords.map(w => w.id);
+        const allAvailable = allWords.filter(w => !usedIds.includes(w.id) || true);
+        const extraNeeded = count - selected.length;
+        const extra = shuffle(allAvailable).slice(0, extraNeeded);
+        selected = [...selected, ...extra];
+    }
+
+    return selected;
+}
+
+
+// =====================================================
+// GENERATE QUESTION DATA
 // =====================================================
 
 function generateQuestionData(word, type) {
@@ -527,23 +684,18 @@ function generateQuestionData(word, type) {
         return null;
     }
 
-    // Get all items with their meanings
     const allItems = answerList.map(item => ({
         word: item.word,
         meaning: item.meaning
     }));
 
-    // Select random correct answer
     const correctIndex = Math.floor(Math.random() * allItems.length);
     const correct = allItems[correctIndex];
 
-    // Build options with confusing words for BCS level
     let options = [];
     const usedWords = new Set([correct.word]);
 
-    // 1. First, try to get confusing words if available
     if (word.confusing_words && word.confusing_words.length > 0) {
-        // Shuffle confusing words and pick up to 2
         const shuffledConfusing = shuffle([...word.confusing_words]);
         let confusingCount = 0;
 
@@ -560,18 +712,15 @@ function generateQuestionData(word, type) {
         }
     }
 
-    // 2. Get similar words from other words with same letter
     const sameLetterWords = state.words.filter(w =>
         w.letter === word.letter &&
         w.id !== word.id
     );
 
-    // Shuffle and get random words
     const shuffledSameLetter = shuffle(sameLetterWords);
     for (const w of shuffledSameLetter) {
         if (options.length >= 3) break;
 
-        // Try to get a relevant synonym/antonym from this word
         const candidates = isSynonym ? w.synonyms : w.antonyms;
         if (candidates && candidates.length > 0) {
             const randomCandidate = candidates[Math.floor(Math.random() * candidates.length)];
@@ -586,7 +735,6 @@ function generateQuestionData(word, type) {
         }
     }
 
-    // 3. If still need more options, get random words from entire vocabulary
     if (options.length < 3) {
         const allCandidates = state.words
             .filter(w => w.id !== word.id)
@@ -607,7 +755,6 @@ function generateQuestionData(word, type) {
         }
     }
 
-    // Add the correct answer
     options.push({
         word: correct.word,
         meaning: correct.meaning,
@@ -615,27 +762,7 @@ function generateQuestionData(word, type) {
         isCorrect: true
     });
 
-    // Shuffle final options
     options = shuffle(options);
-
-    // Prepare explanation with all confusing words if available
-    let confusingWordsHTML = '';
-    if (word.confusing_words && word.confusing_words.length > 0) {
-        confusingWordsHTML = `
-            <div class="rounded-lg bg-amber-50/70 dark:bg-amber-900/20 p-3 border border-amber-200 dark:border-amber-800 mt-3">
-                <p class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2">⚠️ Confusing Words (Similar Sound/Spelling)</p>
-                <div class="flex flex-wrap gap-1.5">
-                    ${word.confusing_words.map(cw => `
-                        <span class="inline-flex items-center gap-1 rounded-full bg-white dark:bg-slate-700 px-2.5 py-1 text-xs border border-amber-200 dark:border-amber-700">
-                            <span class="font-medium text-amber-700 dark:text-amber-300">${cw.word}</span>
-                            <span class="text-slate-300 dark:text-slate-600">·</span>
-                            <span class="text-slate-500 dark:text-slate-400">${cw.meaning}</span>
-                        </span>
-                    `).join(' ')}
-                </div>
-            </div>
-        `;
-    }
 
     return {
         word: word,
@@ -646,10 +773,6 @@ function generateQuestionData(word, type) {
         allSynonyms: word.synonyms || [],
         allAntonyms: word.antonyms || [],
         confusingWords: word.confusing_words || [],
-        examLevel: word.exam_level || 'intermediate',
-        commonUsage: word.common_usage || '',
-        tips: word.tips || '',
-        confusingWordsHTML: confusingWordsHTML,
     };
 }
 
@@ -674,7 +797,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
 
     return `
         <div class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-5 shadow-sm transition-all hover:shadow-md backdrop-blur-sm">
-            <!-- Question Header - With Serial Index -->
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 flex-wrap">
@@ -705,7 +827,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                 ` : ''}
             </div>
 
-            <!-- Options -->
             <div class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 ${options.map(opt => `
                     <button
@@ -728,10 +849,8 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                 `).join('')}
             </div>
 
-            <!-- Explanation Box -->
             ${isAnswered ? `
                 <div class="mt-4 rounded-xl ${isCorrect ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'} p-4">
-                    <!-- Result header -->
                     <div class="flex items-center gap-3 flex-wrap">
                         <span class="text-lg font-bold ${isCorrect ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}">
                             ${isCorrect ? '✅ Correct!' : '❌ Wrong!'}
@@ -743,9 +862,7 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                         ` : ''}
                     </div>
 
-                    <!-- Word details -->
                     <div class="mt-3 space-y-3">
-                        <!-- Main word with Serial Index and Bangla meaning -->
                         <div class="rounded-lg bg-white/70 dark:bg-slate-700/70 p-3 border border-slate-200 dark:border-slate-600">
                             <div class="flex items-center gap-2 flex-wrap">
                                 ${word.serialIndex ? `
@@ -758,7 +875,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         </div>
 
-                        <!-- Correct answer -->
                         <div class="rounded-lg bg-green-50/70 dark:bg-green-900/20 p-3 border border-green-200 dark:border-green-800">
                             <div class="flex items-center gap-2 flex-wrap">
                                 <span class="font-bold text-green-600 dark:text-green-400">✅ ${correct.word}</span>
@@ -768,7 +884,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         </div>
 
-                        <!-- All Synonyms -->
                         ${allSynonyms.length > 0 ? `
                             <div class="rounded-lg bg-indigo-50/70 dark:bg-indigo-900/20 p-3 border border-indigo-200 dark:border-indigo-800">
                                 <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">📝 All Synonyms</p>
@@ -784,7 +899,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         ` : ''}
 
-                        <!-- All Antonyms -->
                         ${allAntonyms.length > 0 ? `
                             <div class="rounded-lg bg-purple-50/70 dark:bg-purple-900/20 p-3 border border-purple-200 dark:border-purple-800">
                                 <p class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2">📝 All Antonyms</p>
@@ -800,7 +914,6 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         ` : ''}
 
-                        <!-- Confusing Words -->
                         ${confusingWords && confusingWords.length > 0 ? `
                             <div class="rounded-lg bg-amber-50/70 dark:bg-amber-900/20 p-3 border border-amber-200 dark:border-amber-800">
                                 <p class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2">⚠️ Similar Sounding / Confusing Words</p>
@@ -822,62 +935,81 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
     `;
 }
 
+
 // =====================================================
-// PRACTICE FUNCTIONS (Same as before but with dark mode classes)
+// PRACTICE FUNCTIONS - WITH QUESTION TRACKING
 // =====================================================
 
 function setupPractice() {
     startPractice.addEventListener("click", startPracticeQuiz);
     exitPractice.addEventListener("click", exitPracticeQuiz);
+    if (resetPractice) {
+        resetPractice.addEventListener("click", () => resetQuestionTracking('practice'));
+    }
 }
 
 function startPracticeQuiz() {
     const count = practiceCount.value;
     const type = practiceType.value;
+    const mode = 'practice';
 
-    let questions = [...state.words];
-
+    // Filter words by type
+    let availableWords = [...state.words];
     if (type === 'synonym') {
-        questions = questions.filter(w => w.synonyms && w.synonyms.length > 0);
+        availableWords = availableWords.filter(w => w.synonyms && w.synonyms.length > 0);
     } else if (type === 'antonym') {
-        questions = questions.filter(w => w.antonyms && w.antonyms.length > 0);
+        availableWords = availableWords.filter(w => w.antonyms && w.antonyms.length > 0);
     }
 
-    questions = shuffle(questions);
-
-    if (count !== 'all') {
-        questions = questions.slice(0, parseInt(count));
-    }
-
-    if (!questions.length) {
+    if (availableWords.length === 0) {
         alert("No questions available for the selected type!");
         return;
     }
 
+    // Get questions count
+    let questionCount = count === 'all' ? availableWords.length : parseInt(count);
+
+    // Generate unique questions
+    const selectedWords = generateUniqueQuestions(mode, availableWords, questionCount, type);
+
+    if (selectedWords.length === 0) {
+        alert("No new questions available! Please reset your progress.");
+        return;
+    }
+
+    // Generate question data
     const questionData = {};
-    questions.forEach((word, idx) => {
+    selectedWords.forEach((word, idx) => {
         const data = generateQuestionData(word, type);
         if (data) {
             questionData[idx] = data;
+            // Mark as used
+            markQuestionAsUsed(mode, word.id);
         }
     });
 
-    const validQuestions = Object.keys(questionData).length;
-    if (validQuestions === 0) {
+    const validQuestions = selectedWords.filter((_, idx) => questionData[idx] !== undefined);
+    const validCount = validQuestions.length;
+
+    if (validCount === 0) {
         alert("No valid questions could be generated!");
         return;
     }
 
+    const itemsPerPage = Math.min(10, validCount);
+
     state.practice = {
-        questions: questions.filter((_, idx) => questionData[idx] !== undefined),
+        questions: validQuestions,
         currentPage: 1,
-        itemsPerPage: Math.min(10, validQuestions),
+        itemsPerPage: itemsPerPage,
         answered: {},
         score: 0,
-        total: validQuestions,
+        total: validCount,
         type: type,
         completed: false,
         questionData: questionData,
+        sessionId: Date.now().toString(),
+        usedQuestions: getUsedQuestions(mode),
     };
 
     practiceQuizContainer.classList.remove("hidden");
@@ -891,8 +1023,9 @@ function startPracticeQuiz() {
 
 function renderPracticeQuestions() {
     const { questions, currentPage, itemsPerPage, answered, questionData } = state.practice;
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = Math.min(start + itemsPerPage, questions.length);
+    const perPage = itemsPerPage;
+    const start = (currentPage - 1) * perPage;
+    const end = Math.min(start + perPage, questions.length);
     const pageItems = questions.slice(start, end);
 
     if (!pageItems.length) {
@@ -921,8 +1054,6 @@ function renderPracticeQuestions() {
     document.querySelectorAll('.option-btn:not([disabled])').forEach(btn => {
         btn.addEventListener('click', handlePracticeAnswer);
     });
-
-    // REMOVED: practiceQuestions.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function handlePracticeAnswer(e) {
@@ -964,38 +1095,99 @@ function handlePracticeAnswer(e) {
 
 function renderPracticePagination() {
     const { questions, currentPage, itemsPerPage, total, answered } = state.practice;
-    const totalPages = Math.ceil(total / itemsPerPage);
+    const perPage = itemsPerPage;
+    const totalPages = Math.ceil(total / perPage);
+    const current = currentPage;
 
-    if (totalPages <= 1) {
-        practicePagination.innerHTML = '';
+    if (total === 0 || totalPages <= 1) {
+        practicePagination.innerHTML = `
+            <div class="text-center text-sm text-slate-500 dark:text-slate-400">
+                ${Object.keys(answered).length}/${total} answered
+                ${Object.keys(answered).length === total ? ' 🎉' : ''}
+            </div>
+        `;
         return;
     }
 
-    let html = '<div class="flex gap-1 flex-wrap">';
-    for (let i = 1; i <= totalPages; i++) {
-        const pageStart = (i - 1) * itemsPerPage;
-        const pageEnd = Math.min(i * itemsPerPage, total);
-        const answeredCount = Object.keys(answered)
+    const startItem = (current - 1) * perPage + 1;
+    const endItem = Math.min(current * perPage, total);
+    const answeredCount = Object.keys(answered).length;
+
+    let html = `
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
+            <div class="text-sm text-slate-500 dark:text-slate-400">
+                <span class="font-medium">${startItem}-${endItem}</span> of <span class="font-medium">${total}</span> | 
+                <span class="font-medium">${answeredCount}</span>/${total} answered
+                ${answeredCount === total ? ' 🎉' : ''}
+            </div>
+            <div class="flex gap-1">
+                <button data-page="prev" 
+                    class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${current === 1 ? 'opacity-50 cursor-not-allowed' : ''}"
+                    ${current === 1 ? 'disabled' : ''}>
+                    ←
+                </button>
+    `;
+
+    const maxVisible = window.innerWidth < 640 ? 3 : 5;
+    let startPage = Math.max(1, current - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    if (endPage - startPage + 1 < maxVisible) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    if (startPage > 1) {
+        html += `<button data-page="1" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">1</button>`;
+        if (startPage > 2) html += `<span class="px-1 text-slate-400">…</span>`;
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const pageStart = (i - 1) * perPage;
+        const pageEnd = Math.min(i * perPage, total);
+        const pageAnswered = Object.keys(answered)
             .filter(idx => parseInt(idx) >= pageStart && parseInt(idx) < pageEnd).length;
+        const isComplete = pageAnswered === (pageEnd - pageStart) && pageAnswered > 0;
 
         html += `
             <button data-page="${i}" 
-                class="rounded-lg px-3 py-1 text-sm transition ${i === currentPage
+                class="rounded-lg px-3 py-1.5 text-sm transition ${i === current
                 ? 'bg-indigo-600 dark:bg-indigo-500 text-white shadow-md'
-                : 'border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600'
-            } ${answeredCount === (pageEnd - pageStart) && answeredCount > 0 ? 'border-green-400 dark:border-green-600' : ''}"
-            >
+                : 'hover:bg-slate-100 dark:hover:bg-slate-700'
+            } ${isComplete ? 'border-green-400 border-2' : ''}">
                 ${i}
-                ${answeredCount === (pageEnd - pageStart) && answeredCount > 0 ? '✓' : ''}
+                ${isComplete ? '✓' : ''}
             </button>
         `;
     }
-    html += '</div>';
+
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += `<span class="px-1 text-slate-400">…</span>`;
+        html += `<button data-page="${totalPages}" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">${totalPages}</button>`;
+    }
+
+    html += `
+                <button data-page="next" 
+                    class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${current === totalPages ? 'opacity-50 cursor-not-allowed' : ''}"
+                    ${current === totalPages ? 'disabled' : ''}>
+                    →
+                </button>
+            </div>
+        </div>
+    `;
+
     practicePagination.innerHTML = html;
 
     practicePagination.querySelectorAll('[data-page]').forEach(btn => {
         btn.addEventListener('click', () => {
-            state.practice.currentPage = parseInt(btn.dataset.page);
+            if (btn.disabled) return;
+            const page = btn.dataset.page;
+            if (page === 'prev' && current > 1) {
+                state.practice.currentPage--;
+            } else if (page === 'next' && current < totalPages) {
+                state.practice.currentPage++;
+            } else if (page !== 'prev' && page !== 'next') {
+                state.practice.currentPage = parseInt(page);
+            }
             renderPracticeQuestions();
             renderPracticePagination();
         });
@@ -1023,64 +1215,83 @@ function exitPracticeQuiz() {
         type: 'mixed',
         completed: false,
         questionData: {},
+        sessionId: null,
+        usedQuestions: [],
     };
+    practicePagination.innerHTML = '';
 }
 
 
 // =====================================================
-// EXAM FUNCTIONS (Same as before but with dark mode classes)
+// EXAM FUNCTIONS - WITH QUESTION TRACKING
 // =====================================================
 
 function setupExam() {
     startExam.addEventListener("click", startExamMode);
     exitExam.addEventListener("click", exitExamMode);
+    if (resetExam) {
+        resetExam.addEventListener("click", () => resetQuestionTracking('exam'));
+    }
 }
 
 function startExamMode() {
     const count = examCount.value;
     const type = examType.value;
     const timeLimit = parseInt(examTime.value);
+    const mode = 'exam';
 
-    let questions = [...state.words];
-
+    // Filter words by type
+    let availableWords = [...state.words];
     if (type === 'synonym') {
-        questions = questions.filter(w => w.synonyms && w.synonyms.length > 0);
+        availableWords = availableWords.filter(w => w.synonyms && w.synonyms.length > 0);
     } else if (type === 'antonym') {
-        questions = questions.filter(w => w.antonyms && w.antonyms.length > 0);
+        availableWords = availableWords.filter(w => w.antonyms && w.antonyms.length > 0);
     }
 
-    questions = shuffle(questions);
-
-    if (count !== 'all') {
-        questions = questions.slice(0, parseInt(count));
-    }
-
-    if (!questions.length) {
+    if (availableWords.length === 0) {
         alert("No questions available for the selected type!");
         return;
     }
 
+    // Get questions count
+    let questionCount = count === 'all' ? availableWords.length : parseInt(count);
+
+    // Generate unique questions
+    const selectedWords = generateUniqueQuestions(mode, availableWords, questionCount, type);
+
+    if (selectedWords.length === 0) {
+        alert("No new questions available! Please reset your progress.");
+        return;
+    }
+
+    // Generate question data
     const questionData = {};
-    questions.forEach((word, idx) => {
+    selectedWords.forEach((word, idx) => {
         const data = generateQuestionData(word, type);
         if (data) {
             questionData[idx] = data;
+            // Mark as used
+            markQuestionAsUsed(mode, word.id);
         }
     });
 
-    const validQuestions = Object.keys(questionData).length;
-    if (validQuestions === 0) {
+    const validQuestions = selectedWords.filter((_, idx) => questionData[idx] !== undefined);
+    const validCount = validQuestions.length;
+
+    if (validCount === 0) {
         alert("No valid questions could be generated!");
         return;
     }
 
+    const itemsPerPage = Math.min(10, validCount);
+
     state.exam = {
-        questions: questions.filter((_, idx) => questionData[idx] !== undefined),
+        questions: validQuestions,
         currentPage: 1,
-        itemsPerPage: 10,
+        itemsPerPage: itemsPerPage,
         answered: {},
         score: 0,
-        total: validQuestions,
+        total: validCount,
         type: type,
         timeLimit: timeLimit,
         timeRemaining: timeLimit * 60,
@@ -1088,6 +1299,8 @@ function startExamMode() {
         started: true,
         completed: false,
         questionData: questionData,
+        sessionId: Date.now().toString(),
+        usedQuestions: getUsedQuestions(mode),
     };
 
     examContainer.classList.remove("hidden");
@@ -1136,8 +1349,9 @@ function updateExamTimer() {
 
 function renderExamQuestions() {
     const { questions, currentPage, itemsPerPage, answered, questionData } = state.exam;
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = Math.min(start + itemsPerPage, questions.length);
+    const perPage = itemsPerPage;
+    const start = (currentPage - 1) * perPage;
+    const end = Math.min(start + perPage, questions.length);
     const pageItems = questions.slice(start, end);
 
     if (!pageItems.length) {
@@ -1166,8 +1380,6 @@ function renderExamQuestions() {
     document.querySelectorAll('.option-btn:not([disabled])').forEach(btn => {
         btn.addEventListener('click', handleExamAnswer);
     });
-
-    // REMOVED: examQuestions.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function handleExamAnswer(e) {
@@ -1206,38 +1418,99 @@ function handleExamAnswer(e) {
 
 function renderExamPagination() {
     const { questions, currentPage, itemsPerPage, total, answered } = state.exam;
-    const totalPages = Math.ceil(total / itemsPerPage);
+    const perPage = itemsPerPage;
+    const totalPages = Math.ceil(total / perPage);
+    const current = currentPage;
 
-    if (totalPages <= 1) {
-        examPagination.innerHTML = '';
+    if (total === 0 || totalPages <= 1) {
+        examPagination.innerHTML = `
+            <div class="text-center text-sm text-slate-500 dark:text-slate-400">
+                ${Object.keys(answered).length}/${total} answered
+                ${Object.keys(answered).length === total ? ' 🎉' : ''}
+            </div>
+        `;
         return;
     }
 
-    let html = '<div class="flex gap-1 flex-wrap">';
-    for (let i = 1; i <= totalPages; i++) {
-        const pageStart = (i - 1) * itemsPerPage;
-        const pageEnd = Math.min(i * itemsPerPage, total);
-        const answeredCount = Object.keys(answered)
+    const startItem = (current - 1) * perPage + 1;
+    const endItem = Math.min(current * perPage, total);
+    const answeredCount = Object.keys(answered).length;
+
+    let html = `
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
+            <div class="text-sm text-slate-500 dark:text-slate-400">
+                <span class="font-medium">${startItem}-${endItem}</span> of <span class="font-medium">${total}</span> | 
+                <span class="font-medium">${answeredCount}</span>/${total} answered
+                ${answeredCount === total ? ' 🎉' : ''}
+            </div>
+            <div class="flex gap-1">
+                <button data-page="prev" 
+                    class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${current === 1 ? 'opacity-50 cursor-not-allowed' : ''}"
+                    ${current === 1 ? 'disabled' : ''}>
+                    ←
+                </button>
+    `;
+
+    const maxVisible = window.innerWidth < 640 ? 3 : 5;
+    let startPage = Math.max(1, current - Math.floor(maxVisible / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+    if (endPage - startPage + 1 < maxVisible) {
+        startPage = Math.max(1, endPage - maxVisible + 1);
+    }
+
+    if (startPage > 1) {
+        html += `<button data-page="1" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">1</button>`;
+        if (startPage > 2) html += `<span class="px-1 text-slate-400">…</span>`;
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const pageStart = (i - 1) * perPage;
+        const pageEnd = Math.min(i * perPage, total);
+        const pageAnswered = Object.keys(answered)
             .filter(idx => parseInt(idx) >= pageStart && parseInt(idx) < pageEnd).length;
+        const isComplete = pageAnswered === (pageEnd - pageStart) && pageAnswered > 0;
 
         html += `
             <button data-page="${i}" 
-                class="rounded-lg px-3 py-1 text-sm transition ${i === currentPage
+                class="rounded-lg px-3 py-1.5 text-sm transition ${i === current
                 ? 'bg-indigo-600 dark:bg-indigo-500 text-white shadow-md'
-                : 'border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600'
-            } ${answeredCount === (pageEnd - pageStart) && answeredCount > 0 ? 'border-green-400 dark:border-green-600' : ''}"
-            >
+                : 'hover:bg-slate-100 dark:hover:bg-slate-700'
+            } ${isComplete ? 'border-green-400 border-2' : ''}">
                 ${i}
-                ${answeredCount === (pageEnd - pageStart) && answeredCount > 0 ? '✓' : ''}
+                ${isComplete ? '✓' : ''}
             </button>
         `;
     }
-    html += '</div>';
+
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += `<span class="px-1 text-slate-400">…</span>`;
+        html += `<button data-page="${totalPages}" class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700">${totalPages}</button>`;
+    }
+
+    html += `
+                <button data-page="next" 
+                    class="rounded-lg px-3 py-1.5 text-sm transition hover:bg-slate-100 dark:hover:bg-slate-700 ${current === totalPages ? 'opacity-50 cursor-not-allowed' : ''}"
+                    ${current === totalPages ? 'disabled' : ''}>
+                    →
+                </button>
+            </div>
+        </div>
+    `;
+
     examPagination.innerHTML = html;
 
     examPagination.querySelectorAll('[data-page]').forEach(btn => {
         btn.addEventListener('click', () => {
-            state.exam.currentPage = parseInt(btn.dataset.page);
+            if (btn.disabled) return;
+            const page = btn.dataset.page;
+            if (page === 'prev' && current > 1) {
+                state.exam.currentPage--;
+            } else if (page === 'next' && current < totalPages) {
+                state.exam.currentPage++;
+            } else if (page !== 'prev' && page !== 'next') {
+                state.exam.currentPage = parseInt(page);
+            }
             renderExamQuestions();
             renderExamPagination();
         });
@@ -1336,8 +1609,11 @@ function exitExamMode() {
         started: false,
         completed: false,
         questionData: {},
+        sessionId: null,
+        usedQuestions: [],
     };
     examTimer.textContent = '⏱️ 10:00';
+    examPagination.innerHTML = '';
 }
 
 
