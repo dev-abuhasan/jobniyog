@@ -444,10 +444,15 @@ function renderVocabulary() {
         .map(
             (word) => `
                 <article class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-4 shadow-sm transition-all hover:shadow-lg backdrop-blur-sm">
-                    <!-- Word Header -->
+                    <!-- Word Header with Serial Index -->
                     <div class="flex items-start justify-between">
                         <div class="flex-1">
                             <div class="flex items-center gap-2 flex-wrap">
+                                ${word.serialIndex ? `
+                                    <span class="rounded-full bg-gradient-to-r from-amber-400 to-orange-400 dark:from-amber-500 dark:to-orange-500 px-2.5 py-0.5 text-xs font-bold text-white shadow-sm whitespace-nowrap">
+                                        #${word.serialIndex}
+                                    </span>
+                                ` : ''}
                                 <span class="rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50 px-2 py-0.5 text-xs font-bold text-indigo-700 dark:text-indigo-300 whitespace-nowrap">
                                     ${word.letter}
                                 </span>
@@ -504,7 +509,6 @@ function renderVocabulary() {
         )
         .join("");
 }
-
 
 // =====================================================
 // GENERATE QUESTION DATA
@@ -664,31 +668,23 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
         allSynonyms,
         allAntonyms,
         confusingWords,
-        examLevel,
-        commonUsage,
-        tips,
     } = questionData;
 
     const isCorrect = isAnswered && answer?.isCorrect;
 
-    // Get exam level badge color
-    const levelColors = {
-        'beginner': 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300',
-        'intermediate': 'bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300',
-        'advanced': 'bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300',
-        'expert': 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300'
-    };
-    const levelColor = levelColors[examLevel] || levelColors['intermediate'];
-
     return `
         <div class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-5 shadow-sm transition-all hover:shadow-md backdrop-blur-sm">
-            <!-- Question Header - Clean, exam-like -->
+            <!-- Question Header - With Serial Index -->
             <div class="flex items-start justify-between gap-3">
                 <div class="min-w-0 flex-1">
                     <div class="flex items-center gap-2 flex-wrap">
                         <span class="rounded-full bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900/50 dark:to-purple-900/50 px-3 py-0.5 text-xs font-bold text-indigo-700 dark:text-indigo-300 whitespace-nowrap">
                             ${typeDisplay}
                         </span>
+                        ${word.serialIndex ? `
+                            <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">#${word.serialIndex}</span>
+                            <span class="text-xs text-slate-400 dark:text-slate-500">·</span>
+                        ` : ''}
                         <span class="text-xs text-slate-400 dark:text-slate-500 whitespace-nowrap">Q${globalIdx + 1}</span>
                         <span class="text-xs text-slate-400 dark:text-slate-500">·</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 truncate">${word.word}</span>
@@ -709,7 +705,7 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                 ` : ''}
             </div>
 
-            <!-- Options - Clean, NO badges, NO hints -->
+            <!-- Options -->
             <div class="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
                 ${options.map(opt => `
                     <button
@@ -728,12 +724,11 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                         ${isAnswered ? 'disabled' : ''}
                     >
                         <span class="font-semibold">${opt.word}</span>
-                        <!-- NO confusing badge here - clean exam experience -->
                     </button>
                 `).join('')}
             </div>
 
-            <!-- Explanation Box - Full details shown only after answering -->
+            <!-- Explanation Box -->
             ${isAnswered ? `
                 <div class="mt-4 rounded-xl ${isCorrect ? 'bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800' : 'bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800'} p-4">
                     <!-- Result header -->
@@ -750,26 +745,20 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
 
                     <!-- Word details -->
                     <div class="mt-3 space-y-3">
-                        <!-- Main word with Bangla meaning -->
+                        <!-- Main word with Serial Index and Bangla meaning -->
                         <div class="rounded-lg bg-white/70 dark:bg-slate-700/70 p-3 border border-slate-200 dark:border-slate-600">
                             <div class="flex items-center gap-2 flex-wrap">
+                                ${word.serialIndex ? `
+                                    <span class="text-xs font-bold text-slate-400 dark:text-slate-500">#${word.serialIndex}</span>
+                                    <span class="text-slate-300 dark:text-slate-600">·</span>
+                                ` : ''}
                                 <span class="font-bold text-slate-800 dark:text-slate-200">📖 ${word.word}</span>
                                 <span class="text-slate-300 dark:text-slate-600">—</span>
                                 <span class="text-slate-600 dark:text-slate-400">${word.meaning}</span>
                             </div>
-                            ${commonUsage ? `
-                                <div class="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                                    <span class="font-medium">Example:</span> ${commonUsage}
-                                </div>
-                            ` : ''}
-                            ${tips ? `
-                                <div class="mt-1 text-xs text-indigo-600 dark:text-indigo-400">
-                                    <span class="font-medium">💡 Tip:</span> ${tips}
-                                </div>
-                            ` : ''}
                         </div>
 
-                        <!-- Correct answer with Bangla meaning -->
+                        <!-- Correct answer -->
                         <div class="rounded-lg bg-green-50/70 dark:bg-green-900/20 p-3 border border-green-200 dark:border-green-800">
                             <div class="flex items-center gap-2 flex-wrap">
                                 <span class="font-bold text-green-600 dark:text-green-400">✅ ${correct.word}</span>
@@ -779,7 +768,7 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         </div>
 
-                        <!-- All Synonyms with Bangla meanings -->
+                        <!-- All Synonyms -->
                         ${allSynonyms.length > 0 ? `
                             <div class="rounded-lg bg-indigo-50/70 dark:bg-indigo-900/20 p-3 border border-indigo-200 dark:border-indigo-800">
                                 <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">📝 All Synonyms</p>
@@ -795,7 +784,7 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         ` : ''}
 
-                        <!-- All Antonyms with Bangla meanings -->
+                        <!-- All Antonyms -->
                         ${allAntonyms.length > 0 ? `
                             <div class="rounded-lg bg-purple-50/70 dark:bg-purple-900/20 p-3 border border-purple-200 dark:border-purple-800">
                                 <p class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2">📝 All Antonyms</p>
@@ -811,10 +800,10 @@ function renderQuestionHTML(questionData, globalIdx, isAnswered, answer, mode) {
                             </div>
                         ` : ''}
 
-                        <!-- Confusing Words Section - Only in explanation, NOT in options -->
+                        <!-- Confusing Words -->
                         ${confusingWords && confusingWords.length > 0 ? `
                             <div class="rounded-lg bg-amber-50/70 dark:bg-amber-900/20 p-3 border border-amber-200 dark:border-amber-800">
-                                <p class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2">⚠️ Similar Sounding / Confusing Words (For your reference)</p>
+                                <p class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-2">⚠️ Similar Sounding / Confusing Words</p>
                                 <div class="flex flex-wrap gap-1.5">
                                     ${confusingWords.map(cw => `
                                         <span class="inline-flex items-center gap-1 rounded-full bg-white dark:bg-slate-700 px-2.5 py-1 text-xs border border-amber-200 dark:border-amber-700">
