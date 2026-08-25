@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCS Topics - BCS Vocabulary Pro</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-in': 'slideIn 0.3s ease-out',
+                        'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        /* Sidebar scroll */
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .dark .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* Markdown styles */
+        .markdown-content {
+            max-width: 100%;
+        }
+
+        .markdown-content h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            color: #4f46e5;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .dark .markdown-content h1 {
+            border-bottom-color: #334155;
+        }
+
+        .markdown-content h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.75rem;
+            color: #1e293b;
+        }
+
+        .dark .markdown-content h2 {
+            color: #e2e8f0;
+        }
+
+        .markdown-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .markdown-content p {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .markdown-content ul {
+            list-style-type: disc;
+        }
+
+        .markdown-content ol {
+            list-style-type: decimal;
+        }
+
+        .markdown-content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+
+        .markdown-content table th,
+        .markdown-content table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+        }
+
+        .dark .markdown-content table th,
+        .dark .markdown-content table td {
+            border-color: #334155;
+        }
+
+        .markdown-content table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .dark .markdown-content table th {
+            background-color: #1e293b;
+        }
+
+        .markdown-content blockquote {
+            border-left: 4px solid #4f46e5;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #64748b;
+        }
+
+        .dark .markdown-content blockquote {
+            color: #94a3b8;
+        }
+
+        .markdown-content code {
+            background-color: #f1f5f9;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+
+        .dark .markdown-content code {
+            background-color: #1e293b;
+        }
+
+        .markdown-content pre {
+            background-color: #f1f5f9;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .dark .markdown-content pre {
+            background-color: #1e293b;
+        }
+
+        /* Topic item active state */
+        .topic-item {
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+
+        .topic-item:hover {
+            background-color: #f1f5f9;
+        }
+
+        .dark .topic-item:hover {
+            background-color: #1e293b;
+        }
+
+        .topic-item.active {
+            background-color: #eef2ff;
+            border-left-color: #4f46e5;
+        }
+
+        .dark .topic-item.active {
+            background-color: #1e293b;
+            border-left-color: #818cf8;
+        }
+
+        .topic-item.active .topic-name {
+            color: #4f46e5;
+        }
+
+        .dark .topic-item.active .topic-name {
+            color: #818cf8;
+        }
+
+        /* Content fade in */
+        .content-fade {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        /* Mobile menu overlay */
+        .mobile-overlay {
+            transition: all 0.3s ease;
+        }
+
+        /* Category badge */
+        .badge {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-bangla {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .dark .badge-bangla {
+            background: #1e3a5f;
+            color: #93c5fd;
+        }
+
+        .badge-english {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .dark .badge-english {
+            background: #064e3b;
+            color: #6ee7b7;
+        }
+
+        .badge-science {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .dark .badge-science {
+            background: #78350f;
+            color: #fcd34d;
+        }
+
+        .badge-general {
+            background: #fce4ec;
+            color: #831843;
+        }
+
+        .dark .badge-general {
+            background: #4c0519;
+            color: #f9a8d4;
+        }
+
+        .badge-math {
+            background: #fef08a;
+            color: #713f12;
+        }
+
+        .dark .badge-math {
+            background: #422006;
+            color: #fde047;
+        }
+
+        .badge-ict {
+            background: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .dark .badge-ict {
+            background: #2e1065;
+            color: #a78bfa;
+        }
+
+        .badge-geography {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .dark .badge-geography {
+            background: #064e3b;
+            color: #6ee7b7;
+        }
+
+        .badge-ethics {
+            background: #fce4ec;
+            color: #831843;
+        }
+
+        .dark .badge-ethics {
+            background: #4c0519;
+            color: #f9a8d4;
+        }
+
+        /* Container max-width 2xl */
+        .container-2xl {
+            max-width: 1536px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors font-sans">
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-40 border-b border-slate-200/80 dark:border-slate-700/80 bg-white/95 dark:bg-slate-800/95 backdrop-blur-lg shadow-sm">
+        <div class="container-2xl px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <button id="menuToggle"
+                    class="lg:hidden p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <div
+                    class="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white flex items-center justify-center font-bold text-lg shadow-lg flex-shrink-0">
+                    B
+                </div>
+                <div>
+                    <h1
+                        class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        BCS Topics</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Study Materials</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/"
+                    class="hidden sm:flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2" />
+                    </svg>
+                    Home
+                </a>
+                <button id="themeToggle"
+                    class="rounded-xl p-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition">
+                    <span id="themeIcon" class="text-slate-600 dark:text-slate-300">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileOverlay" class="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm hidden lg:hidden"
+        onclick="closeMobileMenu()"></div>
+
+    <!-- Main Layout -->
+    <div class="container-2xl px-4 py-6">
+        <div class="flex gap-6 relative">
+
+            <!-- Sidebar -->
+            <aside id="sidebar" class="lg:w-72 xl:w-80 flex-shrink-0">
+                <div class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto sidebar-scroll">
+                    <div
+                        class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-4 shadow-sm backdrop-blur-sm">
+
+                        <!-- Sidebar Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-sm font-bold text-slate-700 dark:text-slate-300">📚 Topics</h2>
+                            <span id="topicCount"
+                                class="text-xs bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-full font-semibold">0</span>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="relative mb-4">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input id="searchInput" type="text" placeholder="Filter topics..."
+                                class="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 pl-9 pr-4 py-2 text-sm outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900" />
+                        </div>
+
+                        <!-- Topics List -->
+                        <div id="topicsList" class="space-y-1">
+                            <!-- Dynamically populated -->
+                        </div>
+
+                        <!-- Loading state for sidebar -->
+                        <div id="sidebarLoading" class="text-center py-8">
+                            <div
+                                class="inline-block animate-spin rounded-full h-5 w-5 border-2 border-indigo-500 border-t-transparent">
+                            </div>
+                            <p class="mt-2 text-xs text-slate-400">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Mobile Sidebar -->
+            <div id="mobileSidebar"
+                class="fixed inset-y-0 left-0 z-40 w-72 bg-white dark:bg-slate-800 transform -translate-x-full transition-transform duration-300 lg:hidden shadow-xl">
+                <div class="p-4 h-full overflow-y-auto sidebar-scroll">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-sm font-bold text-slate-700 dark:text-slate-300">📚 Topics</h2>
+                        <button onclick="closeMobileMenu()"
+                            class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative mb-4">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input id="mobileSearchInput" type="text" placeholder="Filter topics..."
+                            class="w-full rounded-xl border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700 pl-9 pr-4 py-2 text-sm outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100 dark:focus:ring-indigo-900" />
+                    </div>
+                    <div id="mobileTopicsList" class="space-y-1"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 min-w-0">
+
+                <!-- Welcome / Empty State -->
+                <div id="emptyState"
+                    class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-12 shadow-sm text-center">
+                    <div class="max-w-md mx-auto">
+                        <div
+                            class="h-20 w-20 mx-auto rounded-2xl bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 flex items-center justify-center text-4xl mb-4">
+                            📖
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-700 dark:text-slate-300">Select a Topic</h3>
+                        <p class="mt-2 text-slate-500 dark:text-slate-400 text-sm">Choose a topic from the sidebar to
+                            start studying. All BCS subjects are organized for easy access.</p>
+                        <div class="mt-6 flex flex-wrap justify-center gap-2">
+                            <span
+                                class="px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-xs">📚
+                                10+ Topics</span>
+                            <span
+                                class="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-xs">✅
+                                Exam Ready</span>
+                            <span
+                                class="px-3 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full text-xs">🎯
+                                BCS Focused</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content View -->
+                <div id="contentView" class="hidden">
+                    <div
+                        class="rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/80 dark:bg-slate-800/80 p-6 shadow-sm">
+                        <div id="contentHeader" class="flex items-start justify-between gap-4 mb-4">
+                            <div>
+                                <div id="contentBadge" class="inline-block mb-2"></div>
+                                <h3 id="contentTitle" class="text-xl font-bold text-slate-800 dark:text-slate-200"></h3>
+                            </div>
+                            <button id="backBtn"
+                                class="lg:hidden flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-700 dark:text-indigo-400">
+                                ← Back
+                            </button>
+                        </div>
+                        <div id="contentBody" class="markdown-content content-fade"></div>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Theme Toggle
+        // ============================================================
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            themeIcon.textContent = '☀️';
+        }
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // ============================================================
+        // Mobile Menu
+        // ============================================================
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openMobileMenu() {
+            mobileSidebar.classList.remove('-translate-x-full');
+            mobileOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileSidebar.classList.add('-translate-x-full');
+            mobileOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('menuToggle').addEventListener('click', openMobileMenu);
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileMenu();
+        });
+
+        // ============================================================
+        // Dynamic Topic Loader
+        // ============================================================
+
+        const BASE_PATH = './assets/subject-topics/';
+
+        const topicsList = document.getElementById('topicsList');
+        const mobileTopicsList = document.getElementById('mobileTopicsList');
+        const topicCount = document.getElementById('topicCount');
+        const searchInput = document.getElementById('searchInput');
+        const mobileSearchInput = document.getElementById('mobileSearchInput');
+        const emptyState = document.getElementById('emptyState');
+        const contentView = document.getElementById('contentView');
+        const contentTitle = document.getElementById('contentTitle');
+        const contentBadge = document.getElementById('contentBadge');
+        const contentBody = document.getElementById('contentBody');
+        const backBtn = document.getElementById('backBtn');
+        const sidebarLoading = document.getElementById('sidebarLoading');
+
+        let allTopics = [];
+        let filteredTopics = [];
+        let currentTopic = null;
+
+        // ============================================================
+        // Detect category from filename
+        // ============================================================
+
+        function detectCategory(filename) {
+            const name = filename.toLowerCase();
+            if (name.includes('bangla') || name.includes('বাংলা')) return 'bangla';
+            if (name.includes('english') || name.includes('ইংরেজি')) return 'english';
+            if (name.includes('science') || name.includes('বিজ্ঞান')) return 'science';
+            if (name.includes('math') || name.includes('গণিত')) return 'math';
+            if (name.includes('ict') || name.includes('computer')) return 'ict';
+            if (name.includes('gepgraphy') || name.includes('ভূগোল')) return 'geography';
+            if (name.includes('ethics') || name.includes('নৈতিকতা')) return 'ethics';
+            return 'general';
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'bangla': 'বাংলা',
+                'english': 'English',
+                'science': 'বিজ্ঞান',
+                'math': 'গণিত',
+                'ict': 'ICT',
+                'geography': 'ভূগোল',
+                'ethics': 'নৈতিকতা',
+                'general': 'সাধারণ'
+            };
+            return labels[category] || category;
+        }
+
+        function getCategoryBadge(category) {
+            return `badge-${category}`;
+        }
+
+        // ============================================================
+        // Get file list
+        // ============================================================
+
+        async function getManifest() {
+            try {
+                const res = await fetch(BASE_PATH + 'manifest.json');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.files) return data.files;
+                }
+            } catch (e) { }
+            return null;
+        }
+
+        async function discoverFiles() {
+            // Try manifest first
+            const manifest = await getManifest();
+            if (manifest) return manifest;
+
+            // Known files from the directory
+            const knownFiles = [
+                '01-bangla-grammer-topic.md',
+                '01-bangla-letature-topic.md',
+                '02-english-grammer-topic.md',
+                '02-english-literature-topic.md',
+                '03-bangladesh-affairs-topic.md',
+                '04-international-topic.md',
+                '05-gepgraphy-topic.md',
+                '06-science-topic.md',
+                '07-ict-topic.md',
+                '08-math-topic.md',
+                '09-mental-ability-topic.md',
+                '10-ethics-topic.md'
+            ];
+
+            const files = [];
+            for (const file of knownFiles) {
+                try {
+                    const res = await fetch(BASE_PATH + file);
+                    if (res.ok) files.push(file);
+                } catch (e) { }
+            }
+            return files;
+        }
+
+        // ============================================================
+        // Load files
+        // ============================================================
+
+        async function loadFile(filename) {
+            try {
+                const res = await fetch(BASE_PATH + filename);
+                if (res.ok) {
+                    const content = await res.text();
+                    return { filename, content, success: true };
+                }
+            } catch (e) { }
+            return { filename, success: false };
+        }
+
+        async function loadTopics() {
+            try {
+                const files = await discoverFiles();
+                if (files.length === 0) {
+                    sidebarLoading.innerHTML = `
+                        <div class="text-center py-4 text-slate-400 text-sm">
+                            No topics found
+                        </div>
+                    `;
+                    return;
+                }
+
+                const results = [];
+                for (const file of files) {
+                    const result = await loadFile(file);
+                    if (result.success) results.push(result);
+                }
+
+                allTopics = results;
+                filteredTopics = [...allTopics];
+                topicCount.textContent = allTopics.length;
+
+                if (allTopics.length > 0) {
+                    sidebarLoading.classList.add('hidden');
+                    renderTopics(allTopics);
+                    // Auto-select first topic
+                    selectTopic(allTopics[0].filename);
+                }
+
+            } catch (e) {
+                sidebarLoading.innerHTML = `
+                    <div class="text-center py-4 text-red-400 text-sm">
+                        Failed to load topics
+                    </div>
+                `;
+                console.error(e);
+            }
+        }
+
+        // ============================================================
+        // Render topics in sidebar
+        // ============================================================
+
+        function renderTopics(topics) {
+            if (topics.length === 0) {
+                const empty = `
+                    <div class="text-center py-4 text-slate-400 text-sm">
+                        No topics match
+                    </div>
+                `;
+                topicsList.innerHTML = empty;
+                mobileTopicsList.innerHTML = empty;
+                return;
+            }
+
+            let html = '';
+            for (const topic of topics) {
+                const name = topic.filename.replace('.md', '').replace(/[-_]/g, ' ');
+                const category = detectCategory(topic.filename);
+                const label = getCategoryLabel(category);
+                const badgeClass = getCategoryBadge(category);
+                const isActive = currentTopic === topic.filename;
+
+                html += `
+                    <div class="topic-item ${isActive ? 'active' : ''} px-3 py-2.5 rounded-xl transition-all"
+                         onclick="selectTopic('${topic.filename}')">
+                        <div class="flex items-center justify-between">
+                            <span class="topic-name text-sm font-medium text-slate-700 dark:text-slate-300 truncate">${name}</span>
+                            <span class="badge ${badgeClass} flex-shrink-0 ml-2">${label}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            topicsList.innerHTML = html;
+            mobileTopicsList.innerHTML = html;
+
+            // Mobile search sync
+            mobileTopicsList.querySelectorAll('.topic-item').forEach((el, i) => {
+                el.onclick = () => {
+                    const topic = filteredTopics[i];
+                    if (topic) {
+                        selectTopic(topic.filename);
+                        closeMobileMenu();
+                    }
+                };
+            });
+        }
+
+        // ============================================================
+        // Select topic
+        // ============================================================
+
+        function selectTopic(filename) {
+            const topic = allTopics.find(t => t.filename === filename);
+            if (!topic) return;
+
+            currentTopic = filename;
+
+            // Update UI
+            const name = topic.filename.replace('.md', '').replace(/[-_]/g, ' ');
+            const category = detectCategory(topic.filename);
+            const label = getCategoryLabel(category);
+            const badgeClass = getCategoryBadge(category);
+
+            contentTitle.textContent = name;
+            contentBadge.innerHTML = `<span class="badge ${badgeClass}">${label}</span>`;
+
+            // Parse and render markdown
+            const html = marked.parse(topic.content);
+            contentBody.innerHTML = html;
+
+            // Show content, hide empty state
+            emptyState.classList.add('hidden');
+            contentView.classList.remove('hidden');
+
+            // Update active state in sidebar
+            document.querySelectorAll('.topic-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll(`.topic-item[onclick="selectTopic('${filename}')"]`).forEach(el => {
+                el.classList.add('active');
+            });
+
+            // Update URL hash
+            window.history.pushState({}, '', '#' + filename.replace('.md', ''));
+
+            // Scroll to top of content
+            contentView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        window.selectTopic = selectTopic;
+
+        // ============================================================
+        // Search
+        // ============================================================
+
+        function filterTopics(query) {
+            const search = query.toLowerCase().trim();
+            if (!search) {
+                filteredTopics = [...allTopics];
+            } else {
+                filteredTopics = allTopics.filter(t =>
+                    t.filename.toLowerCase().includes(search)
+                );
+            }
+            renderTopics(filteredTopics);
+        }
+
+        searchInput.addEventListener('input', (e) => filterTopics(e.target.value));
+        mobileSearchInput.addEventListener('input', (e) => {
+            filterTopics(e.target.value);
+            // Also update desktop search
+            searchInput.value = e.target.value;
+        });
+
+        // Sync search inputs
+        searchInput.addEventListener('input', (e) => {
+            mobileSearchInput.value = e.target.value;
+        });
+
+        // ============================================================
+        // Back button (mobile)
+        // ============================================================
+
+        backBtn.addEventListener('click', () => {
+            contentView.classList.add('hidden');
+            emptyState.classList.remove('hidden');
+            window.history.pushState({}, '', '#');
+            // Remove active state
+            document.querySelectorAll('.topic-item').forEach(el => {
+                el.classList.remove('active');
+            });
+        });
+
+        // ============================================================
+        // Handle hash on load
+        // ============================================================
+
+        function handleHash() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const topic = allTopics.find(t => t.filename.replace('.md', '') === hash);
+                if (topic) {
+                    selectTopic(topic.filename);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // ============================================================
+        // Init
+        // ============================================================
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadTopics();
+
+            // Check if hash exists
+            if (!handleHash() && allTopics.length > 0) {
+                // Auto-select first topic after a delay
+                setTimeout(() => {
+                    if (!currentTopic && allTopics.length > 0) {
+                        selectTopic(allTopics[0].filename);
+                    }
+                }, 500);
+            }
+        });
+
+        // Handle hash changes
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                const topic = allTopics.find(t => t.filename.replace('.md', '') === hash);
+                if (topic) {
+                    selectTopic(topic.filename);
+                }
+            } else {
+                contentView.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                document.querySelectorAll('.topic-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+            }
+        });
+
+        console.log('🔥 BCS Topics loaded with interactive sidebar!');
+    </script>
+
+</body>
+
+</html>
