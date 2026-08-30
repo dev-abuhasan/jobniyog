@@ -6,8 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>📚 51st BCS – Study Routine</title>
 
+    <script>
+        // ── Tailwind config: class‑based dark mode ──
+        window.tailwind = {
+            config: {
+                darkMode: 'class'
+            }
+        };
+    </script>
     <script src="https://cdn.tailwindcss.com">
     </script>
+
     <style>
         /* ── subject color classes ── */
         .subj-english-grammar {
@@ -85,6 +94,7 @@
             color: #7a3a5a;
         }
 
+        /* Dark mode overrides for subject badges */
         .dark .subj-english-grammar {
             background: #1a3a4a;
             color: #b3d4e8;
@@ -209,7 +219,7 @@
 
     <script>
         // ──────────────────────────────────────────────────────────────
-        // 1. SCHEDULE DATA
+        // 1. SCHEDULE DATA (unchanged)
         // ──────────────────────────────────────────────────────────────
         const scheduleData = {
             title: "📚 STUDY ROUTINE",
@@ -315,7 +325,7 @@
         };
 
         // ──────────────────────────────────────────────────────────────
-        // 2. RENDER SCHEDULE
+        // 2. RENDER SCHEDULE (unchanged)
         // ──────────────────────────────────────────────────────────────
         function renderSchedule(data) {
             const app = document.getElementById('app');
@@ -407,18 +417,33 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        // 3. TASK MANAGER (string IDs, single event listener)
+        // 3. TASK MANAGER – COMPLETELY FIXED
         // ──────────────────────────────────────────────────────────────
         function initTaskManager() {
             const STORAGE_KEY = 'bcs_daily_tasks_local';
+
+            const DEFAULT_TASKS = [
+                '📝 5টি নতুন ইংরেজি শব্দ (synonym, antonym, meaning)',
+                '📖 English Literature: One Term or Writer',
+                '📘 Daily Grammar (BCS focus) – at least one topic',
+                '📰 Daily Newspaper Read',
+                '🎯 Live MCQ Practice',
+                '📝 1 Model Test (from previous BCS) at office'
+            ];
+
             let tasks = [];
             let lastResetDate = null;
-            let listenerAttached = false;
+            let listenersAttached = false;
 
+            // ── helpers ──
             function getDhakaDate() {
                 const now = new Date();
                 const dhakaTime = new Date(now.getTime() + (6 * 60 * 60 * 1000));
                 return dhakaTime.toISOString().split('T')[0];
+            }
+
+            function generateId() {
+                return Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6);
             }
 
             function loadFromLocal() {
@@ -442,10 +467,7 @@
                 return div.innerHTML;
             }
 
-            function generateId() {
-                return Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 6);
-            }
-
+            // ── core logic ──
             function mergeAndReset(localData) {
                 const today = getDhakaDate();
                 let mergedTasks = [];
@@ -455,19 +477,12 @@
                     mergedTasks = localData.tasks;
                     lastResetDate = localData.lastReset || null;
                 } else {
-                    const defaults = [
-                        '📝 5টি নতুন ইংরেজি শব্দ (synonym, antonym, meaning)',
-                        '📖 English Literature: One Term or Writer',
-                        '📘 Daily Grammar (BCS focus) – at least one topic',
-                        '📰 Daily Newspaper Read',
-                        '🎯 Live MCQ Practice',
-                        '📝 1 Model Test (from previous BCS) at office'
-                    ];
-                    mergedTasks = defaults.map(text => ({ id: generateId(), text, done: false }));
+                    mergedTasks = DEFAULT_TASKS.map(text => ({ id: generateId(), text, done: false }));
                     lastResetDate = null;
                     resetNeeded = true;
                 }
 
+                // Daily reset: uncheck all, keep tasks
                 if (lastResetDate !== today) {
                     mergedTasks = mergedTasks.map(t => ({ ...t, done: false }));
                     lastResetDate = today;
@@ -535,8 +550,10 @@
                 updateSyncStatus('✅ সংরক্ষিত', true);
             }
 
+            // ── actions ──
             function deleteTaskById(id) {
-                const idx = tasks.findIndex(t => t.id === id);
+                const stringId = String(id);
+                const idx = tasks.findIndex(t => String(t.id) === stringId);
                 if (idx === -1) {
                     updateSyncStatus('⚠️ কাজটি খুঁজে পাওয়া যায়নি', false);
                     return;
@@ -550,13 +567,14 @@
             }
 
             function toggleTaskById(id) {
-                const task = tasks.find(t => t.id === id);
-                if (task) {
-                    task.done = !task.done;
-                    saveAndRender();
-                } else {
+                const stringId = String(id);
+                const task = tasks.find(t => String(t.id) === stringId);
+                if (!task) {
                     updateSyncStatus('⚠️ কাজটি খুঁজে পাওয়া যায়নি', false);
+                    return;
                 }
+                task.done = !task.done;
+                saveAndRender();
             }
 
             function addTask() {
@@ -578,10 +596,10 @@
                     updateSyncStatus('ℹ️ কোনো কাজ নেই', false);
                     return;
                 }
-                if (confirm('⚠️ সব কাজ মুছে ফেলবেন? (পুনরুদ্ধার করা যাবে না)')) {
-                    tasks = [];
+                if (confirm('⚠️ সব কাজ মুছে ডিফল্ট কাজ পুনরুদ্ধার করবেন?')) {
+                    tasks = DEFAULT_TASKS.map(text => ({ id: generateId(), text, done: false }));
                     saveAndRender();
-                    updateSyncStatus('✅ সব কাজ মুছে ফেলা হয়েছে', true);
+                    updateSyncStatus('✅ ডিফল্ট কাজ পুনরুদ্ধার করা হয়েছে', true);
                 }
             }
 
@@ -598,38 +616,47 @@
                 }
             }
 
-            // ── Event delegation (attached only once) ──
+            // ── event delegation ──
             function setupEventDelegation() {
-                if (listenerAttached) return;
+                if (listenersAttached) return;
                 const container = document.getElementById('taskList');
                 if (!container) return;
 
-                container.addEventListener('click', function (e) {
-                    const target = e.target;
-
-                    const deleteBtn = target.closest('.task-delete');
-                    if (deleteBtn) {
-                        const item = deleteBtn.closest('.task-item');
-                        if (item) {
-                            const id = item.dataset.taskId;
-                            if (id) deleteTaskById(id);
-                        }
-                        return;
+                // Checkbox: use 'change' event (reliable)
+                container.addEventListener('change', function (e) {
+                    const checkbox = e.target.closest('.task-checkbox');
+                    if (!checkbox) return;
+                    const item = checkbox.closest('.task-item');
+                    if (!item) return;
+                    const id = item.dataset.taskId;
+                    if (!id) return;
+                    // Update the task's done state
+                    const stringId = String(id);
+                    const task = tasks.find(t => String(t.id) === stringId);
+                    if (task) {
+                        task.done = checkbox.checked;
+                        saveAndRender();
                     }
-
-                    const checkbox = target.closest('.task-checkbox');
-                    if (checkbox) {
-                        const item = checkbox.closest('.task-item');
-                        if (item) {
-                            const id = item.dataset.taskId;
-                            if (id) toggleTaskById(id);
-                        }
-                        return;
-                    }
+                    e.stopPropagation();
                 });
-                listenerAttached = true;
+
+                // Delete button: use 'click' event
+                container.addEventListener('click', function (e) {
+                    const deleteBtn = e.target.closest('.task-delete');
+                    if (!deleteBtn) return;
+                    const item = deleteBtn.closest('.task-item');
+                    if (!item) return;
+                    const id = item.dataset.taskId;
+                    if (!id) return;
+                    e.preventDefault();
+                    deleteTaskById(id);
+                    e.stopPropagation();
+                });
+
+                listenersAttached = true;
             }
 
+            // ── init ──
             function init() {
                 const localData = loadFromLocal();
                 const result = mergeAndReset(localData);
@@ -660,7 +687,7 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        // 4. DARK MODE SYNC (via localStorage, with postMessage fallback)
+        // 4. DARK MODE SYNC (unchanged)
         // ──────────────────────────────────────────────────────────────
         (function syncTheme() {
             function applyTheme(isDark) {
@@ -671,14 +698,12 @@
                 }
             }
 
-            // Primary: read from localStorage (parent always writes it)
             let stored = localStorage.getItem('theme');
             let isDark = null;
 
             if (stored === 'dark') isDark = true;
             else if (stored === 'light') isDark = false;
 
-            // Fallback: system preference if localStorage not set (rare)
             if (isDark === null) {
                 isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -686,7 +711,6 @@
 
             applyTheme(isDark);
 
-            // Listen for parent's toggle updates (postMessage)
             window.addEventListener('message', function (e) {
                 if (e.data && typeof e.data.theme === 'string') {
                     applyTheme(e.data.theme === 'dark');

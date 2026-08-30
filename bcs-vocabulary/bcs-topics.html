@@ -714,16 +714,15 @@
 
             if (topic.filename.endsWith('.html')) {
                 const wrapper = document.createElement('div');
-                wrapper.className = 'iframe-wrapper'; // keep border, no height
+                wrapper.className = 'iframe-wrapper';
                 const iframe = document.createElement('iframe');
                 iframe.srcdoc = topic.content;
-                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-modals');  // ✅ added allow-modals
                 iframe.style.width = '100%';
-                iframe.style.height = 'auto'; // will be set onload
+                iframe.style.height = 'auto';
                 iframe.style.border = 'none';
                 iframe.style.background = '#fff';
 
-                // Auto‑size the iframe after it loads
                 iframe.onload = function () {
                     try {
                         const body = this.contentWindow.document.body;
@@ -733,7 +732,6 @@
                     } catch (_) { }
                 };
 
-                // Forward dark theme to iframe
                 setTimeout(() => {
                     try {
                         iframe.contentWindow.postMessage({ theme: html.classList.contains('dark') ? 'dark' : 'light' }, '*');
