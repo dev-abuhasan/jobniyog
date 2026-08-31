@@ -6,171 +6,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>📚 51st BCS – Study Routine</title>
 
+    <!-- ⭐ থিম ফ্ল্যাশ ঠিক করতে হেডের শুরুতে ইনলাইন স্ক্রিপ্ট -->
     <script>
-        // ── Tailwind config: class‑based dark mode ──
+        (function () {
+            const stored = localStorage.getItem('theme');
+            let isDark = null;
+            if (stored === 'dark') isDark = true;
+            else if (stored === 'light') isDark = false;
+            if (isDark === null) {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
         window.tailwind = {
             config: {
                 darkMode: 'class'
             }
         };
     </script>
-    <script src="https://cdn.tailwindcss.com">
-    </script>
 
     <style>
-        /* ── subject color classes ── */
+        /* ── সাবজেক্ট ব্যাজ – লাইট (উজ্জ্বল) ── */
         .subj-english-grammar {
-            background: #dbeaf5;
-            color: #0e4b6e;
+            background: #bfdbfe;
+            color: #1e3a8a;
+            border: 1px solid #93c5fd;
         }
 
         .subj-english-lit {
-            background: #f2dce8;
-            color: #7a2b5a;
+            background: #fbcfe8;
+            color: #9d174d;
+            border: 1px solid #f9a8d4;
         }
 
         .subj-math {
-            background: #fdebd0;
-            color: #9e5f0b;
+            background: #fde68a;
+            color: #92400e;
+            border: 1px solid #fcd34d;
         }
 
         .subj-international {
-            background: #d4f0e8;
-            color: #0d6b5a;
+            background: #a7f3d0;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
         }
 
         .subj-bangladesh {
-            background: #fadbd8;
-            color: #9e2b1e;
+            background: #fca5a5;
+            color: #991b1b;
+            border: 1px solid #f87171;
         }
 
         .subj-bangla-lit {
-            background: #e8d5c4;
-            color: #6b3a24;
+            background: #fcd34d;
+            color: #78350f;
+            border: 1px solid #fbbf24;
         }
 
         .subj-bangla-grammar {
-            background: #d4e6d4;
-            color: #2a6b3a;
+            background: #6ee7b7;
+            color: #064e3b;
+            border: 1px solid #34d399;
         }
 
         .subj-science {
-            background: #d6e2f0;
-            color: #1f4f7a;
+            background: #a5b4fc;
+            color: #3730a3;
+            border: 1px solid #818cf8;
         }
 
         .subj-computer {
-            background: #dfdbe8;
-            color: #4a3d6b;
+            background: #d8b4fe;
+            color: #5b21b6;
+            border: 1px solid #c084fc;
         }
 
         .subj-geography {
-            background: #d4ede6;
-            color: #1a6b4f;
+            background: #6ee7b7;
+            color: #065f46;
+            border: 1px solid #34d399;
         }
 
         .subj-ethics {
-            background: #ead3c4;
-            color: #7a4a2a;
+            background: #fcd34d;
+            color: #78350f;
+            border: 1px solid #fbbf24;
         }
 
         .subj-mental {
-            background: #e0d9f0;
-            color: #5a3d7a;
+            background: #c4b5fd;
+            color: #5b21b6;
+            border: 1px solid #a78bfa;
         }
 
         .subj-news {
-            background: #f5ebd2;
-            color: #8a6a2a;
+            background: #fde68a;
+            color: #92400e;
+            border: 1px solid #fcd34d;
         }
 
         .subj-revision {
-            background: #fad4d4;
-            color: #8a2a2a;
+            background: #fca5a5;
+            color: #991b1b;
+            border: 1px solid #f87171;
         }
 
         .subj-mcq {
-            background: #f5d4e8;
-            color: #7a3a5a;
+            background: #f9a8d4;
+            color: #9d174d;
+            border: 1px solid #f472b6;
         }
 
-        /* Dark mode overrides for subject badges */
+        /* ── ডার্ক মোডে ব্যাজ ── */
         .dark .subj-english-grammar {
-            background: #1a3a4a;
-            color: #b3d4e8;
+            background: #1e3a5f;
+            color: #93c5fd;
+            border-color: #3b82f6;
         }
 
         .dark .subj-english-lit {
-            background: #3a1a2a;
-            color: #d4b3c8;
+            background: #4c1d3b;
+            color: #f9a8d4;
+            border-color: #ec4899;
         }
 
         .dark .subj-math {
-            background: #3a2a1a;
-            color: #e8c8a3;
+            background: #4a3a1a;
+            color: #fcd34d;
+            border-color: #f59e0b;
         }
 
         .dark .subj-international {
             background: #1a3a3a;
-            color: #a3d4c8;
+            color: #6ee7b7;
+            border-color: #10b981;
         }
 
         .dark .subj-bangladesh {
-            background: #3a1a1a;
-            color: #e8a3a3;
+            background: #4a1a1a;
+            color: #fca5a5;
+            border-color: #ef4444;
         }
 
         .dark .subj-bangla-lit {
-            background: #2a1a1a;
-            color: #c8b3a3;
+            background: #4a3a1a;
+            color: #fcd34d;
+            border-color: #f59e0b;
         }
 
         .dark .subj-bangla-grammar {
-            background: #1a2a1a;
-            color: #a3c8a3;
+            background: #1a3a2a;
+            color: #6ee7b7;
+            border-color: #10b981;
         }
 
         .dark .subj-science {
-            background: #2d4f71;
-            color: #a3b3d4;
+            background: #2d3a6a;
+            color: #a5b4fc;
+            border-color: #6366f1;
         }
 
         .dark .subj-computer {
-            background: #2a1a3a;
-            color: #c8a3d4;
+            background: #3a1a5a;
+            color: #d8b4fe;
+            border-color: #8b5cf6;
         }
 
         .dark .subj-geography {
-            background: #376a6a;
-            color: #a3c8b3;
+            background: #1a3a2a;
+            color: #6ee7b7;
+            border-color: #10b981;
         }
 
         .dark .subj-ethics {
-            background: #2a1a1a;
-            color: #d4b3a3;
+            background: #4a3a1a;
+            color: #fcd34d;
+            border-color: #f59e0b;
         }
 
         .dark .subj-mental {
-            background: #2a1a3a;
-            color: #c8a3d4;
+            background: #2a1a4a;
+            color: #c4b5fd;
+            border-color: #8b5cf6;
         }
 
         .dark .subj-news {
-            background: #2a2a1a;
-            color: #d4c8a3;
+            background: #4a3a1a;
+            color: #fcd34d;
+            border-color: #f59e0b;
         }
 
         .dark .subj-revision {
-            background: #3a1a1a;
-            color: #d4a3a3;
+            background: #4a1a1a;
+            color: #fca5a5;
+            border-color: #ef4444;
         }
 
         .dark .subj-mcq {
-            background: #3a1a2a;
-            color: #d4a3c8;
+            background: #4a1a3a;
+            color: #f9a8d4;
+            border-color: #ec4899;
         }
 
-        /* ── Table borders & backgrounds ── */
+        /* ── টেবিল ── */
         .routine-table th,
         .routine-table td {
             border: 1px solid #e2e8f0;
@@ -182,26 +230,34 @@
         }
 
         .routine-table th {
-            background-color: #f1f5f9;
+            background: #dbeafe;
             color: #1e293b;
+            font-weight: 700;
         }
 
         .dark .routine-table th {
-            background-color: #0f172a;
-            color: white;
+            background: #1e293b;
+            color: #f1f5f9;
         }
 
         .routine-table td {
-            background-color: white;
+            background: #ffffff;
+            color: #1e293b;
         }
 
         .dark .routine-table td {
-            background-color: #1e293b;
+            background: #1e293b;
+            color: #e2e8f0;
         }
 
-        /* ── Task list – no internal scrollbar ── */
-        .task-list {
-            /* no max-height, no overflow */
+        /* ── টাস্ক ── */
+        .task-checkbox {
+            accent-color: #0d9488;
+        }
+
+        .task-label.checked {
+            text-decoration: line-through;
+            opacity: 0.6;
         }
 
         body {
@@ -211,7 +267,7 @@
 </head>
 
 <body
-    class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased p-4 md:p-8 flex justify-center">
+    class="bg-blue-50/70 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased p-4 md:p-8 flex justify-center">
 
     <div id="app"
         class="max-w-6xl w-full bg-white dark:bg-slate-800 rounded-3xl shadow-xl p-6 md:p-8 transition-colors">
@@ -219,7 +275,7 @@
 
     <script>
         // ──────────────────────────────────────────────────────────────
-        // 1. SCHEDULE DATA (unchanged)
+        // 1. SCHEDULE DATA
         // ──────────────────────────────────────────────────────────────
         const scheduleData = {
             title: "📚 STUDY ROUTINE",
@@ -279,7 +335,6 @@
                         ["নিউজ পেপার"],
                         ["রিভিশন অথবা মডেল টেস্ট", "LIVE MCQ"],
                         ["ইংরেজি ব্যাকরণ", "ইংরেজি সাহিত্য"],
-
                     ]
                 }, {
                     day: "মঙ্গলবার",
@@ -327,7 +382,6 @@
             "মানসিক দক্ষতা": "subj-mental",
             "নিউজ পেপার": "subj-news",
             "রিভিশন অথবা মডেল টেস্ট": "subj-revision",
-            "রিভিশন অথবা মডেল টেস্ট": "subj-revision",
             "LIVE MCQ": "subj-mcq",
             "LIVE MCQ (উইক ফ্রি মডেল টেস্ট)": "subj-mcq",
             "রিভিশন এবং মাইন্ড-ম্যাপ": "subj-revision",
@@ -340,7 +394,7 @@
         };
 
         // ──────────────────────────────────────────────────────────────
-        // 2. RENDER SCHEDULE (unchanged)
+        // 2. RENDER SCHEDULE
         // ──────────────────────────────────────────────────────────────
         function renderSchedule(data) {
             const app = document.getElementById('app');
@@ -375,8 +429,8 @@
                                                 <td class="px-2 py-3 text-center align-middle">
                                                     <div class="flex flex-col items-center gap-1">
                                                         ${cell.map((subject, idx) => `
-                                                            <span class="subject-item ${subjectColorMap[subject] || ''} px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap">${subject}</span>
-                                                            ${idx < cell.length - 1 ? '<span class="text-slate-400 dark:text-slate-500 text-lg leading-none">+</span>' : ''}
+                                                            <span class="subject-item ${subjectColorMap[subject] || ''} px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap shadow-sm">${subject}</span>
+                                                            ${idx < cell.length - 1 ? '<span class="text-indigo-300 dark:text-indigo-500 text-lg leading-none font-bold">+</span>' : ''}
                                                         `).join('')}
                                                     </div>
                                                 </td>
@@ -419,7 +473,7 @@
                         </div>
                         <span id="syncStatus" class="text-xs text-slate-500 dark:text-slate-400">✅ প্রস্তুত</span>
                     </div>
-                    <div id="taskList" class="task-list space-y-2 mb-4"></div>
+                    <div id="taskList" class="space-y-2 mb-4"></div>
                     <div class="flex flex-wrap gap-3">
                         <input type="text" id="taskInput" placeholder="নতুন কাজ যোগ করুন (বাংলা/ইংরেজি)" class="flex-1 min-w-[200px] px-4 py-2 rounded-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400" />
                         <button id="addTaskBtn" class="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition">➕ যোগ করুন</button>
@@ -432,11 +486,10 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        // 3. TASK MANAGER – COMPLETELY FIXED
+        // 3. TASK MANAGER
         // ──────────────────────────────────────────────────────────────
         function initTaskManager() {
             const STORAGE_KEY = 'bcs_daily_tasks_local';
-
             const DEFAULT_TASKS = [
                 '📝 5টি নতুন ইংরেজি শব্দ (synonym, antonym, meaning)',
                 '📖 English Literature: One Term or Writer',
@@ -452,7 +505,6 @@
             let lastResetDate = null;
             let listenersAttached = false;
 
-            // ── helpers ──
             function getDhakaDate() {
                 const now = new Date();
                 const dhakaTime = new Date(now.getTime() + (6 * 60 * 60 * 1000));
@@ -484,7 +536,6 @@
                 return div.innerHTML;
             }
 
-            // ── core logic ──
             function mergeAndReset(localData) {
                 const today = getDhakaDate();
                 let mergedTasks = [];
@@ -499,7 +550,6 @@
                     resetNeeded = true;
                 }
 
-                // Daily reset: uncheck all, keep tasks
                 if (lastResetDate !== today) {
                     mergedTasks = mergedTasks.map(t => ({ ...t, done: false }));
                     lastResetDate = today;
@@ -567,7 +617,6 @@
                 updateSyncStatus('✅ সংরক্ষিত', true);
             }
 
-            // ── actions ──
             function deleteTaskById(id) {
                 const stringId = String(id);
                 const idx = tasks.findIndex(t => String(t.id) === stringId);
@@ -581,17 +630,6 @@
                     saveAndRender();
                     updateSyncStatus(`✅ "${text}" মুছে ফেলা হয়েছে`, true);
                 }
-            }
-
-            function toggleTaskById(id) {
-                const stringId = String(id);
-                const task = tasks.find(t => String(t.id) === stringId);
-                if (!task) {
-                    updateSyncStatus('⚠️ কাজটি খুঁজে পাওয়া যায়নি', false);
-                    return;
-                }
-                task.done = !task.done;
-                saveAndRender();
             }
 
             function addTask() {
@@ -633,13 +671,11 @@
                 }
             }
 
-            // ── event delegation ──
             function setupEventDelegation() {
                 if (listenersAttached) return;
                 const container = document.getElementById('taskList');
                 if (!container) return;
 
-                // Checkbox: use 'change' event (reliable)
                 container.addEventListener('change', function (e) {
                     const checkbox = e.target.closest('.task-checkbox');
                     if (!checkbox) return;
@@ -647,7 +683,6 @@
                     if (!item) return;
                     const id = item.dataset.taskId;
                     if (!id) return;
-                    // Update the task's done state
                     const stringId = String(id);
                     const task = tasks.find(t => String(t.id) === stringId);
                     if (task) {
@@ -657,7 +692,6 @@
                     e.stopPropagation();
                 });
 
-                // Delete button: use 'click' event
                 container.addEventListener('click', function (e) {
                     const deleteBtn = e.target.closest('.task-delete');
                     if (!deleteBtn) return;
@@ -673,7 +707,6 @@
                 listenersAttached = true;
             }
 
-            // ── init ──
             function init() {
                 const localData = loadFromLocal();
                 const result = mergeAndReset(localData);
@@ -704,33 +737,19 @@
         }
 
         // ──────────────────────────────────────────────────────────────
-        // 4. DARK MODE SYNC (unchanged)
+        // 4. DARK MODE SYNC (iframe support)
         // ──────────────────────────────────────────────────────────────
-        (function syncTheme() {
-            function applyTheme(isDark) {
-                if (isDark) {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-            }
-
-            let stored = localStorage.getItem('theme');
-            let isDark = null;
-
-            if (stored === 'dark') isDark = true;
-            else if (stored === 'light') isDark = false;
-
-            if (isDark === null) {
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            }
-
-            applyTheme(isDark);
-
+        (function () {
+            // থিম ইতিমধ্যে উপরের ইনলাইন স্ক্রিপ্টে সেট করা হয়েছে,
+            // এখানে শুধু প্যারেন্ট থেকে আসা মেসেজ শুনবো
             window.addEventListener('message', function (e) {
                 if (e.data && typeof e.data.theme === 'string') {
-                    applyTheme(e.data.theme === 'dark');
+                    const isDark = e.data.theme === 'dark';
+                    if (isDark) {
+                        document.documentElement.classList.add('dark');
+                    } else {
+                        document.documentElement.classList.remove('dark');
+                    }
                     localStorage.setItem('theme', e.data.theme);
                 }
             });

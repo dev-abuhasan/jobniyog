@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BCS Topics – Persistent Tab</title>
+
+    <!-- ⭐ থিম ফ্ল্যাশ ঠিক করতে হেডের শুরুতে ইনলাইন স্ক্রিপ্ট -->
+    <script>
+        (function () {
+            const stored = localStorage.getItem('theme');
+            let isDark = null;
+            if (stored === 'dark') isDark = true;
+            else if (stored === 'light') isDark = false;
+            if (isDark === null) {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
 
     <script src="https://cdn.tailwindcss.com">
     </script>
@@ -23,16 +42,12 @@
                     },
                     keyframes: {
                         fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': {
-                                opacity: '1',
-                                transform: 'translateY(0)'
-                            }
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
                         },
                         slideIn: {
-                            '0%': { opacity: '0', transform: 'translateX(-20px)' }, '100%': {
-                                opacity: '1',
-                                transform: 'translateX(0)'
-                            }
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
                         }
                     }
                 }
@@ -500,25 +515,25 @@
         // ============================================================
         const themeToggle = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
-        const html = document.documentElement;
+        const htmlEl = document.documentElement;
 
         function toggleTheme() {
-            html.classList.toggle('dark');
-            const isDark = html.classList.contains('dark');
+            htmlEl.classList.toggle('dark');
+            const isDark = htmlEl.classList.contains('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             themeIcon.textContent = isDark ? '☀️' : '🌙';
+            // broadcast to any iframe (like routine.html)
             document.querySelectorAll('iframe').forEach(iframe => {
                 try {
-                    iframe.contentWindow.postMessage({ theme: html.classList.contains('dark') ? 'dark' : 'light' }, '*');
+                    iframe.contentWindow.postMessage({ theme: isDark ? 'dark' : 'light' }, '*');
                 } catch (_) { }
             });
         }
 
-        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia(
-            'prefers-color-scheme: dark').matches)) {
-            html.classList.add('dark');
-            themeIcon.textContent = '☀️';
-        }
+        // প্রাথমিক থিম আইকন সেট করুন
+        const initialDark = htmlEl.classList.contains('dark');
+        themeIcon.textContent = initialDark ? '☀️' : '🌙';
+
         themeToggle.addEventListener('click', toggleTheme);
 
         // ============================================================
@@ -596,17 +611,7 @@
         function getCategoryBadge(c) { return 'badge-' + c; }
 
         // ── file discovery ──
-        /* async function getManifest() {
-             try {
-                 const res = await fetch(BASE_PATH + 'manifest.json');
-                 if (res.ok) { const d = await res.json(); if (d.files) return d.files; }
-             } catch (_) { }
-             return null;
-         } */
-
         async function discoverFiles() {
-            // const manifest = await getManifest();
-            // if (manifest) return manifest;
             const known = [
                 '01-bangla-grammer-topic.md', '01-bangla-letature-topic.md',
                 '02-english-grammer-topic.md', '02-english-literature-topic.md',
@@ -651,7 +656,6 @@
                 if (allTopics.length > 0) {
                     sidebarLoading.classList.add('hidden');
                     renderTopics(allTopics);
-                    // 👇 DO NOT auto-select first topic here – let hash/localStorage decide
                 }
             } catch (e) {
                 sidebarLoading.innerHTML = `<div class="text-center py-4 text-red-400 text-sm">Failed to load topics</div>`;
@@ -717,7 +721,7 @@
                 wrapper.className = 'iframe-wrapper';
                 const iframe = document.createElement('iframe');
                 iframe.srcdoc = topic.content;
-                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-modals');  // ✅ added allow-modals
+                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-modals');
                 iframe.style.width = '100%';
                 iframe.style.height = 'auto';
                 iframe.style.border = 'none';
@@ -734,7 +738,7 @@
 
                 setTimeout(() => {
                     try {
-                        iframe.contentWindow.postMessage({ theme: html.classList.contains('dark') ? 'dark' : 'light' }, '*');
+                        iframe.contentWindow.postMessage({ theme: htmlEl.classList.contains('dark') ? 'dark' : 'light' }, '*');
                     } catch (_) { }
                 }, 300);
 
@@ -834,13 +838,11 @@
                 selectTopic(allTopics[0].filename);
             }
 
-            // if hash matched, we're done – but ensure we don't double-select
             if (hashOk) {
                 // already selected via handleHash
             }
         });
     </script>
-
 </body>
 
 </html>
