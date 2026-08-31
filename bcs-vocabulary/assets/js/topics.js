@@ -85,7 +85,7 @@
     function detectCategory(filename) {
         const n = filename.toLowerCase();
         if (n.includes('bangla') || n.includes('বাংলা')) return 'bangla';
-        if (n.includes('english') || n.includes('ইংরেজি')) return 'english';
+        if (n.includes('english') || n.includes('ইংরেজি') || n.includes('literature')) return 'english';
         if (n.includes('science') || n.includes('বিজ্ঞান')) return 'science';
         if (n.includes('math') || n.includes('গণিত')) return 'math';
         if (n.includes('ict') || n.includes('computer')) return 'ict';
@@ -126,7 +126,7 @@
             '09-mental-ability-topic.md',
             '10-ethics-topic.md',
             '11-routine.html',
-            '12-english-literature-50-days-topic-daily-learn.json'
+            '12-02-eng-literature-daily-learn.json'
         ];
         const files = [];
         for (const f of known) {
