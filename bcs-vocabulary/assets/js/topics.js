@@ -225,6 +225,7 @@
     function renderJsonView(data) {
         jsonData = data;
 
+        const dataLength = jsonData?.length || 50;
         // Fixed start date: set once on first visit, never change
         let startDateStr = localStorage.getItem(LS_START_DATE);
         if (!startDateStr) {
@@ -236,9 +237,9 @@
         const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
         let currentDay = diffDays + 1;
         if (currentDay < 1) currentDay = 1;
-        if (currentDay > 50) currentDay = 50;
+        if (currentDay > dataLength) currentDay = dataLength;
 
-        const total = 50;
+        const total = dataLength;
         const done = Math.min(currentDay, total);
         const progress = Math.round((done / total) * 100);
 
