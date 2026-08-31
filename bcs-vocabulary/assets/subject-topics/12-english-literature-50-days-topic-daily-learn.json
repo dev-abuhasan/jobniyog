@@ -1,0 +1,826 @@
+[
+    {
+        "day": 1,
+        "topic": "Tragedies of William Shakespeare (HOKM)",
+        "category": "Writers & Works",
+        "summary": "শেক্সপিয়ারের ৪টি সেরা ট্র্যাজেডি মনে রাখার শর্টকাট হলো HOKM। প্রতিটি নাটকের নায়কের একটি প্রধান ভুল বা মানসিক দুর্বলতার কারণে তাদের ট্র্যাজিক পরিণতি ঘটে।",
+        "key_details": {
+            "H_Hamlet": "ডেনমার্কের রাজপুত্র। প্রধান সমস্যা: সিদ্ধান্তহীনতা (Indecision/Procrastination)। বিখ্যাত উক্তি: 'To be, or not to be, that is the question.'",
+            "O_Othello": "ভেনিসের সেনাপতি। প্রধান সমস্যা: চরম অন্ধ সন্দেহ ও হিংসা (Sexual Jealousy)। খলনায়ক 'Iago' তাকে উস্কানি দেয়।",
+            "K_King_Lear": "ব্রিটেনের রাজা। প্রধান সমস্যা: অতিরিক্ত তোষামোদ পছন্দ করা। মিষ্টি কথায় ভুলে সৎ মেয়ে Cordelia-কে তাড়িয়ে দেয়।",
+            "M_Macbeth": "স্কটল্যান্ডের সেনাপতি। প্রধান সমস্যা: রাজলোভ বা অতিরিক্ত উচ্চাকাঙ্ক্ষা (Vaulting Ambition)। স্ত্রী Lady Macbeth-কে নাটকে 'Fourth Witch' (৪র্থ ডাইনি) বলা হয়।"
+        },
+        "bcs_past_mcqs": [
+            "Macbeth নাটকে 'Fourth Witch' কাকে বলা হয়? -> Lady Macbeth",
+            "সিদ্ধান্তহীনতার কারণে কোন নাটকের নায়কের পতন হয়? -> Hamlet"
+        ],
+        "15min_task": "HOKM সিকোয়েন্স ও ৪টি ট্র্যাজেডির মূল নায়কের দুর্বলতাগুলো ২ বার রিডিং পড়ুন।"
+    },
+    {
+        "day": 2,
+        "topic": "Literary Terms: Elegy vs. Epitaph",
+        "category": "Literary Terms",
+        "summary": "Elegy এবং Epitaph দুটোই মৃত্যু সম্পর্কিত, তবে একটি হলো পুরো কবিতা আর অন্যটি সমাধির ওপর লেখা সংক্ষিপ্ত উক্তি।",
+        "key_details": {
+            "Elegy_(শোককবিতা)": "কাউকে হারানোর বেদনায় লেখা দীর্ঘ শোককবিতা।",
+            "বিখ্যাত_Elegy": "১. 'Elegy Written in a Country Churchyard' - Thomas Gray. ২. 'Lycidas' - John Milton. ৩. 'Adonais' - P.B. Shelley (John Keats-এর মৃত্যুতে লেখা)।",
+            "Epitaph_(সমাধিলিপি)": "কবরের উপরের পাথরে খোদাই করে লেখা সংক্ষিপ্ত কথা বা কবিতাংশ।",
+            "বিখ্যাত_Epitaph": "শেক্সপিয়ারের কবরের ওপর লেখা: 'Blest be the man that spares these stones, And curst be he that moves my bones.'"
+        },
+        "bcs_past_mcqs": [
+            "Elegy বলতে কী বোঝায়? -> A song or poem of lamentation (শোকগাথা)।",
+            "'Elegy Written in a Country Churchyard' কার লেখা? -> Thomas Gray"
+        ],
+        "15min_task": "মনে রাখার ট্রিক: Elegy = পুরো কবিতা (Poem), Epitaph = কবরের পাথরের লেখা (Tombstone text)।"
+    },
+    {
+        "day": 3,
+        "topic": "Epics & Mock-Epics (মহাকাব্য ও ব্যঙ্গ-মহাকাব্য)",
+        "category": "Literary Terms & Works",
+        "summary": "Epic হলো বীরত্বপূর্ণ কাজের বড় মহাকাব্য। আর Mock-Epic হলো তুচ্ছ কোনো ঘটনাকে মহাকাব্যের স্টাইলে ব্যঙ্গ করে লেখা।",
+        "key_details": {
+            "Epic_(মহাকাব্য)": "বিশাল পরিসরে বীরত্ব, যুদ্ধ বা ঈশ্বরকে নিয়ে লেখা দীর্ঘ কবিতা।",
+            "বিখ্যাত_Epic": "১. 'Paradise Lost' ও 'Paradise Regained' - John Milton. ২. 'Iliad' ও 'Odyssey' - Homer (গ্রিক). ৩. 'Aeneid' - Virgil (রোমান)।",
+            "Mock_Epic_(ব্যঙ্গ-মহাকাব্য)": "তুচ্ছ বিষয়কে গাম্ভীর্যপূর্ণ স্টাইলে উপহাস করার কবিতা।",
+            "বিখ্যাত_Mock_Epic": "'The Rape of the Lock' - Alexander Pope (বেলিন্ডা নামের এক মেয়ের চুলের গোছা কেটে নেওয়ার তুচ্ছ ঘটনা নিয়ে লেখা)।"
+        },
+        "bcs_past_mcqs": [
+            "'Paradise Lost' কার লেখা মহাকাব্য? -> John Milton",
+            "'The Rape of the Lock' কোন ধরণের কবিতা? -> Mock-heroic poem / Mock-Epic"
+        ],
+        "15min_task": "Milton-এর Paradise Lost (Epic) এবং Pope-এর The Rape of the Lock (Mock-Epic)-এর পার্থক্যটা বুঝুন।"
+    },
+    {
+        "day": 4,
+        "topic": "Geoffrey Chaucer: Father of English Literature",
+        "category": "Writers & Titles",
+        "summary": "জিওফ্রে চসার (১৩৪৩-১৪০০) হলেন ইংরেজি সাহিত্যের জনক। তিনি ফরাসি বা লাতিন বাদ দিয়ে সাধারণ মানুষের মিডল ইংলিশ ভাষায় সাহিত্য রচনা শুরু করেন।",
+        "key_details": {
+            "উপাধি": "Father of English Literature, Father of English Poetry, Father of English Language.",
+            "বিখ্যাত_গ্রন্থ": "'The Canterbury Tales' (২৯ জন তীর্থযাত্রীর গল্প যারা লন্ডনের ক্যাফ্রি থেকে কেন্টারবারির সেন্ট থমাস বেকেটের মাজারের দিকে যাচ্ছিল)।",
+            "গুরুত্বপূর্ণ_চরিত্র": "The Knight, The Wife of Bath, The Pardoner.",
+            "যুগ": "Middle English Period (১০৬৬–১৫০০)।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি কবিতার জনক (Father of English Poetry) কে? -> Geoffrey Chaucer",
+            "Canterbury Tales-এর যাত্রীরা কোথায় যাচ্ছিল? -> St. Thomas Becket-এর মাজারে।"
+        ],
+        "15min_task": "চসারের ৩টি উপাধি এবং Canterbury Tales-এর মূল প্লট মাথায় রাখুন।"
+    },
+    {
+        "day": 5,
+        "topic": "First English Tragedy & Comedy (প্রথম ট্র্যাজেডি ও কমেডি)",
+        "category": "Writers & Works",
+        "summary": "রেনেসাঁ যুগে ইংল্যান্ডে প্রথম প্রাতিষ্ঠানিক ইংরেজি নাটক লেখা শুরু হয়।",
+        "key_details": {
+            "প্রথম_ট্র্যাজেডি": "'Gorboduc' (অন্য নাম: Ferrex and Porrex)। লেখক: Thomas Sackville & Thomas Norton (১৫৬১)। এটি Blank Verse বা অমিল ছন্দে লেখা।",
+            "প্রথম_কমেডি": "'Ralph Roister Doister'। লেখক: Nicholas Udall (১৫৫৩)। এটি মূলত স্কুলের ছাত্রদের অভিনয়ের জন্য লেখা হয়েছিল।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি সাহিত্যের প্রথম ট্র্যাজেডি কোনটি? -> Gorboduc",
+            "'Ralph Roister Doister' প্রথম কমেডিটি কার লেখা? -> Nicholas Udall"
+        ],
+        "15min_task": "খাতায় ২ বার লিখুন: প্রথম ট্র্যাজেডি = Gorboduc, প্রথম কমেডি = Ralph Roister Doister।"
+    },
+    {
+        "day": 6,
+        "topic": "Christopher Marlowe & University Wits",
+        "category": "Writers & Works",
+        "summary": "University Wits হলো অক্সফোর্ড ও কেমব্রিজ বিশ্ববিদ্যালয়ের ৭ জন তরুণ নাট্যকারের দল যারা শেক্সপিয়ারের ঠিক আগে নাটক বিপ্লব ঘটিয়েছিলেন।",
+        "key_details": {
+            "প্রধান_লেখক": "Christopher Marlowe (শেক্সপিয়ারের পূর্ববর্তী সেরা নাট্যকার, ব্ল্যাঙ্ক ভার্স ব্যবহারের ওস্তাদ)।",
+            "মার্লোর_বিখ্যাত_নাটক": "১. 'Doctor Faustus' (শয়তান Mephistopheles-এর কাছে ২৪ বছরের জাদুকরী ক্ষমতার জন্য নিজের আত্মা বিক্রি করেছিলেন)। ২. 'The Jew of Malta'।",
+            "অন্যান্য_সদস্য": "Thomas Kyd (বিখ্যাত প্রথম রিভেঞ্জ ট্র্যাজেডি 'The Spanish Tragedy'-র লেখক)।"
+        },
+        "bcs_past_mcqs": [
+            "'Doctor Faustus' নাটকটি কার লেখা? -> Christopher Marlowe",
+            "'The Spanish Tragedy' নাটকটির লেখক কে? -> Thomas Kyd"
+        ],
+        "15min_task": "ডক্টর ফস্টাসের নিজের আত্মা শয়তানের কাছে বিক্রির কাহিনী ও মার্লোর নাম মনে রাখুন।"
+    },
+    {
+        "day": 7,
+        "topic": "Dramatic Terms: Soliloquy, Monologue, Dramatic Irony",
+        "category": "Literary Terms",
+        "summary": "নাটকে পাত্র-পাত্রীদের মনের ভাব প্রকাশের জন্য ব্যবহৃত গুরুত্বপূর্ণ ৩টি টার্ম।",
+        "key_details": {
+            "Soliloquy_(স্বগতক্তি)": "মঞ্চে একা দাঁড়িয়ে নিজের মনের সাথে কথা বলা, যা দর্শকরা শোনে কিন্তু অন্য চরিত্ররা শোনে না (যেমন: হ্যামলেটের 'To be, or not to be')।",
+            "Monologue_(একক_বক্তৃতা)": "মঞ্চে উপস্থিত অন্য চরিত্রদের উদ্দেশ্যে দেওয়া কোনো একটি চরিত্রের দীর্ঘ ভাষণ।",
+            "Dramatic_Irony": "এমন পরিস্থিতি যেখানে দর্শকরা আসল সত্যিটা জানে কিন্তু মঞ্চের চরিত্ররা তা জানে না।"
+        },
+        "bcs_past_mcqs": [
+            "মঞ্চে একা দাঁড়িয়ে নিজের সাথে কথা বলাকে কী বলে? -> Soliloquy",
+            "হ্যামলেটের 'To be, or not to be' কিসের উদাহরণ? -> Soliloquy"
+        ],
+        "15min_task": "পার্থক্য বুঝুন: Soliloquy = একা একা কথা বলা; Monologue = অন্যদের সামনে একা ভাষণ দেয়া।"
+    },
+    {
+        "day": 8,
+        "topic": "William Wordsworth: Poet of Nature",
+        "category": "Writers & Works",
+        "summary": "উইলিয়াম ওয়ার্ডসওয়ার্থ (১৭৭০-১৮৫০) রোমান্টিক যুগের প্রধান কবি, যিনি প্রকৃতিকে ঈশ্বরের মতো পূজা করতেন।",
+        "key_details": {
+            "উপাধি": "Poet of Nature (প্রকৃতির কবি), High Priest of Nature.",
+            "কবিতার_সংজ্ঞা": "'Poetry is the spontaneous overflow of powerful feelings: it takes its origin from emotion recollected in tranquility.'",
+            "বিখ্যাত_কবিতা": "১. 'Daffodils' (I Wandered Lonely as a Cloud)। ২. 'Tintern Abbey'। ৩. 'Lyrical Ballads' (১৭৯৮ সালে এস টি কোলরিজের সাথে যৌথভাবে প্রকাশিত, যা দিয়ে রোমান্টিক যুগের শুরু)।",
+            "বিখ্যাত_উক্তি": "'Child is the father of Man', 'Ten thousand saw I at a glance'."
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি সাহিত্যে 'High Priest of Nature' কাকে বলা হয়? -> William Wordsworth",
+            "'Child is the father of Man' লাইনটি কার? -> Wordsworth"
+        ],
+        "15min_task": "ওয়ার্ডসওয়ার্থের প্রকৃতিপ্রেম এবং ১৭৯৮ সালের 'Lyrical Ballads'-এর নাম মনে রাখুন।"
+    },
+    {
+        "day": 9,
+        "topic": "John Keats: Poet of Beauty & Sensuousness",
+        "category": "Writers & Works",
+        "summary": "জন কিটস (১৭৯৫-১৮২১) মাত্র ২৫ বছর বয়সে যক্ষ্মায় মারা যান। তাঁর কবিতা মানুষের ৫টি ইন্দ্রিয়কে (চোখ, কান, ত্বক ইত্যাদি) গভীরভাবে স্পর্শ করে।",
+        "key_details": {
+            "উপাধি": "Poet of Beauty (সৌন্দর্যের কবি), Poet of Sensuousness (ইন্দ্রিয়পরায়ণতার কবি)।",
+            "বিশেষ_ধারণা": "Negative Capability (রহস্য ও অনিশ্চয়তাকে যুক্তি ছাড়া গ্রহণ করার ক্ষমতা)।",
+            "বিখ্যাত_Ode_(গীতিকবিতা)": "১. 'Ode to a Nightingale', ২. 'Ode on a Grecian Urn', ৩. 'To Autumn'।",
+            "বিখ্যাত_উক্তি": "'Beauty is truth, truth beauty', 'A thing of beauty is a joy forever'."
+        },
+        "bcs_past_mcqs": [
+            "'A thing of beauty is a joy forever' উক্তিটি কার? -> John Keats",
+            "'Poet of Sensuousness' নামে পরিচিত কে? -> John Keats"
+        ],
+        "15min_task": "কিটসের সৌন্দর্যের বিখ্যাত উক্তি ২টি ৫ বার মুখে উচ্চারণ করে মুখস্থ করুন।"
+    },
+    {
+        "day": 10,
+        "topic": "S.T. Coleridge: Poet of Supernaturalism",
+        "category": "Writers & Works",
+        "summary": "স্যামুয়েল টেলর কোলরিজ (১৭৭২-১৮৩৪) অতিপ্রাকৃতিক বা অলৌকিক বিষয়কে অত্যন্ত জীবন্তভাবে কবিতায় ফুটিয়ে তুলতেন।",
+        "key_details": {
+            "উপাধি": "Poet of Supernaturalism (অলৌকিকতার কবি), Opium Eater (আফিমখোর কবি)।",
+            "বিখ্যাত_টার্ম": "'Willing suspension of disbelief' (শিল্পের খাতিরে সাময়িকভাবে অবিশ্বাসকে দূরে রাখা)।",
+            "বিখ্যাত_কবিতা": "১. 'The Rime of the Ancient Mariner' (অ্যালবাট্রস পাখি হত্যা ও নাবিকের অভিশাপের গল্প)। ২. 'Kubla Khan' (আফিমের ঘোরে লেখা স্বপ্নভিত্তিক কবিতা)।",
+            "বিখ্যাত_উক্তি": "'Water, water, everywhere, Nor any drop to drink' (Ancient Mariner থেকে)।"
+        },
+        "bcs_past_mcqs": [
+            "'The Rime of the Ancient Mariner' কবিতাটি কার লেখা? -> S.T. Coleridge",
+            "'Willing suspension of disbelief' টার্মটি কে উদ্ভাবন করেন? -> Coleridge"
+        ],
+        "15min_task": "Ancient Mariner কবিতার অ্যালবাট্রস পাখি এবং 'Water, water everywhere' লাইনটি মনে রাখুন।"
+    },
+    {
+        "day": 11,
+        "topic": "P.B. Shelley: Revolutionary Romantic Poet",
+        "category": "Writers & Works",
+        "summary": "পার্সি বিস সেলি (১৭৯২-১৮২২) ছিলেন প্রথাভাঙা ও বিপ্লবের কবি, যিনি তরুণ বয়সেই সমুদ্রে ডুবে মারা যান।",
+        "key_details": {
+            "উপাধি": "Revolutionary Poet (বিপ্লবী কবি), Poet of Hope and Regeneration.",
+            "বিখ্যাত_কবিতা": "১. 'Ode to the West Wind' (পশ্চিমী বায়ুকে পরিবর্তনের প্রতীক হিসেবে উপস্থাপন)। ২. 'To a Skylark'। ৩. 'Ozymandias' (মিশরের অহংকারী রাজার ধ্বংসাবশেষ নিয়ে লেখা সোনেট)। ৪. 'Adonais' (কিটসের মৃত্যুতে লেখা Elegy)।",
+            "বিখ্যাত_উক্তি": "'If Winter comes, can Spring be far behind?' (শীত এলে বসন্ত কি দূরে থাকতে পারে?)"
+        },
+        "bcs_past_mcqs": [
+            "'Ozymandias' সোনেটটি কার লেখা? -> P.B. Shelley",
+            "'If Winter comes, can Spring be far behind?' উক্তিটি কার? -> P.B. Shelley"
+        ],
+        "15min_task": "সেলির 'Ode to the West Wind' ও তাঁর বিখ্যাত আশাবাদী উক্তিটি মাথায় রাখুন।"
+    },
+    {
+        "day": 12,
+        "topic": "Lord Byron: Rebel Poet of English Literature",
+        "category": "Writers & Works",
+        "summary": "লর্ড বায়রন (১৭৮৮-১৮২৪) ছিলেন ইংরেজি সাহিত্যের বিদ্রোহী কবি। তিনি 'Byronic Hero' (একাকী, অহংকারী ও বিদ্রোহী চরিত্র) ধারণার প্রবক্তা।",
+        "key_details": {
+            "উপাধি": "Rebel Poet of English Literature (ইংরেজি সাহিত্যের বিদ্রোহী কবি)।",
+            "বিখ্যাত_মহাকাব্যিক_স্যাটায়ার": "'Don Juan' (ডন জুয়ান - এক নারীলোভী নায়কের গল্প)।",
+            "অন্যান্য_কাজ": "'Childe Harold's Pilgrimage', 'The Prisoner of Chillon'।",
+            "বিখ্যাত_ছোট_কবিতা": "'She Walks in Beauty'।",
+            "বিশেষ_তথ্য": "তিনি গ্রিসের স্বাধীনতা যুদ্ধে যুদ্ধ করতে গিয়ে মারা যান।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি সাহিত্যের বিদ্রোহী কবি কে? -> Lord Byron",
+            "'Don Juan' গ্রন্থটি কার লেখা? -> Lord Byron"
+        ],
+        "15min_task": "মনে রাখার টিপস: লর্ড বায়রন = ইংরেজি সাহিত্যের বিদ্রোহী কবি; কাজী নজরুল ইসলাম = বাংলা সাহিত্যের বিদ্রোহী কবি।"
+    },
+    {
+        "day": 13,
+        "topic": "Francis Bacon: Father of English Essays",
+        "category": "Writers & Works",
+        "summary": "ফ্রান্সিস বেকন (১৫৬১-১৬২৬) ছিলেন ইংরেজি প্রবন্ধের জনক। তাঁর প্রবন্ধগুলো ছোট হলেও গভীর বাস্তবজ্ঞানে ভরা (Aphoristic style)।",
+        "key_details": {
+            "উপাধি": "Father of English Essay, Father of Empirical Philosophy.",
+            "প্রবন্ধের_স্টাইল": "Aphoristic style (সংক্ষিপ্ত কিন্তু নীতিকথায় ভরা বাক্য)।",
+            "বিখ্যাত_প্রবন্ধ": "১. 'Of Studies', ২. 'Of Truth', ৩. 'Of Marriage and Single Life', ৪. 'Of Revenge'। (সবগুলো নামের আগে 'Of' থাকে)।",
+            "বিখ্যাত_উক্তি": "'Reading maketh a full man; conference a ready man; and writing an exact man.' (Of Studies থেকে)।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি প্রবন্ধের জনক কে? -> Francis Bacon",
+            "'Reading maketh a full man...' বিখ্যাত লাইনটি কার? -> Francis Bacon"
+        ],
+        "15min_task": "প্রবন্ধের নামের আগে 'Of' দেখলেই উত্তর ফ্রান্সিস বেকন—এই হ্যাকটি মনে রাখুন।"
+    },
+    {
+        "day": 14,
+        "topic": "John Milton: Master of Blank Verse & Epics",
+        "category": "Writers & Works",
+        "summary": "জন মিল্টন (১৬০৮-১৬৭৪) অন্ধ হয়ে যাওয়ার পর তাঁর জীবনের সেরা মহাকাব্য দুটি রচনা করেছিলেন।",
+        "key_details": {
+            "উপাধি": "Epic Poet of the English Language (শ্রেষ্ঠ মহাকাব্যিক কবি)।",
+            "বিখ্যাত_মহাকাব্য": "১. 'Paradise Lost' (শয়তানের বিদ্রোহ ও মানুষের স্বর্গচ্যুতির গল্প)। ২. 'Paradise Regained'।",
+            "বিখ্যাত_শোককবিতা": "'Lycidas' (সহপাঠী এডওয়ার্ড কিং-এর মৃত্যুতে লেখা)।",
+            "বিখ্যাত_উক্তি": "'Better to reign in Hell than serve in Heaven' (স্বর্গে দাসত্ব করার চেয়ে নরকে রাজত্ব করা শ্রেয় - Satan-এর উক্তি)।"
+        },
+        "bcs_past_mcqs": [
+            "'Paradise Lost' মহাকাব্যটি কার লেখা? -> John Milton",
+            "'Better to reign in Hell than serve in Heaven' উক্তিটি কার? -> Satan (Paradise Lost-এ)"
+        ],
+        "15min_task": "মিল্টনের অন্ধত্ব এবং শয়তানের বিখ্যাত উক্তিটি ভালো করে রিডিং পড়ুন।"
+    },
+    {
+        "day": 15,
+        "topic": "Alexander Pope & Neoclassical Satire",
+        "category": "Writers & Works",
+        "summary": "অ্যালেক্সান্ডার পোপ (১৬৮৮-১৭৪৪) নিওক্ল্যাসিক্যাল যুগের কবি, যিনি সমাজকে ব্যঙ্গ করে সোজা সাপ্টা কবিতা লিখতেন।",
+        "key_details": {
+            "ছন্দের_স্টাইল": "Heroic Couplet (দুই লাইনের অন্ত্যমিলযুক্ত অমিত্রাক্ষর ছন্দ)।",
+            "বিখ্যাত_কাজ": "১. 'The Rape of the Lock' (Mock-epic), ২. 'An Essay on Criticism', ৩. 'An Essay on Man'।",
+            "বিখ্যাত_উক্তি": "১. 'A little learning is a dangerous thing' (নূ্যনবিদ্যা ভয়ংকরী)। ২. 'To err is human, to forgive divine' (মানুষ মাত্রই ভুল করে)। ৩. 'Fools rush in where angels fear to tread' (হাতি ঘোড়া গেল তল, মশা বলে কত জল)।"
+        },
+        "bcs_past_mcqs": [
+            "'A little learning is a dangerous thing' কার লেখা? -> Alexander Pope",
+            "'To err is human, to forgive divine' উক্তিটি কার? -> Alexander Pope"
+        ],
+        "15min_task": "পোপের বাংলা প্রবাদের মতো ৩টি ইংরেজি প্রবাদতুল্য উক্তি ভালো করে মুখস্থ করুন।"
+    },
+    {
+        "day": 16,
+        "topic": "Jonathan Swift: Master of Prose Satire",
+        "category": "Writers & Works",
+        "summary": "জোনাথন সুইফট (১৬৬৭-১৭৪৫) গদ্যে ব্যঙ্গ-বিদ্রুপের সর্বশ্রেষ্ঠ মাস্টার ছিলেন।",
+        "key_details": {
+            "উপাধি": "Greatest Prose Satirist in English Literature.",
+            "বিখ্যাত_বই": "'Gulliver's Travels' (১৭২৬) - লেমুয়েল গালিভারের ৪টি ভিন্ন কাল্পনিক দেশে ভ্রমণের কাহিনী।",
+            "৪টি_ভ্রমণস্থান": "১. Lilliput (৬ ইঞ্চির ছোট মানুষের দেশ)। ২. Brobdingnag (বিশাল দানবদের দেশ)। ৩. Laputa (উড়ন্ত দ্বীপ)। ৪. Country of the Houyhnhnms (বুদ্ধিমান ঘোড়াদের দেশ, যেখানে মানুষের মতো দেখতে বন্য প্রাণীদের বলা হতো 'Yahoos')।"
+        },
+        "bcs_past_mcqs": [
+            "'Gulliver's Travels' উপন্যাসটি কার লেখা? -> Jonathan Swift",
+            "Gulliver's Travels-এ 'Yahoos' বলতে কী বোঝানো হয়েছে? -> পশুতুল্য নিকৃষ্ট মানুষ।"
+        ],
+        "15min_task": "গালিভারের ভ্রমণে 'Lilliput' (বামন) এবং 'Houyhnhnms' (ঘোড়া)-এর নামটি মাথায় রাখুন।"
+    },
+    {
+        "day": 17,
+        "topic": "First English Novels & Early Novelists",
+        "category": "Writers & Works",
+        "summary": "১৮ শতকে ইংরেজিতে প্রথম উপন্যাস বা Novel লেখার জোয়ার শুরু হয়।",
+        "key_details": {
+            "Father_of_English_Novel": "Henry Fielding (তাঁর বিখ্যাত উপন্যাস: 'Tom Jones')।",
+            "প্রথম_উপন্যাস": "'Pamela; or, Virtue Rewarded' (১৭৪০) - Samuel Richardson। এটি চিঠি আকারে লেখা উপন্যাস (Epistolary Novel)।",
+            "Daniel_Defoe": "'Robinson Crusoe' (১৭১৯) উপন্যাসের লেখক (মরুদ্বীপে আটকে থাকা এক নাবিকের সারভাইভাল স্টোরি)।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি উপন্যাসের জনক (Father of English Novel) কে? -> Henry Fielding",
+            "'Robinson Crusoe' উপন্যাসটি কার লেখা? -> Daniel Defoe"
+        ],
+        "15min_task": "মনে রাখুন: হেনরি ফিল্ডিং = জনক; স্যাটারডে রিচার্ডসন = প্রথম উপন্যাস (Pamela)।"
+    },
+    {
+        "day": 18,
+        "topic": "Charles Dickens: Great Victorian Novelist",
+        "category": "Writers & Works",
+        "summary": "চার্লস ডিকেন্স (১৮১২-১৮৭০) ভিক্টোরিয়ান যুগের সেরা ঔপন্যাসিক, যিনি সমাজের অনাথ শিশু ও গরিবদের দুঃখ-কষ্ট তুলে ধরেছেন।",
+        "key_details": {
+            "উপাধি": "Greatest Victorian Novelist.",
+            "বিখ্যাত_উপন্যাস": "১. 'A Tale of Two Cities' (ফরাসি বিপ্লবের পটভূমিতে লন্ডন ও প্যারিস শহরের গল্প)। ২. 'David Copperfield' (ডিকেন্সের আত্মজীবনীমূলক উপন্যাস)। ৩. 'Great Expectations' (Pip ও Miss Havisham চরিত্র)। ৪. 'Oliver Twist' (অনাথ বালক অলিভারের গল্প)।",
+            "বিখ্যাত_সূচনা": "'It was the best of times, it was the worst of times...'"
+        },
+        "bcs_past_mcqs": [
+            "'A Tale of Two Cities' বইটিতে কোন দুটি শহরের কথা বলা হয়েছে? -> London and Paris",
+            "চার্লস ডিকেন্সের আত্মজীবনীমূলক উপন্যাস কোনটি? -> David Copperfield"
+        ],
+        "15min_task": "A Tale of Two Cities-এর লন্ডন ও প্যারিস শহরের নাম এবং আত্মজীবনী David Copperfield মনে রাখুন।"
+    },
+    {
+        "day": 19,
+        "topic": "Thomas Hardy: Pessimistic Victorian Novelist",
+        "category": "Writers & Works",
+        "summary": "থমাস হার্ডি (১৮৪০-১৯২৮) একজন হতাশাবাদী (Pessimistic) লেখক, যিনি বিশ্বাস করতেন মানুষের জীবন ভাগ্যের ওপর নির্ভর করে।",
+        "key_details": {
+            "উপাধি": "Pessimistic Novelist, Wessex Novelist.",
+            "কাল্পনিক_অঞ্চল": "তাঁর প্রায় সব উপন্যাস ইংল্যান্ডের কাল্পনিক 'Wessex' অঞ্চলের পটভূমিতে লেখা।",
+            "বিখ্যাত_উপন্যাস": "১. 'Tess of the d'Urbervilles' (সাবটাইটেল: A Pure Woman Faithfully Presented)। ২. 'The Mayor of Casterbridge' (Michael Henchard চরিত্র)। ৩. 'Far from the Madding Crowd'।",
+            "মূল_ভাবনা": "মানুষের হাত বা ইচ্ছার বাইরে এক অল অদৃশ্য নিয়তি (Fate) জীবন ধ্বংস করে।"
+        },
+        "bcs_past_mcqs": [
+            "'Wessex Novelist' কাকে বলা হয়? -> Thomas Hardy",
+            "'Tess of the d'Urbervilles' উপন্যাসটি কার লেখা? -> Thomas Hardy"
+        ],
+        "15min_task": "হার্ডির কাল্পনিক এলাকা 'Wessex' এবং বিখ্যাত চরিত্র 'Tess'-এর নাম মনে রাখুন।"
+    },
+    {
+        "day": 20,
+        "topic": "Jane Austen: Master of Domestic Novels",
+        "category": "Writers & Works",
+        "summary": "জেন অস্টেন (১৭৭৫-১৮১৭) মধ্যবিত্ত পরিবারের প্রেম, বিয়ে ও সামাজিক বাস্তবতা নিয়ে চমৎকার পারিবারিক উপন্যাস লিখতেন।",
+        "key_details": {
+            "উপাধি": "Anti-Romantic Novelist, Master of Domestic Novel.",
+            "বিখ্যাত_উপন্যাস": "১. 'Pride and Prejudice' (নায়িকা Elizabeth Bennet ও নায়ক Mr. Darcy-র ভুল বোঝাবুঝি ও প্রেমের গল্প)। ২. 'Sense and Sensibility'। ৩. 'Emma'।",
+            "বিখ্যাত_সূচনা": "'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.'"
+        },
+        "bcs_past_mcqs": [
+            "'Pride and Prejudice' উপন্যাসটির লেখক কে? -> Jane Austen",
+            "Mr. Darcy কোন উপন্যাসের বিখ্যাত চরিত্র? -> Pride and Prejudice"
+        ],
+        "20min_task": "জেন অস্টেনের 'Pride and Prejudice' এবং এর প্রধান চরিত্র Darcy & Elizabeth-এর নাম মুখস্থ রাখুন।"
+    },
+    {
+        "day": 21,
+        "topic": "George Bernard Shaw: Master of Drama of Ideas",
+        "category": "Writers & Works",
+        "summary": "জর্জ বার্নার্ড শ (১৮৫৬-১৯৫০) আধুনিক নাটকের জনক। তিনি নাটকের হাসির আড়ালে সামাজিক সমস্যার সমাধান দিতেন (Drama of Ideas)।",
+        "key_details": {
+            "উপাধি": "Father of Modern English Drama, সাহিত্য নোবেল (১৯২৫)।",
+            "বিখ্যাত_নাটক": "১. 'Arms and the Man' (যুদ্ধ ও রোমান্টিক ভালোবাসার ভূয়া ভাবাবেগকে ব্যঙ্গ করা নাটক; চরিত্র: Raina, Bluntschli)। ২. 'Man and Superman'। ৩. 'Pygmalion'। ৪. 'Caesar and Cleopatra'।",
+            "বিখ্যাত_উক্তি": "'Beware of false knowledge; it is more dangerous than ignorance.'"
+        },
+        "bcs_past_mcqs": [
+            "'Arms and the Man' নাটকটি কার লেখা? -> George Bernard Shaw",
+            "G.B. Shaw কত সালে নোবেল পুরস্কার পান? -> ১৯২৫ সালে"
+        ],
+        "15min_task": "জি বি শর নোবেল পাওয়ার সাল (১৯২৫) এবং 'Arms and the Man' নাটকের নাম ভালো করে রিডিং পড়ুন।"
+    },
+    {
+        "day": 22,
+        "topic": "T.S. Eliot: Pioneer of Modernist Poetry",
+        "category": "Writers & Works",
+        "summary": "টি এস এলিয়ট (১৮৮৮-১৯৬৫) ১ম বিশ্বযুদ্ধ পরবর্তী মানুষের জীবনের হতাশা, নৈতিক অবক্ষয় ও শূন্যতা নিয়ে আধুনিক কবিতা প্রবর্তন করেন।",
+        "key_details": {
+            "উপাধি": "Poet of Modern Age, সাহিত্য নোবেল (১৯৪৮)।",
+            "বিখ্যাত_কবিতা": "১. 'The Waste Land' (১৯২২ সালে প্রকাশিত আধুনিক যুগের শ্রেষ্ঠ দীর্ঘ কবিতা)। ২. 'The Love Song of J. Alfred Prufrock'। ৩. 'The Hollow Men'।",
+            "বিখ্যাত_কাব্যনাট্য": "'Murder in the Cathedral'।",
+            "বিখ্যাত_লাইন": "'April is the cruellest month...' (The Waste Land-এর প্রথম লাইন)।"
+        },
+        "bcs_past_mcqs": [
+            "'The Waste Land' কবিতাটি কার লেখা? -> T.S. Eliot",
+            "টি এস এলিয়ট কত সালে নোবেল পুরস্কার পান? -> ১৯৪৮ সালে"
+        ],
+        "15min_task": "১৯২২ সালে 'The Waste Land' প্রকাশ এবং এলিয়টের ১৯৪৮ সালের নোবেল জয় মনে রাখুন।"
+    },
+    {
+        "day": 23,
+        "topic": "W.B. Yeats: Great Irish Symbolist Poet",
+        "category": "Writers & Works",
+        "summary": "ডাব্লিউ বি ইয়েটস (১৮৬৫-১৯৩৯) আয়ারল্যান্ডের জাতীয় কবি যিনি রবীন্দ্রনাথের গীতাঞ্জলির ভূমিকা লিখে বিশ্বজুড়ে বিখ্যাত হন।",
+        "key_details": {
+            "উপাধি": "Irish National Poet, সাহিত্য নোবেল (১৯২৩)।",
+            "রবীন্দ্রনাথের_সাথে_সম্পর্ক": "১৯১২ সালে রবীন্দ্রনাথের 'Gitanjali' (Song Offerings)-এর ইংরেজি অনুবাদের ভূমিকার (Introduction) লেখক।",
+            "বিখ্যাত_কবিতা": "১. 'The Second Coming' (বিখ্যাত লাইন: 'Things fall apart; the centre cannot hold')। ২. 'Sailing to Byzantium'। ৩. 'The Lake Isle of Innisfree'।"
+        },
+        "bcs_past_mcqs": [
+            "রবীন্দ্রনাথ ঠাকুরের 'গীতাঞ্জলি'র ইংরেজি ভূমিকার লেখক কে? -> W.B. Yeats",
+            "'The Second Coming' কবিতাটি কার লেখা? -> W.B. Yeats"
+        ],
+        "15min_task": "ইয়েটস ১৯২৩ সালে নোবেল পান এবং রবীন্দ্রনাথের গীতাঞ্জলিতে ভূমিকা লেখেন—এই বিষয়টি মাথায় গেঁথে নিন।"
+    },
+    {
+        "day": 24,
+        "topic": "George Orwell: Political Satirist & Dystopian Author",
+        "category": "Writers & Works",
+        "summary": "জর্জ অরওয়েল (প্রকৃত নাম: এরিক আর্থার ব্লেয়ার, ১৯০৩-১৯৫০) একনায়কতন্ত্র ও সরকারের অতিরিক্ত নজরদারির বিরুদ্ধে উপন্যাস লিখতেন।",
+        "key_details": {
+            "বিখ্যাত_উপন্যাস": "১. 'Animal Farm' (১৯৪৫ - খামারের পশুপাখিদের গল্পের ছলে সোভিয়েত সমাজতন্ত্র ও স্টালিনকে স্যাটায়ার করা)। ২. 'Nineteen Eighty-Four' (১৯৪৯ - একনায়কতান্ত্রিক কাল্পনিক সমাজ যেখানে সব জায়গায় 'Big Brother' নজর রাখে)।",
+            "বিখ্যাত_উক্তি": "'All animals are equal, but some animals are more equal than others' (Animal Farm)।",
+            "বিখ্যাত_শব্দ": "Big Brother, Thoughtpolice, Newspeak."
+        },
+        "bcs_past_mcqs": [
+            "'Animal Farm' রূপক উপন্যাসটি কার লেখা? -> George Orwell",
+            "George Orwell-এর প্রকৃত নাম কী? -> Eric Arthur Blair"
+        ],
+        "15min_task": "অরওয়েলের আসল নাম 'Eric Arthur Blair' এবং 'Animal Farm'-এর পশুপাখিদের উক্তিটি মনে রাখুন।"
+    },
+    {
+        "day": 25,
+        "topic": "Ernest Hemingway: American Master of Minimalist Prose",
+        "category": "Writers & Works",
+        "summary": "আর্নেস্ট হেমিংওয়ে (১৮৯৯-১৯৬১) যুক্তরাষ্ট্রের নোবেলজয়ী লেখক, যিনি সোজা ও ছোট ছোট বাক্যে লেখা 'Iceberg Theory'-র জন্য বিখ্যাত।",
+        "key_details": {
+            "পুরস্কার": "সাহিত্য নোবেল (১৯৫৪), পুলিৎজার পুরস্কার (১৯৫৩)।",
+            "বিখ্যাত_উপন্যাস": "'The Old Man and the Sea' (১৯৫২) - কিউবার বয়স্ক জেলে সান্তিয়াগো (Santiago)-র মার্লিন (Marlin) মাছ শিকারের একাগ্র সংগ্রাম।",
+            "অন্যান্য_বই": "১. 'A Farewell to Arms' (প্রথম বিশ্বযুদ্ধের পটভূমিতে লেখা), ২. 'For Whom the Bell Tolls'।",
+            "বিখ্যাত_উক্তি": "'A man can be destroyed but not defeated.' (মানুষকে ধ্বংস করা যায় কিন্তু পরাজিত করা যায় না)।"
+        },
+        "bcs_past_mcqs": [
+            "'The Old Man and the Sea' উপন্যাসের কেন্দ্রীয় চরিত্র কে? -> Santiago",
+            "'A man can be destroyed but not defeated' উক্তিটি কার? -> Ernest Hemingway"
+        ],
+        "15min_task": "জেলে সান্তিয়াগোর নাম এবং 'A man can be destroyed...' অমর উক্তিটি ২ বার পড়ুন।"
+    },
+    {
+        "day": 26,
+        "topic": "Sonnet Structure: Italian vs. English Sonnets",
+        "category": "Literary Terms",
+        "summary": "সোনেট বা চতুর্দশপদী কবিতা হলো ১৪ লাইনের সুনির্দিষ্ট ছন্দে লেখা কবিতা।",
+        "key_details": {
+            "Italian/Petrarchan_Sonnet": "২ ভাগে বিভক্ত: প্রথম ৮ লাইন = Octave (সমস্যা তুলে ধরে) এবং শেষ ৬ লাইন = Sestet (সমাধান দেয়)। ছন্দ: abba abba cde cde.",
+            "English/Shakespearean_Sonnet": "৪ ভাগে বিভক্ত: ৩টি Quatrain (৪ লাইন করে = ১২ লাইন) + ১টি Couplet (শেষ ২ লাইন)। ছন্দ: abab cdcd efef gg.",
+            "Volta": "সোনেটের ভাব বা চিন্তার মোড় ঘোরাকে (Turn of thought) Volta বলে (সাধারণত ৯ম লাইনে ঘটে)।"
+        },
+        "bcs_past_mcqs": [
+            "সোনেটে মোট কতটি লাইন থাকে? -> ১৪টি লাইন।",
+            "শেক্সপিয়ারিয়ান সোনেটের ছন্দের রূপ (Rhyme scheme) কী? -> abab cdcd efef gg"
+        ],
+        "15min_task": "খাতায় শেক্সপিয়ারের সোনেট ছন্দ লিখুন: abab cdcd efef gg।"
+    },
+    {
+        "day": 27,
+        "topic": "Figures of Speech: Simile, Metaphor, Personification",
+        "category": "Literary Terms",
+        "summary": "সাহিত্যে সৌন্দর্য ও উপমা তৈরির ৩টি চমৎকার অলংকার।",
+        "key_details": {
+            "Simile_(উপমা)": "'like' বা 'as' ব্যবহার করে দুটি ভিন্ন বস্তুর মধ্যে সরাসরি তুলনা। (যেমন: 'He fought like a lion', 'I wandered lonely as a cloud')।",
+            "Metaphor_(রূপক)": "'like' বা 'as' ছাড়া দুটি বস্তুর মধ্যে সরাসরি অভেদ তুলনা। (যেমন: 'Life is a walking shadow', 'He was a lion in the fight')।",
+            "Personification_(ব্যক্তিত্বারোপ)": "বস্তু বা প্রাণহীন বস্তুকে মানুষের মতো রূপ দেওয়া। (যেমন: 'The flowers danced in the breeze')।"
+        },
+        "bcs_past_mcqs": [
+            "'Life is a walking shadow' কিসের উদাহরণ? -> Metaphor",
+            "'As white as snow' কিসের উদাহরণ? -> Simile"
+        ],
+        "15min_task": "পার্থক্য বুঝুন: 'Like/As' থাকলে Simile, না থাকলে Metaphor।"
+    },
+    {
+        "day": 28,
+        "topic": "Figures of Speech: Hyperbole, Irony, Paradox",
+        "category": "Literary Terms",
+        "summary": "সাহিত্যে অতিরিক্ত বাড়িয়ে বলা, ব্যাঙ্গ করা বা পরস্পরবিরোধী সত্য তুলে ধরার অলংকার।",
+        "key_details": {
+            "Hyperbole_(অতিশয়োক্তি)": "কোনো কথাকে অস্বাভাবিক বাড়িয়ে বলা। (যেমন: 'Ten thousand saw I at a glance', 'আমি হাজার বছর ধরে পথ হাটিতেছি')।",
+            "Irony_(বিদ্রুপ)": "যা বলা হয় তার বিপরীত অর্থ বোঝানো বা প্রত্যাশার উল্টো ঘটা। (যেমন: ফায়ার সার্ভিস স্টেশনে আগুন লাগা)।",
+            "Paradox_(আপাতবিরোধী_সত্য)": "আপাতদৃষ্টিতে অসম্ভব মনে হলেও ভেতরে গভীর সত্য থাকা। (যেমন: 'Child is the father of Man', 'যে রক্ষক সেই ভক্ষক')।"
+        },
+        "bcs_past_mcqs": [
+            "'Ten thousand saw I at a glance' এটি কিসের উদাহরণ? -> Hyperbole",
+            "'Child is the father of Man' উক্তিটি কিসের উদাহরণ? -> Paradox"
+        ],
+        "15min_task": "অতিশয়োক্তি (Hyperbole) এবং আপাতবিরোধী সত্য (Paradox)-এর পার্থক্যটি বুঝে নিন।"
+    },
+    {
+        "day": 29,
+        "topic": "Robert Frost: Beloved American Nature Poet",
+        "category": "Writers & Works",
+        "summary": "রবার্ট ফ্রস্ট (১৮৭৪-১৯৬৩) ৪ বার পুলিৎজার বিজয়ী আমেরিকান প্রকৃতিপ্রেমী কবি, যার কবিতা জীবনের সিদ্ধান্ত নিতে শেখায়।",
+        "key_details": {
+            "উপাধি": "Poet of New England, ৪ বার পুলিৎজার পুরস্কার বিজয়ী।",
+            "বিখ্যাত_কবিতা": "১. 'The Road Not Taken' (জীবনের দুই রাস্তার যেকোনো একটি বেছে নেওয়ার গল্প)। ২. 'Stopping by Woods on a Snowy Evening'। ৩. 'Mending Wall'।",
+            "বিখ্যাত_লাইন": "'The woods are lovely, dark and deep, But I have promises to keep, And miles to go before I sleep' (ঘুমানোর আগে অনেক পথ চলা বাকি)।"
+        },
+        "bcs_past_mcqs": [
+            "'The Road Not Taken' কবিতাটি কার লেখা? -> Robert Frost",
+            "'And miles to go before I sleep' লাইনটির রচয়িতা কে? -> Robert Frost"
+        ],
+        "15min_task": "রবার্ট ফ্রস্টের বিখ্যাত কবিতা 'Stopping by Woods...'-এর শেষ লাইনগুলো দুইবার আবৃত্তি করুন।"
+    },
+    {
+        "day": 30,
+        "topic": "Virginia Woolf & Stream of Consciousness Novel",
+        "category": "Writers & Works",
+        "summary": "ভার্জিনিয়া উলফ (১৮৮২-১৯৪১) আধুনিকতাবাদী লেখিকা, যিনি মানুষের মনের ভেতরে চিন্তা কীভাবে অবিরত বয়ে চলে (Stream of Consciousness) তা নিয়ে লিখেছেন।",
+        "key_details": {
+            "টেকনিক": "Stream of Consciousness (চেতনাপ্রবাহ রীতি - চরিত্রের মনের ভেতরের অবিরত চিন্তার প্রবাহ প্রকাশ করা)।",
+            "বিখ্যাত_উপন্যাস": "১. 'To the Lighthouse', ২. 'Mrs. Dalloway', ৩. 'Orlando'।",
+            "বিখ্যাত_নারীবাদী_প্রবন্ধ": "'A Room of One's Own' (নারীদের লেখার জন্য নিজস্ব টাকা ও একটি আলাদা ঘরের প্রয়োজন কথা বলা হয়েছে)।"
+        },
+        "bcs_past_mcqs": [
+            "'To the Lighthouse' উপন্যাসটি কার লেখা? -> Virginia Woolf",
+            "'A Room of One's Own' প্রবন্ধটি কার? -> Virginia Woolf"
+        ],
+        "15min_task": "ভার্জিনিয়া উলফের বিখ্যাত নারীবাদী প্রবন্ধ 'A Room of One's Own'-এর নাম মনে রাখুন।"
+    },
+    {
+        "day": 31,
+        "topic": "Walt Whitman: Father of Free Verse",
+        "category": "Writers & Works",
+        "summary": "ওয়াল্ট হুইটম্যান (১৮১৯-১৮৯২) আমেরিকার জাতীয় কবি যিনি কোনো ছন্দ বা মাত্রা ছাড়া মুক্তক ছন্দে (Free Verse) কবিতা লেখার বিপ্লব ঘটান।",
+        "key_details": {
+            "উপাধি": "Father of Free Verse (মুক্তক ছন্দের জনক), Poet of Democracy.",
+            "বিখ্যাত_কাব্যগ্রন্থ": "'Leaves of Grass' (১৮৫৫)।",
+            "আবراهাম_লিংকনের_শোককবিতা": "১. 'O Captain! My Captain!' (লিংকন আততায়ীর হাতে নিহত হওয়ার পর লেখা)। ২. 'When Lilacs Last in the Dooryard Bloom'd'।",
+            "Free_Verse": "যে কবিতায় কোনো নির্দিষ্ট ছন্দ বা অন্ত্যমিল থাকে না।"
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি সাহিত্যে 'Father of Free Verse' কে? -> Walt Whitman",
+            "'O Captain! My Captain!' কবিতাটি কাকে নিয়ে লেখা? -> Abraham Lincoln"
+        ],
+        "15min_task": "হুইটম্যান মুক্তক ছন্দের জনক এবং লিংকনের ওপর 'O Captain! My Captain!' লিখেছেন—এটি মাথায় রাখুন।"
+    },
+    {
+        "day": 32,
+        "topic": "Literary Periods of English Literature (যুগের সময়কাল)",
+        "category": "Literary Eras",
+        "summary": "ইংরেজি সাহিত্যের ঐতিহাসিক সময়কাল জানা থাকলে কোন লেখক কোন যুগের তা সহজেই বের করা যায়।",
+        "key_details": {
+            "Old_English_Period": "৪৫০–১০৬৬ (মহাকাব্য: Beowulf)।",
+            "Middle_English_Period": "১০৬৬–১৫০০ (চসারের যুগ)।",
+            "Renaissance_Period": "১৫০০–১৬৬০ (শেক্সপিয়ার, মার্লো, মিল্টনের যুগ)।",
+            "Neoclassical_Period": "১৬৬০–১৭৯৮ (ড্রাইডেন, পোপ, সুইফটের যুগ)।",
+            "Romantic_Period": "১৭৯৮–১৮৩২ (ওয়ার্ডসওয়ার্থ, কিটস, সেলি, বায় রনের যুগ)।",
+            "Victorian_Period": "১৮৩২–১৯০১ (ডিকেন্স, হার্ডি, টেনিসনের যুগ)।",
+            "Modern_Period": "১৯০১–১৯৪৫ (জিবি শ, ইয়েটস, এলিয়ট, অরওয়েল)।"
+        },
+        "bcs_past_mcqs": [
+            "রোমান্টিক যুগের সূচনা হয় কত সালে? -> ১৭৯৮ সালে (Lyrical Ballads প্রকাশের মাধ্যমে)।",
+            "উইলিয়াম শেক্সপিয়ার কোন যুগের লেখক? -> Renaissance / Elizabethan Era"
+        ],
+        "15min_task": "রোমান্টিক যুগ (১৭৯৮-১৮৩২) এবং ভিক্টোরিয়ান যুগের (১৮৩২-১৯০১) সাল দুটি ভালো করে মুখস্থ করুন।"
+    },
+    {
+        "day": 33,
+        "topic": "John Donne & Metaphysical Poetry",
+        "category": "Writers & Works",
+        "summary": "জন ডান (১৫৭২-১৬৩১) মেটাফিজিক্যাল কবিদের প্রধান ছিলেন, যারা কবিতায় বুদ্ধিবৃত্তিক উপমা বা তুলনা (Conceit) ব্যবহার করতেন।",
+        "key_details": {
+            "উপাধি": "Poet of Love, Master of Metaphysical Conceit.",
+            "Metaphysical_Conceit": "একেবারে অসংলগ্ন দুটি বিষয়ের মধ্যে অদ্ভুত বুদ্ধিদীপ্ত তুলনা (যেমন: দুই প্রেমিক-প্রেমিকাকে একটি কম্পাসের দুই কাঁটার সাথে তুলনা করা)।",
+            "বিখ্যাত_কবিতা": "১. 'The Flea', ২. 'A Valediction: Forbidding Mourning', ৩. 'The Sun Rising', ৪. 'The Canonization'।",
+            "বিখ্যাত_উক্তি": "'For God's sake hold your tongue, and let me love' (ঈশ্বর তোমার দোহাই লাগে, চুপ করো, আমাকে ভালোবাসতে দাও)।"
+        },
+        "bcs_past_mcqs": [
+            "মেটাফিজিক্যাল কবি (Metaphysical Poet) হিসেবে পরিচিত কে? -> John Donne",
+            "'The Sun Rising' কবিতাটি কার লেখা? -> John Donne"
+        ],
+        "15min_task": "জন ডানের মেটাফিজিক্যাল কবি উপাধি এবং তাঁর প্রেম সম্পর্কিত অসংলগ্ন তুলনার ট্রিকটি মনে রাখুন।"
+    },
+    {
+        "day": 34,
+        "topic": "Alfred Tennyson: Poet Laureate of Victorian Era",
+        "category": "Writers & Works",
+        "summary": "লর্ড অ্যালফ্রেড টেনিসন (১৮০৯-১৮৯২) ভিক্টোরিয়ান যুগের রাজকবি (Poet Laureate) ছিলেন, যাঁর কবিতা যুগে আশা জোগাত।",
+        "key_details": {
+            "উপাধি": "Poet Laureate of Victorian Era (ভিক্টোরিয়ান যুগের সভাকবি)।",
+            "বিখ্যাত_কবিতা": "১. 'Ulysses' (এক বৃদ্ধ বীর ইউলিসিসের অদম্য অভিযানের গল্প)। ২. 'In Memoriam A.H.H.' (বন্ধু আর্থার হ্যালামের মৃত্যুতে লেখা Elegy)। ৩. 'The Charge of the Light Brigade'।",
+            "বিখ্যাত_উক্তি": "১. 'To strive, to seek, to find, and not to yield' (চেষ্টা করা, খোঁজা, লাভ করা এবং হার না মানা)। ২. ''Tis better to have loved and lost than never to have loved at all'।"
+        },
+        "bcs_past_mcqs": [
+            "'Ulysses' কবিতাটি কার লেখা? -> Alfred Tennyson",
+            "'To strive, to seek, to find, and not to yield' কোন কবিতার শেষ চরণ? -> Ulysses"
+        ],
+        "15min_task": "ইউলিসিস কবিতার শেষ লাইন 'To strive, to seek, to find, and not to yield' ৩ বার রিডিং পড়ুন।"
+    },
+    {
+        "day": 35,
+        "topic": "Robert Browning: Master of Dramatic Monologue",
+        "category": "Writers & Works",
+        "summary": "রবার্ট ব্রাউনিং (১৮১২-১৮৮৯) ড্রামাটিক মনোলোগ বা একাকী নাট্যভাষণ নিখুঁত করার জন্য বিখ্যাত ছিলেন।",
+        "key_details": {
+            "উপাধি": "Master of Dramatic Monologue.",
+            "Dramatic_Monologue-এর_বৈশিষ্ট্য": "মঞ্চে একজনই কথা বলবে, একজন নীরব শ্রোতা থাকবে, এবং কথা বলতে বলতে বক্তার ভেতরের আসল চরিত্র বেরিয়ে আসবে।",
+            "বিখ্যাত_কবিতা": "১. 'My Last Duchess' (ফেরারার ডিউক তার মৃত স্ত্রীর ছবি দেখিয়ে একজন দূতের সাথে কথা বলছে)। ২. 'Porphyria's Lover'। ৩. 'Rabbi Ben Ezra'।",
+            "স্ত্রী": "Elizabeth Barrett Browning (যিনি 'Sonnets from the Portuguese' লিখেছেন)।"
+        },
+        "bcs_past_mcqs": [
+            "'My Last Duchess' কবিতাটির লেখক কে? -> Robert Browning",
+            "ড্রামাটিক মনোলোগের মাস্টার (Master of Dramatic Monologue) কাকে বলা হয়? -> Robert Browning"
+        ],
+        "15min_task": "'My Last Duchess' কবিতার কথা এবং ড্রামাটিক মনোলোগে ব্রাউনিংয়ের নাম মনে রাখুন।"
+    },
+    {
+        "day": 36,
+        "topic": "E.M. Forster & Imperial Literature",
+        "category": "Writers & Works",
+        "summary": "ই এম ফরস্টার (১৮৭৯-১৯৭০) ইংরেজদের ভারত শাসন ও ব্রিটিশ-ভারতীয়দের সম্পর্কের জটিলতা নিয়ে উপন্যাস লিখেছেন।",
+        "key_details": {
+            "বিখ্যাত_উপন্যাস": "'A Passage to India' (১৯২৪) - ব্রিটিশ শাসিত ভারতে ইংরেজ ও ভারতীয়দের পারস্পরিক অবিশ্বাস ও বর্ণবাদের গল্প।",
+            "প্রধান_চরিত্র": "Dr. Aziz (ভারতীয় মুসলিম ডাক্তার), Mr. Fielding (উদারমনা ইংরেজ শিক্ষক), Adela Quested (যে মারাবার গুহায় আজিজের বিরুদ্ধে শ্লীলতাহানির মিথ্যা অভিযোগ তুলেছিল)।",
+            "অন্যান্য_কাজ": "১. 'A Room with a View', ২. 'Howards End'।",
+            "মুলনীতি": "'Only connect...'"
+        },
+        "bcs_past_mcqs": [
+            "'A Passage to India' উপন্যাসটি কার লেখা? -> E.M. Forster",
+            "Dr. Aziz কোন উপন্যাসের চরিত্র? -> A Passage to India"
+        ],
+        "15min_task": "ডাক্তার আজিজ (Dr. Aziz) চরিত্র এবং 'A Passage to India' উপন্যাসের যোগসূত্রটি মনে রাখুন।"
+    },
+    {
+        "day": 37,
+        "topic": "Literary Terms: Catharsis, Hamartia, Hubris",
+        "category": "Literary Terms",
+        "summary": "গ্রিক দার্শনিক অ্যারিস্টটলের নাট্যতত্ত্ব 'Poetics' থেকে আসা ট্র্যাজেডির ৩টি প্রধান পরিভাষা।",
+        "key_details": {
+            "Hamartia_(ট্র্যাজিক_ভুল)": "নায়কের চারিত্রিক ভুল বা ভুল সিদ্ধান্ত যা তার পতন ডেকে আনে।",
+            "Hubris_(অহংকার)": "নায়কের সীমাহীন অহংকার বা ঔদ্ধত্য যা ঈশ্বর বা আইনকে অমান্য করে।",
+            "Catharsis_(অনুভূতির_পবিত্রতা)": "ট্র্যাজেডি নাটকের শেষে ভয় ও করুণা (Pity and Fear) প্রকাশের মাধ্যমে দর্শকের মন হালকা বা পবিত্র হওয়া।"
+        },
+        "bcs_past_mcqs": [
+            "নাটকের 'Catharsis' বলতে কী বোঝায়? -> Purgation of emotions / pity and fear (অনুভূতির শুদ্ধিকরণ)।",
+            "ট্র্যাজেডি নায়কের প্রধান ভুলকে কী বলা হয়? -> Hamartia"
+        ],
+        "15min_task": "৩টি গ্রিক টার্ম মনে রাখুন: Hamartia (ভুল), Hubris (অহংকার), Catharsis (আবেগ মুক্তি)।"
+    },
+    {
+        "day": 38,
+        "topic": "Samuel Beckett & Theater of the Absurd",
+        "category": "Writers & Works",
+        "summary": "স্যামুয়েল বেকেট (১৯০৬-১৯৮৯) আইরিশ নোবেলজয়ী নাট্যকার যিনি মানুষের জীবনের অর্থহীনতা ও খামখেয়ালি নিয়ে 'অ্যাবসার্ড নাটক' লিখেছেন।",
+        "key_details": {
+            "Theater_of_the_Absurd": "যে নাটকে জীবনের কোনো নির্দিষ্ট যুক্তি, অর্থ বা সমাধান থাকে না।",
+            "বিখ্যাত_নাটক": "'Waiting for Godot' (১৯৫৩) - ভ্লাদিমির ও এস্ট্রাগন নামের দুই ভবঘুরে রাস্তার পাশে 'গডো' নামের একজনের জন্য অপেক্ষা করে, যে কখনোই আসে না।",
+            "প্রধান_চরিত্র": "Vladimir (Didi), Estragon (Gogo), Pozzo, Lucky।",
+            "পুরস্কার": "সাহিত্য নোবেল (১৯৬৯)।"
+        },
+        "bcs_past_mcqs": [
+            "'Waiting for Godot' নাটকটি কার লেখা? -> Samuel Beckett",
+            "Vladimir ও Estragon কোন নাটকের চরিত্র? -> Waiting for Godot"
+        ],
+        "15min_task": "'Waiting for Godot' নাটকে কখনো না আসা গডোর অপেক্ষার ঘটনাটি মনে রাখুন।"
+    },
+    {
+        "day": 39,
+        "topic": "Old English Period & Beowulf",
+        "category": "Writers & Works",
+        "summary": "ওল্ড ইংলিশ যুগের (৪৫০-১০৬৬) একমাত্র ও প্রাচীনতম ইংরেজি মহাকাব্য বিওউলফ।",
+        "key_details": {
+            "Beowulf": "ইংরেজি ভাষার সর্বপ্রাচীন মহাকাব্য (লেখক অজানা/Anonymous)।",
+            "কাহিনী": "বীর বিওউলফ ডেনমার্কের রাজা রথগারকে রক্ষা করতে গ্রেন্ডেল (Grendel) নামের রাক্ষস, তার মা এবং পরে এক ড্রাগনকে হত্যা করেন।",
+            "স্থান": "Heorot (রাজা রথগারের মদের প্রাসাদ)।",
+            "ভাষা": "Old English / Anglo-Saxon."
+        },
+        "bcs_past_mcqs": [
+            "ইংরেজি সাহিত্যের প্রাচীনতম মহাকাব্য কোনটি? -> Beowulf",
+            "Beowulf-এর রচয়িতা কে? -> Anonymous (অজ্ঞাত)"
+        ],
+        "15min_task": "মনে রাখুন: ইংরেজি সাহিত্যের ১ম মহাকাব্য Beowulf এবং এর কোনো নির্দিষ্ট লেখকের নাম নেই।"
+    },
+    {
+        "day": 40,
+        "topic": "Homer: Father of Greek Epic",
+        "category": "Writers & Works",
+        "summary": "হোমার ছিলেন প্রাচীন গ্রিসের অন্ধ কবি, যাঁর দুটি মহাকাব্য পুরো পশ্চিমা সাহিত্যের ভিত্তি তৈরি করেছে।",
+        "key_details": {
+            "The_Iliad": "ট্রয় নগরীর যুদ্ধ (Trojan War), বীর একিলিস (Achilles) ও হেক্টরের দ্বৈরথ এবং ট্রোজান ঘোড়ার গল্প।",
+            "The_Odyssey": "ট্রয় যুদ্ধের পর ইথাকার রাজা ওডিসিউসের (Odysseus) ১০ বছর ধরে স্বদেশে ফেরার রোমাঞ্চকর ভ্রমণকাহিনি।",
+            "প্রধান_চরিত্র": "Achilles, Hector, Helen of Troy, Odysseus, Penelope."
+        },
+        "bcs_past_mcqs": [
+            "'Iliad' ও 'Odyssey' মহাকাব্য দুটির রচয়িতা কে? -> Homer",
+            "হোমার কোন দেশের কবি ছিলেন? -> গ্রিস (Greece)"
+        ],
+        "15min_task": "পার্থক্য বুঝুন: Iliad = ট্রয় যুদ্ধ; Odyssey = ওডিসিউসের ১০ বছরের গৃহপ্রত্যাবর্তন।"
+    },
+    {
+        "day": 41,
+        "topic": "Dante Alighieri: Father of Italian Poetry",
+        "category": "Writers & Works",
+        "summary": "দান্তে আলিগিয়েরি (১২৬৫-১৩২১) ইতালীয় কবি, যিনি পরকাল নিয়ে বিশ্বের অন্যতম সেরা কাল্পনিক ভ্রমণকাহিনি লিখেছেন।",
+        "key_details": {
+            "বিখ্যাত_মহাকাব্য": "'Divine Comedy' (লা ডিভিনা কমেডিয়া - মৃত্যুর পর পরকালের ৩টি রাজ্যে ভ্রমণের গল্প)।",
+            "৩টি_রাজ্য": "১. Inferno (নরক), ২. Purgatorio (পাপ সংশোধনাগার), ৩. Paradiso (স্বর্গ)।",
+            "গাইড/পথপ্রদর্শক": "ভার্জিল (Virgil - তিনি দান্তেকে নরক ও পPurgatory ঘুরিয়ে দেখান)।"
+        },
+        "bcs_past_mcqs": [
+            "'Divine Comedy' বইটি কার লেখা? -> Dante Alighieri",
+            "Divine Comedy-তে দান্তের পথপ্রদর্শক কে ছিলেন? -> Virgil"
+        ],
+        "15min_task": "দান্তের Divine Comedy এবং ৩টি রাজ্যের নাম (Inferno, Purgatorio, Paradiso) মনে রাখুন।"
+    },
+    {
+        "day": 42,
+        "topic": "Leo Tolstoy & Fyodor Dostoevsky: Russian Giants",
+        "category": "Writers & Works",
+        "summary": "১৯ শতকের রাশিয়া বিশ্ব সাহিত্যকে দুজন সেরা লেখক উপহার দিয়েছে যাদের উপন্যাস মানুষের মনস্তত্ত্বকে গভীরভাবে উন্মোচন করে।",
+        "key_details": {
+            "Leo_Tolstoy": "১. 'War and Peace' (নেপোলিয়নের রাশিয়া আক্রমণের পটভূমিতে লেখা বিশাল উপন্যাস)। ২. 'Anna Karenina' (বিখ্যাত সূচনা: 'All happy families are alike; each unhappy family is unhappy in its own way')।",
+            "Fyodor_Dostoevsky": "১. 'Crime and Punishment' (রাস্কোলনিকভ নামের এক তরুণ কর্তৃক এক সুদখোর বৃদ্ধাকে খুন ও তার মানসিক যন্ত্রণার গল্প)। ২. 'The Brothers Karamazov'।"
+        },
+        "bcs_past_mcqs": [
+            "'War and Peace' উপন্যাসটি কার লেখা? -> Leo Tolstoy",
+            "'Crime and Punishment' বইটি কার লেখা? -> Fyodor Dostoevsky"
+        ],
+        "15min_task": "টলস্টয় = War and Peace; দস্তয়েভস্কি = Crime and Punishment—মিলিয়ে মুখস্থ রাখুন।"
+    },
+    {
+        "day": 43,
+        "topic": "Henrik Ibsen: Father of Modern Drama",
+        "category": "Writers & Works",
+        "summary": "হেনরিক ইবসেন (১৮২৮-১৯০৬) নরওয়েজীয় নাট্যকার যিনি নাটকে বাস্তব সামাজিক সমস্যা ও নারীদের অধিকার নিয়ে লিখে বিপ্লব আনেন।",
+        "key_details": {
+            "উপাধি": "Father of Modern Drama (আধুনিক নাটকের জনক), Father of Realism.",
+            "বিখ্যাত_নাটক": "'A Doll's House' (১৮৭৯) - নোরা হেলমার নামের এক নারী কীভাবে তার স্বামীর পুতুলখেলার সংসার ভেঙে নিজের পরিচয়ের খোঁজে বাড়ি ছেড়ে চলে যায়।",
+            "অন্যান্য_নাটক": "১. 'Ghosts', ২. 'An Enemy of the People', ৩. 'Hedda Gabler'।",
+            "প্রধান_চরিত্র": "Nora, Torvald Helmer."
+        },
+        "bcs_past_mcqs": [
+            "আধুনিক নাটকের জনক (Father of Modern Drama) কাকে বলা হয়? -> Henrik Ibsen",
+            "নোরা (Nora) কোন নাটকের বিখ্যাত চরিত্র? -> A Doll's House (Henrik Ibsen)"
+        ],
+        "15min_task": "ইবসেন আধুনিক নাটকের জনক এবং 'A Doll's House' নাটকের নোরা চরিত্রটি মনে রাখুন।"
+    },
+    {
+        "day": 44,
+        "topic": "Victor Hugo & Alexandre Dumas: French Greats",
+        "category": "Writers & Works",
+        "summary": "১৯ শতকের দুই ফরাসি লেখক যাদের রোমাঞ্চকর উপন্যাস পুরো বিশ্বে জনপ্রিয়।",
+        "key_details": {
+            "Victor_Hugo": "১. 'Les Misérables' (জাঁ ভালজাঁ চরিত্র ও ফরাসি সমাজের অবিচারের গল্প)। ২. 'The Hunchback of Notre-Dame' (কুঁজো কাসিমোদো ও সুন্দরী এসমেরালদার গল্প)।",
+            "Alexandre_Dumas": "১. 'The Count of Monte Cristo' (এডমন্ড দান্তেসের প্রতিশোধের গল্প)। ২. 'The Three Musketeers' (তিন তলোয়ারবাজের অ্যাডভেঞ্চার)।"
+        },
+        "bcs_past_mcqs": [
+            "'Les Misérables' বিখ্যাত উপন্যাসটি কার লেখা? -> Victor Hugo",
+            "'The Three Musketeers' উপন্যাসটির লেখক কে? -> Alexandre Dumas"
+        ],
+        "15min_task": "ভিক্টর হিউগো (Les Misérables) এবং আলেকজান্ডার দ্যুমা (The Three Musketeers) জোড়া দুটি মুখস্থ করুন।"
+    },
+    {
+        "day": 45,
+        "topic": "Rabindranath Tagore: Nobel Laureate of Bengal",
+        "category": "Writers & Works",
+        "summary": "রবীন্দ্রনাথ ঠাকুর (১৮৬১-১৯৪১) প্রথম অ-ইউরোপীয় হিসেবে ১৯১৩ সালে সাহিত্যে নোবেল পুরস্কার পান।",
+        "key_details": {
+            "নোবেল_পুরস্কার": "১৯১৩ সালে 'Gitanjali: Song Offerings' (১০৩টি অনুবাদকৃত কবিতার সংকলন) বইয়ের জন্য।",
+            "ভূমিকা_লেখক": "আয়ারল্যান্ডের কবি W.B. Yeats।",
+            "প্রকাশক": "The India Society, London (১৯১২)।",
+            "বিখ্যাত_ইংরেজি_অনুবাদ_নাটক": "'The Post Office' (ডাকঘর), 'Red Oleanders' (রক্তকরবী)।"
+        },
+        "bcs_past_mcqs": [
+            "রবীন্দ্রনাথ ঠাকুর কত সালে নোবেল পুরস্কার পান? -> ১৯১৩ সালে",
+            "ইংরেজি গীতাঞ্জলিতে মোট কতটি কবিতা ছিল? -> ১০৩টি"
+        ],
+        "15min_task": "১৯১৩ সাল, ১০৩টি কবিতা এবং W.B. Yeats-এর নাম মাথায় গেঁথে নিন।"
+    },
+    {
+        "day": 46,
+        "topic": "Mark Twain: Father of American Literature",
+        "category": "Writers & Works",
+        "summary": "মার্ক টোয়েইন (প্রকৃত নাম: স্যামুয়েল ল্যাঙ্গহোর্ন ক্লিমেন্স, ১৮৩৫-১৯১০) মিসিসিপি নদীর কোলঘেঁষা আমেরিকার অ্যাডভেঞ্চার গল্প লিখেছেন।",
+        "key_details": {
+            "উপাধি": "Father of American Literature (উইলিয়াম ফকনারের দেওয়া উপাধি)।",
+            "প্রকৃত_নাম": "Samuel Langhorne Clemens.",
+            "বিখ্যাত_উপন্যাস": "১. 'Adventures of Huckleberry Finn' (হাক ও পলাতক দাস জিমের নদী ভ্রমণের গল্প)। ২. 'The Adventures of Tom Sawyer'।",
+            "পটভূমি": "আমেরিকার মিসিসিপি নদী (Mississippi River)।"
+        },
+        "bcs_past_mcqs": [
+            "মার্ক টোয়েইনের আসল নাম (Real Name) কী? -> Samuel Langhorne Clemens",
+            "'Adventures of Huckleberry Finn' বইটি কার লেখা? -> Mark Twain"
+        ],
+        "15min_task": "মার্ক টোয়েইনের আসল নাম 'Samuel Langhorne Clemens' ৩ বার খাতায় লিখুন।"
+    },
+    {
+        "day": 47,
+        "topic": "Literary Terms: Ballad, Ode, Hymn",
+        "category": "Literary Terms",
+        "summary": "কবিতার ৩টি ভিন্ন সুর ও কাঠামোগত রূপ।",
+        "key_details": {
+            "Ballad_(গীতিকা)": "ছোট স্তবকে লেখা গল্প বলা কবিতা বা গান, যা লোকমুখে প্রচলিত থাকে। (যেমন: Coleridge-এর 'The Rime of the Ancient Mariner')।",
+            "Ode_(স্তুতি কবিতা)": "কোনো ব্যক্তি, বস্তু বা ধারণাকে উদ্দেশ্যে করে গাম্ভীর্যপূর্ণ সুরের প্রশংসা কবিতা। (যেমন: Keats-এর 'Ode to a Nightingale')।",
+            "Hymn_(উপাসনা সংগীত)": "ঈশ্বর বা দেব-দেবীর প্রশংসায় লেখা ধর্মীয় গান বা প্রার্থনা কবিতা।"
+        },
+        "bcs_past_mcqs": [
+            "ছোট ছোট স্তবকে গল্প বলা কবিতাকে কী বলে? -> Ballad",
+            "Keats-এর 'Ode on a Grecian Urn' কিসের উদাহরণ? -> Ode"
+        ],
+        "15min_task": "পার্থক্য বুঝুন: Ballad = গল্পের গান; Ode = প্রশংসাগান; Hymn = ঈশ্বরের প্রার্থনা।"
+    },
+    {
+        "day": 48,
+        "topic": "Literary Terms: Allegory & Fable",
+        "category": "Literary Terms",
+        "summary": "রূপক বা প্রতিকী গল্পের মাধ্যমে কোনো নীতিশিক্ষা দেওয়ার পদ্ধতি।",
+        "key_details": {
+            "Allegory_(রূপক_গল্প)": "এমন গল্প যেখানে ভেতরের চরিত্র ও ঘটনাগুলো অন্য কোনো গভীর নৈতিক বা রাজনৈতিক সত্যকে নির্দেশ করে। (যেমন: Orwell-এর 'Animal Farm', Bunyan-এর 'The Pilgrim's Progress')।",
+            "Fable_(উপকথা)": "পশুপাখিকে মানুষের মতো কথা বলিয়ে কোনো নীতিশিক্ষা দেওয়া ছোট গল্প। (যেমন: 'Aesop's Fables' বা ঈশপের গল্প)।"
+        },
+        "bcs_past_mcqs": [
+            "John Bunyan-এর 'The Pilgrim's Progress' কিসের উদাহরণ? -> Allegory",
+            "পশুপাখির মাধ্যমে নীতিশিক্ষা দেওয়া ছোট গল্পকে কী বলে? -> Fable"
+        ],
+        "15min_task": "পশুপাখির নীতিগল্প = Fable; দ্বৈত অর্থবোধক রূপক গল্প = Allegory।"
+    },
+    {
+        "day": 49,
+        "topic": "Writers and Their Famous Pen Names (ছদ্মনাম)",
+        "category": "Writers & Titles",
+        "summary": "বিসিএস প্রিলিতে লেখকদের আসল নাম বা ছদ্মনাম থেকে প্রায়ই প্রশ্ন আসে।",
+        "key_details": {
+            "George_Eliot": "আসল নাম: Mary Ann Evans (ভিক্টোরিয়ান নারী ঔপন্যাসিক যিনি পুরুষ ছদ্মনামে লিখতেন)।",
+            "George_Orwell": "আসল নাম: Eric Arthur Blair.",
+            "Mark_Twain": "আসল নাম: Samuel Langhorne Clemens.",
+            "O._Henry": "আসল নাম: William Sydney Porter (টুইস্ট বা চমকপ্রদ সমাপ্তির ছোটগল্পের ওস্তাদ, যেমন: 'The Gift of the Magi')।"
+        },
+        "bcs_past_mcqs": [
+            "George Eliot-এর আসল নাম কী ছিল? -> Mary Ann Evans",
+            "'The Gift of the Magi' ছোটগল্পটির লেখক O. Henry-র আসল নাম কী? -> William Sydney Porter"
+        ],
+        "15min_task": "৪ জন লেখকের ছদ্মনাম ও আসল নামের তালিকাটি ৪ বার রিডিং পড়ুন।"
+    },
+    {
+        "day": 50,
+        "topic": "50-Day Grand Review: Most Frequently Asked BCS Concepts",
+        "category": "Revision",
+        "summary": "গত ৪৯ দিনের সবচেয়ে গুরুত্বপূর্ণ ও বিসিএসে বারবার আসা তথ্যগুলোর একনজরে রিভিশন।",
+        "key_details": {
+            "Shakespeare": "HOKM (Tragedies), Lady Macbeth = 4th Witch.",
+            "Wordsworth_vs_Keats": "Wordsworth = Nature; Keats = Beauty & Sensuousness.",
+            "Fathers": "Chaucer (Poetry), Bacon (Essay), Fielding (Novel), Ibsen (Modern Drama).",
+            "Nobel_Laureates": "Tagore (1913), Yeats (1923), Shaw (1925), T.S. Eliot (1948), Hemingway (1954), Beckett (1969)."
+        },
+        "bcs_past_mcqs": [
+            "এই ৫০ দিনের কনসেপ্ট রিভিশন দিলে ইংলিশ লিটারেচারে ১২-১৫ নম্বর নিশ্চিত করা সম্ভব!"
+        ],
+        "15min_task": "৫০ দিনের সম্পূর্ণ যাত্রার মূল পয়েন্টগুলোতে চোখ বুলিয়ে মাইলফলক সেলিব্রেট করুন!"
+    }
+]
