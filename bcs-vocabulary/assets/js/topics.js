@@ -126,6 +126,7 @@
             '09-mental-ability-topic.md',
             '10-ethics-topic.md',
             '11-routine.html',
+            '11-routine.md',
             '12-02-eng-literature-daily-learn.json'
         ];
         const files = [];
