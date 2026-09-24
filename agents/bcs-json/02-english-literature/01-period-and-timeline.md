@@ -135,3 +135,19 @@
   * *Songs of Innocence* (বিখ্যাত কবিতা: **The Lamb**)
   * *Songs of Experience* (বিখ্যাত কবিতা: **The Tyger**)
   * *The Marriage of Heaven and Hell* (বিখ্যাত গ্রন্থ)
+
+
+
+# Personal Notes
+
+1564-1616 William Shakespeare
+
+Good frend for Iesus sake forbeare,
+To digg the dust encloased heare:
+Blest be ye man yt spares thes stones,
+And curst be he yt moves my bones.
+
+হে প্রিয় বন্ধু, যীশুর দোহাই লাগে, নিবৃত্ত হও,
+এখানে সংরক্ষিত ধূলিকণা (দেহ) মাটি খুঁড়ে তুলতে যেয়ো না;
+ধন্য সে পুরুষ, যে এই পাথরগুলোকে অক্ষত রাখবে,
+আর অভিশপ্ত সে, যে আমার হাড়গুলোকে স্থানান্তরিত করবে।
