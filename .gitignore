@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+agents/bcs-json/04-international-affairs/GK PDF
+agents/bcs-json/03-bangladesh-affairs/GK PDF
