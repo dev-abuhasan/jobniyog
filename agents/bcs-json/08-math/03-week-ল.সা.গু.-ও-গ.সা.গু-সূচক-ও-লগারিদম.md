@@ -63,3 +63,5 @@ $$\text{গ.সা.গু.} = \text{শুধুমাত্র বামপা�
 
 
 TODO: Losagu and gosagu er relation uttoron book 32 Page
+
+# স্টেপ ০৬ - সূচক ও লগারিদম।
