@@ -64,6 +64,8 @@ $b = 10$ এবং $c = 25$
 **উত্তর:** **(ঘ)**
 
 **০৩। $p + q = 5$ এবং $p - q = 3$ হলে $p^2 + q^2$ এর মান কত? [৪৫তম বিসিএস]**
+SortCurt
+p=4, q=1, 4+1, 4-1 so 4x4+1x1=16+1=17
 
 (ক) $8$  (খ) $17$  (গ) $19$  (ঘ) $34$
 
@@ -280,6 +282,278 @@ $\Rightarrow 2(a^2 + b^2) = 29 \therefore a^2 + b^2 = \frac{29}{2}$
 
 ### **Type 02: ঘনের সূত্র এবং অনুসিদ্ধান্তসমূহের প্রয়োগ**
 
+<div align="left">
+
+# এক নজরে ঘনের সূত্রাবলি:
+
+01. $(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$  
+    $= a^3 + b^3 + 3ab(a + b)$
+
+02. $(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$  
+    $= a^3 - b^3 - 3ab(a - b)$
+
+03. $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$  
+    $= (a + b)^3 - 3ab(a + b)$
+
+04. $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$  
+    $= (a - b)^3 + 3ab(a - b)$
+
+05. $a^3 + b^3 + c^3 - 3abc = (a + b + c)(a^2 + b^2 + c^2 - ab - bc - ca)$  
+    $= \frac{1}{2}(a + b + c)\{(a - b)^2 + (b - c)^2 + (c - a)^2\}$
+
+</div>
+
+---
+
+### **বিগত BCS প্রিলি পরীক্ষার প্রশ্ন ও সমাধান**
+
+<div align="left">
+
+**০১। যদি $x = \sqrt{5} + \sqrt{3}$ হয়, তবে $x^3 + \frac{8}{x^3}$ এর মান কত? [৪৭তম বিসিএস]**  
+(ক) $18\sqrt{5}$  (খ) $22\sqrt{5}$  (গ) $28\sqrt{5}$  (ঘ) $3\sqrt{5}$  
+
+**সমাধান:**  
+দেওয়া আছে, $x = \sqrt{5} + \sqrt{3}$[cite: 4]  
+তাহলে, $\frac{1}{x} = \frac{1}{\sqrt{5}+\sqrt{3}} = \frac{(\sqrt{5}-\sqrt{3})}{(\sqrt{5}+\sqrt{3})(\sqrt{5}-\sqrt{3})} = \frac{\sqrt{5}-\sqrt{3}}{(\sqrt{5})^2 - (\sqrt{3})^2} = \frac{\sqrt{5}-\sqrt{3}}{5-3}$[cite: 4]  
+অর্থাৎ $\frac{1}{x} = \frac{\sqrt{5}-\sqrt{3}}{2}$[cite: 4]  
+$\therefore \frac{2}{x} = \sqrt{5} - \sqrt{3}$[cite: 4]  
+সুতরাং, $x + \frac{2}{x} = \sqrt{5} + \sqrt{3} + \sqrt{5} - \sqrt{3} = 2\sqrt{5}$[cite: 4]  
+
+এখন, $x^3 + \frac{8}{x^3} = x^3 + \left(\frac{2}{x}\right)^3$[cite: 4]  
+$= \left(x + \frac{2}{x}\right)^3 - 3 \cdot x \cdot \frac{2}{x} \left(x + \frac{2}{x}\right)$[cite: 4]  
+$= (2\sqrt{5})^3 - 3 \cdot 2 \cdot 2\sqrt{5}$[cite: 4]  
+$= 40\sqrt{5} - 12\sqrt{5} = 28\sqrt{5}$[cite: 4]  
+
+**উত্তর:** **(গ)**[cite: 4]
+
+---
+
+**০২। $x = \sqrt{4} + \sqrt{3}$ হলে, $x^3 + \frac{1}{x^3}$ এর মান কত? [৪৩তম বিসিএস]**  
+(ক) $5\sqrt{3}$  (খ) $52$  (গ) $5\sqrt{2}$  (ঘ) $2\sqrt{5}$  
+
+**সমাধান:**  
+দেওয়া আছে, $x = \sqrt{4} + \sqrt{3}$[cite: 4]  
+সুতরাং, $\frac{1}{x} = \frac{1}{\sqrt{4}+\sqrt{3}} = \frac{\sqrt{4}-\sqrt{3}}{(\sqrt{4}+\sqrt{3})(\sqrt{4}-\sqrt{3})} = \frac{\sqrt{4}-\sqrt{3}}{4-3} = \sqrt{4} - \sqrt{3}$[cite: 4]  
+তাহলে, $x + \frac{1}{x} = \sqrt{4} + \sqrt{3} + \sqrt{4} - \sqrt{3} = 2\sqrt{4} = 4$[cite: 4]  
+
+প্রদত্ত রাশি, $x^3 + \frac{1}{x^3} = \left(x + \frac{1}{x}\right)^3 - 3 \cdot x \cdot \frac{1}{x} \left(x + \frac{1}{x}\right)$[cite: 4]  
+$= (4)^3 - 3 \cdot 4 = 64 - 12 = 52$[cite: 4]  
+
+**উত্তর:** **(খ)**[cite: 4]
+
+---
+
+**০৩। $\frac{(0.9)^3 + (0.8)^3}{0.9 + 0.8}$ এর মান কত? [৪০তম বিসিএস]**  
+(ক) $0.36$  (খ) $0.51$  (গ) $0.81$  (ঘ) $0.61$  
+
+**সমাধান:**  
+$\frac{(0.9)^3 + (0.8)^3}{0.9 + 0.8} = \frac{(0.9 + 0.8)\{(0.9)^2 - (0.9 \times 0.8) + (0.8)^2\}}{(0.9 + 0.8)}$[cite: 5]  
+$[\because a^3 + b^3 = (a + b)(a^2 - ab + b^2)]$[cite: 5]  
+$= 0.81 - 0.72 + 0.64$[cite: 5]  
+$= 0.17 + 0.44 = 0.61$[cite: 5]  
+
+**উত্তর:** **(ঘ)**[cite: 5]
+
+---
+
+**০৪। $x = \sqrt{3} + \sqrt{2}$ হলে, $x^3 + \frac{1}{x^3}$ এর মান কত? [৩৮তম বিসিএস]**  
+(ক) $3\sqrt{2}$  (খ) $18\sqrt{3}$  (গ) $12\sqrt{3}$  (ঘ) $8$  
+
+**সমাধান:**  
+$x = \sqrt{3} + \sqrt{2} \Rightarrow \frac{1}{x} = \frac{1}{\sqrt{3}+\sqrt{2}} = \frac{\sqrt{3}-\sqrt{2}}{(\sqrt{3}+\sqrt{2})(\sqrt{3}-\sqrt{2})} = \sqrt{3} - \sqrt{2}$[cite: 5]  
+$\therefore x + \frac{1}{x} = \sqrt{3} + \sqrt{2} + \sqrt{3} - \sqrt{2} = 2\sqrt{3}$[cite: 5]  
+
+এখন, $x^3 + \frac{1}{x^3} = \left(x + \frac{1}{x}\right)^3 - 3 \cdot x \cdot \frac{1}{x} \left(x + \frac{1}{x}\right)$[cite: 5]  
+$= (2\sqrt{3})^3 - 3 \times 2\sqrt{3}$[cite: 5]  
+$= 24\sqrt{3} - 6\sqrt{3} = 18\sqrt{3}$[cite: 5]  
+
+**উত্তর:** **(খ)**[cite: 5]
+
+---
+
+**০৫। $x - \frac{1}{x} = 1$ হলে, $x^3 - \frac{1}{x^3}$ এর মান কত? [৩৬তম বিসিএস]**  
+(ক) $1$  (খ) $2$  (গ) $3$  (ঘ) $4$  
+
+**সমাধান:**  
+আমরা জানি, $x^3 - \frac{1}{x^3} = \left(x - \frac{1}{x}\right)^3 + 3 \cdot x \cdot \frac{1}{x} \left(x - \frac{1}{x}\right)$[cite: 5]  
+$= (1)^3 + 3 \cdot 1 = 1 + 3 = 4$[cite: 5]  
+
+**উত্তর:** **(ঘ)**[cite: 5]
+
+---
+
+**০৬। $x + y = 2, x^2 + y^2 = 4$ হলে, $x^3 + y^3 =$ কত? [৩৪তম বিসিএস]**  
+(ক) $8$  (খ) $9$  (গ) $16$  (ঘ) $25$  
+
+**সমাধান:**  
+প্রদত্ত রাশি, $x^2 + y^2 = (x + y)^2 - 2xy$[cite: 5]  
+$\Rightarrow 4 = (2)^2 - 2xy$[cite: 5]  
+$\Rightarrow 4 = 4 - 2xy$[cite: 5]  
+$\therefore xy = 0$[cite: 5]  
+
+এখন, $x^3 + y^3 = (x + y)^3 - 3xy(x + y)$[cite: 5]  
+$= (2)^3 - 3 \times 0 \times 2 = 8$[cite: 5]  
+
+**উত্তর:** **(ক)**[cite: 5]
+
+---
+
+**০৭। $x - \frac{1}{x} = 7$ হলে, $x^3 - \left(\frac{1}{x}\right)^3$ এর মান কত? [৩২তম বিসিএস]**  
+(ক) $334$  (খ) $154$  (গ) $364$  (ঘ) $512$  
+
+**সমাধান:**  
+$x^3 - \left(\frac{1}{x}\right)^3 = \left(x - \frac{1}{x}\right)^3 + 3 \cdot x \cdot \frac{1}{x} \left(x - \frac{1}{x}\right)$[cite: 5]  
+$= (7)^3 + 3 \cdot 7 = 343 + 21 = 364$[cite: 5]  
+
+**উত্তর:** **(গ)**[cite: 5]
+
+---
+
+**০৮। $a - \frac{1}{a} = 3$ হলে, $a^3 + \frac{1}{a^3}$ এর মান কত? [৩০তম বিসিএস]**  
+(ক) $9$  (খ) $18$  (গ) $27$  (ঘ) $36$  
+
+**সমাধান:**  
+প্রশ্নটিতে ভুল রয়েছে। তবে-  
+(i) প্রশ্নপত্রে $a^3 + \frac{1}{a^3}$ এর পরিবর্তে $a^3 - \frac{1}{a^3}$ থাকলে,  
+$a^3 - \frac{1}{a^3} = \left(a - \frac{1}{a}\right)^3 + 3 \cdot a \cdot \frac{1}{a} \left(a - \frac{1}{a}\right) = 3^3 + (3 \times 3) = 27 + 9 = 36$[cite: 5]  
+
+(ii) প্রশ্নপত্রে $a - \frac{1}{a} = 3$ এর পরিবর্তে $a + \frac{1}{a} = 3$ থাকলে,  
+$a^3 + \frac{1}{a^3} = \left(a + \frac{1}{a}\right)^3 - 3 \cdot a \cdot \frac{1}{a} \left(a + \frac{1}{a}\right) = 3^3 - (3 \times 3) = 27 - 9 = 18$[cite: 5]  
+
+**উত্তর:** **(Blank)**[cite: 5]
+
+---
+
+**০৯। $x + \frac{1}{x} = \sqrt{3}$ হলে, $x^3 + \frac{1}{x^3}$ -এর মান- [২৫তম বিসিএস]**  
+(ক) $2$  (খ) $4$  (গ) $0$  (ঘ) $6$  
+
+**সমাধান:**  
+$x^3 + \frac{1}{x^3} = \left(x + \frac{1}{x}\right)^3 - 3 \cdot x \cdot \frac{1}{x} \left(x + \frac{1}{x}\right)$[cite: 5]  
+$= (\sqrt{3})^3 - 3\sqrt{3} = 3\sqrt{3} - 3\sqrt{3} = 0$[cite: 5]  
+
+**উত্তর:** **(গ)**[cite: 5]
+
+---
+
+**১০। যদি $a^3 - b^3 = 513$ এবং $a - b = 3$ হয়, তবে $ab$ -এর মান কত? [১১তম বিসিএস]**  
+(ক) $54$  (খ) $35$  (গ) $45$  (ঘ) $55$  
+
+**সমাধান:**  
+$a^3 - b^3 = (a - b)^3 + 3ab(a - b)$[cite: 5]  
+$\Rightarrow 513 = (3)^3 + 3ab \cdot 3$[cite: 5]  
+$\Rightarrow 513 = 27 + 9ab$[cite: 5]  
+$\Rightarrow 9ab = 486 \therefore ab = 54$[cite: 5]  
+
+**উত্তর:** **(ক)**[cite: 5]
+
+</div>
+
+---
+
+### **নমুনা প্রশ্ন ও সমাধান**
+
+<div align="left">
+
+**০১। $x - 2y = 3$ হলে, $x^3 - 8y^3 - 18xy$ এর মান নির্ণয় করুন।**  
+(ক) $25$  (খ) $18$  (গ) $23$  (ঘ) $27$  
+
+**সমাধান:**  
+$x - 2y = 3$  
+$\Rightarrow (x - 2y)^3 = 3^3$ [ঘন করে][cite: 6]  
+$\Rightarrow x^3 - (2y)^3 - 3 \cdot x \cdot 2y(x - 2y) = 27$[cite: 6]  
+$\Rightarrow x^3 - 8y^3 - 6xy \cdot 3 = 27$[cite: 6]  
+$\therefore x^3 - 8y^3 - 18xy = 27$[cite: 6]  
+
+**উত্তর:** **(ঘ)**[cite: 6]
+
+---
+
+**০২। যদি $a + b = 5$ এবং $ab = 6$ হয়, তবে $a^3 + b^3 + 4(a - b)^2$ এর মান কত?**  
+(ক) $31$  (খ) $39$  (গ) $33$  (ঘ) $35$  
+
+**সমাধান:**  
+দেওয়া আছে, $a + b = 5$ এবং $ab = 6$[cite: 6]  
+$\therefore$ প্রদত্ত রাশি $= a^3 + b^3 + 4(a - b)^2$[cite: 6]  
+$= (a + b)^3 - 3ab(a + b) + 4\{(a + b)^2 - 4ab\}$[cite: 6]  
+$= (5)^3 - 3 \cdot 6 \cdot 5 + 4(5^2 - 4 \cdot 6)$ [মান বসিয়ে][cite: 6]  
+$= 125 - 90 + 4(25 - 24) = 35 + 4 \cdot 1 = 39$[cite: 6]  
+
+**উত্তর:** **(খ)**[cite: 6]
+
+---
+
+**০৩। যদি $x = \sqrt{5} + \sqrt{3}$ হয়, তবে $x^3 + \frac{8}{x^3}$ এর মান নির্ণয় করুন?**  
+(ক) $28\sqrt{5}$  (খ) $23\sqrt{5}$  (গ) $25\sqrt{5}$  (ঘ) $22\sqrt{5}$  
+
+**সমাধান:**  
+দেওয়া আছে, $x = \sqrt{5} + \sqrt{3}$[cite: 6]  
+$\therefore \frac{2}{x} = \frac{2}{\sqrt{5}+\sqrt{3}} = \frac{2(\sqrt{5}-\sqrt{3})}{(\sqrt{5}+\sqrt{3})(\sqrt{5}-\sqrt{3})} = \frac{2(\sqrt{5}-\sqrt{3})}{5-3} = \sqrt{5} - \sqrt{3}$[cite: 6]  
+$\therefore x + \frac{2}{x} = \sqrt{5} + \sqrt{3} + \sqrt{5} - \sqrt{3} = 2\sqrt{5}$[cite: 6]  
+
+$\therefore x^3 + \frac{8}{x^3} = \left(x + \frac{2}{x}\right)^3 - 3 \cdot x \cdot \frac{2}{x} \left(x + \frac{2}{x}\right) = (2\sqrt{5})^3 - 6 \cdot 2\sqrt{5} = 40\sqrt{5} - 12\sqrt{5} = 28\sqrt{5}$[cite: 6]  
+
+**উত্তর:** **(ক)**[cite: 6]
+
+---
+
+**০৪। $x + 3 + \frac{1}{x} = 0$ হলে, $x^3 + \frac{1}{x^3} =$ ?**  
+(ক) $-11$  (খ) $18$  (গ) $-18$  (ঘ) $-36$  
+
+**সমাধান:**  
+এখানে, $x + 3 + \frac{1}{x} = 0 \Rightarrow x + \frac{1}{x} = -3$[cite: 6]  
+প্রদত্ত রাশি, $x^3 + \frac{1}{x^3} = \left(x + \frac{1}{x}\right)^3 - 3 \cdot x \cdot \frac{1}{x} \left(x + \frac{1}{x}\right)$[cite: 6]  
+$= (-3)^3 - 3(-3) = -27 + 9 = -18$[cite: 6]  
+
+**উত্তর:** **(গ)**[cite: 6]
+
+---
+
+**০৫। $x + \frac{1}{x} = b$ হলে, $x^3 + \frac{1}{x^3}$ এর মান কত?**  
+(ক) $-b^3 - 3b$  (খ) $b^3 + 3b$  (গ) $b^3 - 3b$  (ঘ) কোনোটিই নয়  
+
+**সমাধান:**  
+প্রদত্ত রাশি, $x^3 + \frac{1}{x^3} = (x)^3 + \left(\frac{1}{x}\right)^3 = \left(x + \frac{1}{x}\right)^3 - 3 \cdot x \cdot \frac{1}{x}\left(x + \frac{1}{x}\right) = b^3 - 3b$[cite: 6]  
+
+**উত্তর:** **(গ)**[cite: 6]
+
+---
+
+**০৬। $\frac{1}{a} = 5 - a$ হলে, $a^3 + \frac{1}{a^3} =$ ?**  
+(ক) $50$  (খ) $125$  (গ) $140$  (ঘ) $110$  
+
+**সমাধান:**  
+দেওয়া আছে, $\frac{1}{a} = 5 - a \Rightarrow a + \frac{1}{a} = 5$[cite: 6]  
+প্রদত্ত রাশি, $a^3 + \frac{1}{a^3} = \left(a + \frac{1}{a}\right)^3 - 3 \cdot a \cdot \frac{1}{a}\left(a + \frac{1}{a}\right) = 5^3 - 3(5) = 125 - 15 = 110$[cite: 6]  
+
+**উত্তর:** **(ঘ)**[cite: 6]
+
+---
+
+**০৭। $y = 1 + \sqrt{3}$ হলে, $y^3$ এর মান কত?**  
+(ক) $4 + 3\sqrt{3}$  (খ) $10 + 9\sqrt{3}$  (গ) $10 + 6\sqrt{3}$  (ঘ) $10 - 6\sqrt{3}$  
+
+**সমাধান:**  
+$y^3 = (1 + \sqrt{3})^3 = 1^3 + (\sqrt{3})^3 + 3 \cdot 1^2 \cdot \sqrt{3} + 3 \cdot 1 \cdot (\sqrt{3})^2$[cite: 7]  
+$= 1 + 3\sqrt{3} + 3\sqrt{3} + 9 = 10 + 6\sqrt{3}$[cite: 7]  
+
+**উত্তর:** **(গ)**[cite: 7]
+
+---
+
+**০৮। $a = \sqrt{6} + \sqrt{5}$ হলে, $\frac{a^6 - 1}{a^3} =$ ?**  
+(ক) $40\sqrt{6}$  (খ) $34\sqrt{5}$  (গ) $40\sqrt{5}$  (ঘ) $46\sqrt{5}$  
+
+**সমাধান:**  
+$a = \sqrt{6} + \sqrt{5} \Rightarrow \frac{1}{a} = \sqrt{6} - \sqrt{5}$[cite: 7]  
+$\therefore a - \frac{1}{a} = \sqrt{6} + \sqrt{5} - \sqrt{6} + \sqrt{5} = 2\sqrt{5}$[cite: 7]  
+প্রদত্ত রাশি $= \frac{a^6 - 1}{a^3} = a^3 - \frac{1}{a^3} = \left(a - \frac{1}{a}\right)^3 + 3 \cdot a \cdot \frac{1}{a} \left(a - \frac{1}{a}\right)$[cite: 7]  
+$= (2\sqrt{5})^3 + 3 \cdot 2\sqrt{5} = 40\sqrt{5} + 6\sqrt{5} = 46\sqrt{5}$[cite: 7]  
+
+**উত্তর:** **(ঘ)**[cite: 7]
+
+</div>
+
+---
 ### **Type 03: বর্গ ও ঘনের সূত্রাবলির সমন্বয়ে সমস্যার সমাধান**
 
 ### **Type 04: বীজগণিতের বিশেষ কিছু সমস্যা**
