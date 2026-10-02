@@ -61,4 +61,3 @@ https://nextjs-math-course.vercel.app/
 1. Build from scratch Make This More Advance Level that look like an calculator 
 2. Hide the present template default
 3. Every change preview issue on hide and show preview works fine need to fix
-4. 
