@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MCQ HTML → JSON Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
+    }
+
+    textarea {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace
+    }
+
+    .field {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: .75rem;
+      padding: .7rem .85rem;
+      background: white;
+      color: #0f172a
+    }
+
+    .field:focus {
+      outline: 2px solid #6366f1;
+      outline-offset: 1px
+    }
+
+    .dark .field {
+      background: #0f172a;
+      border-color: #334155;
+      color: #e2e8f0
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+    <header class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div
+          class="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-100 px-3 py-1 text-xs font-semibold text-indigo-700">
+          LOCAL TOOL · NO SERVER REQUIRED</div>
+        <h1 class="text-3xl font-bold tracking-tight">MCQ HTML <span class="text-indigo-600">→ JSON</span></h1>
+        <p class="mt-2 max-w-2xl text-sm text-slate-600">Paste saved page HTML, extract the quiz payload, configure your
+          MCQ schema, preview the result, and download a JSON file.</p>
+      </div>
+      <div class="flex gap-2">
+        <button id="loadSample"
+          class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold hover:bg-slate-50">Load
+          sample</button>
+        <button id="clearAll"
+          class="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold hover:bg-slate-50">Clear</button>
+      </div>
+    </header>
+
+    <div class="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,.85fr)]">
+      <section class="space-y-6">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="mb-4 flex items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-bold">1. Source HTML</h2>
+              <p class="text-sm text-slate-500">Paste the HTML or load an .html file.</p>
+            </div>
+            <label
+              class="cursor-pointer rounded-xl bg-slate-900 px-3 py-2 text-sm font-semibold text-white hover:bg-slate-700">Choose
+              file<input id="fileInput" type="file" accept=".html,.htm,.txt,text/html,text/plain"
+                class="hidden"></label>
+          </div>
+          <textarea id="htmlInput" class="field min-h-[340px] resize-y text-xs leading-5" spellcheck="false"
+            placeholder="Paste the complete HTML source here..."></textarea>
+          <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+            <span id="sourceStats">0 characters</span><span>Runs in your browser</span>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 class="mb-4 text-lg font-bold">2. MCQ configuration</h2>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="text-sm font-medium">Subject key in payload (optional)<input id="subjectKey"
+                class="field mt-1.5" value="" placeholder="all keys — leave blank"><span
+                class="mt-1 block text-xs font-normal text-slate-500">Leave blank to extract <b>every</b> question array
+                under <code>data.question</code>. Set a key to limit to just that one subject.</span></label>
+            <label class="text-sm font-medium">Subject<input id="subject" class="field mt-1.5" value="BCS"></label>
+            <label class="text-sm font-medium">Topic ID<input id="topicId" class="field mt-1.5" value="general"></label>
+            <label class="text-sm font-medium">Class level<input id="classLevel" class="field mt-1.5"
+                value="BCS Preliminary"></label>
+            <label class="text-sm font-medium">Difficulty<select id="difficulty" class="field mt-1.5">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select></label>
+            <label class="text-sm font-medium">Output filename<input id="filename" class="field mt-1.5"
+                value="mcq-output.json"></label>
+
+            <label class="text-sm font-medium">
+              Max MCQs (0 = all)
+              <input id="maxMcqs" type="number" min="0" step="1" class="field mt-1.5" value="0">
+              <span class="mt-1 block text-xs font-normal text-slate-500">Default <code>0</code> keeps every question
+                found in the payload. Set e.g. <code>300</code> to cap the output.</span>
+            </label>
+
+            <label class="text-sm font-medium">Serial start index<input id="serialStart" type="number" min="1" step="1"
+                class="field mt-1.5" value="1"><span class="mt-1 block text-xs font-normal text-slate-500">Already have
+                50 questions? Enter 51 — serials will run 51, 52, 53 …</span></label>
+
+            <label class="text-sm font-medium sm:col-span-2">Auto-continue after generate<span
+                class="mt-1.5 flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2.5"><input
+                  id="autoContinue" type="checkbox" class="h-4 w-4 accent-indigo-600"><span
+                  class="text-xs font-normal text-slate-600">Bump start index to the next unused
+                  serial</span></span></label>
+
+            <label class="text-sm font-medium sm:col-span-2">Custom tags (comma-separated)<textarea id="customTags"
+                rows="2" class="field mt-1.5 text-xs leading-5" spellcheck="false"
+                placeholder="e.g. bcs, preliminary, 2024, model-test"></textarea><span
+                class="mt-1 block text-xs font-normal text-slate-500">Merged with auto-generated tags (subject, quiz
+                type, subject key). Duplicates are removed; custom tags keep their original casing.</span><span
+                id="tagsPreview" class="mt-2 block text-xs text-slate-500"></span></label>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <button id="generate"
+              class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-indigo-700">Generate
+              MCQs</button>
+            <button id="download" disabled
+              class="rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-sm hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-40">Download
+              JSON</button>
+            <button id="copyJson" disabled
+              class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-bold disabled:opacity-40">Copy
+              JSON</button>
+          </div>
+          <div id="status" role="status" class="mt-4 hidden rounded-xl px-4 py-3 text-sm"></div>
+        </div>
+      </section>
+
+      <section class="space-y-6">
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-bold">3. Preview</h2>
+              <p class="text-sm text-slate-500">Generated schema output</p>
+            </div>
+            <span id="countBadge" class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">0
+              MCQs</span>
+          </div>
+          <pre id="jsonOutput"
+            class="mt-4 max-h-[540px] min-h-[340px] overflow-auto rounded-xl bg-slate-950 p-4 text-xs leading-5 text-emerald-300">Generated JSON will appear here…</pre>
+        </div>
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+          <h3 class="font-bold text-amber-900">Payload extraction notes</h3>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-900/90">
+            <li><b>No MCQ limit.</b> Every question in <b>every</b> subject array under <code>data.question</code> is
+              included unless you set “Max MCQs”.</li>
+            <li><b>Primary strategy:</b> read the hex size from <code>xx:T&lt;hex&gt;,</code> and slice <b>exactly N
+                characters</b> after the comma.</li>
+            <li>If “Subject key in payload” is blank, all arrays are merged. Otherwise only that key is used.</li>
+            <li>Each question keeps its source subject array name in <code>meta.sourceSubject</code> and as a tag.</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h3 class="font-bold">Expected output fields</h3>
+          <div class="mt-3 flex flex-wrap gap-2 text-xs">
+            <span class="rounded-lg bg-slate-100 px-2 py-1">id</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">topicId</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">content</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">options</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">explanation</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">tags</span><span
+              class="rounded-lg bg-slate-100 px-2 py-1">meta</span>
+          </div>
+          <p class="mt-3 text-xs text-slate-500">ID format matches <code>sync-nav.js</code>:
+            <code>abufc_&lt;base36-timestamp&gt;_&lt;12-hex-random&gt;</code> for both question and option IDs.
+          </p>
+        </div>
+      </section>
+    </div>
+    <footer class="mt-8 text-center text-xs text-slate-500">MCQ Generator · HTML processing stays in this browser tab
+    </footer>
+  </div>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    let generated = null;
+
+    /* ---------- ID generation (matches sync-nav.js) ---------- */
+    function randomHex12() {
+      if (typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID().replace(/-/g, '').slice(0, 12);
+      }
+      const bytes = new Uint8Array(6);
+      crypto.getRandomValues(bytes);
+      return [...bytes].map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    function generateId() {
+      return `abufc_${Date.now().toString(36)}_${randomHex12()}`;
+    }
+
+    /* ---------- Tags ---------- */
+    function parseCustomTags(raw) {
+      if (!raw) return [];
+      return raw.split(/[,\n]+/).map(t => t.trim()).filter(Boolean);
+    }
+    function mergeTags(autoTags, customTags) {
+      const seen = new Set(autoTags.map(t => String(t).toLowerCase()));
+      const merged = [...autoTags];
+      for (const tag of customTags) {
+        const key = String(tag).toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        merged.push(tag);
+      }
+      return merged;
+    }
+
+    /* ---------- Subject key resolver (returns ALL arrays, or just one) ---------- */
+    function resolveSubjectKeys(data, preferredKey) {
+      const q = data?.question;
+      if (!q || typeof q !== 'object' || Array.isArray(q)) {
+        return { keys: [], source: 'none', available: [] };
+      }
+      const available = Object.keys(q).filter(k => Array.isArray(q[k]) && q[k].length);
+      if (preferredKey) {
+        if (available.includes(preferredKey)) {
+          return { keys: [preferredKey], source: 'explicit', available };
+        }
+        return { keys: [], source: 'explicit-missing', available };
+      }
+      // Blank → use everything
+      if (available.length) {
+        return { keys: available, source: 'all', available };
+      }
+      return { keys: [], source: 'none', available };
+    }
+
+    /* ---------- Base64 decode ---------- */
+    function decodeBase64Utf8(value) {
+      const binary = atob(value);
+      const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+      return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+    }
+
+    /* ---------- Payload extraction ---------- */
+    function extractPayload(html, preferredKey = '') {
+      const candidates = [];
+      const triedPatterns = [];
+      const seenB64 = new Set();
+
+      const tryDecode = (b64, recordId, pattern) => {
+        if (!b64 || b64.length < 30) return null;
+        const clean = b64.replace(/\s+/g, '');
+        const variants = [
+          clean,
+          clean.replace(/={0,2}$/, ''),
+          clean.replace(/={0,2}$/, '='),
+          clean.replace(/={0,2}$/, '==')
+        ];
+        for (const variant of variants) {
+          if (seenB64.has(variant)) continue;
+          seenB64.add(variant);
+          try {
+            const decoded = decodeBase64Utf8(variant);
+            if (!decoded.trimStart().startsWith('{')) continue;
+            const data = JSON.parse(decoded);
+            const resolved = resolveSubjectKeys(data, preferredKey);
+            if (resolved.keys.length) {
+              const total = resolved.keys.reduce((sum, k) => sum + data.question[k].length, 0);
+              return {
+                payload: decoded,
+                data,
+                recordId,
+                subjectKeys: resolved.keys,
+                keySource: resolved.source,
+                count: total,
+                availableKeys: resolved.available,
+                pattern
+              };
+            }
+            candidates.push({
+              recordId,
+              keys: data?.question && typeof data.question === 'object'
+                ? Object.keys(data.question)
+                : Object.keys(data || {})
+            });
+            return null;
+          } catch { /* try next variant */ }
+        }
+        return null;
+      };
+
+      triedPatterns.push('flight-by-size');
+      {
+        const sizeRegex = /([0-9a-z]+):T([0-9a-f]+),/g;
+        let m;
+        while ((m = sizeRegex.exec(html)) !== null) {
+          const recordId = m[1];
+          const size = parseInt(m[2], 16);
+          if (!Number.isFinite(size) || size < 30) continue;
+          const start = sizeRegex.lastIndex;
+          const end = start + size;
+          if (end > html.length) {
+            const tail = html.slice(start);
+            const result = tryDecode(tail, recordId, 'flight-by-size-tail');
+            if (result) return result;
+            continue;
+          }
+          const b64 = html.slice(start, end);
+          const result = tryDecode(b64, recordId, 'flight-by-size');
+          if (result) return result;
+        }
+      }
+
+      triedPatterns.push('flight-strict');
+      {
+        const re = /([0-9a-z]+):T[0-9a-f]+,([A-Za-z0-9+/]+?={1,2})(?=[0-9a-z]+:|[^A-Za-z0-9+/=]|$)/gi;
+        let m;
+        while ((m = re.exec(html)) !== null) {
+          const result = tryDecode(m[2], m[1], 'flight-strict');
+          if (result) return result;
+        }
+      }
+
+      triedPatterns.push('flight-optional-padding');
+      {
+        const re = /([0-9a-z]+):T[0-9a-f]+,([A-Za-z0-9+/]{40,}={0,2})(?=[0-9a-z]+:|[^A-Za-z0-9+/=]|$)/gi;
+        let m;
+        while ((m = re.exec(html)) !== null) {
+          const result = tryDecode(m[2], m[1], 'flight-optional-padding');
+          if (result) return result;
+        }
+      }
+
+      triedPatterns.push('bare-eyJ');
+      {
+        const re = /(eyJ[A-Za-z0-9+/]{100,}={0,2})/g;
+        let m;
+        while ((m = re.exec(html)) !== null) {
+          const result = tryDecode(m[1], '(inline)', 'bare-eyJ');
+          if (result) return result;
+        }
+      }
+
+      if (candidates.length) {
+        const summary = candidates
+          .map(c => `${c.recordId} → [${c.keys.join(', ') || '(no keys)'}]`)
+          .join(' · ');
+        throw new Error(
+          `Flight payload পাওয়া গেছে কিন্তু কোনো question array নেই। পাওয়া keys: ${summary}`
+        );
+      }
+
+      const hasPush = html.includes('self.__next_f.push');
+      const hasTRow = /[0-9a-z]+:T[0-9a-f]+,/.test(html);
+      const hasEyJ = html.includes('eyJ');
+
+      let diag;
+      if (!html.trim()) diag = 'HTML খালি।';
+      else if (!hasPush && !hasTRow && !hasEyJ) diag = 'Next.js Flight script নেই, T-row pattern নেই, base64 marker (eyJ) নেই — এটি Next.js exam page বলে মনে হচ্ছে না।';
+      else if (!hasPush) diag = 'self.__next_f.push script নেই — page Next.js app নয় বা HTML truncated।';
+      else if (!hasTRow) diag = 'T-row pattern (xx:T&lt;hex&gt;,…) পাওয়া যায়নি — HTML truncated হতে পারে।';
+      else if (!hasEyJ) diag = 'T-rows আছে কিন্তু কোনো base64 payload (eyJ…) নেই।';
+      else diag = 'base64-like content আছে কিন্তু কোনো বৈধ question array decode করা যায়নি।';
+
+      throw new Error(
+        `HTML-এ পরিচিত Next.js Flight Base64 payload পাওয়া যায়নি। ${diag} ` +
+        `[tried: ${triedPatterns.join(' → ')}; html length: ${html.length.toLocaleString()}]। ` +
+        `সম্পূর্ণ page source paste করুন অথবা HTML file upload করুন।`
+      );
+    }
+
+    /* ---------- MCQ builder (flattens ALL subject arrays) ---------- */
+    function buildMcqList(data, opts, subjectKeys) {
+      const qObj = data?.question;
+      if (!qObj || typeof qObj !== 'object' || Array.isArray(qObj)) {
+        throw new Error('Payload-এ `question` object পাওয়া যায়নি।');
+      }
+
+      // Collect every question, remembering which subject array it came from.
+      const flat = [];
+      for (const key of subjectKeys) {
+        const arr = qObj[key];
+        if (!Array.isArray(arr)) continue;
+        for (const q of arr) {
+          flat.push({ q, sourceSubject: key });
+        }
+      }
+
+      if (!flat.length) {
+        const available = Object.keys(qObj).filter(k => Array.isArray(qObj[k]));
+        throw new Error(
+          `"${(opts.subjectKey || '(all)')}" key-এর অধীনে প্রশ্নের array পাওয়া যায়নি। Available keys: ${available.join(', ') || '(none)'}`
+        );
+      }
+
+      // Optional cap. 0 (or anything <= 0) means "all".
+      const cap = Number(opts.maxMcqs);
+      const list = Number.isFinite(cap) && cap > 0
+        ? flat.slice(0, Math.floor(cap))
+        : flat;
+
+      const serialStart = Number.isFinite(Number(opts.serialStart)) && Number(opts.serialStart) >= 1
+        ? Math.floor(Number(opts.serialStart))
+        : 1;
+
+      const customTags = parseCustomTags(opts.customTags);
+
+      return list.map(({ q, sourceSubject }, index) => {
+        const answerNum = String(q.answer ?? '');
+        const explanationHtml = q.exp || '';
+        const options = [1, 2, 3, 4].map(i => ({
+          id: generateId(),
+          text: q[`option${i}`] || '',
+          isCorrect: String(i) === answerNum
+        }));
+        const now = new Date().toISOString();
+        const autoTags = [
+          (opts.subject || 'BCS').toLowerCase(),
+          data.type ? String(data.type).toLowerCase().replace(/_/g, '-') : 'daily-quiz',
+          String(sourceSubject).toLowerCase()
+        ];
+        const tags = mergeTags(autoTags, customTags);
+
+        return {
+          id: generateId(),
+          type: 'mcq',
+          topicId: opts.topicId || 'general',
+          serial: serialStart + index,
+          content: q.question || '',
+          marks: 1,
+          classLevel: opts.classLevel || 'BCS Preliminary',
+          subject: opts.subject || 'BCS',
+          difficulty: opts.difficulty || 'medium',
+          tags,
+          options,
+          explanation: { easy: explanationHtml, medium: explanationHtml, hard: explanationHtml },
+          createdAt: now,
+          updatedAt: now,
+          meta: {
+            examId: data.exam_id,
+            examName: data.examname,
+            sourceSubject,
+            originalQuestionId: q.id,
+            ...(q.is_audio ? {
+              audio: {
+                questionDuration: q.question_duration,
+                answerDuration: q.answer_duration,
+                explainDuration: q.explain_duration
+              }
+            } : {})
+          }
+        };
+      });
+    }
+
+    /* ---------- UI helpers ---------- */
+    function showStatus(message, type = 'success') {
+      const el = $('status');
+      el.textContent = message;
+      el.className = 'mt-4 rounded-xl px-4 py-3 text-sm ' + (type === 'error'
+        ? 'bg-red-50 text-red-700 border border-red-200'
+        : 'bg-emerald-50 text-emerald-700 border border-emerald-200');
+    }
+    function updateStats() { $('sourceStats').textContent = `${$('htmlInput').value.length.toLocaleString()} characters`; }
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+    function updateTagsPreview() {
+      const custom = parseCustomTags($('customTags').value);
+      const auto = [
+        ($('subject').value.trim() || 'BCS').toLowerCase(),
+        'daily-quiz',
+        ($('subjectKey').value.trim() || 'all-subjects')
+      ];
+      const merged = mergeTags(auto, custom);
+      $('tagsPreview').innerHTML = merged.length
+        ? `Final tags (auto base): ${merged.map(t => `<span class="mx-0.5 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-medium text-slate-700">${escapeHtml(t)}</span>`).join('')}`
+        : '';
+    }
+    function getOptions() {
+      const rawStart = parseInt($('serialStart').value, 10);
+      const rawMax = parseInt($('maxMcqs').value, 10);
+      return {
+        subjectKey: $('subjectKey').value.trim(),
+        subject: $('subject').value.trim() || 'BCS',
+        topicId: $('topicId').value.trim() || 'general',
+        classLevel: $('classLevel').value.trim() || 'BCS Preliminary',
+        difficulty: $('difficulty').value,
+        serialStart: Number.isFinite(rawStart) && rawStart >= 1 ? rawStart : 1,
+        maxMcqs: Number.isFinite(rawMax) && rawMax > 0 ? rawMax : 0,
+        customTags: $('customTags').value
+      };
+    }
+
+    /* ---------- Event wiring ---------- */
+    $('htmlInput').addEventListener('input', updateStats);
+    $('customTags').addEventListener('input', updateTagsPreview);
+    $('subject').addEventListener('input', updateTagsPreview);
+    $('subjectKey').addEventListener('input', updateTagsPreview);
+
+    $('fileInput').addEventListener('change', async e => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      $('htmlInput').value = await file.text();
+      updateStats();
+      showStatus(`Loaded ${file.name} (${file.size.toLocaleString()} bytes)`);
+    });
+
+    $('generate').addEventListener('click', () => {
+      try {
+        const html = $('htmlInput').value;
+        if (!html.trim()) throw new Error('আগে HTML paste করুন অথবা একটি HTML file নির্বাচন করুন।');
+        const opts = getOptions();
+        const extracted = extractPayload(html, opts.subjectKey || '');
+        generated = buildMcqList(extracted.data, opts, extracted.subjectKeys);
+
+        $('jsonOutput').textContent = JSON.stringify(generated, null, 2);
+        const first = generated[0]?.serial;
+        const last = generated[generated.length - 1]?.serial;
+        const tagCount = generated[0]?.tags?.length ?? 0;
+        $('countBadge').textContent = `${generated.length} MCQs · #${first}–${last}`;
+        $('download').disabled = false;
+        $('copyJson').disabled = false;
+
+        const keyNote = extracted.keySource === 'explicit'
+          ? `key "${extracted.subjectKeys[0]}"`
+          : extracted.keySource === 'all'
+            ? `${extracted.subjectKeys.length} subject arrays (${extracted.subjectKeys.join(', ')})`
+            : `${extracted.subjectKeys.length} keys`;
+        const capNote = opts.maxMcqs > 0
+          ? ` (capped at ${opts.maxMcqs} of ${extracted.count} available)`
+          : ` (all ${extracted.count} available)`;
+        showStatus(
+          `সফল! ${generated.length}টি MCQ তৈরি হয়েছে (serial ${first}–${last}${capNote}, ${tagCount} tags, ${extracted.recordId} payload, ${keyNote}, pattern: ${extracted.pattern})। এখন Download JSON চাপুন।`
+        );
+
+        if ($('autoContinue').checked) {
+          $('serialStart').value = last + 1;
+        }
+      } catch (err) {
+        generated = null;
+        $('jsonOutput').textContent = 'Generation failed.\n\n' + (err?.message || String(err));
+        $('countBadge').textContent = '0 MCQs';
+        $('download').disabled = true;
+        $('copyJson').disabled = true;
+        showStatus(err?.message || String(err), 'error');
+      }
+    });
+
+    $('download').addEventListener('click', () => {
+      if (!generated) return;
+      const blob = new Blob([JSON.stringify(generated, null, 2)], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const filename = $('filename').value.trim() || 'mcq-output.json';
+      a.href = url; a.download = filename.toLowerCase().endsWith('.json') ? filename : `${filename}.json`;
+      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    $('copyJson').addEventListener('click', async () => {
+      if (!generated) return;
+      try { await navigator.clipboard.writeText(JSON.stringify(generated, null, 2)); showStatus('JSON clipboard-এ copy হয়েছে।'); }
+      catch { showStatus('Clipboard permission পাওয়া যায়নি। Preview থেকে manually copy করুন।', 'error'); }
+    });
+
+    $('clearAll').addEventListener('click', () => {
+      $('htmlInput').value = ''; generated = null; updateStats();
+      $('customTags').value = '';
+      $('subjectKey').value = '';
+      $('maxMcqs').value = '0';
+      $('jsonOutput').textContent = 'Generated JSON will appear here…';
+      $('countBadge').textContent = '0 MCQs';
+      $('download').disabled = true; $('copyJson').disabled = true; $('fileInput').value = '';
+      $('status').className = 'mt-4 hidden rounded-xl px-4 py-3 text-sm';
+      updateTagsPreview();
+    });
+
+    $('loadSample').addEventListener('click', () => {
+      const payload = {
+        is_omr: true,
+        question: {
+          'বাংলা ভাষা ও সাহিত্য': [
+            { id: '1', question: 'বাংলাদেশের রাজধানী কোনটি?', option1: 'চট্টগ্রাম', option2: 'ঢাকা', option3: 'খুলনা', option4: 'রাজশাহী', answer: '2', exp: 'বাংলাদেশের রাজধানী ঢাকা।' }
+          ],
+          'English Language and Literature': [
+            { id: '2', question: 'What is the synonym of "brave"?', option1: 'cowardly', option2: 'fearful', option3: 'valiant', option4: 'timid', answer: '3', exp: 'Valiant means brave.' }
+          ],
+          'সাধারণ বিজ্ঞান': [
+            { id: '3', question: 'পানির রাসায়নিক সংকেত কী?', option1: 'CO2', option2: 'H2O', option3: 'O2', option4: 'NaCl', answer: '2', exp: 'পানির সংকেত H2O।' }
+          ]
+        },
+        type: 'BCS Preliminary',
+        exam_id: 14938,
+        examname: 'Oct 09, 2026'
+      };
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+      $('htmlInput').value = `<script>self.__next_f.push([1,"2d:T${encoded.length.toString(16)},${encoded}"])<\\/script>`;
+      updateStats();
+      showStatus('Sample payload loaded (3 subject arrays). Click Generate MCQs to test.');
+    });
+
+    updateTagsPreview();
+  </script>
+</body>
+
+</html>
