@@ -1,4 +1,5 @@
 // fetch-exam-html.js
+// OCT 12 all clear
 // Run: node fetch-exam-html.js
 
 import * as fs from 'fs';
@@ -27,7 +28,7 @@ const TIMEOUT_MS = 60_000;
 const MIN_VALID_SIZE = 20_000;
 const DEBUG_ON_INVALID = true;
 
-const COOKIE = process.env.LIVEMCQ_COOKIE || 'your_cookie_here';
+const COOKIE = process.env.LIVEMCQ_COOKIE || '_gcl_au=1.1.795904219.1788077233; _fbp=fb.1.1788077233385.283889126682805854; _gcl_gs=2.1.k1$i1788084167$u193264048; _gcl_aw=GCL.1788084176.CjwKCAjwqc_UBhBKEiwAWbl25t0txN_RtKhBbXFOVLJpx4r4YHGzFZpijg5vpot9iM7B0LM4Cv17ghoC89oQAvD_BwE; _ga=GA1.1.174057266.1788077233; _ga_S1QV5PC61T=GS2.1.s1789041089$o9$g1$t1789041118$j31$l0$h0; _ga_3JPWR2R2QT=GS2.1.s1789041089$o9$g1$t1789041118$j31$l0$h0; _ga_S41209C0DK=GS2.1.s1791189232$o10$g1$t1791189250$j42$l0$h1950830227; livemcq_device_id=web_3e85a382073c72bf8011c15478ac9f5b; _clck=zbmwxv%5E2%5Ega8%5E0%5E2433; csrftoken=011eZ08SxvXHWFoVOtuI49tkOlcYfG8U; sessionid=1u93jwnpx5hg98pvsm9kin0j2yieggea; _clsk=sy6os7%5E1791793647397%5E71%5E1%5En.clarity.ms%2Fcollect';
 
 const HEADERS = {
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
