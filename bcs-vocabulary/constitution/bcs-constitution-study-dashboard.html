@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BCS সংবিধান মাস্টার ড্যাশবোর্ড (Act 957)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  /* ===== THEME VARIABLES ===== */
+  :root {
+    --header-h: 92px;
+    --bg: #0f172a; --panel: #111827; --card: #0b1220;
+    --line: #334155; --line-strong: #475569;
+    --txt: #f1f5f9; --txt-2: #cbd5e1; --txt-mute: #94a3b8;
+    --accent: #10b981; --accent-2: #059669; --accent-txt: #6ee7b7;
+    --warn: #f59e0b; --danger: #fb7185;
+    --success: #34d399;
+    --btn-bg: #1e293b; --btn-hover: #334155;
+    --correct-bg: rgba(16,185,129,.15);
+    --wrong-bg: rgba(251,113,133,.12);
+  }
+  body.light-theme {
+    --bg: #f1f5f9; --panel: #ffffff; --card: #f8fafc;
+    --line: #cbd5e1; --line-strong: #94a3b8;
+    --txt: #0f172a; --txt-2: #334155; --txt-mute: #64748b;
+    --accent: #059669; --accent-2: #047857; --accent-txt: #047857;
+    --warn: #b45309; --danger: #be123c;
+    --success: #047857;
+    --btn-bg: #f1f5f9; --btn-hover: #e2e8f0;
+    --correct-bg: #d1fae5;
+    --wrong-bg: #fee2e2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', 'SolaimanLipi', 'Kalpurush', 'Siyam Rupali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    background: var(--bg) !important;
+    color: var(--txt) !important;
+    transition: background .25s ease, color .25s ease;
+    overflow-x: hidden;
+    margin: 0;
+  }
+  ::selection { background: rgba(16,185,129,.35); color: var(--txt); }
+
+  h1,h2,h3,h4,p,span,a,button,label,td,th,li { overflow-wrap: anywhere; word-break: break-word; }
+  button, input, select { font: inherit; line-height: 1.5; }
+  button { min-height: 40px; cursor: pointer; }
+  :focus-visible { outline: 3px solid #38bdf8; outline-offset: 2px; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 4px; }
+  main section { scroll-margin-top: calc(var(--header-h) + 8px); }
+
+  /* ===== NAV ===== */
+  .nav-link { background: var(--btn-bg); color: var(--txt); border: 1px solid var(--line); white-space: nowrap; transition: background .15s, border-color .15s; }
+  .nav-link:hover { background: var(--btn-hover); border-color: var(--accent); }
+  .nav-primary { background: var(--warn); color: #111827 !important; border-color: #d97706; font-weight: 700; }
+  .nav-primary:hover { background: #fbbf24; }
+
+  /* ===== PANELS & CARDS ===== */
+  .panel { background: var(--panel); border: 1px solid var(--line); color: var(--txt); }
+  .muted { color: var(--txt-mute); }
+  .eyebrow { color: var(--accent-txt); }
+  .study-card { background: var(--card); border: 1px solid var(--line-strong); color: var(--txt); }
+  .study-input { background: var(--card); color: var(--txt); border: 1px solid var(--line-strong); min-width: 0; }
+  .study-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  /* ===== BUTTONS ===== */
+  .action-btn { background: var(--accent-2); color: #fff; border: 1px solid var(--accent-2); }
+  .action-btn:hover { background: var(--accent); }
+  .secondary-btn, .mode-btn { background: var(--btn-bg); color: var(--txt); border: 1px solid var(--line-strong); }
+  .secondary-btn:hover, .mode-btn:hover { background: var(--btn-hover); }
+  .mode-btn.active { background: var(--accent-2); color: #fff; border-color: var(--accent); }
+
+  /* ===== ANSWER OPTIONS ===== */
+  .answer-option {
+    display: block; width: 100%; text-align: left;
+    padding: .9rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: .75rem;
+    margin-top: .6rem;
+    background: var(--card);
+    color: var(--txt);
+    transition: background .15s, border-color .15s;
+    font-weight: 500;
+    min-height: 48px;
+  }
+  .answer-option:hover:not(:disabled) { border-color: var(--accent); background: var(--btn-hover); }
+  .answer-option.correct { border-color: #10b981; background: var(--correct-bg); color: var(--success); font-weight: 700; }
+  .answer-option.wrong { border-color: var(--danger); background: var(--wrong-bg); color: var(--danger); }
+  .answer-option:disabled { cursor: default; }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-track { background: var(--line); border-radius: 999px; overflow: hidden; height: 8px; }
+  .progress-fill { background: linear-gradient(90deg, var(--accent-2), var(--accent)); height: 100%; transition: width .35s ease; }
+
+  /* ===== FILTER CHIPS ===== */
+  .filter-btn { border: 1px solid var(--line); background: var(--btn-bg); color: var(--txt); white-space: nowrap; transition: background .15s, border-color .15s; }
+  .filter-btn:hover { background: var(--btn-hover); }
+  .filter-btn.active-filter { background: var(--accent-2); color: #fff; border-color: var(--accent); }
+
+  /* ===== ARTICLE CARDS ===== */
+  .article-card { background: var(--panel); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem; transition: border-color .15s, box-shadow .15s; }
+  .article-card:hover { border-color: var(--accent); box-shadow: 0 4px 14px rgba(16,185,129,.15); }
+  .article-num-badge { display:inline-flex; align-items:center; gap:.25rem; font-size:.7rem; font-weight:700; background: rgba(16,185,129,.15); color: var(--accent-txt); border:1px solid rgba(16,185,129,.3); padding:.15rem .55rem; border-radius:999px; }
+  body.light-theme .article-num-badge { background:#d1fae5; color:#065f46; border-color:#6ee7b7; }
+  .hot-badge { display:inline-flex; align-items:center; gap:.25rem; font-size:.65rem; font-weight:700; background: rgba(245,158,11,.18); color:#fbbf24; border:1px solid rgba(245,158,11,.35); padding:.15rem .55rem; border-radius:999px; }
+  body.light-theme .hot-badge { background:#fef3c7; color:#92400e; border-color:#fcd34d; }
+
+  /* ===== PART HEADER ===== */
+  .part-header { background: linear-gradient(135deg, #065f46, #047857); color:#fff; padding:.85rem 1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:.5rem; }
+  body.light-theme .part-header { background: linear-gradient(135deg, #059669, #047857); }
+
+  /* ===== STICKY SEARCH ===== */
+  .search-wrap { position: sticky; top: var(--header-h); z-index: 30; background: var(--panel); }
+
+  /* ===== TABLE ===== */
+  table { color: var(--txt-2); }
+  thead { background: var(--card); color: var(--txt); }
+  tbody tr { border-color: var(--line) !important; }
+  tbody td { border-color: var(--line); }
+
+  /* ===== FLASHCARD SPECIFIC ===== */
+  .flash-face {
+    text-align: center;
+    padding: 2rem 1rem;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .flash-num-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .35rem .9rem;
+    border-radius: 999px;
+    background: rgba(16,185,129,.15);
+    color: var(--accent-txt);
+    border: 1px solid rgba(16,185,129,.4);
+    font-weight: 700;
+    font-size: .85rem;
+  }
+  .flash-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--txt);
+    line-height: 1.4;
+  }
+  .flash-answer {
+    text-align: left;
+    padding: 1rem 1.25rem;
+    border-radius: .75rem;
+    background: rgba(16,185,129,.1);
+    border: 1px solid rgba(16,185,129,.35);
+    width: 100%;
+    max-width: 100%;
+  }
+  .flash-answer-label {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--accent-txt);
+    margin-bottom: .35rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+  .flash-answer-text {
+    font-size: .95rem;
+    color: var(--txt);
+    line-height: 1.7;
+  }
+
+  /* ===== MCQ FEEDBACK ===== */
+  .mcq-feedback {
+    padding: .75rem 1rem;
+    border-radius: .65rem;
+    border-left: 4px solid;
+    font-size: .9rem;
+  }
+  .mcq-feedback.ok { background: rgba(16,185,129,.1); border-color: #10b981; color: var(--success); }
+  .mcq-feedback.no { background: rgba(251,113,133,.1); border-color: var(--danger); color: var(--danger); }
+  body.light-theme .mcq-feedback.ok { background: #ecfdf5; }
+  body.light-theme .mcq-feedback.no { background: #fff1f2; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    nav.top-nav { width:100%; overflow-x:auto; flex-wrap:nowrap; scrollbar-width:thin; padding-bottom:2px; }
+    nav.top-nav::-webkit-scrollbar { height:4px; }
+  }
+  @media (max-width: 640px) {
+    :root { --header-h: 132px; }
+    body.light-theme { --header-h: 132px; }
+    .page-main { padding-left:.75rem; padding-right:.75rem; }
+    .card-grid { grid-template-columns: 1fr !important; }
+    .flash-face { padding: 1.25rem .5rem; min-height: 180px; }
+    .flash-title { font-size: 1.05rem; }
+  }
+
+  .flash-enter { animation: fadeUp .35s ease-out; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+</style>
+</head>
+<body class="antialiased">
+
+<header id="site-header"></header>
+<main id="site-main" class="page-main max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8 space-y-8 sm:space-y-10"></main>
+<footer id="site-footer"></footer>
+
+<script>
+/* ============================================================
+   SITE_DATA — single source of truth
+   ============================================================ */
+const SITE_DATA = {
+
+  meta: {
+    title: "গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান",
+    badge: "Act 957",
+    subtitle: "BCS ক্যাডার প্রস্তুতি — ১৫৩টি অনুচ্ছেদ, ১১ ভাগ, ৭ তফসিল",
+    footer: {
+      title: "গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান (Act No. 957 of 1972)",
+      subtitle: "তথ্যসূত্র: আইন, বিচার ও সংসদ বিষয়ক মন্ত্রণালয়ের অফিসিয়াল কোড।"
+    }
+  },
+
+  nav: [
+    { href: "#history", label: "ইতিহাস" },
+    { href: "#parts-shortcuts", label: "১১ ভাগ ও ট্রিক্স" },
+    { href: "#flashcards", label: "প্র্যাকটিস" },
+    { href: "#articles-directory", label: "অনুচ্ছেদ ডিরেক্টরি", primary: true },
+    { href: "#schedules", label: "৭ তফসিল" },
+    { href: "#amendments", label: "সংশোধনী" }
+  ],
+
+  history: {
+    icon: "history",
+    title: "১. সংবিধান প্রণয়ন ও ইতিহাস",
+    subtitle: "BCS প্রিলি ও লিখিত পরীক্ষার সর্বাধিক গুরুত্বপূর্ণ তথ্যসূত্র",
+    metrics: [
+      { label: "খসড়া কমিটি গঠন", value: "১১ এপ্রিল, ১৯৭২", sub: "সদস্য: ৩৪ (১ জন মহিলা)" },
+      { label: "গণপরিষদে উত্থাপন", value: "১২ অক্টোবর, ১৯৭২", sub: "উত্থাপক: ড. কামাল হোসেন" },
+      { label: "সংবিধান গৃহীত", value: "০৪ নভেম্বর, ১৯৭২", sub: "জাতীয় সংবিধান দিবস", accent: true },
+      { label: "কার্যকরী তারিখ", value: "১৬ ডিসেম্বর, ১৯৭২", sub: "প্রথম বিজয় দিবসে কার্যকর" }
+    ],
+    cards: [
+      { icon: "users", title: "খসড়া কমিটি", items: [
+        { label: "সভাপতি", value: "ড. কামাল হোসেন" },
+        { label: "একমাত্র নারী সদস্য", value: "বেগম রাজিয়া বানু" },
+        { label: "একমাত্র বিরোধীদলীয় সদস্য", value: "সুরঞ্জিত সেনগুপ্ত" },
+        { label: "মোট বৈঠক", value: "৪৭টি (~৩০০ ঘণ্টা)" }
+      ]},
+      { icon: "pen-tool", title: "লিখন ও শিল্পকর্ম", items: [
+        { label: "মূল লিপিকার", value: "শিল্পী আবদুর রউফ" },
+        { label: "নকশা", value: "শিল্পাচার্য জয়নুল আবেদীন" },
+        { label: "সহযোগী", value: "সমরজিৎ রায় চৌধুরী, আবুল বারক আলভী" },
+        { label: "স্বাক্ষর", value: "৩০৯ জন সদস্য" }
+      ]},
+      { icon: "file-text", title: "ভাষা ও প্রকাশনা", items: [
+        { text: "মূল সংবিধান বাংলা ও ইংরেজি উভয় ভাষায়।" },
+        { text: "পাঠগত বিরোধে বাংলা পাঠ প্রাধান্য (অনুচ্ছেদ ১৫৩)।", accent: true },
+        { text: "১টি প্রস্তাবনা, ১১ ভাগ, ১৫৩ অনুচ্ছেদ, ৭ তফসিল।" }
+      ]}
+    ]
+  },
+
+  parts: {
+    icon: "brain-circuit",
+    title: "২. ১১টি ভাগ মনে রাখার শর্টকাট (Mnemonic)",
+    subtitle: "এক বাক্যে ১১টি ভাগের ক্রমিক নাম মুখস্ত করুন",
+    mnemonic: "প্রজারা মূল মৌলিক কাজ শেষ করে বিচার, নির্বাচন ও মহা-হিসাব সেরে কর্মে ঢুকল, কিন্তু জরুরী সংশোধনী দেখে বিবিধ চিন্তা করল।",
+    list: [
+      { n: "১", keyword: "প্রজা", name: "প্রজাতন্ত্র", range: "১ - ৭খ" },
+      { n: "২", keyword: "মূল", name: "রাষ্ট্র পরিচালনার মূলনীতি", range: "৮ - ২৫" },
+      { n: "৩", keyword: "মৌলিক", name: "মৌলিক অধিকার", range: "২৬ - ৪৫" },
+      { n: "৪", keyword: "কাজ", name: "নির্বাহী বিভাগ", range: "৪৬ - ৬৪" },
+      { n: "৫", keyword: "আইন", name: "আইনসভা", range: "৬৫ - ৯৩" },
+      { n: "৬", keyword: "বিচার", name: "বিচার বিভাগ", range: "৯৪ - ১১২" },
+      { n: "৭", keyword: "নির্বাচন", name: "নির্বাচন", range: "১১৩ - ১২৬" },
+      { n: "৮", keyword: "মহা-হিসাব", name: "মহা হিসাব-নিরীক্ষক", range: "১২৭ - ১৩২" },
+      { n: "৯", keyword: "কর্মে", name: "কর্মবিভাগ", range: "১৩৩ - ১৪১" },
+      { n: "৯ক", keyword: "জরুরী", name: "জরুরী বিধানাবলী", range: "১৪১ক - ১৪১গ", hot: true },
+      { n: "১০", keyword: "সংশোধনী", name: "সংবিধান সংশোধন", range: "১৪২" },
+      { n: "১১", keyword: "বিবিধ", name: "বিবিধ", range: "১৪৩ - ১৫৩" }
+    ]
+  },
+
+  flashcards: {
+    eyebrow: "Active Recall • Exam Practice",
+    title: "সংবিধান Flashcard ও MCQ Practice",
+    subtitle: "Flashcard = self-check (উত্তর দেখুন)। MCQ = exam-style ৪ অপশন, confusing distractors।",
+    examTypes: [
+      { value: "bcs",     label: "🎯 BCS Preliminary" },
+      { value: "govt",    label: "🏛️ সাধারণ সরকারি চাকরি" },
+      { value: "bank",    label: "🏦 ব্যাংক/নিয়োগ" },
+      { value: "written", label: "✍️ লিখিত প্রস্তুতি" }
+    ],
+    scopes: [
+      { value: "hot", label: "🔥 BCS Hot only" },
+      { value: "all", label: "সব অনুচ্ছেদ" }
+    ],
+    kinds: [
+      { value: "mixed",     label: "মিশ্র (সব ধরন)" },
+      { value: "article",   label: "বিষয় → অনুচ্ছেদ নম্বর" },
+      { value: "title",     label: "অনুচ্ছেদ নম্বর → শিরোনাম" },
+      { value: "statement", label: "বিবরণ → অনুচ্ছেদ" }
+    ],
+    sizes: [10, 20, 30, 50],
+    defaultSize: 20,
+    initialCard: {
+      eyebrow: "শুরু করার আগে",
+      title: "“▶ নতুন সেট” চাপুন",
+      body: "প্রশ্নগুলো এখানে থাকা অনুচ্ছেদের নম্বর, শিরোনাম ও বিবরণ থেকে dynamically তৈরি হবে। পরীক্ষার ধরন অনুযায়ী প্রশ্নের কঠিনতা ও ধরন বদলাবে।"
+    },
+    keyboardHint: [
+      { key: "Space", desc: "Flashcard: উত্তর দেখুন" },
+      { key: "←/→", desc: "নেভিগেট" },
+      { key: "1-4", desc: "MCQ: অপশন নির্বাচন" }
+    ]
+  },
+
+  directory: {
+    icon: "search-code",
+    title: "৩. পূর্ণাঙ্গ ১৫৩টি অনুচ্ছেদ ডিরেক্টরি",
+    subtitle: "অনুচ্ছেদ নম্বর, নাম বা বিষয়বস্তু দিয়ে খুঁজুন",
+    placeholder: "যেমন: ২৭, মৌলিক অধিকার, রাষ্ট্রপতি, রীট...",
+    filters: [
+      { value: "all", label: "সকল" },
+      { value: "bcs-hot", label: "🔥 Hot" }
+    ],
+    emptyTitle: "কোনো অনুচ্ছেদ পাওয়া যায়নি",
+    emptySub: "সঠিক অনুচ্ছেদ নম্বর বা বাংলা কীওয়ার্ড লিখুন"
+  },
+
+  /* ===== 153 Articles verbatim ===== */
+  constitutionData: [
+    { partTitle: "১ম ভাগ: প্রজাতন্ত্র", partRange: "অনুচ্ছেদ ১ - ৭খ", partId: "part-1", articles: [
+      { num: "১", title: "প্রজাতন্ত্র", desc: "বাংলাদেশ একটি একক, স্বাধীন ও সার্বভৌম প্রজাতন্ত্র, যাহা ‘গণপ্রজাতন্ত্রী বাংলাদেশ’ নামে পরিচিত হইবে।", bcsHot: true },
+      { num: "২", title: "প্রজাতন্ত্রের রাষ্ট্রীয় সীমানা", desc: "প্রজাতন্ত্রের সীমানা নির্ধারণ ও নতুন এলাকা অন্তর্ভুক্তির বিধান।", bcsHot: false },
+      { num: "২ক", title: "রাষ্ট্রধর্ম", desc: "প্রজাতন্ত্রের রাষ্ট্রধর্ম ইসলাম, তবে অন্যান্য ধর্ম শান্তিতে পালনে সমঅধিকার নিশ্চিত করা হইবে।", bcsHot: true },
+      { num: "৩", title: "রাষ্ট্রভাষা", desc: "প্রজাতন্ত্রের রাষ্ট্রভাষা বাংলা।", bcsHot: true },
+      { num: "৪", title: "জাতীয় সংগীত, পতাকা ও প্রতীক", desc: "জাতীয় সংগীত ‘আমার সোনার বাংলা’, পতাকা লাল-সবুজের অনুপাত ৫:৩, জাতীয় প্রতীক (শাপলা, ধান, পাট, তারকা)।", bcsHot: true },
+      { num: "৪ক", title: "জাতির পিতার প্রতিকৃতি", desc: "জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের প্রতিকৃতি সংরক্ষণ ও প্রদর্শন বাধ্যবাধকতা।", bcsHot: true },
+      { num: "৫", title: "রাজধানী", desc: "প্রজাতন্ত্রের রাজধানী ঢাকা।", bcsHot: false },
+      { num: "৬", title: "নাগরিকত্ব", desc: "বাংলাদেশের নাগরিকত্ব আইনের দ্বারা নির্ধারিত হইবে; নাগরিকগণ ‘বাংলাদেশী’ বলিয়া পরিচিত হইবেন।", bcsHot: true },
+      { num: "৭", title: "সংবিধানের প্রাধান্য", desc: "প্রজাতন্ত্রের সকল ক্ষমতার মালিক জনগণ। সংবিধানের সহিত অসমঞ্জস সকল আইন বাতিল হইবে।", bcsHot: true },
+      { num: "৭ক", title: "সংবিধান বাতিল, স্থগিতকরণ ইত্যাদি অপরাধ", desc: "সংবিধান রদ বা বাতিল করা রাষ্ট্রদ্রোহিতার অপরাধ হিসেবে গণ্য হইবে।", bcsHot: true },
+      { num: "৭খ", title: "সংবিধানের মৌলিক কাঠামো সংশোধন অযোগ্য", desc: "প্রস্তাবনা, ১ম, ২য় ও ৩য় ভাগের মৌলিক বিধানসমূহ সংশোধনযোগ্য নয়।", bcsHot: true }
+    ]},
+    { partTitle: "২য় ভাগ: রাষ্ট্র পরিচালনার মূলনীতি", partRange: "অনুচ্ছেদ ৮ - ২৫", partId: "part-2", articles: [
+      { num: "৮", title: "মূলনীতিসমূহ", desc: "জাতীয়তাবাদ, সমাজতন্ত্র, গণতন্ত্র ও ধর্মনিরপেক্ষতা — এই ৪টি রাষ্ট্র পরিচালনার মূলনীতি।", bcsHot: true },
+      { num: "৯", title: "জাতীয়তাবাদের ভিত্তি", desc: "ভাষাগত ও সংস্কৃতিগত ঐক্যের মাধ্যমে বাঙ্গালী জাতীয়তাবাদের মূলভিত্তি।", bcsHot: false },
+      { num: "১০", title: "সমাজতন্ত্র ও শোষণমুক্তি", desc: "মানুষের উপর মানুষের শোষণ হইতে মুক্ত ন্যায়ানুগ ও সাম্যবাদী সমাজ লাভ।", bcsHot: false },
+      { num: "১১", title: "গণতন্ত্র ও মানবাধিকার", desc: "প্রজাতন্ত্র হইবে একটি গণতন্ত্র, যেখানে মৌলিক মানবাধিকার ও মানবসত্তার মর্যাদার গ্যারান্টি থাকিবে।", bcsHot: true },
+      { num: "১২", title: "ধর্মনিরপেক্ষতা ও ধর্মীয় স্বাধীনতা", desc: "ধর্মনিরপেক্ষতা নীতি বাস্তবায়নে সর্বপ্রকার সাম্প্রদায়িকতা বিলোপ।", bcsHot: true },
+      { num: "১৩", title: "মালিকানার নীতি", desc: "মালিকানার ৩টি রূপ: (ক) রাষ্ট্রীয় (খ) সমবায়ী (গ) ব্যক্তিগত।", bcsHot: true },
+      { num: "১৪", title: "কৃষক ও শ্রমিকের মুক্তি", desc: "মেহনতী মানুষ, কৃষক ও শ্রমিককে সকল প্রকার শোষণ হইতে মুক্তি দান।", bcsHot: false },
+      { num: "১৫", title: "মৌলিক প্রয়োজনের ব্যবস্থা", desc: "অন্ন, বস্ত্র, আশ্রয়, শিক্ষা ও চিকিৎসাসহ জীবনধারণের মৌলিক উপকরণের ব্যবস্থা।", bcsHot: true },
+      { num: "১৬", title: "গ্রামীণ উন্নয়ন ও কৃষি বিপ্লব", desc: "নগর ও গ্রামের বৈষম্য দূরীকরণ এবং কৃষি বিপ্লব বিকাশ।", bcsHot: false },
+      { num: "১৭", title: "অবৈতনিক ও বাধ্যতামূলক শিক্ষা", desc: "নির্দিষ্ট স্তর পর্যন্ত সকল শিশুর জন্য অবৈতনিক ও বাধ্যতামূলক শিক্ষা প্রদান।", bcsHot: true },
+      { num: "১৮", title: "জনস্বাস্থ্য ও নৈতিকতা", desc: "জনস্বাস্থ্যের উন্নতি ও মাদকদ্রব্য/মদ্যপান নিষিদ্ধকরণ।", bcsHot: true },
+      { num: "১৮ক", title: "পরিবেশ ও জীববৈচিত্র্য সংরক্ষণ", desc: "বর্তমান ও ভবিষ্যৎ নাগরিকদের জন্য পরিবেশ, বন ও জীববৈচিত্র্য সংরক্ষণ।", bcsHot: true },
+      { num: "১৯", title: "সুযোগের সমতা", desc: "সকল নাগরিকের জন্য সুযোগের সমতা নিশ্চিত করা এবং নারী-পুরুষ অসমতা দূর করা।", bcsHot: true },
+      { num: "২০", title: "অধিকার ও দায়িত্বরূপে কর্ম", desc: "‘কর্ম হইতেছে অধিকার, কর্তব্য এবং সম্মানের বিষয়’ এবং ‘যার যেমন সামর্থ্য তাকে তেমন কর্ম’।", bcsHot: true },
+      { num: "২১", title: "নাগরিক ও সরকারি কর্মচারীদের কর্তব্য", desc: "সংবিধান পালন করা এবং সরকারি সম্পত্তি রক্ষা করা প্রত্যেক নাগরিক ও কর্মচারীর কর্তব্য।", bcsHot: true },
+      { num: "২২", title: "নির্বাহী বিভাগ হইতে বিচার বিভাগ পৃথকীকরণ", desc: "রাষ্ট্রের নির্বাহী অঙ্গসমূহ হইতে বিচার বিভাগকে পৃথকীকরণ নিশ্চিত করা।", bcsHot: true },
+      { num: "২৩", title: "জাতীয় সংস্কৃতি", desc: "জাতীয় সংস্কৃতি, ঐতিহ্য ও শিল্পকলার সংরক্ষণ ও মানোন্নয়ন।", bcsHot: false },
+      { num: "২৩ক", title: "উপজাতি, ক্ষুদ্র জাতিসত্তা, নৃ-গোষ্ঠীর সংস্কৃতি", desc: "ক্ষুদ্র নৃ-গোষ্ঠী ও উপজাতিদের অনন্য সংস্কৃতি ও ঐতিহ্য সংরক্ষণ।", bcsHot: true },
+      { num: "২৪", title: "জাতীয় স্মৃতিস্তম্ভ ইত্যাদি", desc: "বিশেষ গুরুত্বসম্পন্ন স্মৃতিস্তম্ভ বা ঐতিহাসিক স্থানসমূহ ধ্বংস ও বিকৃতি হইতে রক্ষা।", bcsHot: false },
+      { num: "২৫", title: "আন্তর্জাতিক শান্তি, নিরাপত্তা ও সংহতি উন্নতি", desc: "সার্বভৌমত্ব ও আঞ্চলিক অখণ্ডতার প্রতি শ্রদ্ধা এবং আন্তর্জাতিক বিরোধের শান্তিপূর্ণ নিস্পতি।", bcsHot: true }
+    ]},
+    { partTitle: "৩য় ভাগ: মৌলিক অধিকার", partRange: "অনুচ্ছেদ ২৬ - ৪৫", partId: "part-3", articles: [
+      { num: "২৬", title: "মৌলিক অধিকারের সহিত অসমঞ্জস আইন বাতিল", desc: "মৌলিক অধিকারের বিরোধী সকল বিদ্যমান আইন বাতিল এবং নতুন আইন প্রণয়ন নিষিদ্ধ।", bcsHot: true },
+      { num: "২৭", title: "আইনের দৃষ্টিতে সমতা", desc: "সকল নাগরিক আইনের দৃষ্টিতে সমান এবং আইনের সমান আশ্রয় লাভের অধিকারী।", bcsHot: true },
+      { num: "২৮", title: "ধর্ম প্রভূতির কারণে বৈষম্য নিষিদ্ধ", desc: "কেবল ধর্ম, গোষ্ঠী, বর্ণ, নারী-পুরুষভেদে বা জন্মস্থানের কারণে কোন নাগরিকের প্রতি বৈষম্য করা যাইবে না।", bcsHot: true },
+      { num: "২৯", title: "সরকারি নিয়োগে সুযোগের সমতা", desc: "প্রজাতন্ত্রের কর্মে নিয়োগের ক্ষেত্রে সকল নাগরিকের জন্য সুযোগের সমতা থাকিবে।", bcsHot: true },
+      { num: "৩০", title: "উপাধি ইত্যাদি বিলোপ", desc: "রাষ্ট্রের পূর্বানুমোদন ব্যতিরেকে কোন বিদেশী খেতাব বা উপাধি গ্রহণ করা যাইবে না।", bcsHot: false },
+      { num: "৩১", title: "আইনের আশ্রয় লাভের অধিকার", desc: "আইনানুসারে ব্যতিরেকে কোন ব্যক্তির জীবন, স্বাধীনতা, দেহ বা সম্পত্তির ক্ষতি করা যাইবে না।", bcsHot: true },
+      { num: "৩২", title: "জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষা", desc: "আইনানুসারে ব্যতীত জীবন ও ব্যক্তি-স্বাধীনতা হইতে কাহাকেও বঞ্চিত করা যাইবে না।", bcsHot: true },
+      { num: "৩৩", title: "গ্রেপ্তার ও আটক সম্পর্কে রক্ষা-কবচ", desc: "২৪ ঘণ্টার মধ্যে আদালতে হাজির করা এবং আত্মপক্ষ সমর্থনের অধিকার।", bcsHot: true },
+      { num: "৩৪", title: "জবরদস্তি-শ্রম নিষিদ্ধকরণ", desc: "সকল প্রকার জবরদস্তিমূলক শ্রম নিষিদ্ধ ও দণ্ডনীয় অপরাধ।", bcsHot: true },
+      { num: "৩৫", title: "বিচার ও দণ্ড সম্পর্কে রক্ষা-কবচ", desc: "এক অপরাধের জন্য দুইবার দণ্ড (Double Jeopardy) নিষিদ্ধ এবং নিজেকে অপরাধী প্রমাণের বাধ্যবাধকতা না থাকা।", bcsHot: true },
+      { num: "৩৬", title: "চলাফেরার স্বাধীনতা", desc: "জনস্বার্থে আইন দ্বারা আরোপিত যুক্তিযুক্ত বাধা-নিষেধ সাপেক্ষে চলাফেরার স্বাধীনতা।", bcsHot: false },
+      { num: "৩৭", title: "সমাবেশের স্বাধীনতা", desc: "শান্তিপূর্ণভাবে ও নিরস্ত্র অবস্থায় সমবেত হইবার অধিকার।", bcsHot: false },
+      { num: "৩৮", title: "সংগঠন করিবার স্বাধীনতা", desc: "সমিতি বা সংঘ গঠন করিবার অধিকার (সাম্প্রদায়িক সংগঠন নিষিদ্ধ সংক্রান্ত বিধানসহ)।", bcsHot: true },
+      { num: "৩৯", title: "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা", desc: "চিন্তা ও বিবেকের স্বাধীনতা এবং সংবাদপত্রসহ বাক-স্বাধীনতার নিশ্চয়তা।", bcsHot: true },
+      { num: "৪০", title: "পেশা বা বৃত্তির স্বাধীনতা", desc: "যেকোনো বৈধ পেশা, কারবার বা ব্যবসা পরিচালনার স্বাধীনতা।", bcsHot: false },
+      { num: "৪১", title: "ধর্মীয় স্বাধীনতা", desc: "যেকোনো ধর্ম পালন, প্রচার ও গ্রহণের স্বাধীনতা।", bcsHot: true },
+      { num: "৪২", title: "সম্পত্তির অধিকার", desc: "আইনের দ্বারা আরোপিত সীমা সাপেক্ষে সম্পত্তি অর্জন, ধারণ ও হস্তান্তরের অধিকার।", bcsHot: false },
+      { num: "৪৩", title: "গৃহ ও যোগাযোগের গোপনীয়তা", desc: "প্রবেশ, তল্লাশি ও চিঠিপত্র বা যোগাযোগের গোপনীয়তা রক্ষার অধিকার।", bcsHot: false },
+      { num: "৪৪", title: "মৌলিক অধিকার বলবৎকরণ", desc: "মৌলিক অধিকার ক্ষুণ্ণ হইলে ১০২ অনুচ্ছেদ অনুযায়ী হাইকোর্ট বিভাগে রীট দায়েরের অধিকার।", bcsHot: true },
+      { num: "৪৫", title: "শৃঙ্খলাসংক্রান্ত আইনের ক্ষেত্রে অধিকারের পরিবর্তন", desc: "সশস্ত্র বাহিনীর সদস্যদের ক্ষেত্রে মৌলিক অধিকারের প্রয়োগে শিথিলতা।", bcsHot: false }
+    ]},
+    { partTitle: "৪র্থ ভাগ: নির্বাহী বিভাগ", partRange: "অনুচ্ছেদ ৪৬ - ৬৪", partId: "part-4", articles: [
+      { num: "৪৬", title: "দায়মুক্তি বিধানের ক্ষমতা", desc: "শৃঙ্খলা ভঙ্গের ক্ষেত্রে সংশ্লিষ্ট ব্যক্তিদের দায়মুক্তি (Indemnity) বিধানের ক্ষমতা।", bcsHot: false },
+      { num: "৪৭", title: "কতিপয় আইনের সংরক্ষণ", desc: "মৌলিক অধিকার সত্ত্বেও গণহত্যা, মানবতাবিরোধী অপরাধ সংক্রান্ত আইন সংরক্ষণ।", bcsHot: true },
+      { num: "৪৭ক", title: "সংবিধানের কতিপয় বিধানের অপ্রযোজ্যতা", desc: "যুদ্ধাপরাধীদের ক্ষেত্রে মৌলিক অধিকারের কতিপয় সুরক্ষা প্রযোজ্য হইবে না।", bcsHot: true },
+      { num: "৪৮", title: "রাষ্ট্রপতি", desc: "বাংলাদেশের একজন রাষ্ট্রপতি থাকিবেন। তিনি রাষ্ট্রপ্রধান এবং প্রধানমন্ত্রী ও প্রধান বিচারপতি ব্যতিরেকে সকল কাজ প্রধানমন্ত্রীর পরামর্শে করেন।", bcsHot: true },
+      { num: "৪৯", title: "ক্ষমা প্রদর্শনের অধিকার", desc: "রাষ্ট্রপতি যেকোনো দণ্ড মার্জা, বিলম্বন বা হ্রাস করিতে পারিবেন।", bcsHot: true },
+      { num: "৫০", title: "রাষ্ট্রপতি-পদের মেয়াদ", desc: "দায়িত্ব গ্রহণের তারিখ হতে ৫ বছর (সর্বোচ্চ ২ মেয়াদ)।", bcsHot: true },
+      { num: "৫১", title: "রাষ্ট্রপতির দায়মুক্তি", desc: "রাষ্ট্রপতির বিরুদ্ধে কোনো আদালতে কোনো ফৌজদারী বা দেওয়ানী কার্যধারা দায়ের করা যাইবে না।", bcsHot: true },
+      { num: "৫২", title: "রাষ্ট্রপতির অভিশংসন", desc: "সংবিধান লঙ্ঘন বা গুরুতর অসদাচরণের অভিযোগে সংসদ দ্বারা রাষ্ট্রপতিকে অভিশংসন (Impeachment)।", bcsHot: true },
+      { num: "৫৩", title: "অসামর্থ্যের কারণে রাষ্ট্রপতির অপসারণ", desc: "শারীরিক বা মানসিক অসামর্থ্যের কারণে রাষ্ট্রপতিকে পদচ্যুত করার বিধান।", bcsHot: false },
+      { num: "৫৪", title: "অনুপস্থিতি প্রভৃতির সময়ে স্পিকারের রাষ্ট্রপতিপদে দায়িত্ব পালন", desc: "রাষ্ট্রপতির অনুপস্থিতিতে বা পদ শূন্য হলে স্পিকার রাষ্ট্রপতির দায়িত্ব পালন করবেন।", bcsHot: true },
+      { num: "৫৫", title: "মন্ত্রিসভা", desc: "প্রধানমন্ত্রীর নেতৃত্বে মন্ত্রিসভা গঠিত হইবে এবং মন্ত্রিসভা যৌথভাবে সংসদের নিকট দায়ী থাকিবে।", bcsHot: true },
+      { num: "৫৬", title: "মন্ত্রীগণ", desc: "প্রধানমন্ত্রী ও অন্যান্য মন্ত্রীদের নিয়োগ। ৯/১০ অংশ সংসদ সদস্য হতে এবং ১/১০ অংশ টেকনোক্র্যাট মন্ত্রী হতে পারেন।", bcsHot: true },
+      { num: "৫৭", title: "প্রধানমন্ত্রীর পদের মেয়াদ", desc: "প্রধানমন্ত্রীর পদ শূন্য হওয়া ও পদত্যাগের শর্তাবলী।", bcsHot: false },
+      { num: "৫৮", title: "অন্যান্য মন্ত্রীর পদের মেয়াদ", desc: "মন্ত্রীগণের পদত্যাগের নিয়মাবলী।", bcsHot: false },
+      { num: "৫৮ক", title: "[বিলুপ্ত]", desc: "তত্ত্বাবধায়ক সরকার সংক্রান্ত অধ্যায় (১৫তম সংশোধনীতে অবলুপ্ত)।", bcsHot: false },
+      { num: "৫৯", title: "স্থানীয় শাসন", desc: "আইনানুসারে নির্বাচিত ব্যক্তিদের সমন্বয়ে গঠিত স্থানীয় শাসন সংস্থা।", bcsHot: true },
+      { num: "৬০", title: "স্থানীয় শাসন সংক্রান্ত প্রতিষ্ঠানের ক্ষমতা", desc: "স্থানীয় শাসন সংস্থাসমূহকে কর আরোপ ও বাজেট প্রস্তুতের ক্ষমতা দান।", bcsHot: false },
+      { num: "৬১", title: "সর্বাধিনায়কতা", desc: "বাংলাদেশ প্রতিরক্ষা কর্মবিভাগসমূহের সর্বাধিনায়কতা রাষ্ট্রপতির উপর ন্যস্ত।", bcsHot: true },
+      { num: "৬২", title: "প্রতিরক্ষা কর্মবিভাগে ভর্তি প্রভৃতি", desc: "প্রতিরক্ষা বাহিনীতে নিয়োগ ও নিয়ন্ত্রণ সংসদীয় আইনের দ্বারা নির্ধারিত।", bcsHot: false },
+      { num: "৬৩", title: "যুদ্ধ", desc: "সংসদের সম্মতি ব্যতীত যুদ্ধ ঘোষণা করা বা যুদ্ধে অংশগ্রহণ করা যাইবে না।", bcsHot: true },
+      { num: "৬৪", title: "অ্যাটর্নি-জেনারেল", desc: "রাষ্ট্রপতি উচ্চ আদালতের বিচারক হবার যোগ্যতাসম্পন্ন ব্যক্তিকে অ্যাটর্নি জেনারেল হিসেবে নিয়োগ দেন।", bcsHot: true }
+    ]},
+    { partTitle: "৫ম ভাগ: আইনসভা", partRange: "অনুচ্ছেদ ৬৫ - ৯৩", partId: "part-5", articles: [
+      { num: "৬৫", title: "সংসদ প্রতিষ্ঠা", desc: "‘জাতীয় সংসদ’ নামে বাংলাদেশের একটি সংসদ থাকিবে। ৩০০ একক আঞ্চলিক আসন + ৫০টি সংরক্ষিত নারী আসন।", bcsHot: true },
+      { num: "৬৬", title: "সংসদে নির্বাচিত হইবার যোগ্যতা ও অযোগ্যতা", desc: "বয়স ন্যূনতম ২৫ বছর হইতে হইবে। দেউলিয়া, উন্মাদ বা সাজাপ্রাপ্ত ব্যক্তি অযোগ্য।", bcsHot: true },
+      { num: "৬৭", title: "সদস্যদের আসন শূন্য হওয়া", desc: "অনুমতি ব্যতীত টানা ৯০ কার্যদিবস অনুপস্থিত থাকিলে সংসদ সদস্যপদ শূন্য হয়।", bcsHot: true },
+      { num: "৬৮", title: "সংসদ-সদস্যদের বেতন প্রভৃতি", desc: "সংসদ সদস্যদের বেতন ও ভাতাদি আইনের দ্বারা নির্ধারিত।", bcsHot: false },
+      { num: "৬৯", title: "শপথ গ্রহণের পূর্বে আসন গ্রহণ বা ভোটদান করিলে জরিমানা", desc: "শপথ না নিয়ে সংসদে বসলে বা ভোট দিলে দৈনিক এক হাজার টাকা জরিমানা।", bcsHot: false },
+      { num: "৭০", title: "রাজনৈতিক দল হইতে পদত্যাগ বা দলের বিপক্ষে ভোটদানের কারণে আসন শূন্য হওয়া", desc: "যে দলের মনোনীত হয়ে নির্বাচিত হয়েছেন, সে দল হতে পদত্যাগ বা বিপক্ষে ভোট দিলে সদস্যপদ বাতিল হইবে।", bcsHot: true },
+      { num: "৭১", title: "দ্বৈত সদস্যতায় বাধা", desc: "কোনো ব্যক্তি একই সময়ে দুই বা ততোধিক নির্বাচনী এলাকার সংসদ সদস্য হইবেন না।", bcsHot: true },
+      { num: "৭২", title: "সংসদের অধিবেশন", desc: "এক অধিবেশনের শেষ বৈঠক ও পরবর্তী অধিবেশনের প্রথম বৈঠকের মধ্যে ৬০ দিনের বেশি বিরতি থাকিবে না।", bcsHot: true },
+      { num: "৭৩", title: "সংসদে রাষ্ট্রপতির অধিকার", desc: "সংসদে ভাষণদান ও বাণী প্রেরণের রাষ্ট্রপতির অধিকার।", bcsHot: false },
+      { num: "৭৩ক", title: "সংসদ সম্বন্ধে মন্ত্রীদের অধিকার", desc: "টেকনোক্র্যাট মন্ত্রীগণ সংসদে কথা বলতে পারেন কিন্তু ভোট দিতে পারেন না।", bcsHot: true },
+      { num: "৭৪", title: "স্পিকার ও ডেপুটি স্পিকার", desc: "সংসদের প্রথম বৈঠকে সংসদ সদস্যদের মধ্য থেকে স্পিকার ও ডেপুটি স্পিকার নির্বাচন।", bcsHot: true },
+      { num: "৭৫", title: "কার্যপ্রণালী-বিধি, কোরাম প্রভৃতি", desc: "সংসদের কোরাম গঠনের জন্য ন্যূনতম ৬০ জন সংসদ সদস্যের উপস্থিতি আবশ্যক।", bcsHot: true },
+      { num: "৭৬", title: "সংসদের স্থায়ী কমিটিসমূহ", desc: "সরকারি হিসাব কমিটি, বিশেষ অধিকার কমিটিসহ স্থায়ী কমিটিসমূহ গঠন।", bcsHot: true },
+      { num: "৭৭", title: "ন্যায়পাল (Ombudsman)", desc: "সংসদ আইনের দ্বারা ন্যায়পালের পদ সৃষ্টি করতে পারবে। (তিনি মন্ত্রণালয়ের প্রশাসনিক কাজের তদন্ত করেন)।", bcsHot: true },
+      { num: "৭৮", title: "সংসদ ও সদস্যদের বিশেষ অধিকার ও দায়মুক্তি", desc: "সংসদে বাক-স্বাধীনতার জন্য কোন সদস্যের বিরুদ্ধে আদালতে বিচার চাওয়া যাইবে না।", bcsHot: true },
+      { num: "৭৯", title: "সংসদ সচিবালয়", desc: "জাতীয় সংসদের নিজস্ব স্বাধীন সচিবালয় থাকিবে।", bcsHot: false },
+      { num: "৮০", title: "আইন প্রণয়ন পদ্ধতি", desc: "সংসদে বিল পাস হবার পর ১৫ দিনের মধ্যে রাষ্ট্রপতি সম্মতি দিবেন।", bcsHot: true },
+      { num: "৮১", title: "অর্থবিল", desc: "কেবল কর আরোপ, অর্থ মঞ্জুরি বা সরকারি তহবিল সংক্রান্ত বিল যাহা স্পিকার কর্তৃক প্রত্যয়িত।", bcsHot: true },
+      { num: "৮২", title: "অর্থসংক্রান্ত আর্থিক সুপারিশ", desc: "রাষ্ট্রপতির সুপারিশ ব্যতীত কোন অর্থবিল সংসদে উত্থাপন করা যাইবে না।", bcsHot: false },
+      { num: "৮৩", title: "সংসদের আইন ব্যতীত করারোপে বাধা", desc: "সংসদের কোনো আইনের কর্তৃত্ব ব্যতীত কোন কর আরোপ করা যাইবে না।", bcsHot: true },
+      { num: "৮৪", title: "সংযুক্ত তহবিল ও সরকারি হিসাব", desc: "সরকার কর্তৃক প্রাপ্ত সকল রাজস্ব 'সংযুক্ত তহবিলে' (Consolidated Fund) জমা হইবে।", bcsHot: true },
+      { num: "৮৫", title: "সরকারি অর্থের নিয়ন্ত্রণ", desc: "সংযুক্ত তহবিল থেকে অর্থ প্রত্যাহার ও হেফাজত আইন দ্বারা নিয়ন্ত্রিত।", bcsHot: false },
+      { num: "৮৬", title: "সরকারি হিসাবে অর্থ জমা", desc: "সংযুক্ত তহবিল ব্যতীত অন্যান্য পাবলিক মানি সরকারি হিসাবে জমা হইবে।", bcsHot: false },
+      { num: "৮৭", title: "বার্ষিক আর্থিক বিবৃতি (বাজেট)", desc: "প্রতি অর্থ-বছরের জন্য আনুমানিক আয় ও ব্যয়ের বিবরণী (বাজেট) সংসদে পেশ করা।", bcsHot: true },
+      { num: "৮৮", title: "সংযুক্ত তহবিলের উপর দায়", desc: "রাষ্ট্রপতি, বিচারক, সিএজি, স্পিকারের বেতন সংযুক্ত তহবিলের উপর দায়যুক্ত (সংসদে ভোটের প্রয়োজন হয় না)।", bcsHot: true },
+      { num: "৮৯", title: "বার্ষিক আর্থিক বিবৃতি সম্পর্কিত পদ্ধতি", desc: "মঞ্জুরি দাবির উপর সংসদে আলোচনার বিধান।", bcsHot: false },
+      { num: "৯০", title: "নির্দিষ্টকরণ আইন", desc: "সংযুক্ত তহবিল হতে অর্থ প্রত্যাহারের অনুমোদনের জন্য আইন।", bcsHot: false },
+      { num: "৯১", title: "সম্পূরক ও অতিরিক্ত মঞ্জুরি", desc: "চলতি অর্থ-বছরে বরাদ্দকৃত অর্থ অপর্যাপ্ত হলে সম্পূরক বাজেট পেশ।", bcsHot: false },
+      { num: "৯২", title: "হিসাব, ঋণ ইত্যাদির উপর ভোট", desc: "বিশেষ পরিস্থিতিতে নির্দিষ্ট মেয়াদের জন্য অর্থ অগ্রিম উত্তোলনের অনুমোদন।", bcsHot: false },
+      { num: "৯২ক", title: "[বিলুপ্ত]", desc: "অর্থনৈতিক ক্রান্তিকালে বিশেষ অর্থ মঞ্জুরি (বাতিল)।", bcsHot: false },
+      { num: "৯৩", title: "অধ্যাদেশ প্রণয়ন ক্ষমতা", desc: "সংসদের অধিবেশন না থাকা অবস্থায় বা সংসদ ভেঙে গেলে রাষ্ট্রপতি জরুরী অধ্যাদেশ (Ordinance) জারি করতে পারেন।", bcsHot: true }
+    ]},
+    { partTitle: "৬ষ্ঠ ভাগ: বিচার বিভাগ", partRange: "অনুচ্ছেদ ৯৪ - ১১২", partId: "part-6", articles: [
+      { num: "৯৪", title: "সুপ্রীম কোর্ট প্রতিষ্ঠা", desc: "‘বাংলাদেশের সুপ্রীম কোর্ট’ নামে সর্বোচ্চ আদালত থাকিবে। ইহার দুটি বিভাগ: (১) আপীল বিভাগ (২) হাইকোর্ট বিভাগ।", bcsHot: true },
+      { num: "৯৫", title: "বিচারক নিয়োগ", desc: "প্রধান বিচারপতি ও অন্যান্য বিচারকগণ রাষ্ট্রপতি কর্তৃক নিযুক্ত হইবেন। বিচারক হতে ১০ বছরের এডভোকেট অভিজ্ঞতার প্রয়োজন।", bcsHot: true },
+      { num: "৯৬", title: "বিচারকদের পদের মেয়াদ", desc: "সুপ্রীম কোর্টের বিচারকগণ ৬৭ বছর বয়স পূর্ণ হওয়া পর্যন্ত পদে বহাল থাকিবেন।", bcsHot: true },
+      { num: "৯৭", title: "অস্থায়ী প্রধান বিচারপতি নিয়োগ", desc: "প্রধান বিচারপতির অনুপস্থিতিতে জ্যেষ্ঠ বিচারক দায়িত্ব পালন করবেন।", bcsHot: false },
+      { num: "৯৮", title: "সুপ্রীম কোর্টের অতিরিক্ত বিচারকগণ", desc: "২ বছরের জন্য অতিরিক্ত বিচারক নিয়োগের বিধান।", bcsHot: false },
+      { num: "৯৯", title: "বিচারকগণের অবসর গ্রহণের পর অক্ষমতা", desc: "অবসরের পর সুপ্রীম কোর্টের বিচারক কোনো আদালত বা কর্তৃপক্ষের সমক্ষে ওকালতি করতে পারবেন না।", bcsHot: true },
+      { num: "১০০", title: "সুপ্রীম কোর্টের আসন", desc: "সুপ্রীম কোর্টের স্থায়ী আসন রাজধানী ঢাকায়।", bcsHot: true },
+      { num: "১০১", title: "হাইকোর্ট বিভাগের এখতিয়ার", desc: "হাইকোর্ট বিভাগের মূল ও আপীল এখতিয়ার।", bcsHot: false },
+      { num: "১০২", title: "কতিপয় আদেশ ও নির্দেশ প্রভৃতি জারী করিবার হাইকোর্ট বিভাগের ক্ষমতা (রীট)", desc: "মৌলিক অধিকার বলবৎকরণে ৫ প্রকার রীট (Habeas Corpus, Mandamus, Prohibition, Quo-Warranto, Certiorari) জারি।", bcsHot: true },
+      { num: "১০৩", title: "আপীল বিভাগের এখতিয়ার", desc: "হাইকোর্ট বিভাগের রায়, ডিক্রি বা দণ্ডের বিরুদ্ধে আপীল শুনানির এখতিয়ার।", bcsHot: true },
+      { num: "১০৪", title: "আপীল বিভাগের পরোয়ানা জারী ও প্রকাশ", desc: "সম্পূর্ণ ন্যায়বিচারের জন্য আপীল বিভাগের নির্দেশ জারি করার ক্ষমতা।", bcsHot: false },
+      { num: "১০৫", title: "আপীল বিভাগ কর্তৃক রায় বা আদেশ পুনর্বিবেচনা (Review)", desc: "আপীল বিভাগের ঘোষিত রায় স্বীয় রিভিউ করার ক্ষমতা।", bcsHot: true },
+      { num: "১০৬", title: "সুপ্রীম কোর্টের উপদেষ্টা-সংক্রান্ত এখতিয়ার", desc: "আইনগত গুরুত্বপূর্ণ প্রশ্নে রাষ্ট্রপতি সুপ্রীম কোর্টের মতামত চাইতে পারেন।", bcsHot: true },
+      { num: "১০৭", title: "সুপ্রীম কোর্টের বিধি-প্রণয়ন ক্ষমতা", desc: "রাষ্ট্রপতির অনুমোদন সাপেক্ষে সুপ্রীম কোর্টের নিজস্ব রুলস তৈরির ক্ষমতা।", bcsHot: false },
+      { num: "১০৮", title: "‘কোর্ট অব রেকর্ড’ রূপে সুপ্রীম কোর্ট", desc: "সুপ্রীম কোর্ট একটি ‘কোর্ট অব রেকর্ড’ এবং অবমাননার জন্য দণ্ডদানের ক্ষমতা রহিয়াছে।", bcsHot: true },
+      { num: "১০৯", title: "আদালতসমূহের উপর তত্ত্বাবধান ও নিয়ন্ত্রণ", desc: "হাইকোর্ট বিভাগ অধস্তন সকল আদালত ও ট্রাইব্যুনালের উপর তত্ত্বাবধান করবে।", bcsHot: true },
+      { num: "১১০", title: "অধস্তন আদালত হইতে হাইকোর্ট বিভাগে মামলা স্থানান্তর", desc: "সংবিধানের ব্যাখ্যা জড়িত মামলা হাইকোর্টে স্থানান্তর।", bcsHot: false },
+      { num: "১১১", title: "সুপ্রীম কোর্টের রায়ের বাধ্যবাধকতা", desc: "আপীল বিভাগের ঘোষিত আইন হাইকোর্ট ও অধস্তন আদালতের জন্য এবং হাইকোর্টের আইন অধস্তন আদালতের জন্য বাধ্যতামূলক।", bcsHot: true },
+      { num: "১১২", title: "সুপ্রীম কোর্টের সহায়তা", desc: "প্রজাতন্ত্রের সীমানার ভিতরের সকল নির্বাহী ও বিচার বিভাগীয় কর্তৃপক্ষ সুপ্রীম কোর্টের সহায়তা করিবেন।", bcsHot: false },
+      { num: "১১৩", title: "অধস্তন আদালতসমূহ প্রতিষ্ঠা", desc: "আইন দ্বারা অধস্তন দেওয়ানী ও ফৌজদারী আদালত প্রতিষ্ঠা।", bcsHot: false },
+      { num: "১১৪", title: "অধস্তন আদালতে নিয়োগ", desc: "অধস্তন আদালতের বিচারক পদে নিয়োগ রাষ্ট্রপতি কর্তৃক প্রদত্ত সার্ভিস রুলস অনুযায়ী (BJS পরীক্ষা)।", bcsHot: true },
+      { num: "১১৫", title: "অধস্তন আদালতের নিয়ন্ত্রণ ও শৃঙ্খলা", desc: "অধস্তন বিচারকদের নিয়ন্ত্রণ ও শৃঙ্খলা সুপ্রীম কোর্টের সাথে পরামর্শক্রমে রাষ্ট্রপতির উপর ন্যস্ত।", bcsHot: true },
+      { num: "১১৬", title: "বিচার বিভাগীয় কর্মচারীদের দায়িত্ব পালনের ক্ষেত্রে স্বাধীনতা", desc: "বিচার বিভাগীয় দায়িত্ব পালনের ক্ষেত্রে বিচারকগণ স্বাধীন।", bcsHot: true },
+      { num: "১১৭", title: "প্রশাসনিক ট্রাইব্যুনাল", desc: "সরকারি কর্মচারীদের চাকরি সংক্রান্ত বিরোধ নিষ্পত্তির জন্য প্রশাসনিক ট্রাইব্যুনাল গঠন।", bcsHot: true }
+    ]},
+    { partTitle: "৭ম ভাগ: নির্বাচন", partRange: "অনুচ্ছেদ ১১৮ - ১২৬", partId: "part-7", articles: [
+      { num: "১১৮", title: "নির্বাচন কমিশন গঠন", desc: "একজন প্রধান নির্বাচন কমিশনার ও সর্বোচ্চ ৪ জন কমিশনার নিয়ে নির্বাচন কমিশন গঠন। রাষ্ট্রপতি নিয়োগ দেন।", bcsHot: true },
+      { num: "১১৯", title: "নির্বাচন কমিশনের দায়িত্ব", desc: "রাষ্ট্রপতি ও সংসদ নির্বাচন পরিচালনা, ভোটার তালিকা প্রস্তুত ও সীমানা পুনঃনির্ধারণ।", bcsHot: true },
+      { num: "১২০", title: "নির্বাচন কমিশনের কর্মচারীগণ", desc: "কমিশনের চাহিদামতো রাষ্ট্রপতি প্রয়োজনীয় কর্মচারী দান করবেন।", bcsHot: false },
+      { num: "১২১", title: "প্রতিটি এলাকার জন্য একটিমাত্র ভোটার তালিকা", desc: "ধর্ম, বর্ণ বা লিঙ্গভিত্তিক পৃথক নির্বাচন মণ্ডলী গঠন করা যাইবে না।", bcsHot: false },
+      { num: "১২২", title: "ভোটার তালিকায় নামভুক্তির যোগ্যতা", desc: "বাংলাদেশের নাগরিক, বয়স ন্যূনতম ১৮ বছর এবং আদালত কর্তৃক অপ্রকৃতিস্থ ঘোষিত নয়।", bcsHot: true },
+      { num: "১২৩", title: "নির্বাচন অনুষ্ঠানের সময়", desc: "সংসদ ভেঙে যাওয়ার ৯০ দিনের মধ্যে অথবা মেয়াদ শেষ হবার পূর্ববর্তী ৯০ দিনের মধ্যে নির্বাচন।", bcsHot: true },
+      { num: "১২৪", title: "নির্বাচন সম্পর্কে সংসদের বিধান প্রণয়নের ক্ষমতা", desc: "সীমানা ও ভোটার তালিকা সংক্রান্ত আইন পাসের ক্ষমতা।", bcsHot: false },
+      { num: "১২৫", title: "নির্বাচনী বিষয়াবলীর বৈধতা", desc: "নির্বাচন কমিশনের তফসিল বা কার্যধারা নিয়ে আদালতে প্রশ্ন তোলা যাবে না।", bcsHot: false },
+      { num: "১২৬", title: "নির্বাচন কমিশনকে সহায়তা দান", desc: "নির্বাচন কমিশনকে সহায়তা করা সকল নির্বাহী কর্তৃপক্ষের কর্তব্য।", bcsHot: true }
+    ]},
+    { partTitle: "৮ম ভাগ: মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক", partRange: "অনুচ্ছেদ ১২৭ - ১৩২", partId: "part-8", articles: [
+      { num: "১২৭", title: "মহা হিসাব-নিরীক্ষক পদের সৃষ্টি", desc: "বাংলাদেশের একজন মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক (CAG) থাকিবেন। তাহাকে রাষ্ট্রপতি নিয়োগ দেন।", bcsHot: true },
+      { num: "১২৮", title: "মহা হিসাব-নিরীক্ষকের দায়িত্ব", desc: "সরকারি হিসাব ও সকল আদালত/কর্তৃপক্ষের হিসাব পরীক্ষা ও নিরীক্ষা করা।", bcsHot: true },
+      { num: "১২৯", title: "মহা হিসাব-নিরীক্ষকের কর্মের মেয়াদ", desc: "দায়িত্ব গ্রহণের তারিখ হতে ৫ বছর বা ৬৫ বছর বয়স পূর্ণ হওয়া (যাহা পূর্বে আসে)।", bcsHot: true },
+      { num: "১৩০", title: "অস্থায়ী মহা হিসাব-নিরীক্ষক", desc: "CAG এর অনুপস্থিতিতে সাময়িক নিয়োগ।", bcsHot: false },
+      { num: "১৩১", title: "প্রজাতন্ত্রের হিসাব রক্ষার আকার ও পদ্ধতি", desc: "রাষ্ট্রপতির অনুমোদনক্রমে CAG নির্ধারিত পদ্ধতিতে সরকারি হিসাব রাখা।", bcsHot: false },
+      { num: "১৩২", title: "সংসদে মহা হিসাব-নিরীক্ষকের রিপোর্ট পেশ", desc: "CAG-এর প্রতিবেদন রাষ্ট্রপতির নিকট পেশ করা হইবে এবং রাষ্ট্রপতি তাহা সংসদে পেশ করার ব্যবস্থা করিবেন।", bcsHot: true }
+    ]},
+    { partTitle: "৯ম ভাগ: বাংলাদেশের কর্মবিভাগ", partRange: "অনুচ্ছেদ ১৩৩ - ১৪১", partId: "part-9", articles: [
+      { num: "১৩৩", title: "নিয়োগ ও কর্মের শর্তাবলী", desc: "প্রজাতন্ত্রের কর্মে কর্মচারী নিয়োগ ও কর্মের শর্তাবলী সংসদীয় আইনের দ্বারা নিয়ন্ত্রিত।", bcsHot: true },
+      { num: "১৩৪", title: "কর্মের মেয়াদ", desc: "সংবিধানের বিধান সাপেক্ষে সরকারি কর্মচারিগণ রাষ্ট্রপতির সন্তোষানুযায়ী পদে বহাল থাকিবেন।", bcsHot: false },
+      { num: "১৩৫", title: "অসামরিক সরকারি কর্মচারীদের বরখাস্ত প্রভৃতি", desc: "আত্মপক্ষ সমর্থনের যুক্তিযুক্ত সুযোগ না দিয়া কোনো সরকারি কর্মচারীকে বরখাস্ত বা অপসারিত করা যাইবে না।", bcsHot: true },
+      { num: "১৩৬", title: "কর্মবিভাগ পুনর্গঠন", desc: "আইন দ্বারা সার্ভিস পুনর্গঠন বা একত্রীকরণ করা যাইবে।", bcsHot: false },
+      { num: "১৩৭", title: "কমিশন গঠন", desc: "আইন দ্বারা এক বা একাধিক সরকারি কর্ম কমিশন (BPSC) গঠিত হইবে।", bcsHot: true },
+      { num: "১৩৮", title: "সদস্য নিয়োগ", desc: "পিএসসির চেয়ারম্যান ও অন্যান্য সদস্যগণ রাষ্ট্রপতি কর্তৃক নিযুক্ত হইবেন (নূন্যতম অর্ধেক সদস্য ১৫ বছর সরকারি চাকুরিজীবী হতে হবে)।", bcsHot: true },
+      { num: "১৩৯", title: "পদের মেয়াদ", desc: "পিএসসি চেয়ারম্যান ও সদস্যদের মেয়াদ ৫ বছর বা ৬৫ বছর বয়স (যাহা পূর্বে আসে)।", bcsHot: true },
+      { num: "১৪০", title: "কমিশনের দায়িত্ব", desc: "প্রজাতন্ত্রের কর্মে নিয়োগের জন্য পরীক্ষা পরিচালনা ও পরামর্শ প্রদান।", bcsHot: true },
+      { num: "১৪১", title: "বার্ষিক রিপোর্ট", desc: "প্রতি বছর কমিশন রাষ্ট্রপতির নিকট রিপোর্ট পেশ করিবে এবং রাষ্ট্রপতি তাহা সংসদে উপস্থাপন করিবেন।", bcsHot: true }
+    ]},
+    { partTitle: "৯ম (ক) ভাগ: জরুরী বিধানাবলী", partRange: "অনুচ্ছেদ ১৪১ক - ১৪১গ", partId: "part-9a", articles: [
+      { num: "১৪১ক", title: "জরুরী অবস্থা ঘোষণা", desc: "যুদ্ধ, বহিরাক্রমণ বা অভ্যন্তরীণ গোলযোগের কারণে রাষ্ট্রপতি প্রধানমন্ত্রীর পূর্ব-স্বাক্ষর নিয়ে জরুরি অবস্থা ঘোষণা করতে পারেন (সর্বোচ্চ ১২০ দিন সংসদ অনুমোদন ছাড়া)।", bcsHot: true },
+      { num: "১৪১খ", title: "জরুরী অবস্থার সময় সংবিধানের কতিপয় অনুচ্ছেদের স্থগিতকরণ", desc: "জরুরি অবস্থা চলাকালে ৩৬, ৩৭, ৩৮, ৩৯, ৪০ ও ৪১ অনুচ্ছেদের মৌলিক অধিকারসমূহ স্থগিত থাকে।", bcsHot: true },
+      { num: "১৪১গ", title: "জরুরী অবস্থার সময় মৌলিক অধিকারসমূহ বলবৎকরণ স্থগিতকরণ", desc: "আদালতে মৌলিক অধিকার বলবৎ করার অধিকার রাষ্ট্রপতির আদেশক্রমে স্থগিত রাখা যায়।", bcsHot: true }
+    ]},
+    { partTitle: "১০ম ভাগ: সংবিধান-সংশোধন", partRange: "অনুচ্ছেদ ১৪২", partId: "part-10", articles: [
+      { num: "১৪২", title: "সংবিধানের বিধান সংশোধনের ক্ষমতা", desc: "সংসদের মোট সদস্য-সংখ্যার ন্যূনতম দুই-তৃতীয়াংশ (২/৩) ভোটের মাধ্যমে সংবিধানের যেকোনো বিধান সংশোধন বা রদ করা যাইবে। রাষ্ট্রপতির সম্মতির সময় ৭ দিন।", bcsHot: true }
+    ]},
+    { partTitle: "১১শ ভাগ: বিবিধ", partRange: "অনুচ্ছেদ ১৪৩ - ১৫৩", partId: "part-11", articles: [
+      { num: "১৪৩", title: "প্রজাতন্ত্রের সম্পত্তি", desc: "মালিকহীন সম্পত্তি, খনিজ সম্পদ, ও সামুদ্রিক এলাকার সম্পদের মালিক প্রজাতন্ত্র।", bcsHot: false },
+      { num: "১৪৪", title: "সম্পত্তি ও কারবার প্রভৃতি সম্পর্কে নির্বাহী ক্ষমতা", desc: "প্রজাতন্ত্রের নামে সম্পত্তি ক্রয়, বিক্রয় ও চুক্তি সম্পাদনের ক্ষমতা।", bcsHot: false },
+      { num: "১৪৫", title: "চুক্তি ও দলিল", desc: "প্রজাতন্ত্রের পক্ষে সম্পাদিত সকল চুক্তি রাষ্ট্রপতির নামে সম্পাদিত হইবে।", bcsHot: true },
+      { num: "১৪৫ক", title: "আন্তর্জাতিক চুক্তি", desc: "বিদেশী রাষ্ট্রের সহিত সম্পাদিত চুক্তি রাষ্ট্রপতির নিকট পেশ করা হইবে এবং রাষ্ট্রপতি তাহা সংসদে পেশ করার ব্যবস্থা করিবেন।", bcsHot: true },
+      { num: "১৪৬", title: "মামলা-মোকদ্দমা", desc: "বাংলাদেশ সরকারের নামে মামলা দায়ের করা যাইবে বা সরকারের বিরুদ্ধে মামলা করা যাইবে।", bcsHot: true },
+      { num: "১৪৭", title: "কতিপয় পদাধিকারীর পারিশ্রমিক প্রভৃতি", desc: "রাষ্ট্রপতি, প্রধানমন্ত্রী, স্পিকার, বিচারক, সিএজি, নির্বাচন কমিশনার ও পিএসসি সদস্যদের বেতন পদাধিকারকালে কমানো যাবে না।", bcsHot: true },
+      { num: "১৪৮", title: "পদের শপথ", desc: "৩য় তফসিলে বর্ণিত ব্যক্তিগণ কার্যভার গ্রহণের পূর্বে নির্ধারিত শপথ গ্রহণ করিবেন।", bcsHot: true },
+      { num: "১৪৯", title: "প্রচলিত আইনের বহাল থাকা", desc: "সংবিধান প্রবর্তনের পূর্বে বিদ্যমান সকল আইন বহাল থাকিবে।", bcsHot: false },
+      { num: "১৫০", title: "ক্রান্তিকালীন ও অস্থায়ী বিধানাবলী", desc: "৪র্থ, ৫ম, ৬ষ্ঠ ও ৭ম তফসিলে বর্ণিত ঐতিহাসিক দলিলসমূহ সংরক্ষণ ও কার্যকারিতা।", bcsHot: true },
+      { num: "১৫১", title: "রদকরণ", desc: "বাংলাদেশের অস্থায়ী সংবিধান আদেশ ১৯৭২ রদ করা হইল।", bcsHot: false },
+      { num: "১৫২", title: "ব্যাখ্যা", desc: "সংবিধানে ব্যবহৃত শব্দসমূহের আইনগত ব্যাখ্যা (যেমন: নাগরিক, আইন, আদালত ইত্যাদি)।", bcsHot: true },
+      { num: "১৫৩", title: "প্রবর্তন, উল্লেখ ও প্রামাণিক পাঠ", desc: "১৬ ডিসেম্বর ১৯৭২ তারিখ হতে প্রবর্তিত। মূল সংবিধান বাংলা ও ইংরেজিতে লিখিত; কিন্তু পাঠগত বিরোধে ‘বাংলা পাঠ প্রাধান্য পাইবে’।", bcsHot: true }
+    ]}
+  ],
+
+  schedules: {
+    icon: "calendar",
+    title: "৪. সংবিধানের ৭টি তফসিল",
+    subtitle: "BCS পরীক্ষার জন্য তফসিলের বিস্তারিত",
+    list: [
+      { num: "১ম", title: "অন্যান্য প্রভাবশালী আইন", desc: "সংবিধানের ২৬ অনুচ্ছেদ সত্ত্বেও যে আইন বহাল থাকবে (অনুচ্ছেদ ৪৭)।" },
+      { num: "২য়", title: "রাষ্ট্রপতি নির্বাচন", desc: "[বিলুপ্ত] ১২তম সংশোধনীর মাধ্যমে অবলুপ্ত।" },
+      { num: "৩য়", title: "শপথ ও ঘোষণা", desc: "রাষ্ট্রপতি, প্রধানমন্ত্রী, স্পিকার, বিচারপতি, সাংসদ, CAG, PSC প্রধানের শপথ (অনুচ্ছেদ ১৪৮)।" },
+      { num: "৪র্থ", title: "ক্রান্তিকালীন বিধান", desc: "১৯৭১-এর ২৬ মার্চ থেকে ১৯৭২-এর ১৬ ডিসেম্বর পর্যন্ত (অনুচ্ছেদ ১৫০)।" },
+      { num: "৫ম", title: "৭ই মার্চের ভাষণ", desc: "১৯৭১ সালের ৭ মার্চ রেসকোর্স ময়দানে বঙ্গবন্ধুর ঐতিহাসিক ভাষণ (১৫তম সংশোধনী, অনুচ্ছেদ ১৫০(২))।", highlight: true },
+      { num: "৬ষ্ঠ", title: "স্বাধীনতার ঘোষণা", desc: "২৫/২৬ মার্চ ১৯৭১ বঙ্গবন্ধুর স্বাধীনতা ঘোষণা (অনুচ্ছেদ ১৫০(২))।", highlight: true },
+      { num: "৭ম", title: "স্বাধীনতার ঘোষণাপত্র", desc: "১৯৭১ সালের ১০ এপ্রিল মুজিবনগর সরকার কর্তৃক জারিকৃত Proclamation of Independence (অনুচ্ছেদ ১৫০(২))।", highlight: true, wide: true }
+    ]
+  },
+
+  amendments: {
+    icon: "git-commit",
+    title: "৫. সংবিধানের ১৭টি সংশোধনী",
+    subtitle: "BCS প্রিলির জন্য সংশোধনীর মূল বিষয়বস্তু",
+    headers: ["সংশোধনী", "সাল", "মূল বিষয়বস্তু", "BCS Note"],
+    list: [
+      { num: "১ম",   year: "১৯৭৩", desc: "যুদ্ধাপরাধীদের বিচার নিশ্চিতকরণ (৪৭(৩))।",                          note: "গুরুত্বপূর্ণ", noteStyle: "accent" },
+      { num: "২য়",   year: "১৯৭৩", desc: "জরুরি অবস্থা (৯ম-ক), নিবারক আটক।",                                  note: "জরুরি",     noteStyle: "muted" },
+      { num: "৩য়",   year: "১৯৭৪", desc: "বাংলাদেশ-ভারত সীমান্ত চুক্তি।",                                    note: "সীমান্ত",   noteStyle: "muted" },
+      { num: "৪র্থ",  year: "১৯৭৫", desc: "রাষ্ট্রপতি শাসিত ও একদলীয় (বাকশাল)।",                             note: "BCS Hot",   noteStyle: "warn", rowHighlight: true },
+      { num: "৫ম",   year: "১৯৭৯", desc: "সামরিক শাসনের বৈধতা (পরবর্তীতে বাতিল)।",                           note: "সামরিক",    noteStyle: "muted" },
+      { num: "৬ষ্ঠ",  year: "১৯৮১", desc: "উপ-রাষ্ট্রপতি পদ বহাল।",                                          note: "উপ-রাষ্ট্রপতি", noteStyle: "muted" },
+      { num: "৭ম",   year: "১৯৮৬", desc: "এরশাদ শাসনের বৈধতা (বাতিল)।",                                      note: "এরশাদ",     noteStyle: "muted" },
+      { num: "৮ম",   year: "১৯৮৮", desc: "ইসলাম = রাষ্ট্রধর্ম; ৬টি হাইকোর্ট বেঞ্চ (বেঞ্চ বাতিল)।",              note: "BCS Hot",   noteStyle: "warn", rowHighlight: true },
+      { num: "৯ম",   year: "১৯৮৯", desc: "রাষ্ট্রপতি মেয়াদ ২ বার (১০ বছর)।",                                 note: "মেয়াদ",    noteStyle: "muted" },
+      { num: "১০ম",  year: "১৯৯০", desc: "৩০ সংরক্ষিত নারী আসনের মেয়াদ বৃদ্ধি।",                             note: "নারী আসন", noteStyle: "muted" },
+      { num: "১১শ",  year: "১৯৯১", desc: "সাহাবুদ্দীন আহমদের স্বপদে প্রত্যাবর্তন।",                            note: "সাহাবুদ্দীন", noteStyle: "muted" },
+      { num: "১২তম", year: "১৯৯১", desc: "সংসদীয় সরকার পুনঃপ্রবর্তন।",                                        note: "Must Know", noteStyle: "accent", rowHighlight: "accent" },
+      { num: "১৩তম", year: "১৯৯৬", desc: "তত্ত্বাবধায়ক সরকার (২০১১ বাতিল)।",                                  note: "BCS Hot",   noteStyle: "warn", rowHighlight: true },
+      { num: "১৪তম", year: "২০০৪", desc: "মহিলা ৪৫ আসন; বিচারক অবসর ৬৫→৬৭।",                                 note: "অবসর ৬৭",  noteStyle: "muted" },
+      { num: "১৫তম", year: "২০১১", desc: "তত্ত্বাবধায়ক বাতিল; ৫ম/৬ষ্ঠ/৭ম তফসিল যুক্ত।",                        note: "Must Know", noteStyle: "accent", rowHighlight: "accent" },
+      { num: "১৬তম", year: "২০১৪", desc: "বিচারপতি অপসারণ সংসদের হাতে (বাতিল)।",                              note: "বিচারপতি", noteStyle: "muted" },
+      { num: "১৭তম", year: "২০১৮", desc: "৫০ নারী আসনের মেয়াদ ২৫ বছর বৃদ্ধি।",                               note: "সর্বশেষ",  noteStyle: "muted" }
+    ]
+  }
+};
+
+/* ============================================================
+   STORAGE + UTILITIES
+   ============================================================ */
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+const escapeHtml = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const shuffle = arr => { const c = arr.slice(); for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; } return c; };
+const allArticles = () => SITE_DATA.constitutionData.flatMap(p =>
+  p.articles.map(a => ({ ...a, partTitle: p.partTitle, partRange: p.partRange }))
+);
+
+/* ============================================================
+   RENDER: Header
+   ============================================================ */
+function renderHeader(data) {
+  const navLinks = data.nav.map(n =>
+    `<a href="${n.href}" class="nav-link ${n.primary ? 'nav-primary' : ''} px-3 py-2 rounded-lg">${escapeHtml(n.label)}</a>`
+  ).join('');
+  return `
+    <header class="sticky top-0 z-50 shadow-xl border-b" style="background: var(--panel); border-color: var(--line); backdrop-filter: blur(8px);">
+      <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex flex-col lg:flex-row lg:justify-between lg:items-center gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="p-2 rounded-xl shrink-0" style="background: var(--accent-2);">
+            <i data-lucide="book-open" class="w-6 h-6 text-white"></i>
+          </div>
+          <div class="min-w-0">
+            <h1 class="text-base sm:text-lg lg:text-xl font-bold flex flex-wrap items-center gap-2 leading-snug">
+              ${escapeHtml(data.meta.title)}
+              <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full font-normal text-white" style="background: var(--accent);">${escapeHtml(data.meta.badge)}</span>
+            </h1>
+            <p class="text-xs sm:text-sm muted">${escapeHtml(data.meta.subtitle)}</p>
+          </div>
+        </div>
+        <nav class="top-nav flex items-center gap-1.5 text-xs sm:text-sm font-medium w-full lg:w-auto">
+          ${navLinks}
+          <button id="themeToggle" type="button" class="nav-link px-3 py-2 rounded-lg" aria-label="থিম পরিবর্তন">☀️ Light</button>
+        </nav>
+      </div>
+    </header>`;
+}
+
+/* ============================================================
+   RENDER: Section header helper
+   ============================================================ */
+function renderSectionHeader(data) {
+  return `
+    <div class="flex items-center gap-3 mb-6 border-b pb-4" style="border-color: var(--line);">
+      <div class="p-2 rounded-lg" style="background: rgba(16,185,129,.15); color: var(--accent-txt);">
+        <i data-lucide="${data.icon}" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="text-lg sm:text-2xl font-bold">${escapeHtml(data.title)}</h2>
+        <p class="text-xs sm:text-sm muted">${escapeHtml(data.subtitle)}</p>
+      </div>
+    </div>`;
+}
+
+/* ============================================================
+   RENDER: History
+   ============================================================ */
+function renderHistory(data) {
+  const metrics = data.metrics.map(m => `
+    <div class="p-4 rounded-xl" style="background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.25);">
+      <p class="text-xs font-semibold eyebrow mb-1">${escapeHtml(m.label)}</p>
+      <p class="text-lg sm:text-xl font-bold">${escapeHtml(m.value)}</p>
+      <p class="text-xs ${m.accent ? 'font-semibold' : 'muted'} mt-1" ${m.accent ? 'style="color: var(--accent-txt);"' : ''}>${escapeHtml(m.sub)}</p>
+    </div>`).join('');
+
+  const cards = data.cards.map(c => {
+    const items = c.items.map(it => {
+      if (it.text) {
+        return `<li class="${it.accent ? 'font-semibold' : 'muted'}" ${it.accent ? 'style="color: var(--accent-txt);"' : ''}>• ${escapeHtml(it.text)}</li>`;
+      }
+      return `<li class="muted">• <strong style="color: var(--txt);">${escapeHtml(it.label)}:</strong> ${escapeHtml(it.value)}</li>`;
+    }).join('');
+    return `
+      <div class="p-4 rounded-xl" style="background: var(--card); border: 1px solid var(--line);">
+        <h3 class="font-bold mb-2 flex items-center gap-2">
+          <i data-lucide="${c.icon}" class="w-4 h-4" style="color: var(--accent);"></i> ${escapeHtml(c.title)}
+        </h3>
+        <ul class="space-y-1.5 text-sm">${items}</ul>
+      </div>`;
+  }).join('');
+
+  return `
+    <section id="history" class="panel p-5 sm:p-8 rounded-2xl">
+      ${renderSectionHeader(data)}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">${metrics}</div>
+      <div class="grid md:grid-cols-3 gap-3 text-sm">${cards}</div>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Parts
+   ============================================================ */
+function renderParts(data) {
+  const parts = data.list.map(p => `
+    <div class="p-3.5 rounded-xl flex items-start gap-3" style="background: var(--card); border: 1px solid var(--line);">
+      <span class="w-8 h-8 rounded-lg text-white font-bold flex items-center justify-center shrink-0 text-sm" style="background: ${p.hot ? '#d97706' : 'var(--accent-2)'};">${escapeHtml(p.n)}</span>
+      <div class="min-w-0">
+        <span class="text-xs font-semibold uppercase" style="color: var(--accent-txt);">${escapeHtml(p.name)}</span>
+        <h4 class="font-bold text-sm">${escapeHtml(p.n)}ম ভাগ (অনুচ্ছেদ ${escapeHtml(p.range)})</h4>
+        <p class="text-xs muted mt-0.5">কীওয়ার্ড: <strong>${escapeHtml(p.keyword)}</strong></p>
+      </div>
+    </div>`).join('');
+
+  return `
+    <section id="parts-shortcuts" class="panel p-5 sm:p-8 rounded-2xl">
+      ${renderSectionHeader(data)}
+      <div class="text-white p-4 sm:p-5 rounded-xl mb-5 shadow-md" style="background: linear-gradient(135deg, #d97706, #b45309);">
+        <p class="text-xs uppercase tracking-wider font-semibold mb-1" style="color: #fde68a;">মাস্টার নেমোনিক:</p>
+        <p class="text-sm sm:text-base font-bold leading-relaxed">"${escapeHtml(data.mnemonic)}"</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">${parts}</div>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Practice (Flashcard + MCQ)
+   ============================================================ */
+function renderFlashcardsShell(data) {
+  const examOpts = data.examTypes.map(o => `<option value="${o.value}">${escapeHtml(o.label)}</option>`).join('');
+  const scopeOpts = data.scopes.map(o => `<option value="${o.value}">${escapeHtml(o.label)}</option>`).join('');
+  const kindOpts = data.kinds.map(o => `<option value="${o.value}">${escapeHtml(o.label)}</option>`).join('');
+  const sizeOpts = data.sizes.map(s => `<option value="${s}"${s === data.defaultSize ? ' selected' : ''}>${s} প্রশ্ন</option>`).join('');
+  const kbHint = data.keyboardHint.map(k =>
+    `<kbd class="px-1 rounded" style="background: var(--card); border: 1px solid var(--line);">${escapeHtml(k.key)}</kbd> = ${escapeHtml(k.desc)}`
+  ).join(' · ');
+
+  return `
+    <section id="flashcards" class="panel p-4 sm:p-7 rounded-2xl">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-3 mb-5">
+        <div>
+          <p class="eyebrow text-xs font-bold tracking-wide uppercase mb-1">${escapeHtml(data.eyebrow)}</p>
+          <h2 class="text-lg sm:text-2xl font-bold">${escapeHtml(data.title)}</h2>
+          <p class="muted text-xs sm:text-sm mt-1">${escapeHtml(data.subtitle)}</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button id="modeFlash" class="mode-btn active px-4 py-2 rounded-lg font-semibold" type="button">📇 Flashcard</button>
+          <button id="modeMcq" class="mode-btn px-4 py-2 rounded-lg font-semibold" type="button">📝 MCQ</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <label class="text-xs font-semibold"><span class="muted">পরীক্ষার ধরন</span>
+          <select id="examType" class="study-input mt-1 w-full rounded-lg border px-3 py-2.5 text-sm">${examOpts}</select>
+        </label>
+        <label class="text-xs font-semibold"><span class="muted">প্রশ্নের পরিধি</span>
+          <select id="questionScope" class="study-input mt-1 w-full rounded-lg border px-3 py-2.5 text-sm">${scopeOpts}</select>
+        </label>
+        <label class="text-xs font-semibold"><span class="muted">প্রশ্নের ধরন (MCQ)</span>
+          <select id="questionKind" class="study-input mt-1 w-full rounded-lg border px-3 py-2.5 text-sm">${kindOpts}</select>
+        </label>
+        <label class="text-xs font-semibold"><span class="muted">প্রশ্ন সংখ্যা</span>
+          <select id="sessionSize" class="study-input mt-1 w-full rounded-lg border px-3 py-2.5 text-sm">${sizeOpts}</select>
+        </label>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="studyProgress" class="muted text-sm">প্রস্তুত হলে শুরু করুন</span>
+          <span id="studyBadge" class="text-[10px] font-bold px-2 py-1 rounded-full" style="display:none; background: rgba(16,185,129,.2); color: var(--accent-txt);"></span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button id="startStudy" type="button" class="action-btn px-3 py-2 rounded-lg font-bold text-sm">▶ নতুন সেট</button>
+          <button id="prevQuestion" type="button" class="secondary-btn px-3 py-2 rounded-lg text-sm">← আগের</button>
+          <button id="showAnswer" type="button" class="secondary-btn px-3 py-2 rounded-lg text-sm">👁 উত্তর দেখুন</button>
+          <button id="nextQuestion" type="button" class="secondary-btn px-3 py-2 rounded-lg text-sm">পরের →</button>
+        </div>
+      </div>
+
+      <div class="progress-track mb-4"><div id="progressFill" class="progress-fill" style="width: 0%;"></div></div>
+
+      <div id="studyCard" class="study-card rounded-2xl p-5 sm:p-7 min-h-[260px] flex flex-col flash-enter" aria-live="polite">
+        <div class="eyebrow text-xs font-bold mb-2">${escapeHtml(data.initialCard.eyebrow)}</div>
+        <h3 class="text-base sm:text-xl font-bold mb-3">${escapeHtml(data.initialCard.title)}</h3>
+        <p class="muted text-sm">${escapeHtml(data.initialCard.body)}</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        <button id="markKnown" type="button" class="secondary-btn px-3 py-2 rounded-lg text-sm">✓ জানতাম</button>
+        <button id="markReview" type="button" class="secondary-btn px-3 py-2 rounded-lg text-sm">↻ আবার পড়ব</button>
+        <span id="studyScore" class="muted text-sm self-center ml-auto">স্কোর: ০ / ০</span>
+      </div>
+
+      <p class="muted text-[11px] mt-3">⌨️ ${kbHint}</p>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Directory shell
+   ============================================================ */
+function renderDirectoryShell(data) {
+  const filterBtns = data.filters.map((f, i) =>
+    `<button type="button" data-filter="${f.value}" class="filter-btn ${i === 0 ? 'active-filter' : ''} px-3 py-2 rounded-lg text-xs font-semibold">${escapeHtml(f.label)}</button>`
+  ).join('');
+
+  return `
+    <section id="articles-directory" class="panel p-4 sm:p-8 rounded-2xl">
+      <div class="search-wrap pt-2 pb-4 mb-4 border-b space-y-3" style="border-color: var(--line);">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg sm:text-2xl font-bold flex items-center gap-2">
+              <i data-lucide="${data.icon}" class="w-5 h-5" style="color: var(--accent);"></i> ${escapeHtml(data.title)}
+            </h2>
+            <p class="text-xs sm:text-sm muted">${escapeHtml(data.subtitle)}</p>
+          </div>
+          <span id="result-count" class="text-xs font-bold px-3 py-1 rounded-full" style="background: rgba(16,185,129,.15); color: var(--accent-txt);">দেখাচ্ছে: ১৫৩ / ১৫৩</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <div class="relative sm:col-span-2">
+            <input type="text" id="articleSearch" placeholder="${escapeHtml(data.placeholder)}"
+              class="w-full pl-10 pr-3 py-2.5 rounded-xl text-sm study-input" oninput="filterArticles()">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 muted"></i>
+          </div>
+          <div class="flex gap-1.5 overflow-x-auto">${filterBtns}</div>
+        </div>
+      </div>
+      <div id="articlesContainer" class="space-y-6"></div>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Schedules
+   ============================================================ */
+function renderSchedules(data) {
+  const items = data.list.map(s => {
+    const bg = s.highlight ? 'rgba(244,63,94,.08)' : 'var(--card)';
+    const border = s.highlight ? 'rgba(244,63,94,.3)' : 'var(--line)';
+    const numBg = s.highlight ? 'rgba(244,63,94,.25)' : 'rgba(244,63,94,.15)';
+    return `
+      <div class="p-4 rounded-xl ${s.wide ? 'md:col-span-2' : ''}" style="background: ${bg}; border: 1px solid ${border};">
+        <div class="flex items-center gap-2 font-bold mb-1 flex-wrap" style="color: #fb7185;">
+          <span class="px-2 py-0.5 rounded text-xs" style="background: ${numBg};">${escapeHtml(s.num)} তফসিল</span>
+          <h4>${escapeHtml(s.title)}</h4>
+        </div>
+        <p class="text-xs muted leading-relaxed">${escapeHtml(s.desc)}</p>
+      </div>`;
+  }).join('');
+  return `
+    <section id="schedules" class="panel p-5 sm:p-8 rounded-2xl">
+      ${renderSectionHeader(data)}
+      <div class="grid md:grid-cols-2 gap-3">${items}</div>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Amendments
+   ============================================================ */
+function renderAmendments(data) {
+  const noteStyle = {
+    accent: `color: var(--accent-txt); font-weight: bold;`,
+    warn: `color: var(--warn); font-weight: 600;`,
+    muted: `color: var(--txt-mute);`
+  };
+  const rows = data.list.map(a => {
+    const rowBg = a.rowHighlight === 'accent' ? 'rgba(16,185,129,.08)' : a.rowHighlight ? 'rgba(245,158,11,.08)' : 'transparent';
+    return `
+      <tr style="background: ${rowBg};">
+        <td class="p-3 font-bold" style="color: var(--txt);">${escapeHtml(a.num)}</td>
+        <td class="p-3">${escapeHtml(a.year)}</td>
+        <td class="p-3">${escapeHtml(a.desc)}</td>
+        <td class="p-3" style="${noteStyle[a.noteStyle] || ''}">${escapeHtml(a.note)}</td>
+      </tr>`;
+  }).join('');
+  return `
+    <section id="amendments" class="panel p-5 sm:p-8 rounded-2xl">
+      ${renderSectionHeader(data)}
+      <div class="overflow-x-auto rounded-xl border" style="border-color: var(--line);">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse">
+          <thead><tr>${data.headers.map(h => `<th class="p-3 font-bold">${escapeHtml(h)}</th>`).join('')}</tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </section>`;
+}
+
+/* ============================================================
+   RENDER: Footer
+   ============================================================ */
+function renderFooter(data) {
+  return `
+    <footer class="py-8 border-t mt-8 text-center text-xs sm:text-sm" style="background: var(--panel); border-color: var(--line);">
+      <div class="max-w-7xl mx-auto px-4 space-y-1">
+        <p class="font-medium" style="color: var(--txt);">${escapeHtml(data.title)}</p>
+        <p class="muted">${escapeHtml(data.subtitle)}</p>
+      </div>
+    </footer>`;
+}
+
+/* ============================================================
+   MOUNT
+   ============================================================ */
+document.getElementById('site-header').innerHTML = renderHeader(SITE_DATA);
+document.getElementById('site-main').innerHTML = [
+  renderHistory(SITE_DATA.history),
+  renderParts(SITE_DATA.parts),
+  renderFlashcardsShell(SITE_DATA.flashcards),
+  renderDirectoryShell(SITE_DATA.directory),
+  renderSchedules(SITE_DATA.schedules),
+  renderAmendments(SITE_DATA.amendments)
+].join('');
+document.getElementById('site-footer').innerHTML = renderFooter(SITE_DATA.meta.footer);
+
+/* ============================================================
+   THEME
+   ============================================================ */
+const themeToggle = document.getElementById('themeToggle');
+function applyTheme(light) {
+  document.body.classList.toggle('light-theme', light);
+  themeToggle.textContent = light ? '🌙 Dark' : '☀️ Light';
+  themeToggle.setAttribute('aria-label', light ? 'ডার্ক থিম চালু করুন' : 'লাইট থিম চালু করুন');
+}
+const savedTheme = store.get('const_theme', null);
+applyTheme(savedTheme === null ? false : savedTheme);
+themeToggle.addEventListener('click', () => {
+  const light = !document.body.classList.contains('light-theme');
+  applyTheme(light);
+  store.set('const_theme', light);
+});
+
+/* ============================================================
+   DIRECTORY
+   ============================================================ */
+let currentFilter = 'all';
+
+function renderArticles(searchQuery = '') {
+  const container = document.getElementById('articlesContainer');
+  const q = searchQuery.trim().toLowerCase();
+  const emptyCfg = SITE_DATA.directory;
+  let total = 0;
+  container.innerHTML = '';
+
+  SITE_DATA.constitutionData.forEach(part => {
+    const matches = part.articles.filter(a => {
+      if (currentFilter === 'bcs-hot' && !a.bcsHot) return false;
+      if (!q) return true;
+      return a.num.toLowerCase().includes(q) || a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q);
+    });
+    if (!matches.length) return;
+    total += matches.length;
+
+    const cards = matches.map(a => `
+      <div class="article-card">
+        <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+          <span class="article-num-badge">অনুচ্ছেদ ${escapeHtml(a.num)}</span>
+          ${a.bcsHot ? '<span class="hot-badge">🔥 BCS Hot</span>' : ''}
+        </div>
+        <h4 class="font-bold text-sm mb-1" style="color: var(--txt);">${escapeHtml(a.title)}</h4>
+        <p class="text-xs leading-relaxed" style="color: var(--txt-mute);">${escapeHtml(a.desc)}</p>
+      </div>`).join('');
+
+    const section = document.createElement('div');
+    section.className = 'rounded-xl overflow-hidden';
+    section.style.cssText = 'border:1px solid var(--line);';
+    section.innerHTML = `
+      <div class="part-header">
+        <h3 class="font-bold text-sm sm:text-base flex items-center gap-2">
+          <i data-lucide="bookmark" class="w-4 h-4 opacity-80"></i> ${escapeHtml(part.partTitle)}
+        </h3>
+        <span class="text-xs px-2.5 py-1 rounded-md font-medium" style="background: rgba(255,255,255,.15);">${escapeHtml(part.partRange)} · ${matches.length}টি</span>
+      </div>
+      <div class="p-3 grid gap-3 card-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); background: var(--card);">${cards}</div>`;
+    container.appendChild(section);
+  });
+
+  document.getElementById('result-count').textContent = `দেখাচ্ছে: ${total} / ১৫৩`;
+  if (total === 0) {
+    container.innerHTML = `<div class="text-center py-12 rounded-xl" style="background: var(--card); border: 1px dashed var(--line);">
+      <p class="font-medium" style="color: var(--txt);">${escapeHtml(emptyCfg.emptyTitle)}</p>
+      <p class="text-xs muted mt-1">${escapeHtml(emptyCfg.emptySub)}</p>
+    </div>`;
+  }
+  if (window.lucide) lucide.createIcons();
+}
+
+function filterArticles() {
+  renderArticles(document.getElementById('articleSearch').value);
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    currentFilter = e.currentTarget.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter'));
+    e.currentTarget.classList.add('active-filter');
+    filterArticles();
+  });
+});
+
+/* ============================================================
+   PRACTICE ENGINE
+   ============================================================ */
+const state = {
+  mode: 'flash',
+  set: [], index: 0, correctCount: 0, answeredCount: 0,
+  answeredThisCard: false, revealed: false,
+  exam: 'bcs', kind: 'mixed', scope: 'hot', size: 20,
+  known: new Set(store.get('const_known', [])),
+  review: new Set(store.get('const_review', []))
+};
+
+function strategyFor(exam) {
+  return {
+    bcs:     { preferHot: true,  types: ['title','statement','article','article'] },
+    govt:    { preferHot: false, types: ['article','title','statement'] },
+    bank:    { preferHot: false, types: ['article','title','title','article'] },
+    written: { preferHot: false, types: ['statement','statement','title'] }
+  }[exam] || { preferHot: false, types: ['article','title','statement'] };
+}
+
+function pickConfusingDistractors(article, pool, distractorFn, count = 3) {
+  const usedText = new Set([distractorFn(article)]);
+  const picks = [];
+
+  // Strategy 1: same-part distractors (much more confusing than random)
+  const samePart = pool.filter(a => a.num !== article.num && a.partTitle === article.partTitle);
+  for (const cand of shuffle(samePart)) {
+    if (picks.length >= count) break;
+    const text = distractorFn(cand);
+    if (text && !usedText.has(text)) {
+      picks.push(cand);
+      usedText.add(text);
+    }
+  }
+
+  // Strategy 2: fallback to other parts
+  if (picks.length < count) {
+    const others = pool.filter(a => a.num !== article.num && a.partTitle !== article.partTitle);
+    for (const cand of shuffle(others)) {
+      if (picks.length >= count) break;
+      const text = distractorFn(cand);
+      if (text && !usedText.has(text)) {
+        picks.push(cand);
+        usedText.add(text);
+      }
+    }
+  }
+
+  return picks;
+}
+
+function buildQuestion(article, pool, kind, exam) {
+  if (pool.filter(a => a.num !== article.num).length < 3) return null;
+
+  let type = kind;
+  if (kind === 'mixed') {
+    const strat = strategyFor(exam);
+    type = strat.types[Math.floor(Math.random() * strat.types.length)];
+  }
+
+  let prompt, answer, distractorFn;
+  if (type === 'article') {
+    prompt = Math.random() < 0.5
+      ? `"${article.title}" — এটি কোন অনুচ্ছেদ?`
+      : `"${article.desc}" — এই বিধানটি কোন অনুচ্ছেদে?`;
+    answer = `অনুচ্ছেদ ${article.num}`;
+    distractorFn = a => `অনুচ্ছেদ ${a.num}`;
+  } else if (type === 'title') {
+    prompt = `অনুচ্ছেদ ${article.num} — এর শিরোনাম কোনটি?`;
+    answer = article.title;
+    distractorFn = a => a.title;
+  } else {
+    prompt = `"${article.desc}" — এই বিবরণটি কোন অনুচ্ছেদের?`;
+    answer = `${article.num} — ${article.title}`;
+    distractorFn = a => `${a.num} — ${a.title}`;
+  }
+
+  const distractors = pickConfusingDistractors(article, pool, distractorFn, 3);
+  if (distractors.length < 3) return null;
+
+  const options = shuffle([answer, ...distractors.map(distractorFn)]);
+
+  return {
+    article, prompt, answer, options, type,
+    explanation: `অনুচ্ছেদ ${article.num}: ${article.title}। ${article.desc}`,
+    partTitle: article.partTitle
+  };
+}
+
+/* ==== FLASHCARD (self-check) ==== */
+function buildFlashcard(article) {
+  return { article, partTitle: article.partTitle };
+}
+
+/* ==== SESSION ==== */
+function pickPool() {
+  let pool = allArticles();
+  const strat = strategyFor(state.exam);
+  if (state.scope === 'hot' || strat.preferHot) {
+    const hot = pool.filter(a => a.bcsHot);
+    if (hot.length >= 8) pool = hot;
+  }
+  const fresh = pool.filter(a => !state.known.has(a.num));
+  if (fresh.length >= 8) pool = fresh;
+  return pool;
+}
+
+function startSession() {
+  state.exam = document.getElementById('examType').value;
+  state.kind = document.getElementById('questionKind').value;
+  state.scope = document.getElementById('questionScope').value;
+  state.size = parseInt(document.getElementById('sessionSize').value, 10);
+
+  const pool = pickPool();
+  if (pool.length < 4) {
+    state.set = [];
+    document.getElementById('studyCard').innerHTML = `
+      <div class="eyebrow text-xs font-bold mb-2">ডেটা অপর্যাপ্ত</div>
+      <h3 class="text-lg font-bold mb-2">প্রশ্ন তৈরির জন্য পর্যাপ্ত অনুচ্ছেদ নেই</h3>
+      <p class="muted text-sm">অনুগ্রহ করে "সব অনুচ্ছেদ" নির্বাচন করুন বা ভিন্ন প্রশ্নের ধরন বেছে নিন।</p>`;
+    return;
+  }
+
+  const picked = shuffle(pool).slice(0, Math.min(state.size, pool.length));
+
+  if (state.mode === 'flash') {
+    // Flashcard set: just the article info
+    state.set = picked.map(a => buildFlashcard(a));
+  } else {
+    // MCQ set: build questions
+    state.set = [];
+    const seenKeys = new Set();
+    for (const art of picked) {
+      const q = buildQuestion(art, pool, state.kind, state.exam);
+      if (!q) continue;
+      const key = `${art.num}|${q.type}`;
+      if (seenKeys.has(key)) continue;
+      seenKeys.add(key);
+      state.set.push(q);
+      if (state.set.length >= state.size) break;
+    }
+    if (state.set.length < state.size) {
+      const remaining = pool.filter(a => !state.set.some(q => q.article.num === a.num));
+      for (const art of shuffle(remaining)) {
+        const q = buildQuestion(art, pool, state.kind, state.exam);
+        if (q) { state.set.push(q); if (state.set.length >= state.size) break; }
+      }
+    }
+  }
+
+  if (!state.set.length) return startSession();
+
+  state.index = 0; state.correctCount = 0; state.answeredCount = 0;
+  state.answeredThisCard = false; state.revealed = false;
+  renderStudy();
+}
+
+/* ==== RENDER CURRENT CARD ==== */
+function renderStudy() {
+  const card = document.getElementById('studyCard');
+  const progress = document.getElementById('studyProgress');
+  const score = document.getElementById('studyScore');
+  const badge = document.getElementById('studyBadge');
+  const fill = document.getElementById('progressFill');
+  const showAnswerBtn = document.getElementById('showAnswer');
+  const markKnownBtn = document.getElementById('markKnown');
+  const markReviewBtn = document.getElementById('markReview');
+
+  if (!state.set.length) {
+    progress.textContent = 'প্রস্তুত হলে শুরু করুন';
+    score.textContent = 'স্কোর: ০ / ০';
+    fill.style.width = '0%';
+    badge.style.display = 'none';
+    return;
+  }
+
+  // Show/hide contextual buttons
+  if (state.mode === 'flash') {
+    showAnswerBtn.style.display = '';
+    markKnownBtn.style.display = '';
+    markReviewBtn.style.display = '';
+  } else {
+    showAnswerBtn.style.display = 'none';
+    markKnownBtn.style.display = 'none';
+    markReviewBtn.style.display = 'none';
+  }
+
+  // Set complete
+  if (state.index >= state.set.length) {
+    fill.style.width = '100%';
+    progress.textContent = 'সেট সম্পন্ন 🎉';
+    badge.style.display = 'none';
+    const acc = state.answeredCount ? Math.round((state.correctCount / state.answeredCount) * 100) : 0;
+    card.innerHTML = state.mode === 'mcq' ? `
+      <div class="eyebrow text-xs font-bold mb-2">সেট সম্পন্ন 🎉</div>
+      <h3 class="text-2xl font-bold mb-3">স্কোর ${state.correctCount} / ${state.answeredCount}</h3>
+      <p class="mb-1" style="color: var(--txt);">নির্ভুলতা: <strong style="color: var(--accent-txt);">${acc}%</strong></p>
+      <p class="muted text-sm mb-4">${state.correctCount === state.answeredCount ? 'অসাধারণ! আরও কঠিন প্রশ্নের জন্য প্রস্তুত।' : 'ভুল প্রশ্নগুলোর অনুচ্ছেদ ডিরেক্টরি থেকে আবার পড়ুন।'}</p>
+      <button class="action-btn px-4 py-2 rounded-lg font-bold self-start" onclick="startSession()">🔄 আবার নতুন সেট</button>
+    ` : `
+      <div class="eyebrow text-xs font-bold mb-2">সেট সম্পন্ন 🎉</div>
+      <h3 class="text-2xl font-bold mb-3">${state.set.length}টি কার্ড দেখা হয়েছে</h3>
+      <p class="muted text-sm mb-4">ভালো করছেন! আরও প্র্যাকটিস করুন।</p>
+      <button class="action-btn px-4 py-2 rounded-lg font-bold self-start" onclick="startSession()">🔄 আবার নতুন সেট</button>
+    `;
+    score.textContent = state.mode === 'mcq'
+      ? `স্কোর: ${state.correctCount} / ${state.answeredCount}`
+      : `প্রোগ্রেস: ${state.set.length} / ${state.set.length}`;
+    return;
+  }
+
+  const item = state.set[state.index];
+  const total = state.set.length;
+  const filled = state.index + (state.answeredThisCard || (state.mode === 'flash' && state.revealed) ? 1 : 0);
+  fill.style.width = `${(filled / total) * 100}%`;
+  progress.textContent = state.mode === 'mcq'
+    ? `প্রশ্ন ${state.index + 1} / ${total}`
+    : `কার্ড ${state.index + 1} / ${total}`;
+  score.textContent = state.mode === 'mcq'
+    ? `স্কোর: ${state.correctCount} / ${state.answeredCount}`
+    : `প্রোগ্রেস: ${state.index + 1} / ${total}`;
+  badge.style.display = 'inline-block';
+  badge.textContent = `📘 ${state.exam.toUpperCase()} · ${item.partTitle.split(':')[0]}`;
+
+  if (state.mode === 'flash') {
+    renderFlashcard(item);
+  } else {
+    renderMcq(item);
+  }
+}
+
+/* ==== FLASHCARD RENDER (self-check) ==== */
+function renderFlashcard(item) {
+  const card = document.getElementById('studyCard');
+  const a = item.article;
+  card.innerHTML = `
+    <div class="eyebrow text-xs font-bold mb-2">FLASHCARD · ${escapeHtml(item.partTitle)}</div>
+    <div class="flash-face">
+      <div class="flash-num-badge">📖 অনুচ্ছেদ ${escapeHtml(a.num)}</div>
+      <h3 class="flash-title">${escapeHtml(a.title)}</h3>
+      ${state.revealed
+        ? `<div class="flash-answer">
+             <div class="flash-answer-label">বিবরণ</div>
+             <p class="flash-answer-text">${escapeHtml(a.desc)}</p>
+           </div>`
+        : `<p class="muted text-sm mt-2">আপনি কি এই অনুচ্ছেদের বিস্তারিত জানেন?<br>ভেবে দেখুন, তারপর <strong style="color: var(--accent-txt);">"👁 উত্তর দেখুন"</strong> চাপুন।</p>`}
+    </div>
+  `;
+}
+
+/* ==== MCQ RENDER (exam-style) ==== */
+function renderMcq(q) {
+  const card = document.getElementById('studyCard');
+  card.innerHTML = `
+    <div class="eyebrow text-xs font-bold mb-2">MCQ · ${escapeHtml(q.partTitle)}</div>
+    <h3 class="text-base sm:text-xl font-bold mb-4">${escapeHtml(q.prompt)}</h3>
+    <div id="answerOptions">
+      ${q.options.map((opt, i) => `
+        <button type="button" class="answer-option" data-opt="${i}">
+          <span class="font-bold mr-2" style="color: var(--accent-txt);">${['ক','খ','গ','ঘ'][i]}.</span>${escapeHtml(opt)}
+        </button>`).join('')}
+    </div>
+    <div id="mcqFeedback" class="mt-3" aria-live="polite"></div>`;
+}
+
+/* ==== MCQ ANSWER HANDLER ==== */
+function handleMcqAnswer(idx) {
+  if (state.answeredThisCard) return;
+  const q = state.set[state.index];
+  if (!q || !q.options) return;
+  const card = document.getElementById('studyCard');
+  const options = card.querySelectorAll('[data-opt]');
+  const chosen = q.options[idx];
+  const correct = chosen === q.answer;
+
+  state.answeredThisCard = true;
+  state.answeredCount++;
+  if (correct) state.correctCount++;
+
+  options.forEach(b => {
+    b.disabled = true;
+    const val = q.options[parseInt(b.dataset.opt, 10)];
+    if (val === q.answer) b.classList.add('correct');
+    else if (parseInt(b.dataset.opt, 10) === idx) b.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('mcqFeedback');
+  fb.innerHTML = `
+    <div class="mcq-feedback ${correct ? 'ok' : 'no'}">
+      <p class="font-bold mb-1">${correct ? '✓ সঠিক উত্তর!' : '✗ সঠিক হয়নি'}</p>
+      <p class="text-sm" style="color: var(--txt);">${escapeHtml(q.explanation)}</p>
+    </div>`;
+  document.getElementById('studyScore').textContent = `স্কোর: ${state.correctCount} / ${state.answeredCount}`;
+  document.getElementById('progressFill').style.width = `${((state.index + 1) / state.set.length) * 100}%`;
+}
+
+/* ==== NAVIGATION ==== */
+function nextCard() {
+  if (!state.set.length) return;
+  state.index++;
+  state.answeredThisCard = false;
+  state.revealed = false;
+  renderStudy();
+}
+function prevCard() {
+  if (!state.set.length || state.index === 0) return;
+  state.index--;
+  state.answeredThisCard = false;
+  state.revealed = false;
+  renderStudy();
+}
+function revealAnswer() {
+  if (!state.set.length || state.index >= state.set.length) return;
+  if (state.mode !== 'flash') return;
+  state.revealed = true;
+  renderStudy();
+}
+
+/* ==== BUTTON WIRING ==== */
+document.getElementById('modeFlash').addEventListener('click', () => {
+  state.mode = 'flash';
+  document.getElementById('modeFlash').classList.add('active');
+  document.getElementById('modeMcq').classList.remove('active');
+  // Reset session
+  state.set = []; state.index = 0; state.correctCount = 0; state.answeredCount = 0;
+  state.answeredThisCard = false; state.revealed = false;
+  renderStudy();
+  document.getElementById('studyCard').innerHTML = `
+    <div class="eyebrow text-xs font-bold mb-2">FLASHCARD মোড</div>
+    <h3 class="text-lg font-bold mb-2">Random অনুচ্ছেদ আসবে</h3>
+    <p class="muted text-sm">"▶ নতুন সেট" চাপুন। প্রতিটি কার্ডে অনুচ্ছেদ নম্বর + শিরোনাম দেখাবে। "👁 উত্তর দেখুন" দিয়ে বিবরণ দেখুন, তারপর নিজেকে যাচাই করুন।</p>`;
+});
+document.getElementById('modeMcq').addEventListener('click', () => {
+  state.mode = 'mcq';
+  document.getElementById('modeMcq').classList.add('active');
+  document.getElementById('modeFlash').classList.remove('active');
+  // Reset session
+  state.set = []; state.index = 0; state.correctCount = 0; state.answeredCount = 0;
+  state.answeredThisCard = false; state.revealed = false;
+  renderStudy();
+  document.getElementById('studyCard').innerHTML = `
+    <div class="eyebrow text-xs font-bold mb-2">MCQ মোড (EXAM-STYLE)</div>
+    <h3 class="text-lg font-bold mb-2">৪ অপশনের standard MCQ</h3>
+    <p class="muted text-sm">"▶ নতুন সেট" চাপুন। প্রতিটি প্রশ্নে ৪টি অপশন থাকবে (same-part distractors → বেশি confusing)। একটি সাবমিট করুন, সাথে সাথে feedback পাবেন।</p>`;
+});
+document.getElementById('startStudy').addEventListener('click', startSession);
+document.getElementById('prevQuestion').addEventListener('click', prevCard);
+document.getElementById('nextQuestion').addEventListener('click', nextCard);
+document.getElementById('showAnswer').addEventListener('click', revealAnswer);
+document.getElementById('markKnown').addEventListener('click', () => {
+  if (!state.set.length || state.index >= state.set.length) return;
+  const item = state.set[state.index];
+  state.known.add(item.article.num);
+  state.review.delete(item.article.num);
+  store.set('const_known', Array.from(state.known));
+  store.set('const_review', Array.from(state.review));
+  nextCard();
+});
+document.getElementById('markReview').addEventListener('click', () => {
+  if (!state.set.length || state.index >= state.set.length) return;
+  const item = state.set[state.index];
+  state.review.add(item.article.num);
+  state.known.delete(item.article.num);
+  store.set('const_known', Array.from(state.known));
+  store.set('const_review', Array.from(state.review));
+  nextCard();
+});
+
+/* ==== DELEGATED ANSWER CLICKS ==== */
+document.getElementById('studyCard').addEventListener('click', e => {
+  const btn = e.target.closest('[data-opt]');
+  if (btn && state.mode === 'mcq') handleMcqAnswer(parseInt(btn.dataset.opt, 10));
+});
+
+/* ==== KEYBOARD ==== */
+document.addEventListener('keydown', e => {
+  const tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'input' || tag === 'select' || tag === 'textarea') return;
+  if (!state.set.length) return;
+  if (e.key === ' ' && state.mode === 'flash') { e.preventDefault(); revealAnswer(); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); nextCard(); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard(); }
+  else if (state.mode === 'mcq' && /^[1-4]$/.test(e.key)) {
+    const idx = parseInt(e.key, 10) - 1;
+    const q = state.set[state.index];
+    if (q && q.options && idx < q.options.length) handleMcqAnswer(idx);
+  }
+});
+
+/* ==== INIT ==== */
+function init() {
+  if (window.lucide) lucide.createIcons();
+  renderArticles();
+}
+if (document.readyState !== 'loading') init();
+else window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

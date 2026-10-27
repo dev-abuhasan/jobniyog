@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCS সংবিধান মাস্টার ড্যাশবোর্ড (Act 957)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Hind Siliguri & Tiro Bangla -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #059669;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #047857;
+        }
+
+        /* Print Styles */
+        @media print {
+
+            header,
+            nav,
+            #flashcard-section,
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+
+            .print-full-width {
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+    <!-- TOP NAVIGATION HEADER -->
+    <header class="bg-emerald-900 text-white shadow-xl sticky top-0 z-50 border-b border-emerald-800">
+        <div class="max-w-7xl mx-auto px-4 py-3 sm:py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3.5 w-full md:w-auto justify-between md:justify-start">
+                <div class="flex items-center gap-3">
+                    <div class="bg-emerald-700 p-2.5 rounded-xl border border-emerald-600 shadow-inner">
+                        <i data-lucide="book-open-check" class="w-7 h-7 text-amber-300"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                            গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান
+                            <span
+                                class="text-xs bg-amber-500 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Act
+                                957</span>
+                        </h1>
+                        <p class="text-emerald-200 text-sm font-medium">BCS ক্যাডার প্রস্তুতি মাস্টার রেফারেন্স (১৫৩টি
+                            অনুচ্ছেদ, ৭টি তফসিল ও ১৭টি সংশোধনী)</p>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Toggle Button -->
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden bg-emerald-800 hover:bg-emerald-700 p-2 rounded-lg border border-emerald-600">
+                    <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+                </button>
+            </div>
+
+            <!-- Nav Links -->
+            <nav id="nav-menu"
+                class="hidden md:flex items-center gap-2 flex-wrap justify-center text-sm font-semibold w-full md:w-auto pt-2 md:pt-0 border-t md:border-t-0 border-emerald-800">
+                <a href="#history"
+                    class="bg-emerald-800/80 hover:bg-emerald-700 hover:text-amber-200 px-3.5 py-2 rounded-xl transition border border-emerald-700/60 flex items-center gap-1.5">
+                    <i data-lucide="history" class="w-4 h-4 text-emerald-300"></i> ইতিহাস
+                </a>
+                <a href="#parts-shortcuts"
+                    class="bg-emerald-800/80 hover:bg-emerald-700 hover:text-amber-200 px-3.5 py-2 rounded-xl transition border border-emerald-700/60 flex items-center gap-1.5">
+                    <i data-lucide="brain-circuit" class="w-4 h-4 text-amber-300"></i> ১১ ভাগ ও ট্রিক্স
+                </a>
+                <a href="#articles-directory"
+                    class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl transition shadow-md flex items-center gap-1.5">
+                    <i data-lucide="list-filter" class="w-4 h-4"></i> ১৫৩ অনুচ্ছেদ ডিরেক্টরি
+                </a>
+                <a href="#bodies-oath"
+                    class="bg-emerald-800/80 hover:bg-emerald-700 hover:text-amber-200 px-3.5 py-2 rounded-xl transition border border-emerald-700/60 flex items-center gap-1.5">
+                    <i data-lucide="landmark" class="w-4 h-4 text-emerald-300"></i> সংস্থা ও শপথ
+                </a>
+                <a href="#schedules"
+                    class="bg-emerald-800/80 hover:bg-emerald-700 hover:text-amber-200 px-3.5 py-2 rounded-xl transition border border-emerald-700/60 flex items-center gap-1.5">
+                    <i data-lucide="calendar" class="w-4 h-4 text-emerald-300"></i> ৭ তফসিল
+                </a>
+                <a href="#amendments"
+                    class="bg-emerald-800/80 hover:bg-emerald-700 hover:text-amber-200 px-3.5 py-2 rounded-xl transition border border-emerald-700/60 flex items-center gap-1.5">
+                    <i data-lucide="git-commit" class="w-4 h-4 text-emerald-300"></i> ১৭ সংশোধনী
+                </a>
+                <a href="#flashcards"
+                    class="bg-emerald-700 hover:bg-emerald-600 text-white px-3.5 py-2 rounded-xl transition border border-emerald-500 flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-amber-300"></i> কুইজ ও কার্ড
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-12 print-full-width">
+
+        <!-- HERO DASHBOARD BANNER -->
+        <section
+            class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl border border-emerald-700/50 relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl space-y-4">
+                <span
+                    class="bg-amber-400/20 text-amber-300 border border-amber-400/30 font-bold text-xs uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5">
+                    <i data-lucide="award" class="w-4 h-4"></i> BCS ক্যাডার প্রিলিমিনারি ও লিখিত স্পেশাল সংকলন
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                    বাংলাদেশ সংবিধানের পূর্ণাঙ্গ ১৫৩টি অনুচ্ছেদের মাস্টার স্টডি হাব
+                </h2>
+                <p class="text-emerald-100 text-base sm:text-lg leading-relaxed">
+                    সকল অনুচ্ছেদ, তফসিল, সংশোধনী, শর্টকাট নেমোনিক এবং সাংবিধানিক পদের শপথ সংক্রান্ত তথ্যাবলী সম্পূর্ণ
+                    বাংলায় সুন্দরভাবে গুছিয়ে তৈরি করা হয়েছে।
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button onclick="scrollToSection('articles-directory')"
+                        class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-5 py-2.5 rounded-xl transition shadow-lg flex items-center gap-2 text-sm sm:text-base">
+                        <i data-lucide="search" class="w-5 h-5"></i> অনুচ্ছেদ ডিরেক্টরি খুঁজুন
+                    </button>
+                    <button onclick="showOnlyFavorites()"
+                        class="bg-emerald-800 hover:bg-emerald-700 text-white font-semibold px-5 py-2.5 rounded-xl border border-emerald-600 transition flex items-center gap-2 text-sm sm:text-base">
+                        <i data-lucide="star" class="w-5 h-5 text-amber-300 fill-amber-300"></i> সেভ করা অনুচ্ছেদ (<span
+                            id="fav-counter-hero">০</span>)
+                    </button>
+                    <button onclick="window.print()"
+                        class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-4 py-2.5 rounded-xl border border-slate-600 transition flex items-center gap-2 text-sm">
+                        <i data-lucide="printer" class="w-4 h-4"></i> প্রিন্ট রেডি শিট
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. EXECUTIVE SUMMARY & HISTORY -->
+        <section id="history" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="p-3 bg-emerald-100 rounded-xl text-emerald-800">
+                    <i data-lucide="history" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">১. সংবিধান প্রণয়ন ও ইতিহাসের গুরুত্বপূর্ণ
+                        তথ্য</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">BCS প্রিলিমিনারি ও লিখিত পরীক্ষার জন্য সর্বাধিক
+                        গুরুত্বপূর্ণ ঐতিহাসিক তথ্যসূত্র</p>
+                </div>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-emerald-50/80 border border-emerald-200 p-4 sm:p-5 rounded-2xl">
+                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide mb-1">খসড়া কমিটি গঠন</p>
+                    <p class="text-xl sm:text-2xl font-extrabold text-slate-900">১১ এপ্রিল, ১৯৭২</p>
+                    <p class="text-xs text-slate-600 mt-1 font-medium">সদস্য: ৩৪ জন (১ জন মহিলা)</p>
+                </div>
+                <div class="bg-emerald-50/80 border border-emerald-200 p-4 sm:p-5 rounded-2xl">
+                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide mb-1">গণপরিষদে উত্থাপন</p>
+                    <p class="text-xl sm:text-2xl font-extrabold text-slate-900">১২ অক্টোবর, ১৯৭২</p>
+                    <p class="text-xs text-slate-600 mt-1 font-medium">উত্থাপক: ড. কামাল হোসেন</p>
+                </div>
+                <div class="bg-amber-50/90 border border-amber-200 p-4 sm:p-5 rounded-2xl">
+                    <p class="text-xs font-bold text-amber-800 uppercase tracking-wide mb-1">সংবিধান গৃহীত</p>
+                    <p class="text-xl sm:text-2xl font-extrabold text-slate-900">০৪ নভেম্বর, ১৯৭২</p>
+                    <p class="text-xs text-amber-900 font-semibold mt-1">জাতীয় সংবিধান দিবস</p>
+                </div>
+                <div class="bg-emerald-50/80 border border-emerald-200 p-4 sm:p-5 rounded-2xl">
+                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide mb-1">কার্যকরী তারিখ</p>
+                    <p class="text-xl sm:text-2xl font-extrabold text-slate-900">১৬ ডিসেম্বর, ১৯৭২</p>
+                    <p class="text-xs text-slate-600 mt-1 font-medium">প্রথম বিজয় দিবসে কার্যকর</p>
+                </div>
+            </div>
+
+            <!-- Detail Bullet Cards -->
+            <div class="grid md:grid-cols-3 gap-6 text-sm sm:text-base">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center gap-2">
+                        <i data-lucide="users" class="w-5 h-5 text-emerald-700"></i> খসড়া কমিটি ও ব্যক্তিবর্গ
+                    </h3>
+                    <ul class="space-y-2 text-slate-700">
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">সভাপতি:</strong> ড.
+                                কামাল হোসেন (আইনমন্ত্রী)</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">একমাত্র নারী
+                                    সদস্য:</strong> বেগম রাজিয়া বানু</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">একমাত্র বিরোধীদলীয়
+                                    সদস্য:</strong> সুরঞ্জিত সেনগুপ্ত (ন্যাপ)</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">মোট বৈঠক:</strong>
+                                ৪৭টি (সময় লাগে প্রায় ৩০০ ঘণ্টা)</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center gap-2">
+                        <i data-lucide="pen-tool" class="w-5 h-5 text-emerald-700"></i> লিখন ও শিল্পকর্ম
+                    </h3>
+                    <ul class="space-y-2 text-slate-700">
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">মূল লিপিকার:</strong>
+                                শিল্পী আবদুর রউফ</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">নকশা ও
+                                    অলংকরণ:</strong> শিল্পাচার্য জয়নুল আবেদীন</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">সহযোগী
+                                    শিল্পী:</strong> সমরজিৎ রায় চৌধুরী, আবুল বারক আলভী</span></li>
+                        <li class="flex items-start gap-2">• <span><strong class="text-slate-900">মোট স্বাক্ষর:</strong>
+                                ৩০৯ জন সদস্য (প্রথম স্বাক্ষর: বঙ্গবন্ধু)</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-5 h-5 text-emerald-700"></i> ভাষা ও কাঠামো
+                    </h3>
+                    <ul class="space-y-2 text-slate-700">
+                        <li class="flex items-start gap-2">• <span>মূল সংবিধান <strong class="text-slate-900">বাংলা ও
+                                    ইংরেজি</strong> উভয় ভাষায় রচিত।</span></li>
+                        <li class="flex items-start gap-2">• <span>পাঠগত বিরোধে <strong
+                                    class="text-emerald-800 font-bold">বাংলা পাঠ প্রাধান্য পাবে</strong> (অনুচ্ছেদ
+                                ১৫৩)।</span></li>
+                        <li class="flex items-start gap-2">• <span>সংবিধানের কাঠামো: <strong class="text-slate-900">১টি
+                                    প্রস্তাবনা, ১১টি ভাগ, ১৫৩টি অনুচ্ছেদ ও ৭টি তফসিল</strong>।</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PARTS & MNEMONIC SHORTCUTS -->
+        <section id="parts-shortcuts" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="p-3 bg-amber-100 rounded-xl text-amber-800">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">২. ১১টি ভাগ মনে রাখার মাস্টার নেমোনিক
+                        (Mnemonic Short-cut)</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">সহজ একটি বাক্যে সংবিধানের ১১টি ভাগ ধারাবাহিকভাবে মনে
+                        রাখুন</p>
+                </div>
+            </div>
+
+            <div
+                class="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-white p-5 sm:p-6 rounded-2xl mb-8 shadow-md">
+                <p class="text-xs uppercase tracking-wider text-amber-100 font-bold mb-1">মাস্টার শর্টকাট বাক্য (হুবহু
+                    মুখস্ত রাখুন):</p>
+                <p class="text-lg sm:text-2xl font-bold leading-relaxed">
+                    "প্রজারা মূল মৌলিক কাজ শেষ করে বিচার, নির্বাচন ও মহা-হিসাব সেরে কর্মে ঢুকল, কিন্তু জরুরী সংশোধনী
+                    দেখে বিবিধ চিন্তা করল।"
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">১</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">১ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">প্রজাতন্ত্র (The Republic)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১ - ৭খ</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">প্রজা</strong>রা</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">২</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">২য় ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">রাষ্ট্র পরিচালনার মূলনীতি</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ৮ - ২৫</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong class="text-emerald-800">মূল</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৩</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৩য় ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">মৌলিক অধিকার</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ২৬ - ৪৫</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">মৌলিক</strong></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৪</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৪র্থ ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">নির্বাহী বিভাগ (Executive)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ৪৬ - ৬৪</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong class="text-emerald-800">কাজ</strong>
+                            (নির্বাহী)</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৫</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৫ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">আইনসভা (Legislature)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ৬৫ - ৯৩</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong class="text-emerald-800">শেষ</strong>
+                            (আইনসভা)</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৬</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৬ষ্ঠ ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">বিচার বিভাগ (Judiciary)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ৯৪ - ১১২</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">বিচার</strong></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৭</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৭ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">নির্বাচন (Elections)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১১৩ - ১২৬</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">নির্বাচন</strong></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৮</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৮ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১২৭ - ১৩২</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">মহা-হিসাব</strong></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">৯</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">৯ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">বাংলাদেশের কর্মবিভাগ</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১৩৩ - ১৪১</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">কর্মে</strong> (ঢুকল)</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-300 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-amber-600 text-white font-bold flex items-center justify-center shrink-0 text-base">৯ক</span>
+                    <div>
+                        <span class="text-xs font-bold text-amber-800 uppercase">৯ম (ক) ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">জরুরী বিধানাবলী</h4>
+                        <p class="text-xs text-amber-700 font-medium">১৪১ক - ১৪১গ</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong class="text-amber-800">জরুরী</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">১০</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">১০ম ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">সংবিধান সংশোধন</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১৪২</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">সংশোধনী</strong></p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                    <span
+                        class="w-9 h-9 rounded-xl bg-emerald-800 text-white font-bold flex items-center justify-center shrink-0 text-base">১১</span>
+                    <div>
+                        <span class="text-xs font-bold text-emerald-700 uppercase">১১শ ভাগ</span>
+                        <h4 class="font-bold text-slate-900 text-base">বিবিধ (Miscellaneous)</h4>
+                        <p class="text-xs text-slate-500 font-medium">অনুচ্ছেদ ১৪৩ - ১৫৩</p>
+                        <p class="text-xs text-slate-700 mt-1">কীওয়ার্ড: <strong
+                                class="text-emerald-800">বিবিধ</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INTERACTIVE FULL ARTICLE DIRECTORY (ALL 153 ARTICLES) -->
+        <section id="articles-directory" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+
+            <!-- Search & Filter Controls Bar -->
+            <div class="sticky top-[68px] z-40 bg-white pt-2 pb-5 border-b border-slate-200 mb-6 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 flex items-center gap-2.5">
+                            <i data-lucide="book-open" class="w-7 h-7 text-emerald-700"></i>
+                            ৩. সংবিধানের পূর্ণাঙ্গ ১৫৩টি অনুচ্ছেদ ডিরেক্টরি
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base">যেকোনো অনুচ্ছেদ নম্বর, নাম বা ব্যাখ্যা লিখে
+                            তাত্ক্ষণিক খুঁজুন</p>
+                    </div>
+
+                    <!-- Active Counter badge -->
+                    <div class="flex items-center gap-3">
+                        <span id="result-count"
+                            class="bg-emerald-100 text-emerald-900 font-bold px-4 py-1.5 rounded-full text-sm border border-emerald-300">
+                            দেখাচ্ছে: ১৫৩ / ১৫৩টি অনুচ্ছেদ
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Search Input Bar -->
+                <div class="relative">
+                    <input type="text" id="articleSearch"
+                        placeholder="অনুচ্ছেদ সার্চ করুন (যেমন: ২৭, মৌলিক অধিকার, রীট, রাষ্ট্রপতি, নির্বাচন, বিচার ইত্যাদি)..."
+                        class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-2xl text-base focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition shadow-sm"
+                        onkeyup="filterArticles()">
+                    <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 top-4"></i>
+                </div>
+
+                <!-- Part-by-Part Filter Tabs -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+                    <button onclick="setPartFilter('all')" id="filter-btn-all"
+                        class="part-filter-btn active-part-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl border border-emerald-700 bg-emerald-800 text-white transition shrink-0">
+                        সকল অনুচ্ছেদ (১৫৩)
+                    </button>
+                    <button onclick="setPartFilter('bcs-hot')" id="filter-btn-bcs-hot"
+                        class="part-filter-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl border border-amber-300 bg-amber-100 text-amber-900 hover:bg-amber-200 transition shrink-0 flex items-center gap-1">
+                        🔥 BCS Hot Focus
+                    </button>
+                    <button onclick="setPartFilter('fav')" id="filter-btn-fav"
+                        class="part-filter-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl border border-slate-300 bg-slate-100 text-slate-800 hover:bg-slate-200 transition shrink-0 flex items-center gap-1">
+                        ⭐ আমার সেভকৃত
+                    </button>
+                    <button onclick="setPartFilter('part-1')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">১ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-2')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">২য়
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-3')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৩য়
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-4')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৪র্থ
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-5')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৫ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-6')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৬ষ্ঠ
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-7')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৭ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-8')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৮ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-9')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৯ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-9a')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">৯ম(ক)
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-10')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">১০ম
+                        ভাগ</button>
+                    <button onclick="setPartFilter('part-11')"
+                        class="part-filter-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 transition shrink-0">১১শ
+                        ভাগ</button>
+                </div>
+            </div>
+
+            <!-- Articles Container Organized by Parts -->
+            <div id="articlesContainer" class="space-y-8">
+                <!-- JavaScript renders all 153 articles dynamically -->
+            </div>
+        </section>
+
+        <!-- 4. CONSTITUTIONAL VS NON-CONSTITUTIONAL BODIES & OATH TABLE -->
+        <section id="bodies-oath" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="p-3 bg-indigo-100 rounded-xl text-indigo-800">
+                    <i data-lucide="landmark" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">৪. সাংবিধানিক প্রতিষ্ঠান ও ৩য় তফসিলে
+                        বর্ণিত শপথ গ্রহণ সারণী</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">BCS সাধারণ জ্ঞান পরীক্ষার জন্য সর্বাধিক কনফিউজিং
+                        তথ্যসমূহ</p>
+                </div>
+            </div>
+
+            <!-- Constitutional vs Non-Constitutional Table -->
+            <div class="mb-10">
+                <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center gap-2">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-emerald-700"></i> (ক) সাংবিধানিক প্রতিষ্ঠান
+                    (Constitutional Bodies) বনাম বিধিবদ্ধ সংস্থা
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm sm:text-base">
+                        <thead>
+                            <tr class="bg-indigo-900 text-white border-b border-indigo-800">
+                                <th class="p-3.5 font-bold rounded-tl-xl">প্রতিষ্ঠানের নাম</th>
+                                <th class="p-3.5 font-bold">সংবিধানের অনুচ্ছেদ</th>
+                                <th class="p-3.5 font-bold">ধরণ</th>
+                                <th class="p-3.5 font-bold rounded-tr-xl">বিসিএস পরীক্ষার জন্য বিশেষ নোট</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 bg-slate-50/50">
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">নির্বাচন কমিশন (EC)</td>
+                                <td class="p-3.5 font-semibold text-emerald-800">১১৮ অনুচ্ছেদ</td>
+                                <td class="p-3.5"><span
+                                        class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">সাংবিধানিক
+                                        সংস্থা</span></td>
+                                <td class="p-3.5">প্রধান নির্বাচন কমিশনার ও সর্বোচ্চ ৪ জন কমিশনার নিয়োগ দেন রাষ্ট্রপতি।
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">সরকারি কর্ম কমিশন (BPSC)</td>
+                                <td class="p-3.5 font-semibold text-emerald-800">১৩৭ অনুচ্ছেদ</td>
+                                <td class="p-3.5"><span
+                                        class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">সাংবিধানিক
+                                        সংস্থা</span></td>
+                                <td class="p-3.5">চেয়ারম্যান ও সদস্যদের নিয়োগ প্রদান করেন রাষ্ট্রপতি (মেয়াদ ৫ বছর /
+                                    ৬৫ বছর বয়স)।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক (CAG)</td>
+                                <td class="p-3.5 font-semibold text-emerald-800">১২৭ অনুচ্ছেদ</td>
+                                <td class="p-3.5"><span
+                                        class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">সাংবিধানিক
+                                        পদ</span></td>
+                                <td class="p-3.5">জাতীয় সংসদের নিকট রিপোর্ট রাষ্ট্রপতির মাধ্যমে পেশ করা হয় (অনুচ্ছেদ
+                                    ১৩২)।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">অ্যাটর্নি জেনারেল (Attorney General)</td>
+                                <td class="p-3.5 font-semibold text-emerald-800">৬৪ অনুচ্ছেদ</td>
+                                <td class="p-3.5"><span
+                                        class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">সাংবিধানিক
+                                        পদ</span></td>
+                                <td class="p-3.5">রাষ্ট্রের প্রধান আইন কর্মকর্তা; রাষ্ট্রপতির সন্তোষানুযায়ী পদে বহাল
+                                    থাকেন।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">অনবুডসম্যান বা ন্যায়পাল (Ombudsman)</td>
+                                <td class="p-3.5 font-semibold text-emerald-800">৭৭ অনুচ্ছেদ</td>
+                                <td class="p-3.5"><span
+                                        class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">সাংবিধানিক
+                                        বিধান</span></td>
+                                <td class="p-3.5">সংসদ আইনের দ্বারা সৃষ্টি করে; সরকারি কর্মকর্তাদের প্রশাসনিক অনিয়মের
+                                    তদন্ত করেন।</td>
+                            </tr>
+                            <tr class="bg-amber-50/60">
+                                <td class="p-3.5 font-bold text-slate-900">জাতীয় মানবাধিকার কমিশন / দুদক</td>
+                                <td class="p-3.5 text-slate-500 font-medium">সংবিধানে সরাসরি অনুচ্ছেদ নেই</td>
+                                <td class="p-3.5"><span
+                                        class="bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full text-xs font-bold">স্বশাসিত/আইনগত
+                                        সংস্থা</span></td>
+                                <td class="p-3.5 font-semibold text-amber-900">সংবিধানে উল্লেখ নেই, এগুলো জাতীয় সংসদের
+                                    পৃথক আইন দ্বারা গঠিত।</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Oath Chart (3rd Schedule Summary) -->
+            <div>
+                <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center gap-2">
+                    <i data-lucide="user-check" class="w-5 h-5 text-emerald-700"></i> (খ) ৩য় তফসিল: কে কাকে শপথ পাঠ
+                    করান
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm sm:text-base">
+                        <thead>
+                            <tr class="bg-emerald-900 text-white border-b border-emerald-800">
+                                <th class="p-3.5 font-bold rounded-tl-xl">সাংবিধানিক পদবী</th>
+                                <th class="p-3.5 font-bold">শপথ পাঠ করান যিনি</th>
+                                <th class="p-3.5 font-bold rounded-tr-xl">বিসিএস স্পেশাল নোট</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-700 bg-slate-50/50">
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">রাষ্ট্রপতি</td>
+                                <td class="p-3.5 font-bold text-emerald-800">স্পিকার</td>
+                                <td class="p-3.5">স্পিকারের অনুপস্থিতিতে ডেপুটি স্পিকার শপথ পাঠ করাবেন।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">প্রধানমন্ত্রী ও অন্যান্য মন্ত্রীগণ</td>
+                                <td class="p-3.5 font-bold text-emerald-800">রাষ্ট্রপতি</td>
+                                <td class="p-3.5">মন্ত্রী, প্রতিমন্ত্রী ও উপ-মন্ত্রী সবার শপথ রাষ্ট্রপতি পরিচালনা করেন।
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">স্পিকার ও ডেপুটি স্পিকার</td>
+                                <td class="p-3.5 font-bold text-emerald-800">রাষ্ট্রপতি</td>
+                                <td class="p-3.5">সংসদের প্রথম অধিবেশনেই নির্বাচিত হওয়ার পর শপথ গ্রহণ করেন।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">সংসদ-সদস্যগণ (MPs)</td>
+                                <td class="p-3.5 font-bold text-emerald-800">স্পিকার</td>
+                                <td class="p-3.5">স্পিকারের অনুপস্থিতিতে স্পিকার কর্তৃক মনোনীত ব্যক্তি (যেমন ডেপুটি
+                                    স্পিকার)।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">প্রধান বিচারপতি</td>
+                                <td class="p-3.5 font-bold text-emerald-800">রাষ্ট্রপতি</td>
+                                <td class="p-3.5">বঙ্গভবনে রাষ্ট্রপতি শপথ পাঠ করান।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">সুপ্রীম কোর্টের অন্যান্য বিচারকগণ</td>
+                                <td class="p-3.5 font-bold text-emerald-800">প্রধান বিচারপতি</td>
+                                <td class="p-3.5">প্রধান বিচারপতি কর্তৃক শপথ পরিচালিত হয়।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">প্রধান নির্বাচন কমিশনার ও কমিশনারগণ</td>
+                                <td class="p-3.5 font-bold text-emerald-800">প্রধান বিচারপতি</td>
+                                <td class="p-3.5">সুপ্রীম কোর্টে শপথ অনুষ্ঠিত হয়।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">মহা হিসাব-নিরীক্ষক (CAG)</td>
+                                <td class="p-3.5 font-bold text-emerald-800">প্রধান বিচারপতি</td>
+                                <td class="p-3.5">প্রধান বিচারপতি শপথ পরিচালনা করেন।</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-bold text-slate-900">পিএসসি চেয়ারম্যান ও সদস্যগণ</td>
+                                <td class="p-3.5 font-bold text-emerald-800">প্রধান বিচারপতি</td>
+                                <td class="p-3.5">প্রধান বিচারপতি শপথ পাঠ করান।</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SCHEDULES (৭টি তফসিল) -->
+        <section id="schedules" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="p-3 bg-rose-100 rounded-xl text-rose-800">
+                    <i data-lucide="calendar" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">৫. সংবিধানের ৭টি তফসিল (Schedules
+                        Overview)</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">বিসিএস পরীক্ষার জন্য তফসিলের প্রয়োজনীয় তথ্যাবলী</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-5 text-sm sm:text-base">
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-800 font-bold mb-2">
+                        <span class="bg-rose-100 px-3 py-1 rounded-lg text-xs font-extrabold uppercase">১ম তফসিল</span>
+                        <h4 class="text-base sm:text-lg">অন্যান্য প্রভাবশালী আইন (Other Effective Laws)</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        সংবিধানের ২৬ অনুচ্ছেদ (মৌলিক অধিকারের সাথে অসমঞ্জস আইন বাতিল) সত্ত্বেও যে সকল বিশেষ আইন বহাল ও
+                        কার্যকর থাকবে (অনুচ্ছেদ ৪৭)।
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-800 font-bold mb-2">
+                        <span class="bg-rose-100 px-3 py-1 rounded-lg text-xs font-extrabold uppercase">২য় তফসিল</span>
+                        <h4 class="text-base sm:text-lg">রাষ্ট্রপতি নির্বাচন (President Election)</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        [বাতিলকৃত/অবলুপ্ত] অনুচ্ছেদ ৪৮(১) অনুযায়ী পূর্বে বর্ণিত রাষ্ট্রপতি নির্বাচনের বিশদ পদ্ধতি (১২তম
+                        সংশোধনীর মাধ্যমে অবলুপ্ত)।
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-800 font-bold mb-2">
+                        <span class="bg-rose-100 px-3 py-1 rounded-lg text-xs font-extrabold uppercase">৩য় তফসিল</span>
+                        <h4 class="text-base sm:text-lg">শপথ ও ঘোষণা (Oaths and Affirmations)</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        রাষ্ট্রপতি, প্রধানমন্ত্রী, স্পিকার, বিচারপতি, সংসদ সদস্য, সিএজি, পিএসসি প্রধানসহ প্রধান
+                        সাংবিধানিক পদসমূহের শপথ বাক্য ও শপথ দানকারী (অনুচ্ছেদ ১৪৮)।
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-800 font-bold mb-2">
+                        <span class="bg-rose-100 px-3 py-1 rounded-lg text-xs font-extrabold uppercase">৪র্থ
+                            তফসিল</span>
+                        <h4 class="text-base sm:text-lg">ক্রান্তিকালীন ও অস্থায়ী বিধানাবলী</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        ১৯৭১ সালের ২৬শে মার্চ থেকে ১৯৭২ সালের ১৬ই ডিসেম্বর সংবিধান প্রবর্তনের পূর্ব পর্যন্ত কার্যপদ্ধতি
+                        সংরক্ষণ (অনুচ্ছেদ ১৫০)।
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-rose-50/70 border border-rose-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-900 font-bold mb-2">
+                        <span class="bg-rose-200 text-rose-900 px-3 py-1 rounded-lg text-xs font-extrabold">৫ম
+                            তফসিল</span>
+                        <h4 class="text-base sm:text-lg">৭ই মার্চের ঐতিহাসিক ভাষণ</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        ১৯৭১ সালের ৭ই মার্চ তারিখে ঢাকার রেসকোর্স ময়দানে জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের
+                        প্রদত্ত ঐতিহাসিক ভাষণ (১৫তম সংশোধনীতে যুক্ত, অনুচ্ছেদ ১৫০(২))।
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-rose-50/70 border border-rose-200 hover:border-rose-400 transition">
+                    <div class="flex items-center gap-2 text-rose-900 font-bold mb-2">
+                        <span class="bg-rose-200 text-rose-900 px-3 py-1 rounded-lg text-xs font-extrabold">৬ষ্ঠ
+                            তফসিল</span>
+                        <h4 class="text-base sm:text-lg">স্বাধীনতার ঘোষণা (Declaration)</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        ১৯৭১ সালের ২৫শে মার্চ মধ্যরাত অর্থাৎ ২৬শে মার্চ তারিখে জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমান
+                        কর্তৃক প্রদত্ত স্বাধীনতার ঘোষণা (১৫তম সংশোধনীতে যুক্ত)।
+                    </p>
+                </div>
+
+                <div
+                    class="p-5 rounded-2xl bg-rose-50/70 border border-rose-200 hover:border-rose-400 transition md:col-span-2">
+                    <div class="flex items-center gap-2 text-rose-900 font-bold mb-2">
+                        <span class="bg-rose-200 text-rose-900 px-3 py-1 rounded-lg text-xs font-extrabold">৭ম
+                            তফসিল</span>
+                        <h4 class="text-base sm:text-lg">স্বাধীনতার ঘোষণাপত্র (Proclamation of Independence)</h4>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed">
+                        ১৯৭১ সালের ১০ই এপ্রিল তারিখে মুজিবনগর সরকার কর্তৃক জারীকৃত স্বাধীনতার অনুদান ও ঘোষণাপত্র
+                        (Proclamation of Independence) (১৫তম সংশোধনীতে অন্তর্ভুক্ত, অনুচ্ছেদ ১৫০(২))।
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. AMENDMENTS SUMMARY (১ম থেকে ১৭শ সংশোধনী) -->
+        <section id="amendments" class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                <div class="p-3 bg-indigo-100 rounded-xl text-indigo-800">
+                    <i data-lucide="git-commit" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">৬. সংবিধানের ১৭টি সংশোধনী (Amendments
+                        Master Summary)</h2>
+                    <p class="text-slate-600 text-sm sm:text-base">BCS প্রিলিমিনারির জন্য সংশোধনীগুলোর মূল বিষয়বস্তু ও
+                        প্রেক্ষাপট</p>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-sm sm:text-base">
+                    <thead>
+                        <tr class="bg-indigo-900 text-white border-b border-indigo-800">
+                            <th class="p-3.5 font-bold rounded-tl-xl">সংশোধনী</th>
+                            <th class="p-3.5 font-bold">সাল ও শাসক/প্রেক্ষাপট</th>
+                            <th class="p-3.5 font-bold">মূল বিষয়বস্তু / পরিবর্তন</th>
+                            <th class="p-3.5 font-bold rounded-tr-xl">গুরুত্ব (BCS Note)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700 bg-slate-50/50">
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">১ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৭৩ (বঙ্গবন্ধু শেখ মুজিবুর রহমান)</td>
+                            <td class="p-3.5">যুদ্ধাপরাধীদের (পাকিস্তানি গণহত্যা বাহিনী) বিচার নিশ্চিতকরণ (অনুচ্ছেদ
+                                ৪৭(৩) সংযোজন)।</td>
+                            <td class="p-3.5 font-bold text-emerald-800">অত্যন্ত গুরুত্বপূর্ণ</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">২য় সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৭৩</td>
+                            <td class="p-3.5">জরুরি অবস্থা ঘোষণা (৯ম-ক ভাগ যুক্ত), নিবারক আটক ও মৌলিক অধিকার স্থগিতের
+                                বিধান।</td>
+                            <td class="p-3.5 font-medium text-slate-600">জরুরি অবস্থা</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">৩য় সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৭৪</td>
+                            <td class="p-3.5">বাংলাদেশ-ভারত সীমান্ত চুক্তি (বেরুবাড়ী হস্তান্তর) বাস্তবায়ন।</td>
+                            <td class="p-3.5 font-medium text-slate-600">সীমান্ত চুক্তি</td>
+                        </tr>
+                        <tr class="bg-amber-50/70">
+                            <td class="p-3.5 font-bold text-slate-900">৪র্থ সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৭৫ (বঙ্গবন্ধু শেখ মুজিবুর রহমান)</td>
+                            <td class="p-3.5">সংসদীয় ব্যবস্থা বাতিল করে রাষ্ট্রপতি শাসিত সরকার ব্যবস্থা ও একদলীয় শাসন
+                                (বাকশাল) প্রবর্তন।</td>
+                            <td class="p-3.5 font-bold text-amber-900">BCS Hot Question</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">৫ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৭৯ (জিয়াউর রহমান)</td>
+                            <td class="p-3.5">১৯৭৫ এর ১৫ আগস্টের পর থেকে সামরিক শাসনের বৈধতা প্রদান (পরবর্তীতে ২০১০ সালে
+                                উচ্চ আদালত কর্তৃক অবৈধ ঘোষিত)।</td>
+                            <td class="p-3.5 font-medium text-slate-600">সামরিক শাসন বৈধতা</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">৬ষ্ঠ সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৮১ (আবদুস সাত্তার)</td>
+                            <td class="p-3.5">উপ-রাষ্ট্রপতির পদ বহাল রেখে রাষ্ট্রপতি পদে নির্বাচনের সুযোগ সৃষ্টি।</td>
+                            <td class="p-3.5 font-medium text-slate-600">উপ-রাষ্ট্রপতি</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">৭ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৮৬ (এইচ এম এরশাদ)</td>
+                            <td class="p-3.5">এইচ এম এরশাদের সামরিক ফরমান ও কাজের বৈধতা (পরবর্তীতে সুপ্রীম কোর্ট বাতিল
+                                ঘোষণা করে)।</td>
+                            <td class="p-3.5 font-medium text-slate-600">এরশাদ শাসন</td>
+                        </tr>
+                        <tr class="bg-amber-50/70">
+                            <td class="p-3.5 font-bold text-slate-900">৮ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৮৮ (এইচ এম এরশাদ)</td>
+                            <td class="p-3.5">ইসলামকে ‘রাষ্ট্রধর্ম’ মর্যাদা দান (অনুচ্ছেদ ২ক) এবং ঢাকার বাইরে হাইকোর্টের
+                                ৬টি স্থায়ী বেঞ্চ গঠন।</td>
+                            <td class="p-3.5 font-bold text-amber-900">BCS Hot Question</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">৯ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৮৯ (এইচ এম এরশাদ)</td>
+                            <td class="p-3.5">রাষ্ট্রপতি ও উপ-রাষ্ট্রপতি নির্বাচন একই সাথে এবং রাষ্ট্রপতির মেয়াদ
+                                সর্বোচ্চ ২ মেয়াদে (১০ বছর) নির্ধারণ।</td>
+                            <td class="p-3.5 font-medium text-slate-600">মেয়াদ নির্ধারণ</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">১০ম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৯০</td>
+                            <td class="p-3.5">জাতীয় সংসদে মহিলাদের ৩০টি সংরক্ষিত আসনের মেয়াদ আরও ১০ বছর বৃদ্ধি।</td>
+                            <td class="p-3.5 font-medium text-slate-600">নারী আসন</td>
+                        </tr>
+                        <tr class="bg-amber-50/70">
+                            <td class="p-3.5 font-bold text-slate-900">১১শ সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৯১ (সাহাবুদ্দীন আহমদ)</td>
+                            <td class="p-3.5">অস্থায়ী রাষ্ট্রপতি বিচারপতি সাহাবুদ্দীন আহমদের স্বপদে (প্রধান বিচারপতি)
+                                ফিরে যাওয়ার বৈধতা অনুমোদন।</td>
+                            <td class="p-3.5 font-bold text-amber-900">সাহাবুদ্দীন আহমদ</td>
+                        </tr>
+                        <tr class="bg-emerald-50">
+                            <td class="p-3.5 font-bold text-emerald-950">১২তম সংশোধনী</td>
+                            <td class="p-3.5 font-bold text-emerald-900">১৯৯১ (begum খালেদা জিয়া)</td>
+                            <td class="p-3.5 font-medium text-slate-900">রাষ্ট্রপতি শাসিত সরকার পরিবর্তন করে পুনরায়
+                                "সংসদীয় সরকার ব্যবস্থা" প্রবর্তন।</td>
+                            <td class="p-3.5 font-extrabold text-emerald-800">অত্যন্ত গুরুত্বপূর্ণ (Must Know)</td>
+                        </tr>
+                        <tr class="bg-amber-50/70">
+                            <td class="p-3.5 font-bold text-slate-900">১৩তম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">১৯৯৬ (begum খালেদা জিয়া)</td>
+                            <td class="p-3.5">অবাধ ও নিরপেক্ষ নির্বাচনের জন্য "তত্ত্বাবধায়ক সরকার ব্যবস্থা" প্রবর্তন
+                                (২০১১ সালে বাতিল)।</td>
+                            <td class="p-3.5 font-bold text-amber-900">BCS Hot Question</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">১৪তম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">২০০৪</td>
+                            <td class="p-3.5">মহিলা সংরক্ষিত আসন ৪৫টিতে উন্নীত করা ও বিচারকদের অবসরের বয়স ৬৫ থেকে ৬৭
+                                বছর করা।</td>
+                            <td class="p-3.5 font-medium text-slate-600">অবসর বয়স ৬৭</td>
+                        </tr>
+                        <tr class="bg-emerald-50">
+                            <td class="p-3.5 font-bold text-emerald-950">১৫তম সংশোধনী</td>
+                            <td class="p-3.5 font-bold text-emerald-900">২০১১ (শেখ হাসিনা)</td>
+                            <td class="p-3.5 font-medium text-slate-900">তত্ত্বাবধায়ক সরকার ব্যবস্থা বাতিল, মূলনীতি
+                                পুনপ্রতিষ্ঠা, সংরক্ষিত নারী আসন ৫০ করা, ৫্থ, ৬ষ্ঠ, ৭ম তফসিল যুক্ত করা।</td>
+                            <td class="p-3.5 font-extrabold text-emerald-800">ব্যাপক পরিবর্তন (Must Know)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">১৬তম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">২০১৪ (শেখ হাসিনা)</td>
+                            <td class="p-3.5">বিচারপতিদের অপসারণের ক্ষমতা সংসদের হাতে প্রদান (পরবর্তীতে সুপ্রীম কোর্ট
+                                কর্তৃক অবৈধ ঘোষিত)।</td>
+                            <td class="p-3.5 font-medium text-slate-600">বিচারপতি অপসারণ</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3.5 font-bold text-slate-900">১৭তম সংশোধনী</td>
+                            <td class="p-3.5 font-semibold text-slate-700">২০১৮ (শেখ হাসিনা)</td>
+                            <td class="p-3.5">জাতীয় সংসদের সংরক্ষিত ৫০টি নারী আসনের মেয়াদ আরও ২৫ বছর বৃদ্ধি করা।</td>
+                            <td class="p-3.5 font-medium text-slate-600">সর্বশেষ সংশোধনী</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 7. FLASHCARD / QUICK SELF-TEST MODE -->
+        <section id="flashcards"
+            class="bg-emerald-950 text-white p-6 sm:p-10 rounded-3xl shadow-xl border border-emerald-800">
+            <div class="flex items-center gap-3 mb-6 border-b border-emerald-800 pb-4">
+                <div class="p-3 bg-emerald-800 rounded-xl text-amber-300">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">৭. কুইজ ও ফ্ল্যাশকার্ড মোড (BCS Self-Test)
+                    </h2>
+                    <p class="text-emerald-200 text-sm sm:text-base">গুরুত্বপূর্ণ অনুচ্ছেদগুলো কার্ড ফ্লিপ করে দ্রুত
+                        রিভিশন দিন</p>
+                </div>
+            </div>
+
+            <div class="max-w-xl mx-auto text-center space-y-6">
+                <div id="flashcard-box" onclick="flipCard()"
+                    class="bg-emerald-900 border-2 border-emerald-600 rounded-2xl p-8 min-h-[220px] flex flex-col items-center justify-center shadow-2xl cursor-pointer hover:border-amber-400 transition">
+                    <span id="flashcard-badge"
+                        class="bg-amber-400 text-slate-950 text-xs font-bold px-3 py-1 rounded-full mb-3">
+                        অনুচ্ছেদ ২৭
+                    </span>
+                    <p id="flashcard-question" class="text-xl sm:text-2xl font-bold text-white">
+                        "আইনের দৃষ্টিতে সমতা" — এটি সংবিধানের কত নম্বর অনুচ্ছেদে বর্ণিত?
+                    </p>
+                    <p id="flashcard-answer"
+                        class="hidden text-lg text-emerald-200 font-semibold mt-4 bg-emerald-950 px-4 py-2 rounded-xl border border-emerald-700">
+                        উত্তর: ২৭ নম্বর অনুচ্ছেদ (সকল নাগরিক আইনের দৃষ্টিতে সমান এবং আইনের সমান আশ্রয় লাভের অধিকারী)।
+                    </p>
+                    <p class="text-xs text-amber-300 mt-6 flex items-center gap-1">
+                        <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> ক্লিক করে উত্তর দেখুন / লুকান
+                    </p>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <button onclick="nextFlashcard()"
+                        class="bg-amber-400 hover:bg-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl transition flex items-center gap-2">
+                        পরবর্তী ফ্ল্যাশকার্ড <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 mt-16 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <p class="font-semibold text-slate-200 text-base">গণপ্রজাতন্ত্রী বাংলাদেশের সংবিধান (Act No. 957 of 1972) -
+                BCS ক্যাডার প্রস্তুতি মাস্টার সহায়িকা</p>
+            <p class="text-slate-400 max-w-2xl mx-auto">
+                সকল ১৫৩টি অনুচ্ছেদের সঠিক তথ্যসূত্র ও ব্যাখ্যা গণপ্রজাতন্ত্রী বাংলাদেশের আইন, বিচার ও সংসদ বিষয়ক
+                মন্ত্রণালয়ের অফিসিয়াল টেক্সট অনুসরণে প্রস্তুতকৃত।
+            </p>
+            <p class="text-slate-500 text-xs pt-4 border-t border-slate-800">
+                © BCS Constitution Complete Master Dashboard • All Rights Reserved
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC & COMPLETE 153 ARTICLES DATA -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const nav = document.getElementById('nav-menu');
+            nav.classList.toggle('hidden');
+        }
+
+        // Scroll Helper
+        function scrollToSection(id) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Local Storage Favorites System
+        let favorites = JSON.parse(localStorage.getItem('bcs_fav_articles') || '[]');
+
+        function toggleFavorite(artNum) {
+            if (favorites.includes(artNum)) {
+                favorites = favorites.filter(num => num !== artNum);
+            } else {
+                favorites.push(artNum);
+            }
+            localStorage.setItem('bcs_fav_articles', JSON.stringify(favorites));
+            updateFavCounter();
+            filterArticles();
+        }
+
+        function updateFavCounter() {
+            const el = document.getElementById('fav-counter-hero');
+            if (el) el.innerText = favorites.length;
+        }
+
+        function showOnlyFavorites() {
+            setPartFilter('fav');
+            scrollToSection('articles-directory');
+        }
+
+        // COMPLETE 153 ARTICLES DATA (ALL 153 ARTICLES INCLUDED WITH BENGALI TITLES AND BCS NOTES)
+        const constitutionData = [
+            {
+                partTitle: "১ম ভাগ: প্রজাতন্ত্র (The Republic)",
+                partRange: "অনুচ্ছেদ ১ - ৭খ",
+                partId: "part-1",
+                articles: [
+                    { num: "১", title: "প্রজাতন্ত্র", desc: "বাংলাদেশ একটি একক, স্বাধীন ও সার্বভৌম প্রজাতন্ত্র, যাহা ‘গণপ্রজাতন্ত্রী বাংলাদেশ’ নামে পরিচিত হইবে।", bcsHot: true },
+                    { num: "২", title: "প্রজাতন্ত্রের রাষ্ট্রীয় সীমানা", desc: "প্রজাতন্ত্রের এলাকা ও সীমানা নির্ধারণ এবং নতুন এলাকা অন্তর্ভুক্তির বিধান।", bcsHot: false },
+                    { num: "২ক", title: "রাষ্ট্রধর্ম", desc: "প্রজাতন্ত্রের রাষ্ট্রধর্ম ইসলাম, তবে হিন্দু, বৌদ্ধ, খ্রিস্টানসহ অন্যান্য ধর্ম শান্তিতে পালনে সমঅধিকার নিশ্চিত করা হইবে।", bcsHot: true },
+                    { num: "৩", title: "রাষ্ট্রভাষা", desc: "প্রজাতন্ত্রের রাষ্ট্রভাষা বাংলা।", bcsHot: true },
+                    { num: "৪", title: "জাতীয় সংগীত, পতাকা ও প্রতীক", desc: "জাতীয় সংগীত ‘আমার সোনার বাংলা’ (প্রথম ১০ চরণ), জাতীয় পতাকা লাল-সবুজের অনুপাত ১০:৬ (৫:৩), ও জাতীয় প্রতীক (উভয় পাশে ধানের শীষবেষ্টিত ভাসমান শাপলা, ওপরে পাটের পাতা ও ৪টি তারকা)।", bcsHot: true },
+                    { num: "৪ক", title: "জাতির পিতার প্রতিকৃতি", desc: "জাতির পিতা বঙ্গবন্ধু শেখ মুজিবুর রহমানের প্রতিকৃতি সংরক্ষণ ও প্রদর্শন বাধ্যবাধকতা।", bcsHot: true },
+                    { num: "৫", title: "রাজধানী", desc: "প্রজাতন্ত্রের রাজধানী ঢাকা।", bcsHot: false },
+                    { num: "৬", title: "নাগরিকত্ব", desc: "বাংলাদেশের নাগরিকত্ব আইনের দ্বারা নির্ধারিত হইবে; বাংলাদেশের জনগণ ‘বাঙালি’ এবং নাগরিকগণ ‘বাংলাদেশী’ বলিয়া পরিচিত হইবেন।", bcsHot: true },
+                    { num: "৭", title: "সংবিধানের প্রাধান্য", desc: "প্রজাতন্ত্রের সকল ক্ষমতার মালিক জনগণ। সংবিধানের সহিত অসমঞ্জস সকল আইন অসমঞ্জসতার সীমা পর্যন্ত বাতিল হইবে।", bcsHot: true },
+                    { num: "৭ক", title: "সংবিধান বাতিল, স্থগিতকরণ ইত্যাদি অপরাধ", desc: "সংবিধান রদ বা বাতিল করা রাষ্ট্রদ্রোহিতার অপরাধ হিসেবে গণ্য হইবে এবং সর্বোচ্চ দণ্ড হইবে।", bcsHot: true },
+                    { num: "৭খ", title: "সংবিধানের মৌলিক কাঠামো সংশোধন অযোগ্য", desc: "প্রস্তাবনা, ১ম, ২য় ও ৩য় ভাগের মৌলিক বিধানসমূহ এবং ১৪২ অনুচ্ছেদের বিধান সংশোধনযোগ্য নয়।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "২য় ভাগ: রাষ্ট্র পরিচালনার মূলনীতি (Fundamental Principles)",
+                partRange: "অনুচ্ছেদ ৮ - ২৫",
+                partId: "part-2",
+                articles: [
+                    { num: "৮", title: "মূলনীতিসমূহ", desc: "জাতীয়তাবাদ, সমাজতন্ত্র, গণতন্ত্র ও ধর্মনিরপেক্ষতা — এই ৪টি রাষ্ট্র পরিচালনার মূলনীতি।", bcsHot: true },
+                    { num: "৯", title: "জাতীয়তাবাদের ভিত্তি", desc: "ভাষাগত ও সংস্কৃতিগত ঐক্যের মাধ্যমে বাঙালি জাতীয়তাবাদের মূলভিত্তি।", bcsHot: false },
+                    { num: "১০", title: "সমাজতন্ত্র ও শোষণমুক্তি", desc: "মানুষের উপর মানুষের শোষণ হইতে মুক্ত ন্যায়ানুগ ও সাম্যবাদী সমাজ লাভ।", bcsHot: false },
+                    { num: "১১", title: "গণতন্ত্র ও মানবাধিকার", desc: "প্রজাতন্ত্র হইবে একটি গণতন্ত্র, যেখানে মৌলিক মানবাধিকার ও মানবসত্তার মর্যাদার গ্যারান্টি থাকিবে।", bcsHot: true },
+                    { num: "১২", title: " ধর্মনিরপেক্ষতা ও ধর্মীয় স্বাধীনতা", desc: " ধর্মনিরপেক্ষতা নীতি বাস্তবায়নে সর্বপ্রকার সাম্প্রদায়িকতা বিলোপ।", bcsHot: true },
+                    { num: "১৩", title: "মালিকানার নীতি", desc: "মালিকানার ৩টি রূপ: (ক) রাষ্ট্রীয় (খ) সমবায়ী (গ) ব্যক্তিগত।", bcsHot: true },
+                    { num: "১৪", title: "কৃষক ও শ্রমিকের মুক্তি", desc: "মেহনতী মানুষ, কৃষক ও শ্রমিককে সকল প্রকার শোষণ হইতে মুক্তি দান।", bcsHot: false },
+                    { num: "১৫", title: "মৌলিক প্রয়োজনের ব্যবস্থা", desc: "অন্ন, বস্ত্র, আশ্রয়, শিক্ষা ও চিকিৎসাসহ জীবনধারণের মৌলিক উপকরণের ব্যবস্থা।", bcsHot: true },
+                    { num: "১৬", title: "গ্রামীণ উন্নয়ন ও কৃষি বিপ্লব", desc: "নগর ও গ্রামের বৈষম্য দূরীকরণ এবং কৃষি বিপ্লব বিকাশ।", bcsHot: false },
+                    { num: "১৭", title: "অবৈতনিক ও বাধ্যতাবোধক শিক্ষা", desc: "নির্দিষ্ট স্তর পর্যন্ত সকল শিশুর জন্য অবৈতনিক ও বাধ্যতামূলক শিক্ষা প্রদান।", bcsHot: true },
+                    { num: "১৮", title: "জনস্বাস্থ্য ও নৈতিকতা", desc: "জনস্বাস্থ্যের উন্নতি ও মাদকদ্রব্য/মদ্যপান নিষিদ্ধকরণ।", bcsHot: true },
+                    { num: "১৮ক", title: "পরিবেশ ও জীববৈচিত্র্য সংরক্ষণ", desc: "বর্তমান ও ভবিষ্যৎ নাগরিকদের জন্য পরিবেশ, বন ও জীববৈচিত্র্য সংরক্ষণ (১৫তম সংশোধনীতে যুক্ত)।", bcsHot: true },
+                    { num: "১৯", title: "সুযোগের সমতা", desc: "সকল নাগরিকের জন্য সুযোগের সমতা নিশ্চিত করা এবং নারী-পুরুষ অসমতা দূর করা।", bcsHot: true },
+                    { num: "২০", title: "অধিকার ও দায়িত্বরূপে কর্ম", desc: "‘কর্ম হইতেছে অধিকার, কর্তব্য এবং সম্মানের বিষয়’ এবং ‘যার যেমন সামর্থ্য তাকে তেমন কর্ম’।", bcsHot: true },
+                    { num: "২১", title: "নাগরিক ও সরকারি কর্মচারীদের কর্তব্য", desc: "সংবিধান পালন করা এবং সরকারি সম্পত্তি রক্ষা করা প্রত্যেক নাগরিক ও কর্মচারীর কর্তব্য।", bcsHot: true },
+                    { num: "২২", title: "নির্বাহী বিভাগ হইতে বিচার বিভাগ পৃথকীকরণ", desc: "রাষ্ট্রের নির্বাহী অঙ্গসমূহ হইতে বিচার বিভাগকে পৃথকীকরণ নিশ্চিত করা।", bcsHot: true },
+                    { num: "২৩", title: "জাতীয় সংস্কৃতি", desc: "জাতীয় সংস্কৃতি, ঐতিহ্য ও শিল্পকলার সংরক্ষণ ও মানোন্নয়ন।", bcsHot: false },
+                    { num: "২৩ক", title: "উপজাতি, ক্ষুদ্র জাতিসত্তা, নৃ-গোষ্ঠীর সংস্কৃতি", desc: "ক্ষুদ্র নৃ-গোষ্ঠী ও উপজাতিদের অনন্য সংস্কৃতি ও ঐতিহ্য সংরক্ষণ।", bcsHot: true },
+                    { num: "২৪", title: "জাতীয় স্মৃতিস্তম্ভ ইত্যাদি", desc: "বিশেষ গুরুত্বসম্পন্ন স্মৃতিস্তম্ভ বা ঐতিহাসিক স্থানসমূহ ধ্বংস ও বিকৃতি হইতে রক্ষা।", bcsHot: false },
+                    { num: "২৫", title: "আন্তর্জাতিক শান্তি, নিরাপত্তা ও সংহতি উন্নতি", desc: "সার্বভৌমত্ব ও আঞ্চলিক অখণ্ডতার প্রতি শ্রদ্ধা এবং আন্তর্জাতিক বিরোধের শান্তিপূর্ণ নিস্পতি।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৩য় ভাগ: মৌলিক অধিকার (Fundamental Rights)",
+                partRange: "অনুচ্ছেদ ২৬ - ৪৫",
+                partId: "part-3",
+                articles: [
+                    { num: "২৬", title: "মৌলিক অধিকারের সহিত অসমঞ্জস আইন বাতিল", desc: "মৌলিক অধিকারের বিরোধী সকল বিদ্যমান আইন বাতিল এবং নতুন আইন প্রণয়ন নিষিদ্ধ।", bcsHot: true },
+                    { num: "২৭", title: "আইনের দৃষ্টিতে সমতা", desc: "সকল নাগরিক আইনের দৃষ্টিতে সমান এবং আইনের সমান আশ্রয় লাভের অধিকারী।", bcsHot: true },
+                    { num: "২৮", title: "ধর্ম প্রভূতির কারণে বৈষম্য নিষিদ্ধ", desc: "কেবল ধর্ম, গোষ্ঠী, বর্ণ, নারী-পুরুষভেদে বা জন্মস্থানের কারণে কোন নাগরিকের প্রতি বৈষম্য করা যাইবে না।", bcsHot: true },
+                    { num: "২৯", title: "সরকারি নিয়োগে সুযোগের সমতা", desc: "প্রজাতন্ত্রের কর্মে নিয়োগের ক্ষেত্রে সকল নাগরিকের জন্য সুযোগের সমতা থাকিবে।", bcsHot: true },
+                    { num: "৩০", title: "উপাধি ইত্যাদি বিলোপ", desc: "রাষ্ট্রের পূর্বানুমোদন ব্যতিরেকে কোন বিদেশী খেতাব বা উপাধি গ্রহণ করা যাইবে না।", bcsHot: false },
+                    { num: "৩১", title: "আইনের আশ্রয় লাভের অধিকার", desc: "আইনানুসারে ব্যতিরেকে কোন ব্যক্তির জীবন, স্বাধীনতা, দেহ বা সম্পত্তির ক্ষতি করা যাইবে না।", bcsHot: true },
+                    { num: "৩২", title: "জীবন ও ব্যক্তি-স্বাধীনতার অধিকার রক্ষা", desc: "আইনানুসারে ব্যতীত জীবন ও ব্যক্তি-স্বাধীনতা হইতে কাহাকেও বঞ্চিত করা যাইবে না।", bcsHot: true },
+                    { num: "৩৩", title: "গ্রেপ্তার ও আটক সম্পর্কে রক্ষা-কবচ", desc: "২৪ ঘণ্টার মধ্যে আদালতে হাজির করা এবং আইনজীবীর মাধ্যমে আত্মপক্ষ সমর্থনের অধিকার।", bcsHot: true },
+                    { num: "৩৪", title: "জবরদস্তি-শ্রম নিষিদ্ধকরণ", desc: "সকল প্রকার জবরদস্তিমূলক শ্রম নিষিদ্ধ ও দণ্ডনীয় অপরাধ।", bcsHot: true },
+                    { num: "৩৫", title: "বিচার ও দণ্ড সম্পর্কে রক্ষা-কবচ", desc: "এক অপরাধের জন্য দুইবার দণ্ড (Double Jeopardy) নিষিদ্ধ এবং নিজেকে অপরাধী প্রমাণের বাধ্যবাধকতা না থাকা।", bcsHot: true },
+                    { num: "৩৬", title: "চলাফেরার স্বাধীনতা", desc: "জনস্বার্থে আইন দ্বারা আরোপিত যুক্তিযুক্ত বাধা-নিষেধ সাপেক্ষে চলাফেরার স্বাধীনতা।", bcsHot: false },
+                    { num: "৩৭", title: "সমাবেশের স্বাধীনতা", desc: "শান্তিপূর্ণভাবে ও নিরস্ত্র অবস্থায় সমবেত হইবার অধিকার।", bcsHot: false },
+                    { num: "৩৮", title: "সংগঠন করিবার স্বাধীনতা", desc: "সমিতি বা সংঘ গঠন করিবার অধিকার (সাম্প্রদায়িক সংগঠন নিষিদ্ধ সংক্রান্ত বিধানসহ)।", bcsHot: true },
+                    { num: "৩৯", title: "চিন্তা ও বিবেকের স্বাধীনতা এবং বাক-স্বাধীনতা", desc: "চিন্তা ও বিবেকের স্বাধীনতা এবং সংবাদপত্রসহ বাক-স্বাধীনতার নিশ্চয়তা।", bcsHot: true },
+                    { num: "৪০", title: "পেশা বা বৃত্তির স্বাধীনতা", desc: "যেকোনো বৈধ পেশা, কারবার বা ব্যবসা পরিচালনার স্বাধীনতা।", bcsHot: false },
+                    { num: "৪১", title: "ধর্মীয় স্বাধীনতা", desc: "যেকোনো ধর্ম পালন, প্রচার ও গ্রহণের স্বাধীনতা।", bcsHot: true },
+                    { num: "৪২", title: "সম্পত্তির অধিকার", desc: "আইনের দ্বারা আরোপিত সীমা সাপেক্ষে সম্পত্তি অর্জন, ধারণ ও হস্তান্তরের অধিকার।", bcsHot: false },
+                    { num: "৪৩", title: "গৃহ ও যোগাযোগের গোপনীয়তা", desc: "প্রবেশ, তল্লাশি ও চিঠিপত্র বা যোগাযোগের গোপনীয়তা রক্ষার অধিকার।", bcsHot: false },
+                    { num: "৪৪", title: "মৌলিক অধিকার বলবৎকরণ", desc: "মৌলিক অধিকার ক্ষুণ্ণ হইলে ১০২ অনুচ্ছেদ অনুযায়ী হাইকোর্ট বিভাগে রীট দায়েরের অধিকার।", bcsHot: true },
+                    { num: "৪৫", title: "শৃঙ্খলাসংক্রান্ত আইনের ক্ষেত্রে অধিকারের পরিবর্তন", desc: "সশস্ত্র বাহিনীর সদস্যদের ক্ষেত্রে মৌলিক অধিকারের প্রয়োগে শিথিলতা।", bcsHot: false }
+                ]
+            },
+            {
+                partTitle: "৪র্থ ভাগ: নির্বাহী বিভাগ (The Executive)",
+                partRange: "অনুচ্ছেদ ৪৬ - ৬৪",
+                partId: "part-4",
+                articles: [
+                    { num: "৪৬", title: "দায়মুক্তি বিধানের ক্ষমতা", desc: "শৃঙ্খলা ভঙ্গের ক্ষেত্রে সংশ্লিষ্ট ব্যক্তিদের দায়মুক্তি (Indemnity) বিধানের ক্ষমতা।", bcsHot: false },
+                    { num: "৪৭", title: "কতিপয় আইনের সংরক্ষণ", desc: "মৌলিক অধিকার সত্ত্বেও গণহত্যা, মানবতাবিরোধী অপরাধ সংক্রান্ত আইন সংরক্ষণ।", bcsHot: true },
+                    { num: "৪৭ক", title: "সংবিধানের কতিপয় বিধানের অপ্রযোজ্যতা", desc: "যুদ্ধাপরাধীদের ক্ষেত্রে মৌলিক অধিকারের কতিপয় সুরক্ষা প্রযোজ্য হইবে না।", bcsHot: true },
+                    { num: "৪৮", title: "রাষ্ট্রপতি", desc: "বাংলাদেশের একজন রাষ্ট্রপতি থাকিবেন। তিনি রাষ্ট্রপ্রধান এবং প্রধানমন্ত্রী ও প্রধান বিচারপতি ব্যতিরেকে সকল কাজ প্রধানমন্ত্রীর পরামর্শে করেন।", bcsHot: true },
+                    { num: "৪৯", title: "ক্ষমা প্রদর্শনের অধিকার", desc: "রাষ্ট্রপতি যেকোনো দণ্ড মার্জা, বিলম্বন বা হ্রাস করিতে পারিবেন।", bcsHot: true },
+                    { num: "৫০", title: "রাষ্ট্রপতি-পদের মেয়াদ", desc: "দায়িত্ব গ্রহণের তারিখ হতে ৫ বছর (সর্বোচ্চ ২ মেয়াদ)।", bcsHot: true },
+                    { num: "৫১", title: "রাষ্ট্রপতির দায়মুক্তি", desc: "রাষ্ট্রপতির বিরুদ্ধে কোনো আদালতে কোনো ফৌজদারী বা দেওয়ানী কার্যধারা দায়ের করা যাইবে না।", bcsHot: true },
+                    { num: "৫২", title: "রাষ্ট্রপতির অভিশংসন", desc: "সংবিধান লঙ্ঘন বা গুরুতর অসদাচরণের অভিযোগে সংসদ দ্বারা রাষ্ট্রপতিকে অভিশংসন (Impeachment)।", bcsHot: true },
+                    { num: "৫৩", title: "অসামর্থ্যের কারণে রাষ্ট্রপতির অপসারণ", desc: "শারীরিক বা মানসিক অসামর্থ্যের কারণে রাষ্ট্রপতিকে পদচ্যুত করার বিধান।", bcsHot: false },
+                    { num: "৫৪", title: "অনুপস্থিতি প্রভৃতির সময়ে স্পিকারের রাষ্ট্রপতিপদে দায়িত্ব পালন", desc: "রাষ্ট্রপতির অনুপস্থিতিতে বা পদ শূন্য হলে স্পিকার রাষ্ট্রপতির দায়িত্ব পালন করবেন।", bcsHot: true },
+                    { num: "৫৫", title: "মন্ত্রিসভা", desc: "প্রধানমন্ত্রীর নেতৃত্বে একটি মন্ত্রিসভা থাকিবে এবং মন্ত্রিসভা যৌথভাবে সংসদের নিকট দায়ী থাকিবে।", bcsHot: true },
+                    { num: "৫৬", title: "মন্ত্রীগণ", desc: "প্রধানমন্ত্রী ও অন্যান্য মন্ত্রীদের নিয়োগ। ৯/১০ অংশ সংসদ সদস্য হতে এবং ১/১০ অংশ টেকনোক্র্যাট মন্ত্রী হতে পারেন।", bcsHot: true },
+                    { num: "৫৭", title: "প্রধানমন্ত্রীর পদের মেয়াদ", desc: "প্রধানমন্ত্রীর পদ শূন্য হওয়া ও পদত্যাগের শর্তাবলী।", bcsHot: false },
+                    { num: "৫৮", title: "অন্যান্য মন্ত্রীর পদের মেয়াদ", desc: "মন্ত্রীগণের পদত্যাগের নিয়মাবলী।", bcsHot: false },
+                    { num: "৫৮ক", title: " [অবলুপ্ত]", desc: "তত্ত্বাবধায়ক সরকার সংক্রান্ত অধ্যায় (১৫তম সংশোধনীর মাধ্যমে অবলুপ্ত)।", bcsHot: false },
+                    { num: "৫৯", title: "স্থানীয় শাসন", desc: "আইনানুসারে নির্বাচিত ব্যক্তিদের সমন্বয়ে গঠিত স্থানীয় শাসন সংস্থা।", bcsHot: true },
+                    { num: "৬০", title: "স্থানীয় শাসন সংক্রান্ত প্রতিষ্ঠানের ক্ষমতা", desc: "স্থানীয় শাসন সংস্থাসমূহকে কর আরোপ ও বাজেট প্রস্তুতের ক্ষমতা দান।", bcsHot: false },
+                    { num: "৬১", title: "সর্বাধিনায়কতা", desc: "বাংলাদেশ প্রতিরক্ষা কর্মবিভাগসমূহের সর্বাধিনায়কতা রাষ্ট্রপতির উপর ন্যস্ত।", bcsHot: true },
+                    { num: "৬২", title: "প্রতিরক্ষা কর্মবিভাগে ভর্তি প্রভৃতি", desc: "প্রতিরক্ষা বাহিনীতে নিয়োগ ও নিয়ন্ত্রণ সংসদীয় আইনের দ্বারা নির্ধারিত।", bcsHot: false },
+                    { num: "৬৩", title: "যুদ্ধ", desc: "সংসদের সম্মতি ব্যতীত যুদ্ধ ঘোষণা করা বা যুদ্ধে অংশগ্রহণ করা যাইবে না।", bcsHot: true },
+                    { num: "৬৪", title: "অ্যাটর্নি-জেনারেল", desc: "রাষ্ট্রপতি উচ্চ আদালতের বিচারক হবার যোগ্যতাসম্পন্ন ব্যক্তিকে অ্যাটর্নি জেনারেল হিসেবে নিয়োগ দেন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৫ম ভাগ: আইনসভা (The Legislature)",
+                partRange: "অনুচ্ছেদ ৬৫ - ৯৩",
+                partId: "part-5",
+                articles: [
+                    { num: "৬৫", title: "সংসদ প্রতিষ্ঠা", desc: "‘জাতীয় সংসদ’ নামে একটি সংসদ থাকিবে। ৩০০ একক আঞ্চলিক আসন + ৫০টি সংরক্ষিত নারী আসন।", bcsHot: true },
+                    { num: "৬৬", title: "সংসদে নির্বাচিত হইবার যোগ্যতা ও অযোগ্যতা", desc: "বয়স ন্যূনতম ২৫ বছর হইতে হইবে। দেউলিয়া, উন্মাদ বা সাজাপ্রাপ্ত ব্যক্তি অযোগ্য।", bcsHot: true },
+                    { num: "৬৭", title: "সদস্যদের আসন শূন্য হওয়া", desc: "অনুমতি ব্যতীত টানা ৯০ কার্যদিবস অনুপস্থিত থাকিলে সংসদ সদস্যপদ শূন্য হয়।", bcsHot: true },
+                    { num: "৬৮", title: "সংসদ-সদস্যদের বেতন প্রভৃতি", desc: "সংসদ সদস্যদের বেতন ও ভাতাদি আইনের দ্বারা নির্ধারিত।", bcsHot: false },
+                    { num: "৬৯", title: "শপথ গ্রহণের পূর্বে আসন গ্রহণ বা ভোটদান করিলে জরিমানা", desc: "শপথ না নিয়ে সংসদে বসলে বা ভোট দিলে দৈনিক এক হাজার টাকা জরিমানা।", bcsHot: false },
+                    { num: "৭০", title: "রাজনৈতিক দল হইতে পদত্যাগ বা দলের বিপক্ষে ভোটদানের কারণে আসন শূন্য হওয়া", desc: "যে দলের মনোনীত হয়ে নির্বাচিত হয়েছেন, সে দল হতে পদত্যাগ বা বিপক্ষে ভোট দিলে সদস্যপদ বাতিল হইবে।", bcsHot: true },
+                    { num: "৭১", title: "দ্বৈত সদস্যতায় বাধা", desc: "কোনো ব্যক্তি একই সময়ে দুই বা ততোধিক নির্বাচনী এলাকার সংসদ সদস্য হইবেন না।", bcsHot: true },
+                    { num: "৭২", title: "সংসদের অধিবেশন", desc: "এক অধিবেশনের শেষ বৈঠক ও পরবর্তী অধিবেশনের প্রথম বৈঠকের মধ্যে ৬০ দিনের বেশি বিরতি থাকিবে না।", bcsHot: true },
+                    { num: "৭৩", title: "সংসদে রাষ্ট্রপতির অধিকার", desc: "সংসদে ভাষণদান ও বাণী প্রেরণের রাষ্ট্রপতির অধিকার।", bcsHot: false },
+                    { num: "৭৩ক", title: "সংসদ সম্বন্ধে মন্ত্রীদের অধিকার", desc: "টেকনোক্র্যাট মন্ত্রীগণ সংসদে কথা বলতে পারেন কিন্তু ভোট দিতে পারেন না।", bcsHot: true },
+                    { num: "৭৪", title: "স্পিকার ও ডেপুটি স্পিকার", desc: "সংসদের প্রথম বৈঠকে সংসদ সদস্যদের মধ্য থেকে স্পিকার ও ডেপুটি স্পিকার নির্বাচন।", bcsHot: true },
+                    { num: "৭৫", title: "কার্যপ্রণালী-বিধি, কোরাম প্রভৃতি", desc: "সংসদের কোরাম গঠনের জন্য ন্যূনতম ৬০ জন সংসদ সদস্যের উপস্থিতি আবশ্যক।", bcsHot: true },
+                    { num: "৭৬", title: "সংসদের স্থায়ী কমিটিসমূহ", desc: "সরকারি হিসাব কমিটি, বিশেষ অধিকার কমিটিসহ স্থায়ী কমিটিসমূহ গঠন।", bcsHot: true },
+                    { num: "৭৭", title: "ন্যায়পাল (Ombudsman)", desc: "সংসদ আইনের দ্বারা ন্যায়পালের পদ সৃষ্টি করতে পারবে। (তিনি মন্ত্রণালয়ের প্রশাসনিক কাজের তদন্ত করেন)।", bcsHot: true },
+                    { num: "৭৮", title: "সংসদ ও সদস্যদের বিশেষ অধিকার ও দায়মুক্তি", desc: "সংসদে বাক-স্বাধীনতার জন্য কোন সদস্যের বিরুদ্ধে আদালতে বিচার চাওয়া যাইবে না।", bcsHot: true },
+                    { num: "৭৯", title: "সংসদ সচিবালয়", desc: "জাতীয় সংসদের নিজস্ব স্বাধীন সচিবালয় থাকিবে।", bcsHot: false },
+                    { num: "৮০", title: "আইন প্রণয়ন পদ্ধতি", desc: "সংসদে বিল পাস হবার পর ১৫ দিনের মধ্যে রাষ্ট্রপতি সম্মতি দিবেন।", bcsHot: true },
+                    { num: "৮১", title: "অর্থবিল", desc: "কেবল কর আরোপ, অর্থ মঞ্জুরি বা সরকারি তহবিল সংক্রান্ত বিল যাহা স্পিকার কর্তৃক প্রত্যয়িত।", bcsHot: true },
+                    { num: "৮২", title: "অর্থসংক্রান্ত আর্থিক সুপারিশ", desc: "রাষ্ট্রপতির সুপারিশ ব্যতীত কোন অর্থবিল সংসদে উত্থাপন করা যাইবে না।", bcsHot: false },
+                    { num: "৮৩", title: "সংসদের আইন ব্যতীত করারোপে বাধা", desc: "সংসদের কোনো আইনের কর্তৃত্ব ব্যতীত কোন কর আরোপ করা যাইবে না।", bcsHot: true },
+                    { num: "৮৪", title: "সংযুক্ত তহবিল ও সরকারি হিসাব", desc: "সরকার কর্তৃক প্রাপ্ত সকল রাজস্ব 'সংযুক্ত তহবিলে' (Consolidated Fund) জমা হইবে।", bcsHot: true },
+                    { num: "৮৫", title: "সরকারি অর্থের নিয়ন্ত্রণ", desc: "সংযুক্ত তহবিল হতে অর্থ প্রত্যাহার ও হেফাজত আইন দ্বারা নিয়ন্ত্রিত।", bcsHot: false },
+                    { num: "৮৬", title: "সরকারি হিসাবে অর্থ জমা", desc: "সংযুক্ত তহবিল ব্যতীত অন্যান্য পাবলিক মানি সরকারি হিসাবে জমা হইবে।", bcsHot: false },
+                    { num: "৮৭", title: "বার্ষিক আর্থিক বিবৃতি (বাজেট)", desc: "প্রতি অর্থ-বছরের জন্য আনুমানিক আয় ও ব্যয়ের বিবরণী (বাজেট) সংসদে পেশ করা।", bcsHot: true },
+                    { num: "৮৮", title: "সংযুক্ত তহবিলের উপর দায়", desc: "রাষ্ট্রপতি, বিচারক, সিএজি, স্পিকারের বেতন সংযুক্ত তহবিলের উপর দায়যুক্ত (সংসদে ভোটের প্রয়োজন হয় না)।", bcsHot: true },
+                    { num: "৮৯", title: "বার্ষিক আর্থিক বিবৃতি সম্পর্কিত পদ্ধতি", desc: "মঞ্জুরি দাবির উপর সংসদে আলোচনার বিধান।", bcsHot: false },
+                    { num: "৯০", title: "নির্দিষ্টকরণ আইন", desc: "সংযুক্ত তহবিল হতে অর্থ প্রত্যাহারের অনুমোদনের জন্য আইন।", bcsHot: false },
+                    { num: "৯১", title: "সম্পূরক ও অতিরিক্ত মঞ্জুরি", desc: "চলতি অর্থ-বছরে বরাদ্দকৃত অর্থ অপ পর্যাপ্ত হলে সম্পূরক বাজেট পেশ।", bcsHot: false },
+                    { num: "৯২", title: "হিসাব, ঋণ ইত্যাদির উপর ভোট", desc: "বিশেষ পরিস্থিতিতে নির্দিষ্ট মেয়াদের জন্য অর্থ অগ্রিম উত্তোলনের অনুমোদন।", bcsHot: false },
+                    { num: "৯২ক", title: " [অবলুপ্ত]", desc: "অর্থনৈতিক ক্রান্তিকালে বিশেষ অর্থ মঞ্জুরি (অবলুপ্ত)।", bcsHot: false },
+                    { num: "৯৩", title: "অধ্যাদেশ প্রণয়ন ক্ষমতা", desc: "সংসদের অধিবেশন না থাকা অবস্থায় বা সংসদ ভেঙে গেলে রাষ্ট্রপতি জরুরী অধ্যাদেশ (Ordinance) জারি করতে পারেন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৬ষ্ঠ ভাগ: বিচার বিভাগ (The Judiciary)",
+                partRange: "অনুচ্ছেদ ৯৪ - ১১২",
+                partId: "part-6",
+                articles: [
+                    { num: "৯৪", title: "সুপ্রীম কোর্ট প্রতিষ্ঠা", desc: "‘বাংলাদেশের সুপ্রীম কোর্ট’ নামে সর্বোচ্চ আদালত থাকিবে। ইহার দুটি বিভাগ: (১) আপীল বিভাগ (২) হাইকোর্ট বিভাগ।", bcsHot: true },
+                    { num: "৯৫", title: "বিচারক নিয়োগ", desc: "প্রধান বিচারপতি ও অন্যান্য বিচারকগণ রাষ্ট্রপতি কর্তৃক নিযুক্ত হইবেন। বিচারক হতে ১০ বছরের এডভোকেট অভিজ্ঞতার প্রয়োজন।", bcsHot: true },
+                    { num: "৯৬", title: "বিচারকদের পদের মেয়াদ", desc: "সুপ্রীম কোর্টের বিচারকগণ ৬৭ বছর বয়স পূর্ণ হওয়া পর্যন্ত পদে বহাল থাকিবেন।", bcsHot: true },
+                    { num: "৯৭", title: "অস্থায়ী প্রধান বিচারপতি নিয়োগ", desc: "প্রধান বিচারপতির অনুপস্থিতিতে জ্যেষ্ঠ বিচারক দায়িত্ব পালন করবেন।", bcsHot: false },
+                    { num: "৯৮", title: "সুপ্রীম কোর্টের অতিরিক্ত বিচারকগণ", desc: "২ বছরের জন্য অতিরিক্ত বিচারক নিয়োগের বিধান।", bcsHot: false },
+                    { num: "৯৯", title: "বিচারকগণের অবসর গ্রহণের পর অক্ষমতা", desc: "অবসরের পর সুপ্রীম কোর্টের বিচারক কোনো আদালত বা কর্তৃপক্ষের সমক্ষে ওকালতি করতে পারবেন না।", bcsHot: true },
+                    { num: "১০০", title: "সুপ্রীম কোর্টের আসন", desc: "সুপ্রীম কোর্টের স্থায়ী আসন রাজধানী ঢাকায়।", bcsHot: true },
+                    { num: "১০১", title: "হাইকোর্ট বিভাগের এখতিয়ার", desc: "হাইকোর্ট বিভাগের মূল ও আপীল এখতিয়ার।", bcsHot: false },
+                    { num: "১০২", title: "রীট জারী করিবার হাইকোর্ট বিভাগের ক্ষমতা", desc: "মৌলিক অধিকার বলবৎকরণে ৫ প্রকার রীট (Habeas Corpus, Mandamus, Prohibition, Quo-Warranto, Certiorari) জারি।", bcsHot: true },
+                    { num: "১০৩", title: "আপীল বিভাগের এখতিয়ার", desc: "হাইকোর্ট বিভাগের রায়, ডিক্রি বা দণ্ডের বিরুদ্ধে আপীল শুনানির এখতিয়ার।", bcsHot: true },
+                    { num: "১০৪", title: "আপীল বিভাগের পরোয়ানা জারী ও প্রকাশ", desc: "সম্পূর্ণ ন্যায়বিচারের জন্য আপীল বিভাগের নির্দেশ জারি করার ক্ষমতা।", bcsHot: false },
+                    { num: "১০৫", title: "আপীল বিভাগ কর্তৃক রায় পুনর্বিবেচনা (Review)", desc: "আপীল বিভাগের ঘোষিত রায় স্বীয় রিভিউ করার ক্ষমতা।", bcsHot: true },
+                    { num: "১০৬", title: "সুপ্রীম কোর্টের উপদেষ্টা-সংক্রান্ত এখতিয়ার", desc: "আইনগত গুরুত্বপূর্ণ প্রশ্নে রাষ্ট্রপতি সুপ্রীম কোর্টের মতামত চাইতে পারেন।", bcsHot: true },
+                    { num: "১০৭", title: "সুপ্রীম কোর্টের বিধি-প্রণয়ন ক্ষমতা", desc: "রাষ্ট্রপতির অনুমোদন সাপেক্ষে সুপ্রীম কোর্টের নিজস্ব রুলস তৈরির ক্ষমতা।", bcsHot: false },
+                    { num: "১০৮", title: "‘কোর্ট অব রেকর্ড’ রূপে সুপ্রীম কোর্ট", desc: "সুপ্রীম কোর্ট একটি ‘কোর্ট অব রেকর্ড’ এবং অবমাননার জন্য দণ্ডদানের ক্ষমতা রহিয়াছে।", bcsHot: true },
+                    { num: "১০৯", title: "আদালতসমূহের উপর তত্ত্বাবধান ও নিয়ন্ত্রণ", desc: "হাইকোর্ট বিভাগ অধস্তন সকল আদালত ও ট্রাইব্যুনালের উপর তত্ত্বাবধান করবে।", bcsHot: true },
+                    { num: "১১০", title: "অধস্তন আদালত হইতে হাইকোর্ট বিভাগে মামলা স্থানান্তর", desc: "সংবিধানের ব্যাখ্যা জড়িত মামলা হাইকোর্টে স্থানান্তর।", bcsHot: false },
+                    { num: "১১১", title: "সুপ্রীম কোর্টের রায়ের বাধ্যবাধকতা", desc: "আপীল বিভাগের ঘোষিত আইন হাইকোর্ট ও অধস্তন আদালতের জন্য এবং হাইকোর্টের আইন অধস্তন আদালতের জন্য বাধ্যতামূলক।", bcsHot: true },
+                    { num: "১১২", title: "সুপ্রীম কোর্টের সহায়তা", desc: "প্রজাতন্ত্রের সীমানার ভিতরের সকল নির্বাহী ও বিচার বিভাগীয় কর্তৃপক্ষ সুপ্রীম কোর্টের সহায়তা করিবেন।", bcsHot: false },
+                    { num: "১১৩", title: "অধস্তন আদালতসমূহ প্রতিষ্ঠা", desc: "আইন দ্বারা অধস্তন দেওয়ানী ও ফৌজদারী আদালত প্রতিষ্ঠা।", bcsHot: false },
+                    { num: "১১৪", title: "অধস্তন আদালতে নিয়োগ", desc: "অধস্তন আদালতের বিচারক পদে নিয়োগ রাষ্ট্রপতি কর্তৃক প্রদত্ত সার্ভিস রুলস অনুযায়ী (BJS পরীক্ষা)।", bcsHot: true },
+                    { num: "১১৫", title: "অধস্তন আদালতের নিয়ন্ত্রণ ও শৃঙ্খলা", desc: "অধস্তন বিচারকদের নিয়ন্ত্রণ ও শৃঙ্খলা সুপ্রীম কোর্টের সাথে পরামর্শক্রমে রাষ্ট্রপতির উপর ন্যস্ত।", bcsHot: true },
+                    { num: "১১৬", title: "বিচার বিভাগীয় কর্মচারীদের স্বাধীনতা", desc: "বিচার বিভাগীয় দায়িত্ব পালনের ক্ষেত্রে বিচারকগণ স্বাধীন।", bcsHot: true },
+                    { num: "১১৭", title: "প্রশাসনিক ট্রাইব্যুনাল (Administrative Tribunals)", desc: "সরকারি কর্মচারীদের চাকরি সংক্রান্ত বিরোধ নিষ্পত্তির জন্য প্রশাসনিক ট্রাইব্যুনাল গঠন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৭ম ভাগ: নির্বাচন (Elections)",
+                partRange: "অনুচ্ছেদ ১১৩ - ১২৬",
+                partId: "part-7",
+                articles: [
+                    { num: "১১৮", title: "নির্বাচন কমিশন গঠন", desc: "একজন প্রধান নির্বাচন কমিশনার ও সর্বোচ্চ ৪ জন কমিশনার নিয়ে নির্বাচন কমিশন গঠন। রাষ্ট্রপতি নিয়োগ দেন।", bcsHot: true },
+                    { num: "১১৯", title: "নির্বাচন কমিশনের দায়িত্ব", desc: "রাষ্ট্রপতি ও সংসদ নির্বাচন পরিচালনা, ভোটার তালিকা প্রস্তুত ও সীমানা পুনঃনির্ধারণ।", bcsHot: true },
+                    { num: "১২০", title: "নির্বাচন কমিশনের কর্মচারীগণ", desc: "কমিশনের চাহিদামতো রাষ্ট্রপতি প্রয়োজনীয় কর্মচারী দান করবেন।", bcsHot: false },
+                    { num: "১২১", title: "প্রতিটি এলাকার জন্য একটিমাত্র ভোটার তালিকা", desc: "ধর্ম, বর্ণ বা লিঙ্গভিত্তিক পৃথক নির্বাচন মণ্ডলী গঠন করা যাইবে না।", bcsHot: false },
+                    { num: "১২২", title: "ভোটার তালিকায় নামভুক্তির যোগ্যতা", desc: "বাংলাদেশের নাগরিক, বয়স ন্যূনতম ১৮ বছর এবং আদালত কর্তৃক অপ্রকৃতিস্থ ঘোষিত নয়।", bcsHot: true },
+                    { num: "১২৩", title: "নির্বাচন অনুষ্ঠানের সময়", desc: "সংসদ ভেঙে যাওয়ার ৯০ দিনের মধ্যে অথবা মেয়াদ শেষ হবার পূর্ববর্তী ৯০ দিনের মধ্যে নির্বাচন।", bcsHot: true },
+                    { num: "১২৪", title: "নির্বাচন সম্পর্কে সংসদের বিধান প্রণয়নের ক্ষমতা", desc: "সীমানা ও ভোটার তালিকা সংক্রান্ত আইন পাসের ক্ষমতা।", bcsHot: false },
+                    { num: "১২৫", title: "নির্বাচনী বিষয়াবলীর বৈধতা", desc: "নির্বাচন কমিশনের তফসিল বা কার্যধারা নিয়ে আদালতে প্রশ্ন তোলা যাবে না।", bcsHot: false },
+                    { num: "১২৬", title: "নির্বাচন কমিশনকে সহায়তা দান", desc: "নির্বাচন কমিশনকে সহায়তা করা সকল নির্বাহী কর্তৃপক্ষের কর্তব্য।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৮ম ভাগ: মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক (Comptroller & Auditor-General)",
+                partRange: "অনুচ্ছেদ ১২৭ - ১৩২",
+                partId: "part-8",
+                articles: [
+                    { num: "১২৭", title: "মহা হিসাব-নিরীক্ষক পদের সৃষ্টি", desc: "বাংলাদেশের একজন মহা হিসাব-নিরীক্ষক ও নিয়ন্ত্রক (CAG) থাকিবেন। তাহাকে রাষ্ট্রপতি নিয়োগ দেন।", bcsHot: true },
+                    { num: "১২৮", title: "মহা হিসাব-নিরীক্ষকের দায়িত্ব", desc: "সরকারি হিসাব ও সকল আদালত/কর্তৃপক্ষের হিসাব পরীক্ষা ও নিরীক্ষা করা।", bcsHot: true },
+                    { num: "১২৯", title: "মহা হিসাব-নিরীক্ষকের কর্মের মেয়াদ", desc: "দায়িত্ব গ্রহণের তারিখ হতে ৫ বছর বা ৬৫ বছর বয়স পূর্ণ হওয়া (যাহা পূর্বে আসে)।", bcsHot: true },
+                    { num: "১৩০", title: "অস্থায়ী মহা হিসাব-নিরীক্ষক", desc: "CAG এর অনুপস্থিতিতে সাময়িক নিয়োগ।", bcsHot: false },
+                    { num: "১৩১", title: "প্রজাতন্ত্রের হিসাব রক্ষার আকার ও পদ্ধতি", desc: "রাষ্ট্রপতির অনুমোদনক্রমে CAG নির্ধারিত পদ্ধতিতে সরকারি হিসাব রাখা।", bcsHot: false },
+                    { num: "১৩২", title: "সংসদে মহা হিসাব-নিরীক্ষকের রিপোর্ট পেশ", desc: "CAG-এর প্রতিবেদন রাষ্ট্রপতির নিকট পেশ করা হইবে এবং রাষ্ট্রপতি তাহা সংসদে পেশ করার ব্যবস্থা করিবেন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৯ম ভাগ: বাংলাদেশের কর্মবিভাগ (Public Services)",
+                partRange: "অনুচ্ছেদ ১৩৩ - ১৪১",
+                partId: "part-9",
+                articles: [
+                    { num: "১৩৩", title: "নিয়োগ ও কর্মের শর্তাবলী", desc: "প্রজাতন্ত্রের কর্মে কর্মচারী নিয়োগ ও কর্মের শর্তাবলী সংসদীয় আইনের দ্বারা নিয়ন্ত্রিত।", bcsHot: true },
+                    { num: "১৩৪", title: "কর্মের মেয়াদ", desc: "সংবিধানের বিধান সাপেক্ষে সরকারি কর্মচারিগণ রাষ্ট্রপতির সন্তোষানুযায়ী পদে বহাল থাকিবেন।", bcsHot: false },
+                    { num: "১৩৫", title: "অসামরিক সরকারি কর্মচারীদের বরখাস্ত প্রভৃতি", desc: "আত্মপক্ষ সমর্থনের যুক্তিযুক্ত সুযোগ না দিয়া কোনো সরকারি কর্মচারীকে বরখাস্ত বা অপসারিত করা যাইবে না।", bcsHot: true },
+                    { num: "১৩৬", title: "কর্মবিভাগ পুনর্গঠন", desc: "আইন দ্বারা সার্ভিস পুনর্গঠন বা একত্রীকরণ করা যাইবে।", bcsHot: false },
+                    { num: "১৩৭", title: "কমিশন গঠন", desc: "আইন দ্বারা এক বা একাধিক সরকারি কর্ম কমিশন (BPSC) গঠিত হইবে।", bcsHot: true },
+                    { num: "১৩৮", title: "সদস্য নিয়োগ", desc: "পিএসসির চেয়ারম্যান ও অন্যান্য সদস্যগণ রাষ্ট্রপতি কর্তৃক নিযুক্ত হইবেন (নূন্যতম অর্ধেক সদস্য ১৫ বছর সরকারি চাকুরিজীবী হতে হবে)।", bcsHot: true },
+                    { num: "১৩৯", title: "পদের মেয়াদ", desc: "পিএসসি চেয়ারম্যান ও সদস্যদের মেয়াদ ৫ বছর বা ৬৫ বছর বয়স (যাহা পূর্বে আসে)।", bcsHot: true },
+                    { num: "১৪০", title: "কমিশনের দায়িত্ব", desc: "প্রজাতন্ত্রের কর্মে নিয়োগের জন্য পরীক্ষা পরিচালনা ও পরামর্শ প্রদান।", bcsHot: true },
+                    { num: "১৪১", title: "বার্ষিক রিপোর্ট", desc: "প্রতি বছর কমিশন রাষ্ট্রপতির নিকট রিপোর্ট পেশ করিবে এবং রাষ্ট্রপতি তাহা সংসদে উপস্থাপন করিবেন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "৯ম (ক) ভাগ: জরুরী বিধানাবলী (Emergency Provisions)",
+                partRange: "অনুচ্ছেদ ১৪১ক - ১৪১গ",
+                partId: "part-9a",
+                articles: [
+                    { num: "১৪১ক", title: "জরুরী অবস্থা ঘোষণা", desc: "যুদ্ধ, বহিরাক্রমণ বা অভ্যন্তরীণ গোলযোগের কারণে রাষ্ট্রপতি প্রধানমন্ত্রীর পূর্ব-স্বাক্ষর নিয়ে জরুরি অবস্থা ঘোষণা করতে পারেন (সর্বোচ্চ ১২০ দিন সংসদ অনুমোদন ছাড়া)।", bcsHot: true },
+                    { num: "১৪১খ", title: "জরুরী অবস্থার সময় সংবিধানের কতিপয় অনুচ্ছেদের স্থগিতকরণ", desc: "জরুরি অবস্থা চলাকালে ৩৬, ৩৭, ৩৮, ৩৯, ৪০ ও ৪১ অনুচ্ছেদের মৌলিক অধিকারসমূহ স্থগিত থাকে।", bcsHot: true },
+                    { num: "১৪১গ", title: "জরুরী অবস্থার সময় মৌলিক অধিকারসমূহ বলবৎকরণ স্থগিতকরণ", desc: "আদালতে মৌলিক অধিকার বলবৎ করার অধিকার রাষ্ট্রপতির আদেশক্রমে স্থগিত রাখা যায়।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "১০ম ভাগ: সংবিধান-সংশোধন (Amendment of the Constitution)",
+                partRange: "অনুচ্ছেদ ১৪২",
+                partId: "part-10",
+                articles: [
+                    { num: "১৪২", title: "সংবিধানের বিধান সংশোধনের ক্ষমতা", desc: "সংসদের মোট সদস্য-সংখ্যার ন্যূনতম দুই-তৃতীয়াংশ (২/৩) ভোটের মাধ্যমে সংবিধানের যেকোনো বিধান সংশোধন বা রদ করা যাইবে। রাষ্ট্রপতির সম্মতির সময় ৭ দিন।", bcsHot: true }
+                ]
+            },
+            {
+                partTitle: "১১শ ভাগ: বিবিধ (Miscellaneous)",
+                partRange: "অনুচ্ছেদ ১৪৩ - ১৫৩",
+                partId: "part-11",
+                articles: [
+                    { num: "১৪৩", title: "প্রজাতন্ত্রের সম্পত্তি", desc: "মালিকহীন সম্পত্তি, খনিজ সম্পদ, ও সামুদ্রিক এলাকার সম্পদের মালিক প্রজাতন্ত্র।", bcsHot: false },
+                    { num: "১৪৪", title: "সম্পত্তি ও কারবার প্রভৃতি সম্পর্কে নির্বাহী ক্ষমতা", desc: "প্রজাতন্ত্রের নামে সম্পত্তি ক্রয়, বিক্রয় ও চুক্তি সম্পাদনের ক্ষমতা।", bcsHot: false },
+                    { num: "১৪৫", title: "চুক্তি ও দলিল", desc: "প্রজাতন্ত্রের পক্ষে সম্পাদিত সকল চুক্তি রাষ্ট্রপতির নামে সম্পাদিত হইবে।", bcsHot: true },
+                    { num: "১৪৫ক", title: "আন্তর্জাতিক চুক্তি", desc: "বিদেশী রাষ্ট্রের সহিত সম্পাদিত চুক্তি রাষ্ট্রপতির নিকট পেশ করা হইবে এবং রাষ্ট্রপতি তাহা সংসদে পেশ করার ব্যবস্থা করিবেন।", bcsHot: true },
+                    { num: "১৪৬", title: "মামলা-মোকদ্দমা", desc: "বাংলাদেশ সরকারের নামে মামলা দায়ের করা যাইবে বা সরকারের বিরুদ্ধে মামলা করা যাইবে।", bcsHot: true },
+                    { num: "১৪৭", title: "কতিপয় পদাধিকারীর পারিশ্রমিক প্রভৃতি", desc: "রাষ্ট্রপতি, প্রধানমন্ত্রী, স্পিকার, বিচারক, সিএজি, নির্বাচন কমিশনার ও পিএসসি সদস্যদের বেতন পদাধিকারকালে কমানো যাবে না।", bcsHot: true },
+                    { num: "১৪৮", title: "পদের শপথ", desc: "৩য় তফসিলে বর্ণিত ব্যক্তিগণ কার্যভার গ্রহণের পূর্বে নির্ধারিত শপথ গ্রহণ করিবেন।", bcsHot: true },
+                    { num: "১৪৯", title: "প্রচলিত আইনের বহাল থাকা", desc: "সংবিধান প্রবর্তনের পূর্বে বিদ্যমান সকল আইন বহাল থাকিবে।", bcsHot: false },
+                    { num: "১৫০", title: "ক্রান্তিকালীন ও অস্থায়ী বিধানাবলী", desc: "৪র্থ, ৫ম, ৬ষ্ঠ ও ৭ম তফসিলে বর্ণিত ঐতিহাসিক দলিলসমূহ সংরক্ষণ ও কার্যকারিতা।", bcsHot: true },
+                    { num: "১৫১", title: "রদকরণ", desc: "বাংলাদেশের অস্থায়ী সংবিধান আদেশ ১৯৭২ রদ করা হইল।", bcsHot: false },
+                    { num: "১৫২", title: "ব্যাখ্যা", desc: "সংবিধানে ব্যবহৃত শব্দসমূহের আইনগত ব্যাখ্যা (যেমন: নাগরিক, আইন, আদালত ইত্যাদি)।", bcsHot: true },
+                    { num: "১৫৩", title: "প্রবর্তন, উল্লেখ ও প্রামাণিক পাঠ", desc: "১৬ ডিসেম্বর ১৯৭২ তারিখ হতে প্রবর্তিত। মূল সংবিধান বাংলা ও ইংরেজিতে লিখিত; কিন্তু পাঠগত বিরোধে ‘বাংলা পাঠ প্রাধান্য পাইবে’।", bcsHot: true }
+                ]
+            }
+        ];
+
+        let currentPartFilter = 'all';
+
+        // RENDER ARTICLES DIRECTORY
+        function filterArticles() {
+            const searchQuery = document.getElementById('articleSearch').value.trim().toLowerCase();
+            const container = document.getElementById('articlesContainer');
+            container.innerHTML = '';
+
+            let totalVisibleArticles = 0;
+
+            constitutionData.forEach(part => {
+                // Filter by Part tab first
+                if (currentPartFilter !== 'all' && currentPartFilter !== 'bcs-hot' && currentPartFilter !== 'fav' && part.partId !== currentPartFilter) {
+                    return;
+                }
+
+                // Filter articles inside part
+                const matchingArticles = part.articles.filter(art => {
+                    // Favorite filter check
+                    if (currentPartFilter === 'fav' && !favorites.includes(art.num)) {
+                        return false;
+                    }
+
+                    // High yield check
+                    if (currentPartFilter === 'bcs-hot' && !art.bcsHot) {
+                        return false;
+                    }
+
+                    // Search text query check
+                    if (!searchQuery) return true;
+
+                    const numMatch = art.num.toLowerCase().includes(searchQuery);
+                    const titleMatch = art.title.toLowerCase().includes(searchQuery);
+                    const descMatch = art.desc.toLowerCase().includes(searchQuery);
+
+                    return numMatch || titleMatch || descMatch;
+                });
+
+                if (matchingArticles.length > 0) {
+                    totalVisibleArticles += matchingArticles.length;
+
+                    // Create Part Card
+                    const partSection = document.createElement('div');
+                    partSection.className = 'border border-slate-200 rounded-2xl overflow-hidden bg-slate-50/50 shadow-sm';
+
+                    let articlesHtml = matchingArticles.map(art => {
+                        const isFav = favorites.includes(art.num);
+                        return `
+              <div class="p-5 bg-white rounded-2xl border border-slate-200/90 hover:border-emerald-500 hover:shadow-md transition group relative flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between gap-2 mb-2">
+                    <span class="inline-flex items-center gap-1 text-xs font-extrabold bg-emerald-100 text-emerald-950 px-3 py-1 rounded-full border border-emerald-300">
+                      অনুচ্ছেদ ${art.num}
+                    </span>
+                    <div class="flex items-center gap-1.5">
+                      ${art.bcsHot ? `
+                        <span class="text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                          🔥 BCS Hot
+                        </span>
+                      ` : ''}
+                      <button onclick="toggleFavorite('${art.num}')" title="বুকমার্ক করুন" class="p-1.5 hover:bg-slate-100 rounded-full transition">
+                        <i data-lucide="star" class="w-4 h-4 ${isFav ? 'text-amber-400 fill-amber-400' : 'text-slate-400'}"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <h4 class="font-bold text-slate-900 text-base sm:text-lg mb-2 group-hover:text-emerald-800 transition">
+                    ${art.title}
+                  </h4>
+                  <p class="text-sm text-slate-700 leading-relaxed">
+                    ${art.desc}
+                  </p>
+                </div>
+              </div>
+            `;
+                    }).join('');
+
+                    partSection.innerHTML = `
+            <div class="bg-emerald-900 text-white p-4 flex justify-between items-center flex-wrap gap-2">
+              <h3 class="font-bold text-base sm:text-lg flex items-center gap-2">
+                <i data-lucide="bookmark" class="w-5 h-5 text-amber-300"></i>
+                ${part.partTitle}
+              </h3>
+              <span class="text-xs sm:text-sm bg-emerald-800 border border-emerald-700 px-3 py-1 rounded-lg text-emerald-100 font-semibold">
+                ${part.partRange} (${matchingArticles.length}টি প্রদর্শন)
+              </span>
+            </div>
+            <div class="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${articlesHtml}
+            </div>
+          `;
+
+                    container.appendChild(partSection);
+                }
+            });
+
+            // Update counter
+            document.getElementById('result-count').innerText = `দেখাচ্ছে: ${totalVisibleArticles} / ১৫৩টি অনুচ্ছেদ`;
+
+            if (totalVisibleArticles === 0) {
+                container.innerHTML = `
+          <div class="text-center py-12 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+            <i data-lucide="search-x" class="w-12 h-12 text-slate-400 mx-auto mb-3"></i>
+            <p class="text-slate-700 font-bold text-lg">কোনো অনুচ্ছেদ পাওয়া যায়নি!</p>
+            <p class="text-sm text-slate-500 mt-1">অনুগ্রহ করে সঠিক অনুচ্ছেদ নম্বর বা অন্য কোনো কীওয়ার্ড লিখে সার্চ করুন।</p>
+          </div>
+        `;
+            }
+
+            // Re-initialize Lucide Icons
+            lucide.createIcons();
+        }
+
+        function setPartFilter(filterType) {
+            currentPartFilter = filterType;
+
+            document.querySelectorAll('.part-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-800', 'text-white', 'border-emerald-700', 'active-part-btn');
+                btn.classList.add('bg-slate-100', 'text-slate-700', 'border-slate-200');
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.remove('bg-slate-100', 'text-slate-700', 'border-slate-200');
+                event.currentTarget.classList.add('bg-emerald-800', 'text-white', 'border-emerald-700', 'active-part-btn');
+            }
+
+            filterArticles();
+        }
+
+        // FLASHCARD / QUIZ LOGIC
+        const flashcardsData = [
+            { num: "২৭", q: '"আইনের দৃষ্টিতে সমতা" — এটি সংবিধানের কত নম্বর অনুচ্ছেদে বর্ণিত?', a: "২৭ নম্বর অনুচ্ছেদ (সকল নাগরিক আইনের দৃষ্টিতে সমান এবং আইনের সমান আশ্রয় লাভের অধিকারী)।" },
+            { num: "২৮", q: 'কেবল ধর্ম, গোষ্ঠী, বর্ণ, নারী-পুরুষভেদে বৈষম্য নিষিদ্ধ সংক্রান্ত অনুচ্ছেদ কোনটি?', a: "২৮ নম্বর অনুচ্ছেদ।" },
+            { num: "২৯", q: 'সরকারি নিয়োগে সুযোগের সমতা নিশ্চিত করা হয়েছে কোন অনুচ্ছেদে?', a: "২৯ নম্বর অনুচ্ছেদ।" },
+            { num: "৭", q: 'সংবিধানের প্রধানতম অনুচ্ছেদ "প্রজাতন্ত্রের সকল ক্ষমতার মালিক জনগণ" কত নম্বর অনুচ্ছেদ?', a: "৭ নম্বর অনুচ্ছেদ।" },
+            { num: "২২", q: 'নির্বাহী বিভাগ হইতে বিচার বিভাগ পৃথকীকরণের কথা কোন অনুচ্ছেদে বলা হয়েছে?', a: "২২ নম্বর অনুচ্ছেদ।" },
+            { num: "১০২", q: 'উচ্চ আদালতে মৌলিক অধিকার বলবৎকরণের জন্য "রীট (Writs)" দায়ের করা হয় কত অনুচ্ছেদে?', a: "১০২ নম্বর অনুচ্ছেদে।" },
+            { num: "৭০", title: "৭১", q: 'রাজনৈতিক দল থেকে পদত্যাগ বা দলের বিপক্ষে ভোট দিলে সংসদ সদস্যপদ বাতিল হয় কোন অনুচ্ছেদে?', a: "৭০ নম্বর অনুচ্ছেদে।" },
+            { num: "১৪২", q: 'সংবিধান সংশোধনের ক্ষমতা ও পদ্ধতি বর্ণিত রয়েছে কত নম্বর অনুচ্ছেদে?', a: "১৪২ নম্বর অনুচ্ছেদে (সংসদের ২/৩ অংশ সংখ্যাগরিষ্ঠতা প্রয়োজন)।" },
+            { num: "১১৮", q: 'নির্বাচন কমিশন গঠনের অনুচ্ছেদ কোনটি?', a: "১১৮ নম্বর অনুচ্ছেদ।" },
+            { num: "১৩৭", q: 'সরকারি কর্ম কমিশন (BPSC) গঠনের কথা কত নম্বর অনুচ্ছেদে রয়েছে?', a: "১৩৭ নম্বর অনুচ্ছেদে।" }
+        ];
+
+        let currentCardIndex = 0;
+
+        function renderFlashcard() {
+            const card = flashcardsData[currentCardIndex];
+            document.getElementById('flashcard-badge').innerText = `অনুচ্ছেদ ${card.num}`;
+            document.getElementById('flashcard-question').innerText = card.q;
+            document.getElementById('flashcard-answer').innerText = `উত্তর: ${card.a}`;
+            document.getElementById('flashcard-answer').classList.add('hidden');
+        }
+
+        function flipCard() {
+            const ans = document.getElementById('flashcard-answer');
+            ans.classList.toggle('hidden');
+        }
+
+        function nextFlashcard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcardsData.length;
+            renderFlashcard();
+        }
+
+        // Initialize Page
+        window.onload = function () {
+            updateFavCounter();
+            renderArticles();
+            renderFlashcard();
+        };
+    </script>
+</body>
+
+</html>
