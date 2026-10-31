@@ -37,3 +37,129 @@ AD^2=AE^2+DE^2
 AD^2=12^2+16^2
 AD^2=400 => 20
 
+
+
+# স্টেপ ০৯ - পানিতে প্রতিচ্ছবি; স্টেপ ১০ - চিত্র গণনা।
+পানিতে প্রতিচ্ছবি: easy just ulta kore dew but carefull option test valo kore koro 
+ চিত্র গণনা: 
+
+Trivuj Gonona: 
+কোনো ত্রিভুজের শীর্ষবিন্দু থেকে নিচের ভিত্তির ওপর একাধিক রেখা টানা থাকলে, নিচের ছোট টুকরোগুলোতে ১, ২, ৩... করে নম্বর দিতে হবে।
+
+ekti trivuj er moddhe arekty tahkle trivuj hoy 5 ti  
+ABC - DEF
+
+ebr aro complex
+  
+       A
+
+    D       E
+
+B       F       C
+
+BDF - EFC - ADE ontor nihito 
+3*5=15 er sathe DEF ABC jog korle total 17
+
+trvuj er sarir songkha jor hole mot trivuj songkha T nirnoy kora jay 
+x=4 
+
+           / \
+          /   \
+         /     \
+        /       \
+       /         \
+      /           \
+     /             \ 
+    /               \    
+   /                 \
+  /                   \
+ /                     \
+ __1__ __2__ __3__ __4__
+
+ T = x(x-2)(2x+1) / 8 = 4x6x9/8 = 216/8
+ T = 27
+
+
+ ara ari ulombo rekha thakle daharbahik number bosige jog kore jog fol er sathe gun
+
+ 1+2+3+4= 10 trivuj ke araari vabe ched koreche erp rekha ache 4 ti 4x10=40
+
+
+Type 02: Choturvuj, Borgo, Aytokhetro o samntorik gonona
+
+Cotuvuj: 
+A         B
+____|____
+1
+____|____
+2
+____|____
+C         D
+
+ek paser sari songkha 1,2 = 1+2=3 3^2= 9
+
+A         B
+____|____
+1       2
+____|____
+2
+____|____
+3
+____|____
+C         D
+
+ei khetre 1+2+3=6, 1+2=3 so 3x6=18
+
+
+Borgo:
+A         B
+____|____
+1
+____|____
+2
+____|____
+C         D
+
+1^2+2^2=1+4=6
+
+5ti sri o 5ti column 
+
+A         B
+____|____|____|____|____
+1      2    3    4   5
+____|____|____|____|____
+2
+____|____|____|____|____
+3
+____|____|____|____|____
+4
+____|____|____|____|____
+5
+____|____|____|____|____
+C         D
+1^2+2^2+3^2+4^2+5^2=1+4+9+16+25=55
+
+ayto khetro 
+choturvuj-borgo
+1   2   3
+
+2
+
+3
+
+3 ti col 3 row
+
+choturvuj = 1^3+2^3+3^3=1+8+27= 36
+borgo = 1^2+2^2+3^2=1+4+9=14
+36-14=22
+
+
+samtorik 
+1   2   3   4
+
+2
+
+3
+
+1+2+3+4=10, 1+2+3=6 6x10=60
+
